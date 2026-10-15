@@ -10,9 +10,10 @@ The committed repository, approved task documents, Git and GitHub evidence prese
 | Agent behavior and source precedence | `AGENTS.md` | Adapters never redefine it |
 | Development, Git and security procedure | `docs/workflow/`, `docs/security/` | Templates/roles link; no parallel protocols |
 | Actual behavior and tests | Current source/test tree | Evidence is verified against Git |
-| Task scope, approved design/plan, work in progress | `docs/changes/<task>/` | PR and current branch SHA |
+| Task scope / frozen Work Block or approved legacy task plan | `docs/changes/<task>/work-block.md` or historical `docs/changes/<task>/plan.md` | Critic evidence and exact reviewed planning SHA |
 | Durable design rationale | `docs/decisions/<id>.md` | `memory_bank/decisions.md` contains links/status only |
-| **Per-task live handoff** (especially parallel branches) | `docs/changes/<task>/handoff.md` on the task branch | Never overwrite another task's handoff |
+| Optional whole-project roadmap | Root `plan.md`, if created | One project plan, stages accepted against independent evidence |
+| **Per-task live handoff** (especially parallel branches) | `docs/changes/<task>/handoff.md` on the task branch | Store phases, Critic/Reviewer/Verifier SHAs, PR and next action outside frozen WB |
 | **Integrated project overview** | `memory_bank/context.md` | Summary of last reconciled common baseline, not the only active task |
 | Recent integrated milestones | `memory_bank/progress.md` | Link task reports/commits; no copied reports |
 | Material integrated coordination events | `memory_bank/orchestrator-log.md` | Short audit index, not raw agent logs |
@@ -28,7 +29,7 @@ The four root `memory_bank/*.md` files are Git-tracked. Do not ignore `memory_ba
 
 1. Read `AGENTS.md`, project brief/map, and the *last integrated* `memory_bank/context.md` and `progress.md`.
 2. Inspect the actual repository, branch, HEAD, worktree status and relevant remote PRs. Resolve discrepancies by checking current Git/PR facts before using a stale memory instruction.
-3. For a task branch, read its own `docs/changes/<task>/handoff.md` and plan. If the task has no local handoff, use its PR/issue and reconstruct a scoped handoff before significant new work.
+3. Read optional **root `plan.md`** for project stages if it exists. For a task branch, read its frozen `docs/changes/<task>/work-block.md` (or historical approved task `plan.md`) plus its `handoff.md`. Never edit frozen planning documents to backfill Critic verdicts/working status; those belong in task-local reports/handoff/PR. If the task has no handoff, use its PR/issue and reconstruct a scoped handoff before significant new work.
 4. For the default branch, identify unfinished work from active PRs and task records; the shared context is **not** a complete authoritative registry of unmerged branches.
 5. Consult linked accepted decisions and relevant reports only as needed.
 
@@ -68,7 +69,9 @@ A tiny change without a meaningful context change does not need ceremonial updat
 - `progress.md`: approximately 15 recent **integrated** milestones, with links to older task/Git evidence.
 - `decisions.md`: index of approved decisions, not duplicate decision text.
 - `orchestrator-log.md`: short material event index, not tool trace. Never record secrets.
-- Task-local `handoff.md`: the recoverable latest task status on a particular branch, including unmerged work.
+- Root `plan.md` if used: one roadmap, with stage progress backed by independent stage/PR evidence rather than task COMPLETE alone.
+- Frozen `work-block.md`: accepted stage contract. A legacy task `plan.md` retains its own original Critic review binding and must not be silently migrated.
+- Task-local `handoff.md`: recoverable working phase (including optional DELIVERY_READY), exact frozen WB and candidate SHA, separate gate links, PR disposition and next action on a particular branch.
 - When a decision is superseded, retain the old ADR with status/provenance and link the new one.
 - Check `git ls-files`, `git status`, actual HEAD, active PRs and Git history when claiming an item is committed or available to other agents.
 

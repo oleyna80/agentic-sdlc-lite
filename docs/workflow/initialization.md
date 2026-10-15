@@ -10,14 +10,14 @@ Check `git remote -v`, current branch, HEAD and `PROJECT_BRIEF.md`. If the repos
 
 1. Create a `docs/initialize-project` task branch, unless this is an initial repository bootstrap with an explicitly approved different workflow. Do not rewrite the source template's `main`.
 2. Replace `PROJECT_BRIEF.md` with **your product name, actual project repository ID, audience, scope, interfaces, data/secret boundaries and deployment assumptions**. Set the project identity field and mark setup complete.
-3. Update `PROJECT_MAP.md` with real source directories, test/build commands and environment paths.
+3. Update `PROJECT_MAP.md` with real source directories, test/build commands and environment paths. If this is a multi-stage project, optionally create **one root `plan.md`** from `docs/templates/plan.md`; otherwise omit it. Replace any inherited source-project roadmap rather than using its stage statuses.
 4. **Reset only the new project's inherited operational memory files**:
    - `memory_bank/context.md` — current project objective, verified branch/HEAD and next setup action; no Lite PR #1 or source branches.
    - `memory_bank/progress.md` — initial milestone and checks for the *new* repository.
    - `memory_bank/decisions.md` — links only to decisions explicitly adopted in the new project.
    - `memory_bank/orchestrator-log.md` — new project's initial setup event.
 5. Review inherited `docs/decisions/` records. In particular, ADR-0001 reflects the **source Lite framework decision**: either explicitly adopt its relevant principles in a project-specific decision, or remove/move inherited source-only ADRs from the new repository. Do not automatically accept decisions with source-repository scope.
-6. Remove/replace inherited `docs/changes/` records, task-specific handoffs and report references that relate only to original Lite development. Keep generic `docs/templates/` untouched.
+6. Remove/replace inherited `docs/changes/` records, task-specific handoffs and report references that relate only to original Lite development. Retain a legacy reviewed task `plan.md` only if explicitly adopted with correct provenance; it is never the project's root roadmap. Keep generic `docs/templates/` untouched.
 7. Configure actual GitHub branch protection/rulesets and required checks as supported by the account/repository plan. Inspect remote rights; installing hooks is optional and does not replace platform enforcement.
 8. Run the available Lite Checks and a fresh-session recovery check from the new checkout. Confirm no stale names, PRs, decision status or source-project IDs appear in the new project's **active** memory/brief.
 9. Commit and open PR; Owner accepts initialization before normal implementation. After merge, new-agent session entry uses this repository's own committed memory.

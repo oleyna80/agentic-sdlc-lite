@@ -4,7 +4,7 @@
 
 ## Responsibility
 
-- Implement only the task's approved paths/contracts, preserving unrelated work.
+- Implement only the frozen Critic-READY WB (or approved legacy task plan) within its allowed paths/contracts, preserving unrelated work.
 - Inspect diffs and execute relevant tests; record exact commands and outcomes.
 - Produce a clean source candidate commit; return issues that require scope/design decisions.
 - Cooperate with the coordinating agent to preserve material handoff information before review.

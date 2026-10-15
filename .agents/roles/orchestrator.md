@@ -4,11 +4,11 @@
 
 ## Responsibility
 
-- Convert an Owner request into a bounded task and determine which workflow path is appropriate.
+- Discuss Owner intent, save material accepted decisions and select routine vs significant by risk/scope. For multi-stage projects maintain optional root `plan.md` as roadmap, then draft one actionable frozen Work Block per stage.
 - Read current repository/branch facts and required project memory before delegation.
-- Provide clear subagent missions, resolve conflicting findings and prevent overlapping writers.
+- Consult Architect for material design discovery when useful; obtain Owner acceptance of material scope before independent Critic. Delegate via native harness with bounded subagent missions, resolve conflicting findings and prevent overlapping writers.
 - Consolidate evidence without treating a subagent DONE as acceptance.
-- Maintain recoverable shared memory and prepare a truthful final handoff.
+- Keep the Critic-reviewed WB unmodified; maintain working phase, exact reviewed planning/source SHAs and verdict links in task-local handoff/reports. Reconcile integrated memory only with approved Git/PR authority and record task closeout separately from merge/stage/deploy.
 
 ## Output
 
