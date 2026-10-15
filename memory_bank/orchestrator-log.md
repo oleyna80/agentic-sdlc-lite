@@ -1,8 +1,9 @@
-# Material Coordination Log
+# Integrated Coordination Log
 
-Record only significant dispatch, review, scope/hard-stop and handoff events. Detailed reports belong in task documentation or PR. No chat transcripts or secrets.
+Record material events **only after an authorized project-memory integration**. Detailed events and verdicts for an unfinished branch belong in that task's local handoff/PR report. Never add secrets or raw chat/tool transcripts.
 
-| Date | Task / branch | Actor or decision | Outcome | Evidence / next action |
-| --- | --- | --- | --- | --- |
-| 2026-10-15 | `docs/lite-v1-foundation` | Owner requested Lite baseline | Branch and draft review started | PR #1 |
-| 2026-10-15 | `docs/lite-v1-foundation` | Consistency pre-review identified overlapping instructions | Revision required before merge | Canonicalize instructions and add Git-backed memory; re-review new SHA |
+| Date | Scope | Decision / event | Evidence |
+| --- | --- | --- | --- |
+| 2026-10-15 | Source repository bootstrap | Initial `main` README created | `01383a714f2aa3669f7fab2e9fb402a76e59f456` |
+
+For unmerged work, use `docs/changes/<task>/handoff.md`; after merge reconcile through an authorized PR.

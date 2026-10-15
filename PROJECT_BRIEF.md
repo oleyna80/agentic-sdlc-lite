@@ -1,14 +1,15 @@
 # Project Brief — Agentic SDLC Lite
 
-- **Product:** Lightweight repository template for development using Codex, Claude Code and other AI assistants.
-- **Users:** Individual developers and small teams managing software projects in Git.
-- **Problem:** Agent sessions lose context; duplicated instructions disagree; temporary workspaces accumulate; source changes are difficult to audit.
-- **Outcome:** A simple, repeatable Git/PR workflow with durable committed project knowledge, scoped tasks, reusable subagent briefs and optional hooks.
-- **Core capability:** Shared agent instruction, canonical development protocol, versioned decisions, task documentation, session recovery and basic CI.
-- **Non-goals:** Controller v1, immutable admission, database/registry, automatic trusted role dispatch, centralized secret storage, agent privilege escalation, autonomous merge/deploy, generic lifecycle platform.
-- **Deployment:** None. Copy/use as a GitHub repository template and adapt project-specific metadata.
-- **Known limitations:** Markdown protocols and Git hooks are advisory/cooperative; independent assurance and runtime isolation depend on actual tools/people/OS access.
-- **Scope owner:** Repository Owner.
-- **Status:** v0.1 draft under PR review.
+- **Repository identity:** `oleyna80/agentic-sdlc-lite`
+- **Initialization:** SOURCE_REPOSITORY (new projects must replace project identity and set INITIALIZED in an approved setup PR)
+- **Product:** Lightweight reusable Git repository template for Codex, Claude Code and other AI assistants.
+- **Users:** Individual developers and small teams developing software.
+- **Problem:** Agent sessions lose context; duplicated instructions disagree; task workspaces accumulate; source modifications become difficult to audit.
+- **Outcome:** Small documented Git workflow, versioned design decisions, recoverable task-local handoffs, shared project overview, six agent roles and optional Git hooks.
+- **Core scope:** Root agent contract, a single development procedure, memory/source-of-truth rules, templates, initial checks.
+- **Non-goals:** Controller v1, immutable admission, database/registry, trusted automatic agent dispatch, autonomous merge/deploy, OS isolation claims or secret management.
+- **Deployment:** None. Copy into a new Git repository/template and adapt details.
+- **Known limitations:** Instructions/hooks are cooperative; technical isolation and independent roles must be established outside documents.
+- **Status:** Lite v0.1 documentation candidate under draft PR #1, not approved for integration.
 
-For product-specific deployments, replace this file with the new project's own brief rather than inserting business/project facts into generic SDLC policies.
+**When used as a template:** the new project must have its *own* repository identity, objective, environment, tests, deployment/data boundaries and `Initialization: INITIALIZED`. Before that, ignore source-Lite active PR/milestone facts and follow [initialization](docs/workflow/initialization.md).

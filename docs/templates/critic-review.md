@@ -1,6 +1,6 @@
 # Independent Critic Review — <Task>
 
-- **Reviewed plan / exact revision:**
+- **Reviewed plan path and exact committed Git SHA:**
 - **Reviewer identity/session:**
 - **Verdict:** READY / REWORK
 
@@ -16,4 +16,4 @@
 
 ## Residual risks and limits of review
 
-Independence must be truthful; do not label self-review independent.
+Keep this verdict in a separate report/PR review, never as a post-review mutation of the plan itself. Independence must be truthful; do not label self-review independent.

@@ -1,23 +1,29 @@
 # Closeout — <Task>
 
 - **Task / branch:**
-- **Final exact candidate SHA:**
-- **PR link and merge SHA (if merged):**
-- **Owner approval / disposition:**
-- **Result:** COMPLETED / CANCELLED / BLOCKED
+- **Last inspected candidate SHA:**
+- **Owner design / merge disposition evidence:**
+- **Task closeout:** COMPLETE / BLOCKED / CANCELLED
+- **PR status:** OPEN / MERGED / CLOSED / NOT_CREATED
+- **Merge SHA and date (only if actually merged):**
+- **Deployment status / evidence (separate from merge):**
 
-## Delivered changes
+## Delivered changes and acceptance evidence
 
-## Tests and assurance evidence
+## Tests / Reviewer / Verifier
 
-## Known limitations / follow-up
+## Remaining limits and next step
 
-## Documentation updated
+## Project-memory checkpoint
+
+- **Task-local handoff path:**
+- **Shared integrated memory updated?** YES / NO / PENDING_RECONCILIATION
+- **Post-merge confirmation path or follow-up PR (if needed):**
 
 ## Workspace cleanup
 
-- **Worktree path / ownership:**
-- **State:** CLEANED / PRESERVED / CLEANUP_PENDING
+- **Owned worktree path:**
+- **Status:** CLEANED / PRESERVED / CLEANUP_PENDING
 - **Evidence and reason:**
 
-Completion of implementation does not imply PR merge or production deployment.
+A completed task does not imply merge or deployment. Merge evidence may be recorded in a later authorized branch/PR without editing `main` directly.

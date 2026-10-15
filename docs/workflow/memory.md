@@ -1,58 +1,77 @@
 # Project Memory Protocol — Canonical Domain Procedure
 
-**Purpose:** The repository and Git history are the durable record of decisions, progress, tests and ongoing work. Chats, model memory and local agent caches are *not* sources of truth.
+The committed repository, approved task documents, Git and GitHub evidence preserve engineering work across agent sessions. **Chat history, agent local caches and ignored workspaces are not project memory.** Memory files are informative, not authority or proof of current Git state.
 
-## Memory surfaces — each fact has one canonical home
+## One home for each kind of knowledge
 
-| Information | Authoritative place | Relationship to operational memory |
+| Information | Canonical home | Other references |
 | --- | --- | --- |
-| Product purpose, audience, core constraints | `PROJECT_BRIEF.md` | `context.md` links, does not copy product spec |
-| Shared agent instructions | `AGENTS.md` | Never rewritten in logs |
-| Procedures / security | `docs/workflow/`, `docs/security/` | Refer by path |
-| Program behavior | Current source, tests and API contracts | Verify against Git; memory cannot override |
-| Approved requirements and task decisions | `docs/changes/<task>/` plus Owner evidence | `context.md` points to active task |
-| Durable architectural/engineering decisions | `docs/decisions/<id>.md` | `decisions.md` is an index, never a second ADR |
-| Current handoff / next action | `memory_bank/context.md` | Latest checked working snapshot |
-| Chronological milestones / checks | `memory_bank/progress.md` | Concise recent history with references |
-| Important coordination events and subagent verdicts | `memory_bank/orchestrator-log.md` | Short append-only event index |
-| Detailed review/verification evidence | Task report under `docs/changes/` or a linked PR | Log links to it; do not duplicate report |
-| Exact branch, commit, PR and CI status | Git and GitHub at observation time | Record dated SHA/link and re-check; no speculative READY |
+| Product intent, audience, boundaries | `PROJECT_BRIEF.md` | Other files link to it |
+| Agent behavior and source precedence | `AGENTS.md` | Adapters never redefine it |
+| Development, Git and security procedure | `docs/workflow/`, `docs/security/` | Templates/roles link; no parallel protocols |
+| Actual behavior and tests | Current source/test tree | Evidence is verified against Git |
+| Task scope, approved design/plan, work in progress | `docs/changes/<task>/` | PR and current branch SHA |
+| Durable design rationale | `docs/decisions/<id>.md` | `memory_bank/decisions.md` contains links/status only |
+| **Per-task live handoff** (especially parallel branches) | `docs/changes/<task>/handoff.md` on the task branch | Never overwrite another task's handoff |
+| **Integrated project overview** | `memory_bank/context.md` | Summary of last reconciled common baseline, not the only active task |
+| Recent integrated milestones | `memory_bank/progress.md` | Link task reports/commits; no copied reports |
+| Material integrated coordination events | `memory_bank/orchestrator-log.md` | Short audit index, not raw agent logs |
+| Final merge/CI state | Live Git/GitHub refs/checks | Memory cites dated exact evidence, never overrides it |
 
-All four `memory_bank/*.md` foundation files are **tracked by Git** in this Lite kit. Do not globally ignore `memory_bank/`. New unreviewed caches, raw model transcripts, provider/tool dumps and local credentials must stay untracked and outside this shared memory. A remote task branch carries its own memory changes until reviewed/merged: other branches do **not** see them automatically.
+The four root `memory_bank/*.md` files are Git-tracked. Do not ignore `memory_bank/`. Do not commit secrets, private client data, tool dumps, raw transcripts, internal scratchpads or local credentials. Other branches do not automatically receive memory updates until integration.
 
-## Session start (required)
+## 0. First use after creating a new repository
 
-1. Read `AGENTS.md`, `PROJECT_BRIEF.md`, `PROJECT_MAP.md`, `memory_bank/context.md` and `memory_bank/progress.md`.
-2. Check actual Git repository, branch/HEAD, dirty changes, PR state when relevant. **Repository facts override stale memory entries.**
-3. Read active task spec/plan, linked decisions and recent log rows **only as needed**.
-4. If the snapshot conflicts with Git/current sources, record the drift and correct the outdated snapshot in a permitted task branch; never silently adopt stale state.
+**Before trusting inherited memory or starting feature work**, confirm the actual Git repository identity against `PROJECT_BRIEF.md`. If this is a new project created from the Lite template, follow **`docs/workflow/initialization.md`** first. A new project's inherited Lite branch names, PR numbers, milestones and ADRs are template-source history, not current project facts. Treat the project as uninitialized until the first-use checklist is committed.
 
-## After material work, interruption or agent handoff (required)
+## 1. Session start and recovery
 
-The coordinating/main agent (not independent read-only subagents) owns shared memory updates:
+1. Read `AGENTS.md`, project brief/map, and the *last integrated* `memory_bank/context.md` and `progress.md`.
+2. Inspect the actual repository, branch, HEAD, worktree status and relevant remote PRs. Resolve discrepancies by checking current Git/PR facts before using a stale memory instruction.
+3. For a task branch, read its own `docs/changes/<task>/handoff.md` and plan. If the task has no local handoff, use its PR/issue and reconstruct a scoped handoff before significant new work.
+4. For the default branch, identify unfinished work from active PRs and task records; the shared context is **not** a complete authoritative registry of unmerged branches.
+5. Consult linked accepted decisions and relevant reports only as needed.
 
-1. Update `context.md`: date, active task/branch, verified facts, blockers, next exact step and links. Keep it short; replace obsolete snapshot content.
-2. Append a **brief** entry to `progress.md`: what changed, exact evidence (file/commit/check), PASS/FAIL/NOT_RUN, what remains.
-3. Append to `orchestrator-log.md` only for material dispatch/role verdict, scope decision, hard stop or handoff — no tool-by-tool transcript.
-4. If a decision has lasting effect, create/update one `docs/decisions/` record and add a link in `decisions.md` (do not restate its rationale).
-5. Add reusable test/recovery knowledge to its canonical procedure, task documentation, or decision record; leave local-only observations in the short operational log.
-6. Inspect staged diffs for secrets, duplicate claims, outdated status and unrelated changes. Commit safe memory updates on the task branch as part of the work; do not write directly on `main`.
+## 2. Parallel tasks — shared memory ownership
 
-A short task with no material change of context does **not** require four ceremonial edits. Update the files that actually changed, but never end substantive work or a blocked run without a recoverable `context.md` checkpoint.
+- Each concurrent task owns its unique `docs/changes/<task>/handoff.md` (or an issue/PR description for a trivial task with no long-lived handoff). Do not store competing "current active task" claims in the shared `memory_bank/context.md`.
+- The shared `memory_bank/context.md`, `progress.md`, and `orchestrator-log.md` describe the **last reconciled integrated baseline**. Only the designated integration/coordinator change updates them; parallel feature branches must **not** edit these shared files.
+- A single-task project may update shared memory on its task branch **only when** there is no overlapping writer and the update is part of that task's reviewable PR. Otherwise keep task-specific changes local.
+- Before integrating a task branch, inspect current `main`, merged/unmerged PRs and **all affected task handoffs**. Preserve any unfinished task in its own file or PR; never resolve a context merge conflict by selecting a single task and silently losing another.
+- If two task branches changed the same shared memory files, **stop and reconcile explicitly** in a bounded integration PR. Update the integrated summary from live Git/PR evidence, retain independent handoffs and show the Owner the resolution.
+- Concurrent agents cannot treat a per-branch commit as globally visible project memory. A fresh session in another branch must discover ongoing work through GitHub PRs, agreed handoff paths, or direct coordination.
 
-## Context compaction and history
+## 3. Required checkpoints and handoff
 
-- `context.md` is **replaceable current state**, never an unbounded journal.
-- `progress.md` keeps a compact recent window (about 15 milestones). Older detail stays in committed task records, Git history and PRs; summarize rather than deleting unique evidence.
-- `decisions.md` is an index of active decisions. Superseded records remain in `docs/decisions/` with status/provenance.
-- `orchestrator-log.md` records significant events (date, task, actor, outcome, evidence); retain historical entries, but do not add routine shell output.
+The coordinating agent (not a source-read-only Reviewer/Critic/Verifier) owns memory synchronization within its **approved write scope**.
 
-## No false permanence or unauthorized publication
+**Before PR, interruption, or substantive task handoff:**
 
-A chat message, skipped memory update, uncommitted local note, or ignored `memory_bank/` file is **not** shared project memory. Check `git status` and file tracking. Committing a memory update on a task branch does not automatically publish or merge it. The Owner controls integration. On public repos, write memory as if anyone could read it; never commit confidential content.
+1. Save/update the task-local handoff with observed repository and branch HEAD, task scope, completed milestones, actual checks, blockers and exact next action. Use `docs/templates/session-handoff.md` if useful. `docs/changes/<task>/handoff.md` is preferred for parallel and significant work.
+2. Commit safe handoff and task evidence on the task branch when in scope; never alter `main` directly. The PR source SHA can change if this is a committed substantive document: apply the exact-candidate review rules in `docs/workflow/development.md`.
+3. For a single-task coordinator authorized to write shared memory, update `context.md` and `progress.md` only with verified facts. Append an `orchestrator-log.md` row only for significant role verdict/scope/Owner decision/handoff, not every command.
+4. If a decision has lasting effect, create one `docs/decisions/` record and link it from `decisions.md` during authorized integration. Do not duplicate ADR rationale.
+5. Check diffs for sensitive content, stale SHA/status, conflicts and unintended edits.
 
-If required context cannot safely be written (e.g., contains sensitive information), store a redacted pointer to an Owner-controlled external secure system; never copy the secret into Git.
+**After Owner merge, cancellation, or other disposition:**
 
-## Session recovery
+1. Verify final PR status, exact merge SHA and CI/Owner decision on GitHub; do not infer merge from a local `COMPLETE`.
+2. Where integrated shared memory remains stale, prepare a separate authorized documentation task branch/PR, or include confirmation in the next already approved integration-memory change. Do **not** write to protected `main`.
+3. Reconcile the shared overview and progress log with **all** outstanding task handoffs; update a task's final disposition without erasing others. Until the update merges, live Git/PR state is authoritative.
+4. Preserve historical decisions and evidence. Cleanup of worktrees is separate and follows `docs/workflow/workspaces.md`.
 
-A fresh session should be able to answer from committed project sources: what are we building; what was decided; what task/branch is active; what actually passed; what is blocked; and what to do next. If not, the last handoff is incomplete.
+A tiny change without a meaningful context change does not need ceremonial updates to four files. Significant or blocked tasks do require a recoverable task-local checkpoint even if a shared overview is unchanged.
+
+## 4. Keep memory usable
+
+- `context.md`: **short integrated overview**, last reconciliation commit/date, links to open work; not a universal mutable singleton for every task.
+- `progress.md`: approximately 15 recent **integrated** milestones, with links to older task/Git evidence.
+- `decisions.md`: index of approved decisions, not duplicate decision text.
+- `orchestrator-log.md`: short material event index, not tool trace. Never record secrets.
+- Task-local `handoff.md`: the recoverable latest task status on a particular branch, including unmerged work.
+- When a decision is superseded, retain the old ADR with status/provenance and link the new one.
+- Check `git ls-files`, `git status`, actual HEAD, active PRs and Git history when claiming an item is committed or available to other agents.
+
+## 5. Fresh-session success criterion
+
+Without any chat history, a new agent should be able to discover the project objective, the canonical rules, accepted decisions, the **specific task branch's** scope/handoff, the most recent verified checks, current blocking conditions and the next action. When evidence is missing or ambiguous, report that instead of inventing status or authority.

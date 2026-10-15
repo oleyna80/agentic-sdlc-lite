@@ -1,33 +1,33 @@
 # Agentic SDLC Lite
 
-A portable, Git-native development kit for AI coding assistants. Its goals are **consistent instructions**, **reproducible delivery**, and **project memory that survives chats and agent sessions**.
+A portable, Git-native development kit for AI coding assistants. Designed for **consistent instructions**, **reproducible delivery**, and **project memory that survives chats and agent sessions**.
 
-It deliberately has **no Controller, admission registry, SQLite, background orchestration service, or duplicated SDD/lifecycle policy**. Git, a small set of documents, opt-in hooks and CI are enough for this baseline.
+No Controller, admission registry, SQLite, background orchestration service or competing SDD/lifecycle protocol.
 
-## Start here
+## Getting started
 
-1. Read [PROJECT_BRIEF.md](PROJECT_BRIEF.md) for the product and [PROJECT_MAP.md](PROJECT_MAP.md) for the file map.
-2. Agents read [AGENTS.md](AGENTS.md) before acting. The actual workflow is in [docs/workflow/development.md](docs/workflow/development.md).
-3. Every new agent session reads [memory_bank/context.md](memory_bank/context.md) and [memory_bank/progress.md](memory_bank/progress.md). Durable project decisions are under [docs/decisions/](docs/decisions/).
-4. Install local hooks for this repository if appropriate:
+1. **When creating a new project from this GitHub template, first complete [First-use Initialization](docs/workflow/initialization.md).** It replaces Lite's inherited source-project identity, task state and decisions. Do not treat the template's memory as your project's.
+2. Configure `PROJECT_BRIEF.md`, `PROJECT_MAP.md` and the new project's committed memory.
+3. Agents start with [AGENTS.md](AGENTS.md), the shared root contract, then the relevant [Development Protocol](docs/workflow/development.md) and [Memory Protocol](docs/workflow/memory.md).
+4. Opt into local Git hooks per clone if useful:
 
    ```bash
    git config --local core.hooksPath .githooks
    ```
 
-   Git and Bash are required; GitHub rulesets, required reviews and CI must be configured separately.
-5. Develop on a short-lived task branch, submit a pull request and obtain Owner approval before merge. Deployment requires separate approval.
+   Git and Bash are required. The repository's GitHub settings, rulesets and required CI are not copied by GitHub template creation.
+5. Work in short-lived task branches, submit PRs, and obtain Owner approval before merge. Deployment is separately authorized.
 
-## Find what you need
+## Project documentation
 
-- **Workflow and assurance:** [development.md](docs/workflow/development.md).
-- **Memory and handoff:** [memory.md](docs/workflow/memory.md).
-- **Subagents:** [agent-roles.md](docs/workflow/agent-roles.md) and [role prompts](.agents/roles/README.md).
-- **Project Git/worktrees:** [workspaces.md](docs/workflow/workspaces.md).
-- **Safety rules:** [boundaries.md](docs/security/boundaries.md).
-- **Optional templates:** [docs/templates/](docs/templates/).
-- **Architecture:** [overview.md](docs/architecture/overview.md).
+- [Project scope](PROJECT_BRIEF.md) and [navigation](PROJECT_MAP.md).
+- [Architecture and dependencies](docs/architecture/overview.md).
+- [Git branches, worktrees and safe cleanup](docs/workflow/workspaces.md).
+- [Portable agent/subagent roles](.agents/roles/README.md).
+- [Canonical security details](docs/security/boundaries.md).
+- [Durable decisions](docs/decisions/), [task records](docs/changes/) and [shared project memory](memory_bank/README.md).
+- [Copy-on-use templates](docs/templates/).
 
-The full process is used only for consequential changes. Routine changes keep a short documented scope, relevant tests and a PR. Memory synchronization is required whenever material context or decisions change, even if the code change is small.
+There are two levels of effort: routine tasks with scope, focused checks and a PR; and significant tasks requiring approved design/scope, independent Critic and exact-candidate Reviewer/Verifier gates. The canonical decision rules are in the development protocol, not here.
 
-**Status:** Lite v0.1 candidate. AI instructions and local hooks are cooperative, not a sandbox or a substitute for GitHub permissions. Source inspiration: AzurSysTech Agentic SDLC; no authorization or Controller state is inherited.
+This is a candidate for review, not a certified technical security boundary. Hooks are cooperative; real GitHub/OS authorization must be configured outside this kit. Origin: AzurSysTech Agentic SDLC concepts without its trusted Controller.

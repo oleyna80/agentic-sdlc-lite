@@ -24,7 +24,7 @@ jobs:
           for file in \
             AGENTS.md CLAUDE.md PROJECT_MAP.md PROJECT_BRIEF.md \
             docs/architecture/overview.md \
-            docs/workflow/development.md docs/workflow/memory.md \
+            docs/workflow/development.md docs/workflow/memory.md docs/workflow/initialization.md \
             docs/workflow/workspaces.md docs/workflow/agent-roles.md \
             docs/security/boundaries.md docs/decisions/README.md \
             memory_bank/context.md memory_bank/progress.md \
@@ -38,6 +38,15 @@ jobs:
             memory_bank/decisions.md memory_bank/orchestrator-log.md; do
             git ls-files --error-unmatch "$file" >/dev/null
           done
+
+      - name: Guard new projects against inherited template state
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "$GITHUB_REPOSITORY" != "oleyna80/agentic-sdlc-lite" ]]; then
+            grep -Fqx -- '- **Initialization:** INITIALIZED' PROJECT_BRIEF.md
+            grep -F -- '- **Repository identity:**' PROJECT_BRIEF.md | grep -F -- "$GITHUB_REPOSITORY"
+          fi
 
       - name: Reject copied legacy authority paths
         shell: bash

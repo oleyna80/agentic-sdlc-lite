@@ -1,27 +1,24 @@
 # ADR-0001 — Single-authority lightweight SDLC with Git-backed memory
 
-- **Status:** accepted project direction; implementation is a candidate under review.
+- **Status:** accepted design direction for the **source repository**; implementation is a candidate under review.
 - **Date:** 2026-10-15
-- **Owner:** project Owner
-- **Scope:** Agentic SDLC Lite repository template
+- **Owner:** SDLC Lite project Owner
+- **Scope:** `oleyna80/agentic-sdlc-lite` template **source only**; new projects must explicitly adopt or replace.
+- **New-project handling:** Review before use; do not automatically treat a copied source-repository decision as accepted in a new repository. See `docs/workflow/initialization.md`.
 
 ## Context
 
-The full AzurSysTech SDLC accumulated overlapping agent, SDD, lifecycle and role instructions. The user requested a portable lightweight alternative with developer/reviewer subagents, simple hooks and memory that survives separate chats.
+The full AzurSysTech SDLC accumulated overlapping agent, SDD, lifecycle and role instructions. A portable alternative was requested with simple Git hooks, delegated logical subagents, and a reliable committed knowledge trail between chat sessions.
 
 ## Decision
 
-Use one root agent contract (`AGENTS.md`), one canonical development protocol, explicit domain procedures for memory, Git workspaces and security, role prompts subordinate to the contract, and concise optional task templates. Commit project context, progress, decision index and coordination log in `memory_bank/`; keep durable design rationale in `docs/decisions/`. No Controller, admission, SQLite or second lifecycle authority.
+Use a single root agent contract (`AGENTS.md`), one canonical development protocol, distinct memory/Git/security procedures, and subordinate portable role briefs and task templates. Keep the integrated project-memory summary Git-tracked under `memory_bank/`, task-local handoffs under `docs/changes/<task>/`, and durable rationale under `docs/decisions/`. Do not introduce a second SDD/lifecycle policy or Controller/admission/SQLite runtime.
 
-## Rationale
+## Rationale and consequences
 
-The team needs reproducible context and predictable Git workflows without maintaining a custom control plane. Canonical ownership of each type of fact reduces contradictory instructions.
+Canonical ownership reduces contradictory instructions. Each task branch must preserve its handoff while concurrent work proceeds; integrated memory is reconciled separately. Local hooks/prompts are cooperative and cannot replace platform access controls or true independent isolation.
 
-## Consequences
+## Evidence / revisit trigger
 
-Git and documentation updates are part of task completion. Hooks cannot enforce true platform permissions. Some independence and security guarantees from the full SDLC are deliberately outside Lite.
-
-## Evidence and review trigger
-
-- Current proposal: `docs/lite-v1-foundation` / PR #1.
-- Revisit if two project files prescribe different mandatory gates, context cannot be recovered from the repo, or a concrete use case requires real technical authorization rather than cooperative instructions.
+- Draft PR #1: `docs/lite-v1-foundation`. Source candidate identity must be verified from live GitHub; review status is not inferred from this ADR.
+- Revisit if parallel task memory is lost, project template clones inherit inappropriate accepted status, independent checks cannot be performed accurately, or a concrete need justifies stronger technical enforcement.

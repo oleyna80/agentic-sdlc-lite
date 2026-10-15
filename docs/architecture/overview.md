@@ -1,73 +1,81 @@
 # SDLC Lite — Architecture and File Dependencies
 
-These are *documentation and execution conventions*, not an installed controller or autonomous orchestration engine.
+These diagrams visualize the canonical procedures. They are **not** an alternative policy, controller, lifecycle state machine or technical authorization system.
 
-## Development flow
+## Development and assurance
 
 ```mermaid
 flowchart TD
-    O["Owner request"] --> P{"Task impact"}
-    P -->|Routine| I["Scoped implementation"]
-    P -->|Significant| S["Intent / spec / plan"]
-    S --> C{"Independent Critic"}
-    C -->|REWORK| S
-    C -->|READY| I
-    I --> T["Tests + Git hooks + commit"]
-    T --> V["Risk-appropriate review/verification"]
-    V -->|REWORK| I
-    V -->|READY| M["Memory sync + PR + CI"]
-    M --> GO{"Owner merge decision"}
-    GO -->|Approve| MAIN["main"]
-    GO -->|Hold| M
+    O["Owner request"] --> INIT{"New project from template?"}
+    INIT -->|Yes| SETUP["First-use initialization and Owner approval"]
+    INIT -->|No| SCOPE["Confirm task scope"]
+    SETUP --> SCOPE
+    SCOPE --> IMPACT{"Routine or significant?"}
+    IMPACT -->|Routine| CODE["Scoped implementation"]
+    IMPACT -->|Significant| PLAN["Intent / spec / plan"]
+    PLAN --> APPROVAL{"Owner accepts material design and scope"}
+    APPROVAL -->|Rework| PLAN
+    APPROVAL -->|Approved| CRIT{"Independent Critic READY on exact plan"}
+    CRIT -->|REWORK| PLAN
+    CRIT -->|READY| CODE
+    CODE --> TEST["Tests, candidate commit and task handoff"]
+    TEST --> ASSURE{"Significant: Reviewer READY + Verifier PASS on SAME SHA"}
+    ASSURE -->|REWORK / FAIL / BLOCKED| RESOLVE["Correct and recheck or escalate to Owner"]
+    RESOLVE --> CODE
+    ASSURE -->|Clear, or routine checks done| PR["PR / required current-head CI"]
+    PR --> GO{"Owner merge decision"}
+    GO -->|Not approved| PR
+    GO -->|Approved| MAIN["main"]
+    MAIN --> POST["Post-merge memory reconciliation via authorized PR"]
 ```
 
-The exact source candidate and PR head may differ when follow-on documentation is committed; the canonical rule is in `docs/workflow/development.md`. Deployment is a separate Owner decision. Local hooks do not enforce actual OS or GitHub permissions.
+The routine path does not require separate independent gates by default. For significant work a `BLOCKED` required Verifier means **no normal assurance clearance**, even if Reviewer is READY. Owner-approved exceptions are explicitly recorded and are not falsely reported as gate PASS. Exact source-vs-PR-head and evidence-only rules are in `docs/workflow/development.md`. Deployment requires separate Owner authorization.
 
-## One-source-of-truth navigation
+## Knowledge ownership
 
 ```mermaid
 flowchart TD
-    OWNER["Owner decisions"] --> AG["AGENTS.md — root policy"]
-    AG --> WF["docs/workflow/development.md — procedure"]
-    AG --> MEM["docs/workflow/memory.md — memory rules"]
-    AG --> SEC["docs/security/boundaries.md — safety"]
-    AG --> WS["docs/workflow/workspaces.md — Git operations"]
-    AG --> ROLES[".agents/roles/* — subordinate role briefs"]
+    OWNER["Owner / external permissions"] --> AG["AGENTS.md — root instructions"]
+    AG --> DEV["docs/workflow/development.md — canonical workflow"]
+    AG --> MEM["docs/workflow/memory.md — canonical memory procedure"]
+    AG --> INIT["docs/workflow/initialization.md — first use"]
+    AG --> GIT["docs/workflow/workspaces.md — Git and cleanup"]
+    AG --> SEC["docs/security/boundaries.md — safety details"]
+    AG --> ROLES[".agents/roles/ — delegated responsibilities"]
     AG --> CLAUDE["CLAUDE.md — adapter"]
-    MAP["PROJECT_MAP.md — navigation"] -.-> WF
-    MAP -.-> MEM
-    MEM --> ADR["docs/decisions/* — durable why"]
-    MEM --> BANK["memory_bank/* — current what/next"]
-    WF --> TEMPL["docs/templates/* — optional forms"]
-    BANK -.-> TASK["docs/changes/* and task PRs"]
+    DEV --> PLAN["docs/changes/<task>/ — specification, plan, assurance"]
+    MEM --> HAND["docs/changes/<task>/handoff.md — branch-local"]
+    MEM --> BANK["memory_bank/ — last reconciled integration"]
+    MEM --> ADR["docs/decisions/ — durable rationale"]
+    PLAN -.-> TMPL["docs/templates/ — optional forms"]
+    BANK -.-> PR["GitHub PRs / live Git verification"]
 ```
 
-Arrows show document references and responsibilities; they do not grant permissions.
+Arrows show information and references, not runtime permission. **Parallel tasks own separate handoff files; only a designated integration change reconciles the shared memory.**
 
-## Folder map
+## File layout
 
 ```text
 project/
-├── README.md
-├── PROJECT_BRIEF.md                  # product purpose and constraints
-├── PROJECT_MAP.md                    # navigation only
-├── AGENTS.md                         # single root operating contract
-├── CLAUDE.md                         # runtime adapter
-├── .agents/roles/                    # 6 portable role briefs
-├── memory_bank/
-│   ├── context.md                    # current handoff snapshot
-│   ├── progress.md                   # recent verified milestones
-│   ├── decisions.md                  # ADR index
-│   └── orchestrator-log.md           # material coordination log
+├── AGENTS.md                         # single root agent contract
+├── CLAUDE.md                         # runtime adapter, no duplicate rules
+├── PROJECT_BRIEF.md                  # repository identity, purpose, constraints
+├── PROJECT_MAP.md                    # source-of-truth navigation
+├── .agents/roles/                    # six portable subagent briefs
+├── memory_bank/                      # last integrated status, not all open branches
+│   ├── context.md
+│   ├── progress.md
+│   ├── decisions.md
+│   └── orchestrator-log.md
 ├── docs/
-│   ├── architecture/                 # diagrams
-│   ├── decisions/                    # durable engineering decisions
-│   ├── workflow/                     # canonical development/memory/Git rules
-│   ├── security/                     # canonical security detail
-│   ├── templates/                    # optional forms
-│   └── changes/                      # task spec/plan/evidence, as needed
-├── .githooks/                        # cooperative Git checks
-└── .github/workflows/                # CI checks
+│   ├── workflow/                     # canonical procedures, including initialization
+│   ├── architecture/                 # descriptive diagrams
+│   ├── decisions/                    # approved durable design rationale
+│   ├── changes/<task>/               # per-task spec/plan/reviews/handoff
+│   ├── templates/                    # non-authoritative reusable forms
+│   └── security/                     # safety details
+├── .githooks/                        # cooperative local Git checks
+└── .github/workflows/                # repository CI
 ```
 
-No state machine, duplicate SDD/lifecycle policy, registry, database or background agent is installed.
+No trusted Controller, admission store, SQLite, native subagent launcher or autonomous merge/deploy service is included.

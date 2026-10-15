@@ -1,13 +1,11 @@
-# Current Project Context
+# Integrated Project Overview (not a task registry)
 
-- **Updated:** 2026-10-15
-- **Project:** Agentic SDLC Lite; see `PROJECT_BRIEF.md`.
-- **Task:** Lite v0.1 documentation, roles and persistent memory baseline.
-- **Task branch:** `docs/lite-v1-foundation`.
-- **Review:** Draft PR #1; integration into `main` not authorized by this file.
-- **Verified baseline:** The initial Lite foundation commit is `341be2b1ce3619dd8b051d9778b028bdbe2bc976`. Current branch HEAD must be re-read from Git before acting.
-- **Status:** revised source candidate prepared for independent review; not merged or deployed.
-- **Remaining:** check structural CI, independent document consistency and recovery flow; decide on Owner-approved merge.
-- **Next step:** inspect exact current PR head and diff; independently verify that no duplicate protocol or memory authority exists.
-- **Scope limits:** No full Controller, SQLite, admission or autonomous deployment.
-- **Canonical guidance:** `AGENTS.md`, `docs/workflow/development.md`, `docs/workflow/memory.md`.
+- **Last reconciled against main:** 2026-10-15, `01383a714f2aa3669f7fab2e9fb402a76e59f456`.
+- **Project:** `oleyna80/agentic-sdlc-lite` source template; see `PROJECT_BRIEF.md`.
+- **Integrated baseline at that observation:** initial README only. Subsequent draft PRs may contain unmerged proposals.
+- **Open work:** do not infer from this file. Inspect GitHub PRs and per-task handoffs; current source-template candidate is described in `docs/changes/lite-v0.1-foundation/handoff.md`.
+- **Next integration action:** review the actual PR head, required CI and independent Critic findings; do not merge without Owner approval.
+- **Recovery rule:** If actual `main` SHA or current branch differs, use live Git/PR evidence and reconcile this snapshot through an authorized task branch/PR.
+- **Template warning:** A new project **must** follow `docs/workflow/initialization.md`; none of the source repository's PR IDs, SHAs, or decisions describe its active tasks.
+
+This shared file describes the last reconciled integrated baseline, not the only active task. Parallel task branches maintain separate handoffs.

@@ -1,11 +1,12 @@
 # Implementation Plan — <Task>
 
-- **Base branch and commit:**
+- **Repository / base commit:**
 - **Task branch:**
-- **Approved scope / write paths:**
-- **Owner authorization or limitation:**
+- **Plan revision label (optional):**
+- **Approved scope and exact write paths:**
+- **Owner design/scope acceptance evidence:** (before implementation; if approval refers to an exact commit SHA, record it in an external immutable PR/Owner decision, not as a later edit to this frozen plan)
 
-## Steps
+## Implementation steps
 
 1.
 2.
@@ -15,10 +16,6 @@
 
 ## Rollback / recovery
 
-## Dependencies / risks
+## Dependencies and risks
 
-## Independent Critic result (for significant work)
-
-- **Verdict:**
-- **Candidate / revision:**
-- **Blocking findings:**
+**Independent Critic verdict is recorded separately** in `docs/changes/<task>/critic-review.md` or an exact-revision PR review, referring to the reviewed plan commit SHA. Do not modify this approved plan to append a Critic verdict after READY: a material plan revision needs fresh Owner consideration and affected Critic re-review.
