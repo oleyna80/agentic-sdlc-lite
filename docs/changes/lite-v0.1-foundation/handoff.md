@@ -1,7 +1,7 @@
 # Source Template Development — Task-Local Handoff
 
 **Repository:** `oleyna80/agentic-sdlc-lite` (source repository **only**)
-**Task branch:** `docs/lite-v1-foundation`  
+**Task branch:** `docs/lite-v1-foundation`
 **PR:** https://github.com/oleyna80/agentic-sdlc-lite/pull/1 (Draft)
 **Last verified main:** `01383a714f2aa3669f7fab2e9fb402a76e59f456`
 **Initial proposal SHA:** `341be2b1ce3619dd8b051d9778b028bdbe2bc976`
