@@ -1,0 +1,41 @@
+name: Lite Checks
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Validate expected documentation
+        shell: bash
+        run: |
+          set -euo pipefail
+          for file in AGENTS.md CLAUDE.md PROJECT_MAP.md docs/architecture/overview.md docs/workflow/development.md docs/security/boundaries.md; do
+            test -s "$file"
+          done
+
+      - name: Validate hook syntax and executable bits
+        shell: bash
+        run: |
+          set -euo pipefail
+          for hook in pre-commit commit-msg pre-push; do
+            bash -n ".githooks/$hook"
+            test -x ".githooks/$hook"
+          done
+
+      - name: Check introduced whitespace errors
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --check HEAD^ HEAD
