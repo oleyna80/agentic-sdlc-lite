@@ -1,32 +1,32 @@
-# Project Map
+# Project Map — Navigation Only
 
-This file should be adapted in each project created from this template. It is an index, **not** a controller state or permission grant.
+This index identifies canonical destinations. It grants no permissions and defines no additional process.
 
-## Core project documentation
+| Need | Canonical file / location |
+| --- | --- |
+| Project purpose and scope | `PROJECT_BRIEF.md` |
+| Shared agent behavior and precedence | `AGENTS.md` |
+| Development, review, delivery procedure | `docs/workflow/development.md` |
+| Operational memory lifecycle and source-of-truth rules | `docs/workflow/memory.md` |
+| Git branches/worktrees and safe cleanup | `docs/workflow/workspaces.md` |
+| Security boundaries | `docs/security/boundaries.md` |
+| Agent/subagent responsibility definitions | `.agents/roles/` |
+| Agent roster/navigation | `docs/workflow/agent-roles.md` |
+| Architecture and relationships | `docs/architecture/overview.md` |
+| Accepted durable design decisions | `docs/decisions/` |
+| Active session handoff | `memory_bank/context.md` |
+| Recent work and checkpoints | `memory_bank/progress.md` |
+| Index of decisions affecting current work | `memory_bank/decisions.md` |
+| Key orchestrator actions and delegated outcomes | `memory_bank/orchestrator-log.md` |
+| Task-specific intent/spec/plan/reports | `docs/changes/<task>/` (as needed) |
+| Copy-on-use non-authoritative forms | `docs/templates/` |
+| Local cooperative Git checks | `.githooks/` |
+| GitHub CI | `.github/workflows/` |
 
-- `AGENTS.md` — shared AI agent rules and delivery boundaries.
-- `CLAUDE.md` — lightweight Claude Code entry point.
-- `docs/architecture/overview.md` — SDLC architecture, information flow, and dependencies.
-- `docs/workflow/development.md` — task branches, QA, PR, and merge.
-- `docs/workflow/workspaces.md` — safe worktree use and cleanup.
-- `docs/workflow/agent-roles.md` — logical roles and independent assurance.
-- `docs/security/boundaries.md` — secrets, external effects, and platform protections.
-- `docs/templates/` — copy-on-use task templates.
-- `docs/changes/` — per-task documentation and decision evidence (only when justified).
-- `.githooks/` — optional local Git safeguards.
-- `.github/workflows/` — repository-side CI checks.
+## Adaptation to a new software project
 
-## Application-specific fields (fill in before implementation)
+When this kit is used as a repository template, update `PROJECT_BRIEF.md` and this map with: application source roots, supported environments, test/build commands, deployment constraints, data classifications and relevant interfaces. Do not put those facts into generic agent/role prompts.
 
-- Product / problem: **TODO**
-- Primary audience: **TODO**
-- Source roots / modules: **TODO**
-- Test commands: **TODO**
-- Build commands: **TODO**
-- Runtime / deployment environment: **TODO**
-- Data / secret boundaries: **TODO**
-- Project Owner / review process: **TODO**
+## Source of truth
 
-## Navigation rule
-
-Read only the documents relevant to the current change. Preserve approved decisions; do not load every template and historical report by default.
+For actual program behavior inspect source and tests; for why a design exists inspect `docs/decisions/`; for a specific task inspect its approved spec/plan and exact Git diff; for what to do next inspect `memory_bank/context.md` and verify it. When information conflicts, resolve against the authoritative source and correct stale memory. Do not rely on chat summaries.

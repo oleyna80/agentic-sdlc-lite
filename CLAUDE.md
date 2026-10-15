@@ -1,12 +1,5 @@
-# Claude Code — Project Entry Point
+# Claude Code Adapter
 
-Follow [AGENTS.md](AGENTS.md) as the shared contract for all agents. Do not duplicate or override its authority and workflow rules.
+**Read and follow [AGENTS.md](AGENTS.md).** It is the only root agent policy. This file adds no independent lifecycle, review, security or memory rules.
 
-At session start:
-1. Read `AGENTS.md` and `PROJECT_MAP.md`.
-2. Inspect current Git branch/HEAD/status; protect unrelated work.
-3. Identify the task scope, acceptance criteria, and tests.
-4. For high-impact tasks, read existing architecture and approved task documentation before implementation.
-5. Implement only in an approved task branch; report exact commits, test results, and remaining limitations.
-
-Role descriptions: `docs/workflow/agent-roles.md`.
+Claude Code can use the role briefs in `.agents/roles/` and the project documentation map. Actual subagent/tool capabilities depend on the user's installed runtime; no model, native agent or tool is assumed present.

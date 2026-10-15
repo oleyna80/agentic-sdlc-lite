@@ -1,48 +1,33 @@
 # Agentic SDLC Lite
 
-A small, project-agnostic workflow for developing software with Codex, Claude Code, or other AI coding assistants. **No Controller, admission registry, database, background service, or custom orchestration runtime.**
+A portable, Git-native development kit for AI coding assistants. Its goals are **consistent instructions**, **reproducible delivery**, and **project memory that survives chats and agent sessions**.
 
-## What is included
+It deliberately has **no Controller, admission registry, SQLite, background orchestration service, or duplicated SDD/lifecycle policy**. Git, a small set of documents, opt-in hooks and CI are enough for this baseline.
 
-- `AGENTS.md`: shared agent behavior and scope boundaries.
-- `CLAUDE.md`: Claude Code entry point, referring to the shared rules.
-- `PROJECT_MAP.md`: documentation and source layout.
-- `docs/architecture/overview.md`: system and file-dependency diagrams.
-- `docs/workflow/`: branch, review, and worktree procedures.
-- `docs/templates/`: optional task, specification, planning, assurance, and closeout forms.
-- `.githooks/`: pre-commit, commit-msg, and pre-push local safeguards.
-- `.github/workflows/lite-checks.yml`: basic PR/commit checks.
+## Start here
 
-## Quick start
-
-1. Create a new project from this repository (ideally mark this repository as a GitHub template), or selectively copy the files into an existing Git project.
-2. Edit `PROJECT_MAP.md` for the actual project, and record your product boundaries in `docs/changes/` when useful.
-3. Install local hooks **in that project**, once:
+1. Read [PROJECT_BRIEF.md](PROJECT_BRIEF.md) for the product and [PROJECT_MAP.md](PROJECT_MAP.md) for the file map.
+2. Agents read [AGENTS.md](AGENTS.md) before acting. The actual workflow is in [docs/workflow/development.md](docs/workflow/development.md).
+3. Every new agent session reads [memory_bank/context.md](memory_bank/context.md) and [memory_bank/progress.md](memory_bank/progress.md). Durable project decisions are under [docs/decisions/](docs/decisions/).
+4. Install local hooks for this repository if appropriate:
 
    ```bash
    git config --local core.hooksPath .githooks
    ```
 
-   Requires Git and Bash. Copy executable bits when installing from an archive. GitHub templates do not carry over repository settings and branch protections.
-4. Work on a short-lived `feat/*`, `fix/*`, or `docs/*` branch from `main`.
-5. Open a PR; merge to `main` only after checks and human approval.
+   Git and Bash are required; GitHub rulesets, required reviews and CI must be configured separately.
+5. Develop on a short-lived task branch, submit a pull request and obtain Owner approval before merge. Deployment requires separate approval.
 
-See [Development workflow](docs/workflow/development.md) and [Architecture map](docs/architecture/overview.md).
+## Find what you need
 
-## Two levels of ceremony
+- **Workflow and assurance:** [development.md](docs/workflow/development.md).
+- **Memory and handoff:** [memory.md](docs/workflow/memory.md).
+- **Subagents:** [agent-roles.md](docs/workflow/agent-roles.md) and [role prompts](.agents/roles/README.md).
+- **Project Git/worktrees:** [workspaces.md](docs/workflow/workspaces.md).
+- **Safety rules:** [boundaries.md](docs/security/boundaries.md).
+- **Optional templates:** [docs/templates/](docs/templates/).
+- **Architecture:** [overview.md](docs/architecture/overview.md).
 
-**Routine change:** scope → implement → test → review → PR.
+The full process is used only for consequential changes. Routine changes keep a short documented scope, relevant tests and a PR. Memory synchronization is required whenever material context or decisions change, even if the code change is small.
 
-**High-impact change:** intent → spec → plan → independent Critic → implementation → independent review/verification → PR.
-
-Templates are optional for routine work; for consequential changes, preserve enough written evidence to explain decisions and confirm acceptance.
-
-## Trust model
-
-Git hooks and `AGENTS.md` are cooperative safeguards, **not** a security sandbox or authorization engine. Configure GitHub branch protection/rulesets, required CI, least-privilege credentials, and external approval for releases. Agents must not access production secrets or perform destructive actions without explicit authorization.
-
-## Scope
-
-Version: **Lite v0.1 — proposed foundation**. The initial set is submitted for review; it is not a certified security or production assurance framework.
-
-Source inspiration: AzurSysTech Agentic SDLC and its Portable Project Kit. This Lite kit is independent and does not inherit their Controller authority.
+**Status:** Lite v0.1 candidate. AI instructions and local hooks are cooperative, not a sandbox or a substitute for GitHub permissions. Source inspiration: AzurSysTech Agentic SDLC; no authorization or Controller state is inherited.

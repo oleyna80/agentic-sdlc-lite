@@ -17,13 +17,35 @@ jobs:
         with:
           fetch-depth: 2
 
-      - name: Validate expected documentation
+      - name: Verify canonical documents and committed memory
         shell: bash
         run: |
           set -euo pipefail
-          for file in AGENTS.md CLAUDE.md PROJECT_MAP.md docs/architecture/overview.md docs/workflow/development.md docs/security/boundaries.md; do
+          for file in \
+            AGENTS.md CLAUDE.md PROJECT_MAP.md PROJECT_BRIEF.md \
+            docs/architecture/overview.md \
+            docs/workflow/development.md docs/workflow/memory.md \
+            docs/workflow/workspaces.md docs/workflow/agent-roles.md \
+            docs/security/boundaries.md docs/decisions/README.md \
+            memory_bank/context.md memory_bank/progress.md \
+            memory_bank/decisions.md memory_bank/orchestrator-log.md; do
             test -s "$file"
           done
+          for role in orchestrator architect critic coder reviewer verifier; do
+            test -s ".agents/roles/$role.md"
+          done
+          for file in memory_bank/context.md memory_bank/progress.md \
+            memory_bank/decisions.md memory_bank/orchestrator-log.md; do
+            git ls-files --error-unmatch "$file" >/dev/null
+          done
+
+      - name: Reject copied legacy authority paths
+        shell: bash
+        run: |
+          set -euo pipefail
+          test ! -e .agent/controllers
+          test ! -e .agent/workflows/sdd-protocol.md
+          test ! -e governance/lifecycle.md
 
       - name: Validate hook syntax and executable bits
         shell: bash
@@ -38,4 +60,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          git diff --check HEAD^ HEAD
+          if git rev-parse HEAD^ >/dev/null 2>&1; then
+            git diff --check HEAD^ HEAD
+          else
+            git diff-tree --check --root --no-commit-id -r HEAD
+          fi

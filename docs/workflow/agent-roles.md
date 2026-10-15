@@ -1,15 +1,14 @@
-# Agent Roles
+# Agent Roles — Router
 
-Roles are functions, not additional daemons, mandatory tools, or permission levels.
+The canonical role briefs are in [`.agents/roles/`](../../.agents/roles/README.md). This file is a **navigation index only**; it does not restate their permissions or define workflow gates.
 
-- **Owner:** defines the goal and scope; approves architectural exceptions, merge, deployment, external effects.
-- **Planner/Architect:** prepares architecture, specification, interface boundaries, and test strategy when needed.
-- **Critic:** independently challenges the proposal *before* significant implementation; produces READY or REWORK with concrete findings.
-- **Coder:** owns the bounded implementation, local tests, and exact candidate commit(s).
-- **Reviewer:** inspects changed code and risks against the approved task; does not approve its own authored source as independent review.
-- **Verifier:** independently checks acceptance criteria and actual reproducible evidence.
-- **Coordinator:** assembles status/evidence and routes follow-up actions. No special control-plane process is required.
+- [Orchestrator](../../.agents/roles/orchestrator.md) — coordinate scope, handoff and memory synchronization.
+- [Architect](../../.agents/roles/architect.md) — discovery, interface/architecture proposals.
+- [Critic](../../.agents/roles/critic.md) — independent pre-implementation challenge.
+- [Coder](../../.agents/roles/coder.md) — bounded implementation.
+- [Reviewer](../../.agents/roles/reviewer.md) — exact-candidate code review.
+- [Verifier](../../.agents/roles/verifier.md) — acceptance evidence.
 
-For routine work, the Owner and one coder/reviewer may be sufficient. For high-risk changes, Critic and independent assurance are mandatory unless the Owner explicitly narrows or changes the task boundary after evaluating risk.
+Agents are **logical roles**, not automatically installed native subagents. Use runtime-native agents if available; otherwise an explicitly separated read-only session or human can fill the role. The active task's actual permission and isolation determine the strength of the evidence.
 
-Agent capabilities never exceed the permissions of the OS user, GitHub account/token, and approved task.
+Workflow and review requirements live **only** in [development.md](development.md). Role briefs and templates cannot redefine them.

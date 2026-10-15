@@ -1,77 +1,73 @@
-# SDLC Lite — Architecture and Dependency Map
+# SDLC Lite — Architecture and File Dependencies
 
-**Status:** proposed v0.1 foundation. This diagram describes the Lite convention, not an installed authorization engine.
+These are *documentation and execution conventions*, not an installed controller or autonomous orchestration engine.
 
-## Work flow
-
-```mermaid
-flowchart LR
-    O["Owner / request"] --> S["Scope"]
-    S --> R{"Risk / complexity"}
-    R -->|Routine| C["Coder"]
-    R -->|Significant| P["Intent / Spec / Plan"]
-    P --> K["Independent Critic"]
-    K -->|READY| C
-    K -->|REWORK| P
-    C --> T["Local checks + Git hooks"]
-    T --> V["Review / verify"]
-    V -->|REWORK| C
-    V -->|READY| PR["Subject branch PR + CI"]
-    PR --> GO{"Owner GO"}
-    GO -->|approved| M["main"]
-    GO -->|not approved| PR
-```
-
-Roles are logical; separate people or sessions are used where independent assurance is needed. Hooks are cooperative checks; GitHub branch protections and Owner decisions remain external.
-
-## File and authority dependencies
+## Development flow
 
 ```mermaid
 flowchart TD
-    OWNER["Owner instructions"] --> AG["AGENTS.md"]
-    AG --> MAP["PROJECT_MAP.md"]
-    AG --> CLAUDE["CLAUDE.md (adapter)"]
-    MAP --> WORK["docs/workflow/*"]
-    MAP --> ARCH["docs/architecture/*"]
-    WORK --> TMPL["docs/templates/*"]
-    TMPL --> CHANGES["docs/changes/<task>/"]
-    AG -.-> HOOKS[".githooks/*"]
-    HOOKS -.-> CI["GitHub Actions checks"]
-    CI --> PR["Pull request"]
-    PR --> MAIN["main (with branch protection)"]
+    O["Owner request"] --> P{"Task impact"}
+    P -->|Routine| I["Scoped implementation"]
+    P -->|Significant| S["Intent / spec / plan"]
+    S --> C{"Independent Critic"}
+    C -->|REWORK| S
+    C -->|READY| I
+    I --> T["Tests + Git hooks + commit"]
+    T --> V["Risk-appropriate review/verification"]
+    V -->|REWORK| I
+    V -->|READY| M["Memory sync + PR + CI"]
+    M --> GO{"Owner merge decision"}
+    GO -->|Approve| MAIN["main"]
+    GO -->|Hold| M
 ```
 
-Solid links indicate documented use/information flow, not programmatic authorization. Dashed links identify supporting checks.
+The exact source candidate and PR head may differ when follow-on documentation is committed; the canonical rule is in `docs/workflow/development.md`. Deployment is a separate Owner decision. Local hooks do not enforce actual OS or GitHub permissions.
 
-## Directory map
+## One-source-of-truth navigation
+
+```mermaid
+flowchart TD
+    OWNER["Owner decisions"] --> AG["AGENTS.md — root policy"]
+    AG --> WF["docs/workflow/development.md — procedure"]
+    AG --> MEM["docs/workflow/memory.md — memory rules"]
+    AG --> SEC["docs/security/boundaries.md — safety"]
+    AG --> WS["docs/workflow/workspaces.md — Git operations"]
+    AG --> ROLES[".agents/roles/* — subordinate role briefs"]
+    AG --> CLAUDE["CLAUDE.md — adapter"]
+    MAP["PROJECT_MAP.md — navigation"] -.-> WF
+    MAP -.-> MEM
+    MEM --> ADR["docs/decisions/* — durable why"]
+    MEM --> BANK["memory_bank/* — current what/next"]
+    WF --> TEMPL["docs/templates/* — optional forms"]
+    BANK -.-> TASK["docs/changes/* and task PRs"]
+```
+
+Arrows show document references and responsibilities; they do not grant permissions.
+
+## Folder map
 
 ```text
 project/
-├── AGENTS.md                 # shared AI agent instructions
-├── CLAUDE.md                 # Claude-specific entry point
-├── PROJECT_MAP.md            # project navigation
+├── README.md
+├── PROJECT_BRIEF.md                  # product purpose and constraints
+├── PROJECT_MAP.md                    # navigation only
+├── AGENTS.md                         # single root operating contract
+├── CLAUDE.md                         # runtime adapter
+├── .agents/roles/                    # 6 portable role briefs
+├── memory_bank/
+│   ├── context.md                    # current handoff snapshot
+│   ├── progress.md                   # recent verified milestones
+│   ├── decisions.md                  # ADR index
+│   └── orchestrator-log.md           # material coordination log
 ├── docs/
-│   ├── architecture/         # architecture and decisions
-│   ├── workflow/             # procedures and roles
-│   ├── security/             # safety boundaries
-│   ├── templates/            # copy-on-use documents
-│   └── changes/              # optional task artifacts
-├── .githooks/                # local Git checks
-└── .github/workflows/        # server-side CI checks
+│   ├── architecture/                 # diagrams
+│   ├── decisions/                    # durable engineering decisions
+│   ├── workflow/                     # canonical development/memory/Git rules
+│   ├── security/                     # canonical security detail
+│   ├── templates/                    # optional forms
+│   └── changes/                      # task spec/plan/evidence, as needed
+├── .githooks/                        # cooperative Git checks
+└── .github/workflows/                # CI checks
 ```
 
-Application source directories are intentionally not prescribed. There is no Controller, work-block registry, persistent state machine, orchestrator, or automation backend in this kit.
-
-## Git workspace model
-
-```mermaid
-flowchart TD
-    A["main (stable checkout)"] --> B["feat/* or fix/* task branch"]
-    B --> WT["Temporary worktree (optional)"]
-    WT --> TEST["Edits + tests + commits"]
-    TEST --> PR["GitHub PR / checks"]
-    PR --> O["Owner-approved merge to main"]
-    O --> CLEAN["Safe worktree cleanup"]
-```
-
-`main` stays stable. Temporary worktrees and full clones are different; never remove either without inspecting their actual state.
+No state machine, duplicate SDD/lifecycle policy, registry, database or background agent is installed.

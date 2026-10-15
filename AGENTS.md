@@ -1,46 +1,38 @@
 # Agent Operating Contract — SDLC Lite
 
-Read this file before editing the project. This is a **process instruction**, not technical permission or a replacement for host access controls.
+**One root contract.** No other document, agent role, memory file, template or README may create independent authority or override it. This is a working convention, not an OS/remote permission system.
 
-## Goal and precedence
+## Source precedence
 
-Deliver the smallest verified change required by the user's task.
+1. Explicit current Owner instructions, applicable platform security and externally enforced permissions.
+2. This root `AGENTS.md` (project-wide agent behavior).
+3. The approved task specification and current Owner decisions, then the recorded architecture decisions in `docs/decisions/`.
+4. Domain-specific canonical procedures: `docs/workflow/development.md` (workflow/assurance), `docs/workflow/memory.md` (knowledge retention), `docs/workflow/workspaces.md` (Git/worktree procedure) and `docs/security/boundaries.md` (security).
+5. Role prompts in `.agents/roles/` (task responsibilities only), templates and reports (evidence only).
+6. `memory_bank/` and session logs (current orientation, never permission or normative policy).
 
-Follow: explicit Owner instructions and platform/security controls → this file → approved project specifications and decisions → task plan → role-specific guidance and templates. If instructions conflict, stop and ask the Owner for the missing decision. Do not invent permissions.
+If two authoritative sources conflict, or an entry is stale, do not guess: report the conflict to the Owner and use verified current project/Git facts.
 
-## Before work
+## Mandatory session entry
 
-- Read `PROJECT_MAP.md`; identify the relevant source modules and tests.
-- Check repository URL, current branch, HEAD, `git status`, and existing user changes.
-- Confirm task objective, allowed files, acceptance criteria, and side-effect boundary.
-- Never modify `main` directly. Use a task branch and preferably an independent worktree for nontrivial work.
-- Preserve all unrelated changes, untracked files, and existing worktrees.
+1. Read `PROJECT_BRIEF.md`, `PROJECT_MAP.md`, `memory_bank/context.md`, and `memory_bank/progress.md`.
+2. Inspect Git remote, branch, HEAD, status, and applicable task/specification; verify memory against actual repository state.
+3. Read relevant decisions from `docs/decisions/` and applicable domain procedures only. Do not load every template/agent file automatically.
+4. Identify the objective, scope, acceptance criteria, source write paths, test strategy, and any security constraints.
+5. Preserve unrelated changes, untracked files, user worktrees and other tasks.
 
-## Choose the lightest adequate workflow
+## Core operating rules
 
-- **Routine:** a small bounded change. Brief scope; implement; run relevant tests; inspect diff; commit; PR.
-- **Significant or high-risk:** architecture, security, credentials, migrations, data-loss risk, production or broad refactors. Create intent/spec/plan as necessary and request independent Critic **before coding**. Have an independent Reviewer and Verifier inspect the exact candidate where appropriate.
-- If discovery changes assumptions or approved scope, stop implementation and revise the decision first.
+- `main` is stable; make implementation changes only on a task branch, never directly on `main`.
+- Use the appropriate **routine** or **significant** path from `docs/workflow/development.md`; that is the single canonical definition of process and review gates.
+- One write-capable agent per overlapping write-set. Subagents are bounded by explicit mission briefs and do not gain independent authority.
+- Relevant tests, scope/diff inspection and truthful reporting are required. No pretending that source review is an executed test or that self-review is independent.
+- Never merge to `main`, deploy, expose client data or perform destructive/external privileged actions without their separate Owner approval and actual platform permissions.
+- Preserve all material changes in project files/Git per `docs/workflow/memory.md`; **chat history is not project memory**.
+- Do not bypass hooks, force-push, discard files, change credential stores, or silently widen scope.
 
-## Implementation discipline
+## End-of-task handoff
 
-- One write-capable agent owns each overlapping file set at a time.
-- Agents can edit/test/commit on the authorized task branch, subject to the Owner's constraints.
-- Never silently modify secrets, credential stores, production infrastructure, IAM, billing, deployments, external services, or protected Git refs.
-- Never use `reset --hard`, force-push, hook bypass, or destructive cleanup to make a task "work."
-- Do not add unnecessary dependencies, frameworks, or workflow machinery.
-- Run appropriate tests and state precisely what passed, failed, or was not run.
+Before returning a task for review or ending a substantive session, follow the memory synchronization procedure and report: task/branch, exact SHA, changed files, performed checks, unresolved issues, next step and PR link (if any). Do not mark completion when acceptance evidence is missing.
 
-## Review and delivery
-
-- Use task-specific evidence: changed paths, relevant test commands/results, new exact commit SHA.
-- Reviewer identifies defects and risks; Verifier checks acceptance criteria. The implementing agent must not represent its own assessment as independent.
-- Routine review can be lightweight; high-impact work needs stronger evidence.
-- Push only the approved subject branch. Never merge into `main` or deploy without the Owner's explicit approval.
-- CI passing is necessary where configured, but not a substitute for Owner approval.
-
-## No controller in Lite
-
-There is no trusted admission, lifecycle state machine, SQLite registry, or autonomous orchestration authority. File conventions are not permission grants. Local hooks are bypassable; GitHub protections and externally held credentials enforce consequential boundaries.
-
-References: `docs/workflow/development.md`, `docs/workflow/agent-roles.md`, and `docs/security/boundaries.md`.
+**No controller:** No admission, active-state machine, SQLite registry, privilege gate or orchestration runtime exists in Lite. Keep it that way unless the Owner explicitly authorizes a separate redesign.
