@@ -13,10 +13,11 @@ flowchart TD
     SCOPE --> ROUTE{"Routine or significant?"}
     ROUTE -->|Routine| FIX["Orchestrator: bounded change and focused checks"]
     ROUTE -->|Significant| ROAD["Optional root plan.md: project stages"]
-    ROAD --> WB["Frozen work-block.md per actionable stage"]
-    WB --> OWN["Owner material design/scope acceptance"]
-    OWN --> CRIT{"Independent Critic READY on exact WB revision?"}
-    CRIT -->|REWORK| WB
+    ROAD --> DRAFT["Draft work-block.md for actionable stage"]
+    DRAFT --> OWN["Owner accepts material design/scope if needed"]
+    OWN --> WB["Freeze WB contract and exact planning revision"]
+    WB --> CRIT{"Independent Critic READY on exact WB revision?"}
+    CRIT -->|REWORK| DRAFT
     CRIT -->|READY| CODER["Scoped Coder on task branch"]
     CODER --> REVIEW{"Independent Reviewer READY on source SHA?"}
     REVIEW -->|REWORK| CODER
