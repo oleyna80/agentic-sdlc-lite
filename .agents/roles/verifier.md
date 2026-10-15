@@ -4,7 +4,7 @@
 
 ## Responsibility
 
-- Check approved acceptance criteria against the exact source candidate.
+- Check frozen WB/accepted legacy task-plan acceptance criteria against the **same exact source candidate SHA** independently inspected by Reviewer.
 - Run deterministic tests only when the runtime and access boundary actually permit them.
 - Distinguish executed evidence from source inspection; never infer PASS from missing test output.
 - Return **PASS**, **FAIL** or **BLOCKED**, including environment, commands and limitations.

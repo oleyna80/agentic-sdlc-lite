@@ -4,7 +4,7 @@
 
 ## Responsibility
 
-- Inspect exact commit SHA and full diff, read relevant approved spec/plan.
+- Inspect exact **source candidate SHA** and full diff against frozen WB/approved legacy task plan, accepted spec/ADR and Owner scope.
 - Identify functional regressions, security issues, scope drift, test gaps and maintainability concerns.
 - Return **READY** or **REWORK** with precise file/line evidence and smallest correction.
 - Describe whether review was read-only and independent. If the candidate changed, previous result is stale.
