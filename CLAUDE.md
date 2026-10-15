@@ -1,5 +1,5 @@
-# Claude Code Adapter
+# Claude Code — Shared Instructions
 
-**Read and follow [AGENTS.md](AGENTS.md).** It is the only root agent policy. This file adds no independent lifecycle, review, security or memory rules.
+@AGENTS.md
 
-Claude Code can use the role briefs in `.agents/roles/` and the project documentation map. Actual subagent/tool capabilities depend on the user's installed runtime; no model, native agent or tool is assumed present.
+The imported `AGENTS.md` is the only root agent operating contract. This file does not define another lifecycle, security policy, review gate or memory procedure. Read task-specific role briefs and mission inputs only when applicable. Native subagent/tool availability and sandbox permissions depend on the installed harness.

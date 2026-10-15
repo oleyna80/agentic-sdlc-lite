@@ -4,7 +4,7 @@ The canonical role briefs are in [`.agents/roles/`](../../.agents/roles/README.m
 
 - [Orchestrator](../../.agents/roles/orchestrator.md) — coordinate scope, handoff and memory synchronization.
 - [Architect](../../.agents/roles/architect.md) — discovery, interface/architecture proposals.
-- [Critic](../../.agents/roles/critic.md) — independent pre-implementation challenge.
+- [Critic](../../.agents/roles/critic.md) — independent challenge to frozen Work Block (or accepted legacy task plan).
 - [Coder](../../.agents/roles/coder.md) — bounded implementation.
 - [Reviewer](../../.agents/roles/reviewer.md) — exact-candidate code review.
 - [Verifier](../../.agents/roles/verifier.md) — acceptance evidence.
