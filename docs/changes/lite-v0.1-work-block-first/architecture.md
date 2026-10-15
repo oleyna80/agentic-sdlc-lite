@@ -28,8 +28,8 @@ Classification depends on **risk, scope, reversibility, and impact on architectu
 ### Work Block route
 
 1. Owner and Orchestrator clarify the stage goal. Orchestrator saves accepted decisions and may ask Architect for research/design evidence.
-2. Draft/link `intent`, `spec` and optional **root `plan.md`** only if useful. Freeze `docs/changes/<task>/work-block.md` defining outcome, acceptance and scope. Existing reviewed `docs/changes/<task>/plan.md` remains a legacy task plan with its own Critic provenance; any WB derived from it explicitly cites the original plan and affected approvals.
-3. Owner accepts material design/scope, where relevant. Independent Critic checks the exact WB/planning revision: READY or REWORK. Critic cannot grant Owner authority.
+2. Draft/link `intent`, `spec` and optional **root `plan.md`** only if useful. Prepare `docs/changes/<task>/work-block.md` defining outcome, acceptance and scope. Existing reviewed `docs/changes/<task>/plan.md` remains a legacy task plan with its own Critic provenance; any WB derived from it explicitly cites the original plan and affected approvals.
+3. Owner accepts material design/scope, where relevant, **before the Work Block is frozen**. Freeze its exact revision, then independent Critic checks that revision: READY or REWORK. Critic cannot grant Owner authority.
 4. Coder executes within the approved scope on a dedicated branch/worktree, runs focused tests, inspects changes and provides a committed source candidate and evidence.
 5. Independent Reviewer examines exact candidate, code/scope/design drift and test gaps: READY or REWORK; rework returns to Coder.
 6. Independent Verifier checks acceptance with applicable executable tests and truthful evidence **on the same source candidate SHA**: PASS/FAIL/BLOCKED. Failure returns to Coder; inability/authority questions return to Owner.
