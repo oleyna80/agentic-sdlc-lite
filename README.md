@@ -7,7 +7,7 @@ No Controller, admission registry, SQLite, background orchestration service or c
 ## Getting started
 
 1. **When creating a new project from this GitHub template, first complete [First-use Initialization](docs/workflow/initialization.md).** It replaces Lite's inherited source-project identity, task state and decisions. Do not treat the template's memory as your project's.
-2. Configure `PROJECT_BRIEF.md`, `PROJECT_MAP.md` and the new project's committed memory.
+2. Configure `PROJECT_BRIEF.md`, `PROJECT_MAP.md` and the new project's committed memory. Optionally create one **root `plan.md`** from `docs/templates/plan.md` for a multi-stage product roadmap.
 3. Agents start with [AGENTS.md](AGENTS.md), the shared root contract, then the relevant [Development Protocol](docs/workflow/development.md) and [Memory Protocol](docs/workflow/memory.md).
 4. Opt into local Git hooks per clone if useful:
 
@@ -16,7 +16,7 @@ No Controller, admission registry, SQLite, background orchestration service or c
    ```
 
    Git and Bash are required. The repository's GitHub settings, rulesets and required CI are not copied by GitHub template creation.
-5. Work in short-lived task branches, submit PRs, and obtain Owner approval before merge. Deployment is separately authorized.
+5. For a significant delivery stage prepare a frozen `docs/changes/<task>/work-block.md` for independent Critic approval, then use scoped Coder, independent Reviewer and Verifier through harness-native delegation. Work in short-lived task branches, submit PRs, and obtain Owner approval before merge. MVP validation and production deployment are separately authorized.
 
 ## Project documentation
 
@@ -28,6 +28,6 @@ No Controller, admission registry, SQLite, background orchestration service or c
 - [Durable decisions](docs/decisions/), [task records](docs/changes/) and [shared project memory](memory_bank/README.md).
 - [Copy-on-use templates](docs/templates/).
 
-There are two levels of effort: routine tasks with scope, focused checks and a PR; and significant tasks requiring approved design/scope, independent Critic and exact-candidate Reviewer/Verifier gates. The canonical decision rules are in the development protocol, not here.
+There are two levels of effort: **routine** small, reversible low-risk tasks (including tiny safe code fixes) with focused checks and a PR; and **significant** Work Blocks requiring Owner-accepted design/scope, independent Critic and same-SHA Reviewer/Verifier gates. A project roadmap is optional and advances only on independent stage acceptance; task closeout can precede PR merge and never implies deployment. The canonical rules are in the Development Protocol.
 
 This is a candidate for review, not a certified technical security boundary. Hooks are cooperative; real GitHub/OS authorization must be configured outside this kit. Origin: AzurSysTech Agentic SDLC concepts without its trusted Controller.
