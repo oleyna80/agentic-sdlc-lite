@@ -1,21 +1,26 @@
-# Subagent Mission — <Task>
+# Subagent Mission — <WB / Task> — <Role>
 
-- **Base role and specialization:**
-- **Exact repo / task branch / commit SHA:**
-- **Objective and requested output:**
-- **Inputs:** `AGENTS.md`, relevant context/plan, exact file paths
-- **Allowed paths / write-set:** (empty for read-only roles)
+> Orchestrator supplies this brief to a native harness subagent/session. A role name or document **does not install an agent or grant OS/tool permissions**.
+
+- **Role:** Architect / Critic / Coder / Reviewer / Verifier / other bounded specialization
+- **Mission objective / success result:**
+- **Parent frozen Work Block (or legacy task plan), exact repo/branch/reviewed planning SHA:**
+- **Read first:** `AGENTS.md`, relevant approved spec/ADR, Work Block, task handoff, source paths
+- **In scope:**
 - **Out of scope:**
-- **Allowed tools and real isolation:**
-- **Tests or evaluation expected:**
-- **Decision/approval stops:**
-- **Result recipient / handoff:**
+- **Permitted write paths:** <none for read-only reviewers; minimal paths for Coder>
+- **Actual tools/permissions/isolation:** <describe available boundary, not imagined security>
+- **Optional Skills:** <already available skill / approved source / not required>
+- **Checks or investigation expected:**
+- **Stop and return to Owner/Orchestrator when:**
+- **Output format and recipient:** <report path/PR review/summary>
 
-## Required result
+## Required return
 
-- **Verdict:** READY / REWORK / PASS / FAIL / BLOCKED / NOT_APPLICABLE
-- **Evidence:**
-- **Changed paths / candidate SHA (if writer):**
-- **Residual risks:**
+- **Result:** READY / REWORK / PASS / FAIL / BLOCKED / NOT_APPLICABLE, as defined for the role
+- **Evidence:** paths, test commands/results, exact source or plan SHA
+- **Changed paths / candidate commit:** if the agent is an authorized writer
+- **Unresolved risks / untested conditions:**
+- **Recommended next action:**
 
-Role assignment does not grant tool, OS or repository permissions.
+> Never represent same-session self-inspection as independent evidence; state observed separation and limitations.
