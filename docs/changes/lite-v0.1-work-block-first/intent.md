@@ -10,7 +10,7 @@ A portable Markdown-first template that Codex, Claude Code or other capable codi
 
 Normal use: Owner discusses product/feature with Orchestrator; Orchestrator records significant findings/decisions in repository memory, optionally consults Architect, creates a project plan for multi-stage work, then prepares a specific Work Block when a stage becomes actionable. Critic reviews that Work Block; Coder implements; Reviewer checks; Verifier confirms acceptance; Orchestrator closes and records evidence. Owner decides consequential design changes, merge and deployment.
 
-Trivial documentation, memory maintenance and analysis need not instantiate a full Work Block or all roles.
+Low-risk bounded documentation, memory maintenance, analysis **and small reversible code fixes** need not instantiate a full Work Block or all roles; classification follows risk/scope/impact, not file extension.
 
 ## Key product semantics
 

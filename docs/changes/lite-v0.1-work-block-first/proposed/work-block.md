@@ -6,8 +6,7 @@
 
 - **WB ID / title:**
 - **Project / optional parent plan stage:**
-- **Status:** DRAFT / CRITIC_READY / IN_PROGRESS / DELIVERY_READY / COMPLETE / BLOCKED / CANCELLED
-- **Task branch or worktree, base revision:**
+- **Planned branch/worktree, initial Git base revision:**
 - **Owner-approved requirement / spec / ADR references:**
 
 ## Objective
@@ -58,12 +57,9 @@ Describe required behavior and constraints, meaningful steps or milestones, and 
 - **Owner stops:** material design/scope changes, merge, deployment, destructive or consequential external action, unavailable required assurance, access/secret boundary changes.
 - Proposed next action on failure or BLOCKED:
 
-## Planning disposition and delivery
+## Frozen planning contract
 
-- **Owner design/scope decision reference:** <required when material>
-- **Critic report link + reviewed exact revision:** <separate report, not appended verdict>
-- **Source candidate / Reviewer / Verifier references:** <added in separate evidence/handoff>
-- **Branch/PR/merge disposition:** <do not claim merged without GitHub proof>
-- **Final closeout/handoff path:**
+- **Owner design/scope decision reference (set before Critic):** <required when material>
+- **Separate status/report convention:** post-review Critic verdict and exact reviewed WB SHA, working phase, source candidate/review/verification SHAs and PR/merge disposition are recorded **only in task-local `handoff.md`, closeout, Critic/review/verification reports or PR**; there are no later-fillable approval/status fields inside this WB.
 
-> The Critic's verdict is in a separate artifact bound to a frozen plan revision. Reviewer READY and Verifier PASS must apply to one same source candidate. Substantive changes invalidate the affected assurance; a merely evidence-only post-review addition must be explicitly bounded and final PR HEAD checked.
+> Freeze this WB before independent Critic review; subsequent status/verdict/evidence must not mutate the reviewed contract. Substantive WB changes require renewed affected Owner/Critic acceptance and a new exact revision; never classify a post-freeze WB edit as harmless evidence. Reviewer READY and Verifier PASS must reference the same exact source candidate, with final PR HEAD separately reconciled.

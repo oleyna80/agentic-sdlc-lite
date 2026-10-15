@@ -6,7 +6,7 @@
 - **Source base at creation:** `02b51d6d087faba0f3eb924591fac561f3bb0104`.
 - **Planning branch:** `docs/lite-v01-wb-first-design-20261015`.
 - **Current exact planning SHA:** query GitHub branch head at review time; do not infer it from this file.
-- **Status:** PLANNING COMPLETE / CRITIC PENDING. No canonical implementation files changed.
+- **Status:** R1 **REWORK** ([Issue #2](https://github.com/oleyna80/agentic-sdlc-lite/issues/2)) on `d9bf250ea3025ac08a762e0b1b256d7880ea4d20`; corrected planning revision awaits independent **R2 Critic**. No canonical implementation files changed.
 - **Owner-approved direction:** project plan → stages → Critic-approved WB → Coder → Reviewer → Verifier → Owner-controlled integration; native harness; durable Git memory.
 
 ## Artifacts to inspect
@@ -16,6 +16,15 @@
 ## Existing baseline to preserve
 
 Current Lite single root `AGENTS.md`, development/memory/workspace/security procedures, logical role briefs, standard Git hooks and structural CI. Inherited source-template context initialization, parallel task handoffs, exact candidate assurance and explicit Owner decisions must remain. GitHub `main` remains unprotected on the observed account/plan; prose or hooks cannot claim otherwise.
+
+## R1 corrections proposed (not independent Critic closure)
+
+- CRIT-WBL-001: retained canonical final task `COMPLETE / BLOCKED / CANCELLED`, split working phase, PR disposition and stage acceptance.
+- CRIT-WBL-002: removed mutable post-Critic fields from reusable WB template and WB-LITE-001; evidence/status remain in separate handoff/reports bound to exact frozen revision.
+- CRIT-WBL-003: root `plan.md` path, new WB path and legacy reviewed `docs/changes/<task>/plan.md` migration semantics.
+- CRIT-WBL-004: Orchestrator routine route includes low-risk, bounded, reversible small source fixes; risk/scope-based classification.
+
+Issue #2 verdict remains **REWORK** for its reviewed SHA; new R2 outcome cannot be inferred from these edits.
 
 ## Current execution result
 

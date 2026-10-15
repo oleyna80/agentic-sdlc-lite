@@ -1,14 +1,13 @@
 # WB-LITE-001 — Converge Lite on Work-Block-First Documentation
 
-- **Status:** DRAFT / INDEPENDENT CRITIC PENDING — implementation NOT authorized.
+- **Document type:** planning-stage WB contract; **no implementation authorization follows from this document**. Live stage and review verdicts are tracked in external handoff and Critic Issue/report, not filled into this frozen WB.
 - **Date:** 2026-10-15.
 - **Repository:** `oleyna80/agentic-sdlc-lite`.
 - **Approved direction:** Owner's 2026-10-15 discussion (document-first SDLC, project-plan-to-WB stages, native harness, no custom orchestration).
 - **Source candidate:** PR #1 `docs/lite-v1-foundation` at `02b51d6d087faba0f3eb924591fac561f3bb0104`.
 - **Planning branch:** `docs/lite-v01-wb-first-design-20261015`.
-- **Critic approval:** PENDING; record separately, referencing exact planning revision.
 - **Target implementation branch:** new short-lived docs branch based on the **then verified** planning candidate / target PR base; Orchestrator must reconcile prior PR #1 head before implementation.
-- **Parent roadmap:** Lite v0.1 Foundation (single bounded documentation delivery WB, no mandatory project `plan.md` needed for this refinement).
+- **Parent roadmap:** Lite v0.1 Foundation (standalone bounded WB; no root `plan.md` required for this refinement). Other projects use optional root `plan.md` as roadmap; new WB contracts at `docs/changes/<task>/work-block.md`. Existing `docs/changes/<task>/plan.md` remains legacy task-plan evidence with prior Critic provenance.
 
 ## Objective
 
@@ -17,7 +16,7 @@ Turn the existing Lite documentation and templates into an unambiguous Work-Bloc
 ## Expected final result
 
 - A developer can discuss a project, document accepted decisions, write optional project plan and derive one executable WB at a time.
-- Nontrivial WB requires Critic → scoped Coder → independent Reviewer → Verifier, honest SHA-tied evidence and Owner-controlled PR/merge; simple docs-only work can remain with Orchestrator.
+- Nontrivial WB requires Critic → scoped Coder → independent Reviewer → Verifier, honest SHA-tied evidence and Owner-controlled PR/merge; routine low-risk docs **or small reversible code fixes** can remain with Orchestrator.
 - A new coding-agent session can reconstruct current project and WB from Git-tracked documents, not chat.
 - Canonical files contain the approved contracts; no extra controller, native hook, software adapter or skill installer.
 
@@ -46,7 +45,7 @@ Existing canonical documentation:
 ## Implementation outline (not commands to micromanage agents)
 
 1. Align `AGENTS.md` entry and Orchestrator role with document-first native-harness operation and actionable memory discipline. `CLAUDE.md` imports `@AGENTS.md` rather than duplicating the policy.
-2. Revise `development.md` to distinguish simple Orchestrator work from nontrivial WB cycle, project roadmap vs WB, truthful candidate review/verification, closing and Owner-controlled integration.
+2. Revise `development.md` to preserve low-risk routine work (including small reversible code fixes), make project `plan.md` the root roadmap and `docs/changes/<task>/work-block.md` the stage contract, preserve legacy task-plan provenance, and keep canonical final task `COMPLETE / BLOCKED / CANCELLED` independent of PR/merge and roadmap stage.
 3. Introduce and adapt concise templates `plan.md` (roadmap), `work-block.md` (delivery stage), `subagent-mission.md` (bounded delegation), `closeout.md` (outcome/evidence/next action). Keep intent/spec and existing report templates coherent without duplicating policy.
 4. Preserve parallel memory/integration safety, source-template first-use reset and exact assurance semantics. Update role briefs, README/navigation/diagram solely for consistency.
 5. Perform manual and CI-backed scenario checks, record evidence; independent Reviewer and Verifier check one exact source candidate.

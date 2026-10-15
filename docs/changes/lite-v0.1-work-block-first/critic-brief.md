@@ -1,6 +1,6 @@
 # Independent Critic Assignment — WB-LITE-001 (Read-Only)
 
-**Review status:** NOT REVIEWED. This is the **mission brief**, not Critic findings or an approval.
+**Review status:** R1 **REWORK** on `d9bf250ea3025ac08a762e0b1b256d7880ea4d20` ([Issue #2](https://github.com/oleyna80/agentic-sdlc-lite/issues/2)). R2 on the corrected exact HEAD is **PENDING**, not presumed READY.
 **Repository:** `oleyna80/agentic-sdlc-lite`.
 **Planning branch:** `docs/lite-v01-wb-first-design-20261015`.
 **Base candidate:** `02b51d6d087faba0f3eb924591fac561f3bb0104` on PR #1 `docs/lite-v1-foundation`.
@@ -12,6 +12,15 @@ Resolve and state the **actual current planning branch HEAD SHA** before review.
 ## Objective
 
 Independently determine if WB-LITE-001 and its concrete draft templates/protocol are READY for **documentation-only implementation** as a minimal Work-Block-driven SDLC using native Codex / Claude Code, or require REWORK.
+
+## R1 blocker closure to verify (Issue #2)
+
+- CRIT-WBL-001: final task `COMPLETE / BLOCKED / CANCELLED` distinct from interim `DELIVERY_READY`, separate PR/merge/deploy facts and independently accepted roadmap stage.
+- CRIT-WBL-002: no post-Critic mutable fields in a frozen WB; external handoff/reports reference exact WB review SHA, substantive WB edits demand renewed affected assurance.
+- CRIT-WBL-003: root `plan.md` as the **one** optional project roadmap; new stage `docs/changes/<task>/work-block.md`; old `docs/changes/<task>/plan.md` preserved with original review provenance; canonical future doc update paths specified.
+- CRIT-WBL-004: simple Orchestrator route permits small safe reversible code changes with tests/branch/PR; significant route classified by risk, scope and impact (not file extension).
+
+Assess the **whole new candidate** and the previous Lite R1 safeguards; no automatic implementation GO.
 
 ## Review questions
 

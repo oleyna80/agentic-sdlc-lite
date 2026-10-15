@@ -1,6 +1,6 @@
 # SDLC Lite v0.1 — Work-Block-First Documentation Refinement
 
-**Status:** PROPOSAL — INDEPENDENT CRITIC PENDING.
+**Status:** PROPOSAL — Critic R1 **REWORK** on `d9bf250ea3025ac08a762e0b1b256d7880ea4d20` ([Issue #2](https://github.com/oleyna80/agentic-sdlc-lite/issues/2)); corrections awaiting independent R2 on new exact HEAD.
 **Source:** oleyna80/agentic-sdlc-lite, PR #1 (`docs/lite-v1-foundation`), base candidate `02b51d6d087faba0f3eb924591fac561f3bb0104`.
 **Owner direction:** 2026-10-15 architecture discussion. Direction agreed; no implementation, merge, deployment or exception approval is implied.
 
