@@ -10,6 +10,6 @@
 - **Non-goals:** Controller v1, immutable admission, database/registry, trusted automatic agent dispatch, autonomous merge/deploy, OS isolation claims or secret management.
 - **Deployment:** None. Copy into a new Git repository/template and adapt details.
 - **Known limitations:** Instructions/hooks are cooperative; technical isolation and independent roles must be established outside documents.
-- **Status:** Lite v0.1 documentation candidate under draft PR #1, not approved for integration.
+- **Status:** Lite v0.1 Foundation integrated into `main` via [PR #1](https://github.com/oleyna80/agentic-sdlc-lite/pull/1), merge `a4a47b3b8b8e243721b5757c13feab19d65ef30f` (2026-10-16); current-head CI PASS. No production deployment or security certification is implied.
 
 **When used as a template:** the new project must have its *own* repository identity, objective, environment, tests, deployment/data boundaries and `Initialization: INITIALIZED`. Before that, ignore source-Lite active PR/milestone facts and follow [initialization](docs/workflow/initialization.md).

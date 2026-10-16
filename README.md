@@ -30,4 +30,4 @@ No Controller, admission registry, SQLite, background orchestration service or c
 
 There are two levels of effort: **routine** small, reversible low-risk tasks (including tiny safe code fixes) with focused checks and a PR; and **significant** Work Blocks requiring Owner-accepted design/scope, independent Critic and same-SHA Reviewer/Verifier gates. A project roadmap is optional and advances only on independent stage acceptance; task closeout can precede PR merge and never implies deployment. The canonical rules are in the Development Protocol.
 
-This is a candidate for review, not a certified technical security boundary. Hooks are cooperative; real GitHub/OS authorization must be configured outside this kit. Origin: AzurSysTech Agentic SDLC concepts without its trusted Controller.
+The v0.1 Foundation is integrated into the source repository's `main`, but is not a certified technical security boundary. Hooks are cooperative; real GitHub/OS authorization must be configured outside this kit. Origin: AzurSysTech Agentic SDLC concepts without its trusted Controller.
