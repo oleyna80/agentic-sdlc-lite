@@ -1,6 +1,6 @@
 # ADR-0001 — Single-authority lightweight SDLC with Git-backed memory
 
-- **Status:** accepted design direction for the **source repository**; implementation is a candidate under review.
+- **Status:** accepted and implemented design direction for the **source repository**; Foundation merged to `main` on 2026-10-16. This does not grant adoption in derived projects.
 - **Date:** 2026-10-15
 - **Owner:** SDLC Lite project Owner
 - **Scope:** `oleyna80/agentic-sdlc-lite` template **source only**; new projects must explicitly adopt or replace.
@@ -20,5 +20,5 @@ Canonical ownership reduces contradictory instructions. Each task branch must pr
 
 ## Evidence / revisit trigger
 
-- Draft PR #1: `docs/lite-v1-foundation`. Source candidate identity must be verified from live GitHub; review status is not inferred from this ADR.
+- [Foundation PR #1](https://github.com/oleyna80/agentic-sdlc-lite/pull/1) merged into `main` at `a4a47b3b8b8e243721b5757c13feab19d65ef30f` (2026-10-16) after full Foundation Reviewer READY, Verifier PASS and CI PASS on candidate `937ed40d94ac37daaf92a4404b4507d2da1e4d1f`. Historical review/merge evidence must still be verified from GitHub.
 - Revisit if parallel task memory is lost, project template clones inherit inappropriate accepted status, independent checks cannot be performed accurately, or a concrete need justifies stronger technical enforcement.

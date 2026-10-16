@@ -2,7 +2,7 @@
 
 These four files are deliberately Git-tracked:
 
-- [context.md](context.md): current recoverable handoff.
+- [context.md](context.md): last reconciled integrated project overview; active task handoffs are task-local.
 - [progress.md](progress.md): recent verified milestones/checks.
 - [decisions.md](decisions.md): links to durable decision records.
 - [orchestrator-log.md](orchestrator-log.md): compact material coordination trail.

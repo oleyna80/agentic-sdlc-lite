@@ -6,7 +6,7 @@ No Controller, admission registry, SQLite, background orchestration service or c
 
 ## Getting started
 
-1. **When creating a new project from this GitHub template, first complete [First-use Initialization](docs/workflow/initialization.md).** It replaces Lite's inherited source-project identity, task state and decisions. Do not treat the template's memory as your project's.
+1. **When deriving a new project from this repository (copy/clone, or GitHub template once enabled), first complete [First-use Initialization](docs/workflow/initialization.md).** It replaces Lite's inherited source-project identity, task state and decisions. Do not treat the template's memory as your project's.
 2. Configure `PROJECT_BRIEF.md`, `PROJECT_MAP.md` and the new project's committed memory. Optionally create one **root `plan.md`** from `docs/templates/plan.md` for a multi-stage product roadmap.
 3. Agents start with [AGENTS.md](AGENTS.md), the shared root contract, then the relevant [Development Protocol](docs/workflow/development.md) and [Memory Protocol](docs/workflow/memory.md).
 4. Opt into local Git hooks per clone if useful:
@@ -30,4 +30,4 @@ No Controller, admission registry, SQLite, background orchestration service or c
 
 There are two levels of effort: **routine** small, reversible low-risk tasks (including tiny safe code fixes) with focused checks and a PR; and **significant** Work Blocks requiring Owner-accepted design/scope, independent Critic and same-SHA Reviewer/Verifier gates. A project roadmap is optional and advances only on independent stage acceptance; task closeout can precede PR merge and never implies deployment. The canonical rules are in the Development Protocol.
 
-This is a candidate for review, not a certified technical security boundary. Hooks are cooperative; real GitHub/OS authorization must be configured outside this kit. Origin: AzurSysTech Agentic SDLC concepts without its trusted Controller.
+Lite v0.1 Foundation is integrated into `main` ([PR #1](https://github.com/oleyna80/agentic-sdlc-lite/pull/1)); it is **not** a certified technical security boundary. Hooks are cooperative; real GitHub/OS authorization must be configured outside this kit. Origin: AzurSysTech Agentic SDLC concepts without its trusted Controller.
