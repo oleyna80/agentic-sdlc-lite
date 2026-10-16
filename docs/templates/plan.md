@@ -1,6 +1,6 @@
 # Project Plan — <Project>
 
-> **Instantiated file:** root `plan.md` (the sole optional whole-project roadmap; this draft becomes `docs/templates/plan.md`). Not a Work Block or permission grant.
+> **Instantiated file:** root `plan.md` (the sole optional whole-project roadmap; copy this template to that path). Not a Work Block or permission grant.
 > New stages use frozen `docs/changes/<task>/work-block.md` after Critic READY. Legacy `docs/changes/<task>/plan.md` files remain old per-task implementation plans with original Critic provenance, not additional project roadmaps.
 
 ## Product objective
