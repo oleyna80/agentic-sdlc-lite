@@ -1,0 +1,76 @@
+name: Lite Checks
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Verify canonical documents and committed memory
+        shell: bash
+        run: |
+          set -euo pipefail
+          for file in \
+            AGENTS.md CLAUDE.md PROJECT_MAP.md PROJECT_BRIEF.md \
+            docs/architecture/overview.md \
+            docs/workflow/development.md docs/workflow/memory.md docs/workflow/initialization.md \
+            docs/workflow/workspaces.md docs/workflow/agent-roles.md \
+            docs/security/boundaries.md docs/decisions/README.md \
+            memory_bank/context.md memory_bank/progress.md \
+            memory_bank/decisions.md memory_bank/orchestrator-log.md; do
+            test -s "$file"
+          done
+          for role in orchestrator architect critic coder reviewer verifier; do
+            test -s ".agents/roles/$role.md"
+          done
+          for file in memory_bank/context.md memory_bank/progress.md \
+            memory_bank/decisions.md memory_bank/orchestrator-log.md; do
+            git ls-files --error-unmatch "$file" >/dev/null
+          done
+
+      - name: Guard new projects against inherited template state
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "$GITHUB_REPOSITORY" != "oleyna80/agentic-sdlc-lite" ]]; then
+            grep -Fqx -- '- **Initialization:** INITIALIZED' PROJECT_BRIEF.md
+            grep -F -- '- **Repository identity:**' PROJECT_BRIEF.md | grep -F -- "$GITHUB_REPOSITORY"
+          fi
+
+      - name: Reject copied legacy authority paths
+        shell: bash
+        run: |
+          set -euo pipefail
+          test ! -e .agent/controllers
+          test ! -e .agent/workflows/sdd-protocol.md
+          test ! -e governance/lifecycle.md
+
+      - name: Validate hook syntax and executable bits
+        shell: bash
+        run: |
+          set -euo pipefail
+          for hook in pre-commit commit-msg pre-push; do
+            bash -n ".githooks/$hook"
+            test -x ".githooks/$hook"
+          done
+
+      - name: Check introduced whitespace errors
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git rev-parse HEAD^ >/dev/null 2>&1; then
+            git diff --check HEAD^ HEAD
+          else
+            git diff-tree --check --root --no-commit-id -r HEAD
+          fi
