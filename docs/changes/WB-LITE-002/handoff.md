@@ -2,6 +2,7 @@
 
 ## Current task state
 
+- **Current disposition:** BLOCKED before Coder entry; Independent Stage Critic R1 REWORK on exact W, FND-STAGE-001. See the latest checkpoint below; earlier pre-commit/PENDING observations are historical.
 - **Task:** Corrective SDLC Lite v0.1, stage WB-LITE-002.
 - **Worktree / branch:** `/home/azur/Projects/WSL/agentic-sdlc-lite-worktrees/wb-lite-002-implementation` / `docs/wb-lite-002-implementation`.
 - **Observed HEAD before the W commit:** `e8bdc689f31af33f1d7e2501cbce9b162ad6f1db`.
@@ -9,7 +10,7 @@
 - **Project Critic:** R1 READY on exact P, recorded separately at `docs/changes/lite-v01-corrective-project/critic-r1.md`.
 - **Owner decision:** separately recorded at `docs/changes/lite-v01-corrective-project/owner-decisions.md` in `e8bdc689f31af33f1d7e2501cbce9b162ad6f1db`; it accepts OD-1…OD-5 and authorizes bounded stage planning, Critic, implementation, assurance and delivery operations.
 
-## Stage W checkpoint
+## Historical pre-commit Stage W checkpoint
 
 - **W path:** `docs/changes/WB-LITE-002/work-block.md`.
 - **W state:** DRAFT READY TO COMMIT. Its exact commit SHA and blob are `NOT_COMMITTED`; neither is inferred from this handoff.
@@ -28,9 +29,31 @@
 
 Original R5 remains immutable input at P. FND-PLAN-001 is retained: the original Project Critic report has an intentional Markdown hardbreak at line 154, so a full base-to-PR `git diff --check` may fail on that unchanged report. Do not normalize it or represent that full check as PASS. Check changed/new content separately and report the known diagnostic and scope.
 
-## Next action
+## Historical pre-Critic next action
 
 1. Re-establish the target worktree, branch, HEAD, status, scope and applicable instructions immediately before a Git mutation.
 2. Commit only W and this handoff under the authorized task evidence scope; then record the exact W commit/blob and P-to-W conformance outside W.
 3. Obtain an independent Stage Critic verdict on that exact W. A `READY` plus conformance and actual permissions is the Coder entry condition.
 4. Keep all later verdicts, source/PR SHAs, checks, CI, closeout and Owner merge disposition in separate task evidence. Do not edit frozen P or W for those facts.
+
+## Committed W and pre-Critic conformance — 2026-10-17
+
+- Exact W: `7c3505a90872fec7b9817b72ed79755da11448f4`; WB blob `04dc08bf860676898f05a3d25ad61773adfa777f`; SHA-256 `2cf96e3ab1b95234b2b9bec8462591948d0ec30dc3a546ef24c7dd7eecfd39d3`. This supersedes the pre-commit checkpoint above.
+- Ancestry: `git merge-base --is-ancestor b4cbc37e6bc318a5b28f4db8cbeaafd3663c60df 7c3505a90872fec7b9817b72ed79755da11448f4` returned 0. Plan/spec blobs at W equal the approved values above. No alternate-base transfer.
+- Scope conformance: exact 21 source paths match P §3; finite stage evidence matches P; AC-1…AC-15, V-01…V-26 and OD-1…OD-5 retained. Scope/risks/escalation/permissions remain bounded by P and separate Owner approval. This is Orchestrator conformance evidence, not an independent verdict.
+- Checks before W commit: direct full-content checks covered tracked W and untracked handoff (whitespace, conflict markers, final LF, local links); PASS. Authorized staging then cached whitespace check and staged diff review: PASS for these two files. No implementation tests were run.
+- A fresh native Independent Stage Critic `/root/stage_critic_r1` received exact W; verdict PENDING. Implementation remains NOT_STARTED. Native roles share filesystem/Git; no OS-isolation claim.
+- Next: preserve original Stage Critic report; READY/conformance permits Coder, REWORK requires a new W and repeated independent Stage Critic. Frozen P and reviewed W are not edited for status/evidence.
+
+## Stage Critic REWORK / BLOCKED checkpoint — 2026-10-17
+
+- Observed source/planning HEAD: exact W `7c3505a90872fec7b9817b72ed79755da11448f4`. Approved P and the plan/spec/W blobs above remain unchanged; all 21 implementation source paths still equal baseline `90c101ba2b6091a24c2f458f5ffc8b02e6eb04ab` (`git diff --exit-code <baseline> -- <21 paths>`, exit 0).
+- Fresh independent native `/root/stage_critic_r1` returned **REWORK**, one blocking finding **FND-STAGE-001**. Its complete original response is preserved verbatim, including the quoted diagnostic's trailing spaces, in [critic-review.md](critic-review.md); SHA-256 `a25cb9e6275d20b287971f29132fce719edf6431f9aa9284efdcf7ada03da66e`. This is an independent review of exact W, not a re-use of Project Critic R1.
+- Blocker: P requires actual successful applicable CI and W V-02 requires Lite Checks PASS, but the normal PR merge checkout makes the unchanged whitespace step cover the original Project Critic report's hardbreak. That report must remain unchanged, and approved workflow scope permits editing only the first-use guard. Preserving a known diagnostic is not an explicit risk exception or permission to change the whitespace step.
+- Root reproduced `git -C <this-worktree> diff --check 90c101ba2b6091a24c2f458f5ffc8b02e6eb04ab 7c3505a90872fec7b9817b72ed79755da11448f4`: **FAIL, exit 2**, only `docs/changes/lite-v01-corrective-project/critic-r1.md:154`. A future PR CI failure is an evidence-based expectation; no actual PR merge ref or GitHub CI run was created.
+- Before staging, direct UTF-8 content inspection covered both the tracked handoff and untracked Stage Critic report. Final LF present, no CR or conflict markers, and all local Markdown link targets exist. Handoff has no trailing whitespace; Stage Critic report retains two trailing spaces at line 66 in its verbatim quoted diagnostic. Its whitespace result is **FAIL**, not hidden by the tracked-only `git diff --check` exit 0. Remote documentation link was inspected against official actions/checkout v4 documentation.
+- Authorized evidence-only staging covered exactly `critic-review.md` and this handoff. `git -C <this-worktree> diff --cached --check` returned **FAIL, exit 2**, solely `critic-review.md:66` (the original response's quoted diagnostic). Full staged content was reviewed; the diagnostic is retained for report fidelity and is not a passed check or an exception to the future CI gate. A normal commit is attempted without bypassing any hook; a hook denial requires STOP.
+- Current work is limited to this handoff and the original Stage Critic report. No implementation source edits, source candidate S, guard/native fixtures V-01…V-26, independent source Reviewer/Verifier, PR or GitHub CI: **NOT_RUN / NOT_STARTED** as applicable. No merge/deploy/settings/hooks operation.
+- Main checkout is clean at `90c101ba2b6091a24c2f458f5ffc8b02e6eb04ab`; remote main remains at the same SHA. Other worktrees are preserved. Shared filesystem/Git is not OS-level isolation.
+- Next permitted bookkeeping: normal commit of these two evidence files and authorized non-force push to `docs/wb-lite-002-implementation`; then STOP. The delivery commit can be discovered as the commit containing this checkpoint; it is not a source S or a completed delivery H.
+- Required next decision: explicit Owner disposition for FND-STAGE-001, either a narrowly bounded authorized CI correction with affected tests, or an explicit bounded risk disposition for this failing gate. Do not infer either from previous approval. Depending on materiality, revise the proposal through its applicable project cycle; changed stage contract/gate expectations require a new committed W and renewed independent Stage Critic. Do not backfill status into reviewed W or frozen P, normalize the original reports, or start Coder before the entry conditions are satisfied.
