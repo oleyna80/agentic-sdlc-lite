@@ -1,18 +1,18 @@
-# Session / Task Handoff — <Task>
+# Task / Session Handoff — <Task>
 
-- **Observed date, repo and exact branch/HEAD:**
-- **Frozen Work Block / approved legacy task plan path and exact reviewed planning SHA:**
-- **Scope / acceptance criteria link:**
-- **Session working phase:** DRAFT / CRITIC_PENDING / IN_PROGRESS / DELIVERY_READY (not final closeout)
-- **Task final closeout status (only if concluded):** COMPLETE / BLOCKED / CANCELLED
-- **Changed / uncommitted / untracked files to preserve:**
-- **Last reviewable source candidate SHA (if different from HEAD):**
-- **Tests:** PASS / FAIL / NOT_RUN with exact evidence
-- **Separate Critic/Reviewer/Verifier verdicts and linked exact WB/source SHAs:**
-- **Owner decisions still required:**
-- **Blocking issues / risks:**
-- **Next concrete step:**
+> Required according to **conditional checkpoint matrix** in `docs/workflow/memory.md`. A short uninterrupted routine with sufficient task PR/issue does **not** require a separate handoff.
 
-For a concurrent or significant task, save as `docs/changes/<task>/handoff.md` in its task branch. This is the branch-local source of recoverable work; it is **not** a competing global `memory_bank/context.md`.
+- **Observed date, repository identity, verified absolute worktree, branch/HEAD/status:**
+- **Task objective/classification, exact write-set and separate evidence paths:**
+- **Approved specification/P commit and blobs, Project Critic and Owner exact-P approval (or reasoned routine N/A):**
+- **Stage W commit/blob, conformance, Stage Critic, entry dependencies (or reasoned routine N/A):**
+- **Working phase:** DRAFT / CRITIC_PENDING / IN_PROGRESS / DELIVERY_READY
+- **Final task status if concluded:** COMPLETE / BLOCKED / CANCELLED
+- **Dirty/staged/untracked paths to preserve and any parallel writers:**
+- **Observed predecessor HEAD / actual last checkpoint (never future self SHA):**
+- **Exact source candidate S, separate delivery HEAD H and inspected S..H evidence-only diff:**
+- **Executed tests and numeric codes, explicit NOT_RUN, actual CI status on H:**
+- **Independent Reviewer/Verifier same-SHA verdicts and original report provenance:**
+- **Owner/material decisions still required, risk, next concrete authorized action:**
 
-`IN_PROGRESS` and `DELIVERY_READY` are working-session descriptors, **not** final closeout values. Never edit the approved frozen WB to fill verdicts, working status or later Git/PR evidence. Post-merge disposition is checked from GitHub and reconciled by a separately authorized memory update.
+This record is branch-local and never substitutes for integrated shared memory. Do not backfill frozen P/W with verdicts or later status. DELIVERY_READY is not final closeout or merge.
