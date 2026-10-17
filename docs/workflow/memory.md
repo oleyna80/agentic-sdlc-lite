@@ -10,9 +10,9 @@ The committed repository, approved task documents, Git and GitHub evidence prese
 | Agent behavior and source precedence | `AGENTS.md` | Adapters never redefine it |
 | Development, Git and security procedure | `docs/workflow/`, `docs/security/` | Templates/roles link; no parallel protocols |
 | Actual behavior and tests | Current source/test tree | Evidence is verified against Git |
-| Task scope / frozen Work Block or approved legacy task plan | `docs/changes/<task>/work-block.md` or historical `docs/changes/<task>/plan.md` | Critic evidence and exact reviewed planning SHA |
+| Stage contract W / historical legacy plan | `docs/changes/<task>/work-block.md` or legacy task plan | Exact reviewed W, independent Stage Critic and approved parent P; historical legacy provenance retained |
 | Durable design rationale | `docs/decisions/<id>.md` | `memory_bank/decisions.md` contains links/status only |
-| Optional whole-project roadmap | Root `plan.md`, if created | One project plan, stages accepted against independent evidence |
+| **Approved project contract P** | Root `plan.md` and exact Project Critic/Owner evidence | Frozen project outcomes, not mutable progress |
 | **Per-task live handoff** (especially parallel branches) | `docs/changes/<task>/handoff.md` on the task branch | Store phases, Critic/Reviewer/Verifier SHAs, PR and next action outside frozen WB |
 | **Integrated project overview** | `memory_bank/context.md` | Summary of last reconciled common baseline, not the only active task |
 | Recent integrated milestones | `memory_bank/progress.md` | Link task reports/commits; no copied reports |
@@ -29,7 +29,7 @@ The four root `memory_bank/*.md` files are Git-tracked. Do not ignore `memory_ba
 
 1. Read `AGENTS.md`, project brief/map, and the *last integrated* `memory_bank/context.md` and `progress.md`.
 2. Inspect the actual repository, branch, HEAD, worktree status and relevant remote PRs. Resolve discrepancies by checking current Git/PR facts before using a stale memory instruction.
-3. Read optional **root `plan.md`** for project stages if it exists. For a task branch, read its frozen `docs/changes/<task>/work-block.md` (or historical approved task `plan.md`) plus its `handoff.md`. Never edit frozen planning documents to backfill Critic verdicts/working status; those belong in task-local reports/handoff/PR. If the task has no handoff, use its PR/issue and reconstruct a scoped handoff before significant new work.
+3. For new significant work recover Owner-accepted exact specification, frozen Project-Critic-reviewed **P**, separate Owner approval, committed **W**, own Stage Critic READY/conformance and task-local handoff. For routine tasks explain P/W/gates NOT_APPLICABLE; preserve accepted legacy task-plan provenance. Never edit frozen P/W to fill verdicts/status. If a mandatory checkpoint is missing, report it; do not create fictional recovery.
 4. For the default branch, identify unfinished work from active PRs and task records; the shared context is **not** a complete authoritative registry of unmerged branches.
 5. Consult linked accepted decisions and relevant reports only as needed.
 
@@ -42,26 +42,21 @@ The four root `memory_bank/*.md` files are Git-tracked. Do not ignore `memory_ba
 - If two task branches changed the same shared memory files, **stop and reconcile explicitly** in a bounded integration PR. Update the integrated summary from live Git/PR evidence, retain independent handoffs and show the Owner the resolution.
 - Concurrent agents cannot treat a per-branch commit as globally visible project memory. A fresh session in another branch must discover ongoing work through GitHub PRs, agreed handoff paths, or direct coordination.
 
-## 3. Required checkpoints and handoff
+## 3. Canonical conditional checkpoint matrix
 
-The coordinating agent (not a source-read-only Reviewer/Critic/Verifier) owns memory synchronization within its **approved write scope**.
+| Situation | Minimum checkpoint |
+| --- | --- |
+| **Short routine**, uninterrupted, no parallel task/handoff | Adequate existing task PR/issue containing objective/scope, branch/base/exact candidate, changes/checks, gate N/A rationale, risks and next action; **no separate handoff file required** |
+| Routine interrupted before PR, long/multi-session, blocked or delegated | Own `docs/changes/<task>/handoff.md` plus safe authorized **Git-committed** checkpoint; future PR cannot replace it |
+| **Significant** or **parallel** task | Own **committed** branch-local `docs/changes/<task>/handoff.md` linking exact P/W and independent results; shared memory is not task state |
 
-**Before PR, interruption, or substantive task handoff:**
+The checkpoint states objective, classification, scope/permissions, exact branch/base, **observed predecessor HEAD** (not a self-referential future commit), dirty/untracked files, verified tests/role verdicts, blockers and concrete next action. Record a subsequently observed SHA in later evidence. Chat, agent-local `MEMORY.md`, `/tmp` scratch, compacted messages and uncommitted drafts are **lookup hints**, not project authority or a completed durable checkpoint.
 
-1. Save/update the task-local handoff with observed repository and branch HEAD, task scope, completed milestones, actual checks, blockers and exact next action. Use `docs/templates/session-handoff.md` if useful. `docs/changes/<task>/handoff.md` is preferred for parallel and significant work.
-2. Commit safe handoff and task evidence on the task branch when in scope; never alter `main` directly. The PR source SHA can change if this is a committed substantive document: apply the exact-candidate review rules in `docs/workflow/development.md`.
-3. For a single-task coordinator authorized to write shared memory, update `context.md` and `progress.md` only with verified facts. Append an `orchestrator-log.md` row only for significant role verdict/scope/Owner decision/handoff, not every command.
-4. If a decision has lasting effect, create one `docs/decisions/` record and link it from `decisions.md` during authorized integration. Do not duplicate ADR rationale.
-5. Check diffs for sensitive content, stale SHA/status, conflicts and unintended edits.
+**Resume/compaction:** before the next write, independently restore objective, applicable instructions, verified absolute target, branch/HEAD/status, authorized scope, all dirty/untracked paths, task checkpoint and next action; apply `docs/workflow/workspaces.md`. Never assume prior cwd/tool state/temp path survived. If reconstruction is uncertain, say STOP/NOT_VERIFIED; a synthetic replay does not prove native compaction.
 
-**After Owner merge, cancellation, or other disposition:**
+If commit/publication is not allowed, preserve safe local work and explicitly report `NOT_COMMITTED` and missing authority; never secretly stage/push or invent recovery PASS. Sudden process failure may prevent checkpoint, which the next session must detect from actual Git state.
 
-1. Verify final PR status, exact merge SHA and CI/Owner decision on GitHub; do not infer merge from a local `COMPLETE`.
-2. Where integrated shared memory remains stale, prepare a separate authorized documentation task branch/PR, or include confirmation in the next already approved integration-memory change. Do **not** write to protected `main`.
-3. Reconcile the shared overview and progress log with **all** outstanding task handoffs; update a task's final disposition without erasing others. Until the update merges, live Git/PR state is authoritative.
-4. Preserve historical decisions and evidence. Cleanup of worktrees is separate and follows `docs/workflow/workspaces.md`.
-
-A tiny change without a meaningful context change does not need ceremonial updates to four files. Significant or blocked tasks do require a recoverable task-local checkpoint even if a shared overview is unchanged.
+Each parallel task owns its own handoff. Only a designated authorized integration writer reconciles shared memory from live merged Git/PR evidence, retaining all active task records; no direct `main` changes. Independent report originals remain reachable by Git commit/blob; explicitly authorized cosmetic presentation changes require exact original/new mapping and cannot alter verdicts. Project Critic READY, Owner P approval, Stage Critic READY and source S assurance are separate claims.
 
 ## 4. Keep memory usable
 
@@ -69,7 +64,7 @@ A tiny change without a meaningful context change does not need ceremonial updat
 - `progress.md`: approximately 15 recent **integrated** milestones, with links to older task/Git evidence.
 - `decisions.md`: index of approved decisions, not duplicate decision text.
 - `orchestrator-log.md`: short material event index, not tool trace. Never record secrets.
-- Root `plan.md` if used: one roadmap, with stage progress backed by independent stage/PR evidence rather than task COMPLETE alone.
+- Root `plan.md` for new significant projects: approved frozen P; operational progress lives in task handoffs/reports, not P.
 - Frozen `work-block.md`: accepted stage contract. A legacy task `plan.md` retains its own original Critic review binding and must not be silently migrated.
 - Task-local `handoff.md`: recoverable working phase (including optional DELIVERY_READY), exact frozen WB and candidate SHA, separate gate links, PR disposition and next action on a particular branch.
 - When a decision is superseded, retain the old ADR with status/provenance and link the new one.
