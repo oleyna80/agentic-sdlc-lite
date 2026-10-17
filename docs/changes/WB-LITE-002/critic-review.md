@@ -63,7 +63,7 @@ exit 2
 
 ```text
 docs/changes/lite-v01-corrective-project/critic-r1.md:154: trailing whitespace.
-+**Blocking findings: отсутствуют.**  
++**Blocking findings: отсутствуют.**
 ```
 
 Наблюдённые локальные `main` и `origin/main` указывают на `90c101ba2b6091a24c2f458f5ffc8b02e6eb04ab`.

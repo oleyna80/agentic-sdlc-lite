@@ -151,7 +151,7 @@ Pre-commit `NOT_FIXED`/`NOT_COMMITTED`/`NOT_RUN` записи в handoff и evid
 
 ## 6. Findings, ограничения и следующий gate
 
-**Blocking findings: отсутствуют.**  
+**Blocking findings: отсутствуют.**
 **Required minimal corrections до Owner review: отсутствуют.**
 
 Оставшиеся ограничения относятся к будущему исполнению:
