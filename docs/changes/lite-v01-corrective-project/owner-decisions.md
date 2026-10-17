@@ -16,3 +16,13 @@ Owner принимает/отклоняет exact READY P с указанным�
 Material correction specification/plan требует нового complete P и affected independent review/approval. Внутри будущего approved project не вводится дополнительных Owner-per-WB gates, но требуются committed actionable W и собственный Stage Critic READY.
 
 Этот файл хранит evidence/status, не создаёт approvals. Предыдущие pre-commit наблюдения доступны на P; они не заменяют данный exact-P checkpoint. Frozen plan/WB ради decisions не редактируются.
+
+## Owner approval — 2026-10-17
+
+Текущий explicit Owner message «Owner Approval — Corrective SDLC Lite v0.1» принимает exact project plan P `b4cbc37e6bc318a5b28f4db8cbeaafd3663c60df`, plan blob `fcfda1f6dfa011a5688c5f04111d918d6bbce707`, specification blob `e8a20a4ae87ae8438b0e66be13c119673260c480` и все OD-1…OD-5 в проверенном plan.md. Independent Project Critic R1 READY на P: [original report](critic-r1.md). Предыдущий PENDING выше — историческое наблюдение evidence checkpoint, superseded этим решением.
+
+**Project plan / OD-1…OD-5: APPROVED.** Reviewed plan/spec bytes не меняются. Разрешены отдельное approval evidence, actionable committed W, independent Stage Critic на exact W и, только после READY/conformance, bounded implementation 21 source paths и перечисленные task evidence. Покрыты autonomous Coder/Reviewer/Verifier REWORK, focused/disposable/native tests AC-1…15/V-01…26, normal commits, non-force push в `docs/wb-lite-002-implementation`, итоговый PR/CI и handoff. Отдельного Owner-per-WB approval нет.
+
+Material deviation, unresolved requirements blocker, недоступное mandatory assurance или permissions требуют STOP/Owner escalation. Final acceptance/merge остаётся Owner. Merge, deployment, GitHub settings, hooks installation, historical ADR edits и расширение source write-set не разрешены. Реальные OS/platform/security controls сохраняются.
+
+FND-PLAN-001 сохраняется как известный whitespace diagnostic оригинального Project Critic report (Markdown hard break, line 154): failed default whitespace check не объявлять PASS. Учесть полный base-to-PR diff и точный CI результат при delivery; исходный report не переписывать.

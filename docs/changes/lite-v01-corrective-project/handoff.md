@@ -14,3 +14,11 @@
 - Publication: evidence checkpoint is prepared for normal scoped commit and non-force push only to authorized planning branch; at this pre-commit observation, push/PR/merge/deploy have not occurred. Final commit/ref/CI observation is reported after publication; this record deliberately has no self-referential commit SHA.
 - Main and other worktrees preserved; main clean at baseline. No hooks/settings/memory/history changed. Temporary scratch is not project authority or durable checkpoint.
 - Next action after evidence publication: **STOP for Owner approval/rejection exact P + OD-1…OD-5 + delegated bounds**. Do not start Stage Coder. Only after approval: actionable committed W → own independent Stage Critic READY → bounded execution under actual permissions.
+
+## Owner-approved continuation — 2026-10-17
+
+- Observed predecessor HEAD: `ce2e59223dff648a34d33870a0d07ad8437a9d2b`, planning branch clean before this evidence update; remote planning HEAD matched. Main/local/remote baseline unchanged: `90c101ba2b6091a24c2f458f5ffc8b02e6eb04ab`.
+- Supersedes earlier STOP/PENDING: [Owner decision](owner-decisions.md#owner-approval--2026-10-17) approves exact P, specification and OD-1…OD-5; project contract frozen with unchanged bytes.
+- Next: approved descendant task branch `docs/wb-lite-002-implementation` / sibling `wb-lite-002-implementation`; actionable W retaining R5 requirements and history → independent Stage Critic exact W → bounded source implementation only after READY/conformance.
+- Stage Critic / source Reviewer / Verifier / implementation fixtures: NOT_RUN at this checkpoint. No Coder implementation yet. Final merge/deployment/settings/hooks/history outside authorization.
+- Planning/evidence commit only; its resulting SHA is observed in the next checkpoint rather than self-inserted. Shared memory and existing worktrees preserved.
