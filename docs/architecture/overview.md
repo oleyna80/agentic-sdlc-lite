@@ -1,91 +1,86 @@
 # SDLC Lite — Architecture and File Dependencies
 
-Diagrams **illustrate** `docs/workflow/development.md` and `docs/workflow/memory.md`; they do not introduce a second policy, orchestration runtime or technical authorization.
+Diagrams **illustrate** `docs/workflow/development.md` and `docs/workflow/memory.md`; they do not authorize operations or define competing gates.
 
-## Project roadmap and delivery
-
-```mermaid
-flowchart TD
-    O["Owner intent"] --> INIT{"First-use initialization needed?"}
-    INIT -->|Yes| SETUP["Initialize new project; Owner acceptance"]
-    INIT -->|No| SCOPE["Risk and scope classification"]
-    SETUP --> SCOPE
-    SCOPE --> ROUTE{"Routine or significant?"}
-    ROUTE -->|Routine| FIX["Orchestrator: bounded change and focused checks"]
-    ROUTE -->|Significant| ROAD["Optional root plan.md: project stages"]
-    ROAD --> DRAFT["Draft work-block.md for actionable stage"]
-    DRAFT --> OWN["Owner accepts material design/scope if needed"]
-    OWN --> WB["Freeze WB contract and exact planning revision"]
-    WB --> CRIT{"Independent Critic READY on exact WB revision?"}
-    CRIT -->|REWORK| DRAFT
-    CRIT -->|READY| CODER["Scoped Coder on task branch"]
-    CODER --> REVIEW{"Independent Reviewer READY on source SHA?"}
-    REVIEW -->|REWORK| CODER
-    REVIEW -->|READY| VER{"Independent Verifier PASS on same source SHA?"}
-    VER -->|FAIL| CODER
-    VER -->|BLOCKED| BLOCK["Owner escalation: no normal clearance"]
-    VER -->|PASS| HAND["Task-local handoff and delivery result"]
-    FIX --> HAND
-    HAND --> PR["Subject PR and current-head CI"]
-    PR --> GO{"Owner merge decision"}
-    GO -->|Approved| GIT["Verify actual PR/merge disposition"]
-    GO -->|Not approved| PR
-    GIT --> STAGE{"Separate project-stage acceptance met?"}
-    STAGE -->|No| HAND
-    STAGE -->|Yes| NEXT["Advance roadmap; assess next WB or MVP"]
-    NEXT --> MVP["MVP deployment and validation with Owner GO"]
-    MVP --> PROD["Production release with separate Owner GO"]
-```
-
-`DELIVERY_READY` is only a **working phase** in handoff; **final task closeout** is `COMPLETE / BLOCKED / CANCELLED` and can occur before PR merge. Project-stage acceptance, merge, MVP deployment/validation and production are separate evidenced facts with their own authorization.
-
-## Documentation ownership
+## Project definition and autonomous stage execution
 
 ```mermaid
 flowchart TD
-    OWNER["Owner and actual OS/platform permissions"] --> AG["AGENTS.md — shared agent contract"]
-    AG --> DEV["docs/workflow/development.md — canonical workflow"]
-    AG --> MEM["docs/workflow/memory.md — canonical memory"]
-    AG --> INIT["docs/workflow/initialization.md — first use"]
-    AG --> GIT["docs/workflow/workspaces.md — branches and cleanup"]
-    AG --> SEC["docs/security/boundaries.md — security details"]
-    AG --> ROLES[".agents/roles — portable roles"]
-    AG --> CLAUDE["CLAUDE.md — imports AGENTS.md"]
-    DEV --> ROAD["root plan.md — optional whole-project roadmap"]
-    DEV --> WB["docs/changes/task/work-block.md — frozen stage contract"]
-    MEM --> HAND["docs/changes/task/handoff.md — mutable branch-local evidence"]
-    MEM --> BANK["memory_bank/ — last reconciled integrated facts"]
-    MEM --> ADR["docs/decisions/ — durable accepted decisions"]
-    WB -.-> TMPL["docs/templates/ — copy-on-use forms"]
-    HAND -.-> PR["Live Git / GitHub PR evidence"]
+    O["Owner intent"] --> INIT{"Derived repo initialized?"}
+    INIT -->|No| SETUP["First-use setup + Owner acceptance"]
+    INIT -->|Yes| CLASS["Risk/impact classification"]
+    SETUP --> CLASS
+    CLASS -->|Routine| ROUTINE["Bounded direct task and focused checks"]
+    CLASS -->|Significant| SPEC["Specification: Owner accepts exact content"]
+    SPEC --> P["Orchestrator/Architect commit full Project Plan P"]
+    P --> PC{"Independent Project Critic READY?"}
+    PC -->|REWORK| P
+    PC -->|READY| PO{"Owner approves exact P + delegated bounds?"}
+    PO -->|Changes| P
+    PO -->|Approved| W["Orchestrator commits actionable Stage WB W; conformance to P"]
+    W --> SC{"Independent Stage Critic READY on exact W?"}
+    SC -->|REWORK| W
+    SC -->|READY and permissions| C["Scoped Coder → source candidate S"]
+    C --> R{"Independent Reviewer READY on S?"}
+    R -->|REWORK| C
+    R -->|READY| V{"Independent Verifier PASS on same S?"}
+    V -->|FAIL| C
+    V -->|BLOCKED| STOP["STOP / Owner escalation"]
+    V -->|PASS| H["Bounded delivery H, verify S..H diff and actual CI"]
+    H --> ACCEPT{"Stage outputs, dependencies and CI satisfied?"}
+    ACCEPT -->|No| STOP
+    ACCEPT -->|Yes| NEXT{"Another approved P stage?"}
+    NEXT -->|Yes| W
+    NEXT -->|No| FINAL["Owner final acceptance / merge GO"]
+    ROUTINE --> RDEL["Focused checks and authorized task delivery"]
+    RDEL --> FINAL
+    FINAL --> PR["Verified PR/merge state; separate deployment GO"]
 ```
 
-Arrows are references, not runtime permissions. Codex, Claude Code and other harnesses perform native orchestration. Parallel tasks have separate handoffs; shared memory is updated by an authorized integration writer only.
+Project Critic READY is **not** Owner approval; Stage Critic READY is **not** a new Owner approval or OS permission. Within approved P, Orchestrator may make bounded technical decisions and handle ordinary REWORK without repeated Owner gates. Changes outside approved constraints require Owner disposition. A stage does not require merge to progress unless its acceptance criteria explicitly say so.
 
-## File layout
+Working `DELIVERY_READY`, final task `COMPLETE / BLOCKED / CANCELLED`, stage acceptance, PR merge and deployment are different evidenced facts. All P/W/S/H commits and independent reports are separate subjects.
+
+## Source hierarchy and memory
+
+```mermaid
+flowchart TD
+    OWNER["Owner instructions + actual sandbox/platform controls"] --> ROOT["AGENTS.md"]
+    ROOT --> DEV["development.md — sole lifecycle"]
+    ROOT --> MEM["memory.md — canonical checkpoint matrix"]
+    ROOT --> INIT["initialization.md — first use"]
+    ROOT --> WORK["workspaces.md — explicit write targets"]
+    ROOT --> SEC["security/boundaries.md"]
+    ROOT --> ROLES[".agents/roles — subordinate missions"]
+    DEV --> PLAN["root plan.md — frozen approved P"]
+    DEV --> STAGE["docs/changes/task/work-block.md — frozen W"]
+    MEM --> HANDOFF["task handoff + independent reports — mutable evidence"]
+    MEM --> BANK["memory_bank — last integrated facts"]
+    ROOT --> CLAUDE["CLAUDE.md — imports AGENTS.md"]
+```
+
+Arrows express reading/navigation only. Harness-native agents execute tasks; role labels and Skills do not install runtime privileges. Separate task branches own handoffs; shared memory is reconciled only by an authorized integration writer.
+
+## Layout
 
 ```text
 project/
-├── AGENTS.md                      # sole shared agent contract
-├── CLAUDE.md                      # @AGENTS.md import, no extra policy
-├── PROJECT_BRIEF.md               # project identity and constraints
-├── PROJECT_MAP.md                 # navigation
-├── plan.md                        # optional ONE project roadmap
-├── .agents/roles/                 # logical role briefs
-├── memory_bank/                   # reconciled integrated summary
-│   ├── context.md
-│   ├── progress.md
-│   ├── decisions.md
-│   └── orchestrator-log.md
+├── AGENTS.md                 # one root contract
+├── CLAUDE.md                 # import, not another policy
+├── PROJECT_BRIEF.md          # identity and product constraints
+├── PROJECT_MAP.md            # navigation
+├── plan.md                   # approved project P for significant work, immutable
+├── .agents/roles/            # portable role briefs
 ├── docs/
-│   ├── workflow/                  # canonical procedures
-│   ├── architecture/              # descriptive diagrams only
-│   ├── decisions/                 # accepted design rationale
-│   ├── changes/<task>/            # frozen WB, separate handoff and reports
-│   ├── templates/                 # non-authoritative forms
-│   └── security/                  # security details
-├── .githooks/                     # optional conventional Git hooks
-└── .github/workflows/             # structural CI
+│   ├── workflow/             # canonical procedures
+│   ├── architecture/         # descriptive diagrams
+│   ├── decisions/            # accepted rationale
+│   ├── changes/<task>/       # reviewed W, separate handoff/reports
+│   ├── templates/            # non-authoritative forms
+│   └── security/             # security boundaries
+├── memory_bank/              # reconciled integrated facts
+├── .githooks/                # optional conventional hooks
+└── .github/workflows/        # structural CI and bounded first-use guard
 ```
 
-Previously approved `docs/changes/<task>/plan.md` are historical **task-specific implementation plans** with original exact Critic provenance—not a competing root roadmap. There is no Controller, SQLite, admission service, custom dispatcher/adapter, skill-fetcher, native agent installer or autonomous merge/deploy system.
+Previously approved legacy `docs/changes/<task>/plan.md` preserve original provenance. Lite does not contain a Controller, SQLite authority registry, hook installer, native agent runtime, skill-fetcher or automated merge/deploy.

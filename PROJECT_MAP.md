@@ -1,37 +1,29 @@
 # Project Map — Navigation Only
 
-This index points to canonical files. It grants no runtime permission, process gate or independent project state.
+This index provides paths, not process authority, current task registry, permission or real sandbox isolation.
 
-| Need | Single source / path |
+| Need | Canonical path |
 | --- | --- |
-| Purpose and repo identity | `PROJECT_BRIEF.md` |
-| Shared agent behavior | `AGENTS.md` |
-| First use in a derived project | `docs/workflow/initialization.md` |
-| Routine/significant Work Block procedure and review gates | `docs/workflow/development.md` |
-| Optional one-project roadmap | Root `plan.md`, when instantiated from `docs/templates/plan.md` |
-| Memory retention, concurrent tasks and synchronization | `docs/workflow/memory.md` |
-| Worktree/branch and safe cleanup | `docs/workflow/workspaces.md` |
-| Safety details | `docs/security/boundaries.md` |
-| Role briefs | `.agents/roles/` |
-| Role links | `docs/workflow/agent-roles.md` |
+| Project identity and source-template warning | `PROJECT_BRIEF.md` |
+| Root behavior and precedence | `AGENTS.md` |
+| **Two-level lifecycle**, classification/assurance/Owner merge | `docs/workflow/development.md` |
+| **First-use initialization** | `docs/workflow/initialization.md` |
+| **Project contract P** for significant projects | Root `plan.md`, reviewed exact P plus separate Critic/Owner records |
+| **Autonomous stage W** for new significant stages | `docs/changes/<task>/work-block.md` and independent Stage Critic |
+| Legacy approved task plan, original provenance retained | `docs/changes/<task>/plan.md` |
+| Canonical conditional checkpoint / recovery | `docs/workflow/memory.md` |
+| Safe Git/non-Git targets and worktree cleanup | `docs/workflow/workspaces.md` |
+| Role navigation / actual briefs | `docs/workflow/agent-roles.md`, `.agents/roles/` |
 | Architecture diagram | `docs/architecture/overview.md` |
-| Durable accepted engineering decisions | `docs/decisions/` |
-| Integrated project context | `memory_bank/context.md` |
-| Recent integrated progress | `memory_bank/progress.md` |
-| Accepted decision index | `memory_bank/decisions.md` |
-| Material coordination log | `memory_bank/orchestrator-log.md` |
-| Task-local handoff for unmerged/parallel branches | `docs/changes/<task>/handoff.md` |
-| Frozen Work Block per new significant stage | `docs/changes/<task>/work-block.md` |
-| Previously approved legacy per-task plan | `docs/changes/<task>/plan.md` with original Critic provenance |
-| Task specification/evidence | `docs/changes/<task>/` or exact PR |
-| Optional forms | `docs/templates/` |
-| Git hooks | `.githooks/` |
-| GitHub checks | `.github/workflows/` |
+| Security details | `docs/security/boundaries.md` |
+| Accepted durable design rationale | `docs/decisions/` |
+| Task-local progress/independent reports | `docs/changes/<task>/handoff.md`, linked reports |
+| Last reconciled integrated project context | `memory_bank/context.md`, `progress.md`, `decisions.md`, `orchestrator-log.md` |
+| Optional non-authoritative forms | `docs/templates/` |
+| Optional Git hooks / structural CI | `.githooks/`, `.github/workflows/` |
 
-## Adaptation
+## Adaptation and recovery
 
-For a new project, first use `docs/workflow/initialization.md`. For multi-stage work, optionally create root `plan.md` (never reclassify a legacy task `plan.md` as this roadmap). Then record real source roots, test/build commands, accepted dependencies, interfaces, environments and deployment constraints here. Keep business/product details in `PROJECT_BRIEF.md`.
+In a derived repo, initialize identity, map, memory and source-only historical references **before** feature work. For significant work instantiate root P only after specification acceptance and review it before Owner plan approval; routine tasks do not need P/W. Record actual source roots, tests, deployment constraints and task-specific runbooks in the derived map.
 
-## Recovery
-
-For actual program behavior inspect source/tests; for why a design exists inspect `docs/decisions/`; for planned stages consult root `plan.md` if present; for current work inspect its frozen WB and *the task's own branch/handoff or PR* and live Git/GitHub state; for integrated context inspect `memory_bank/`. If inconsistent, the verified current Git/source facts prevail over a stale operational snapshot.
+After session interruption/compaction verify actual Git target/branch/HEAD, supported checkpoint and Owner permissions; load the current task's handoff and independent evidence. Scratch/agent MEMORY and one branch's unmerged summary do not supersede verified state.
