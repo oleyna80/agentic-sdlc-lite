@@ -37,7 +37,7 @@ These are illustrative commands, **not** agent authorization. First establish ex
 
 Run read-only inspections:
 
-``bash
+```bash
 # Replace this example value with the independently verified absolute task root.
 task_worktree=/absolute/verified/owned-task-worktree
 git -C "$task_worktree" worktree list --porcelain
@@ -91,7 +91,7 @@ Read-only inspection of permitted repositories/files **outside** the task worktr
 
 For Git/index/ref/worktree mutations, derive expected identity, absolute root, branch, HEAD, dirty/untracked inventory and authorized scope from mission/checkpoint (not from possibly wrong target). Inspect explicit target:
 
-``bash
+```bash
 # Replace this example value with the independently verified absolute task root.
 task_worktree=/absolute/verified/owned-task-worktree
 git -C "$task_worktree" rev-parse --show-toplevel
