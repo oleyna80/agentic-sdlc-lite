@@ -4,34 +4,49 @@
 
 Keep a persistent, clean checkout of `main`. Use a short-lived task branch, preferably in a separate Git worktree when multiple tasks must coexist. A worktree shares Git objects and refs with the repository; an independent clone does not.
 
-Example (run manually only after the required repository/base, scope, destination and permission checks):
+Example — **one contiguous, fail-closed Bash run**, and only when the Owner-authorized mission permits worktree creation. All example values are deliberately non-operational until replaced with independently verified expected facts. Run the complete block, **not individual mutation lines**:
 
 ```bash
-# Set these explicitly from the approved mission; do not infer them from shell cwd.
+set -euo pipefail
+
+# Replace every example value using approved independent mission facts.
 managing_worktree=/absolute/verified/managing-worktree
 new_worktree_path=/absolute/approved/worktrees/my-task
+expected_origin='https://github.com/OWNER/REPOSITORY.git'
+expected_branch=main
+expected_head=REPLACE_WITH_VERIFIED_40_HEX_SHA
+expected_base_sha=REPLACE_WITH_VERIFIED_BASE_40_HEX_SHA
+new_branch=feat/my-task
 
-# Verify the existing managing checkout, its expected branch/HEAD and ownership.
-git -C "$managing_worktree" rev-parse --show-toplevel
-git -C "$managing_worktree" remote get-url origin
-git -C "$managing_worktree" branch --show-current
-git -C "$managing_worktree" rev-parse HEAD
-git -C "$managing_worktree" status --short --branch --untracked-files=all
-git -C "$managing_worktree" worktree list --porcelain
+fail() { printf 'STOP: %s\n' "$1" >&2; exit 1; }
 
-# Only after explicit fetch authority, verified target identity and clean ownership:
-git -C "$managing_worktree" fetch origin
-# Recheck the expected base/ref and approved absolute destination (including collisions)
-# before creating the worktree; the destination must not contain unrelated work.
-git -C "$managing_worktree" worktree add -b feat/my-task "$new_worktree_path" origin/main
-# Verify the newly created root, branch, HEAD and status before any source write.
-git -C "$new_worktree_path" rev-parse --show-toplevel
-git -C "$new_worktree_path" branch --show-current
-git -C "$new_worktree_path" rev-parse HEAD
-git -C "$new_worktree_path" status --short --branch --untracked-files=all
+# Inspect the actual destination and repository BEFORE the mutating fetch.
+[[ "$managing_worktree" == /* && "$new_worktree_path" == /* ]] || fail 'non-absolute path'
+[[ "$managing_worktree" != "$new_worktree_path" ]] || fail 'same source and destination'
+[[ "$expected_head" =~ ^[0-9a-f]{40}$ && "$expected_base_sha" =~ ^[0-9a-f]{40}$ ]] || fail 'unresolved expected SHA'
+[[ -d "$managing_worktree" && ! -L "$managing_worktree" ]] || fail 'managing worktree not present/canonical'
+[[ ! -e "$new_worktree_path" && ! -L "$new_worktree_path" ]] || fail 'destination collision'
+[[ "$(git -C "$managing_worktree" rev-parse --show-toplevel)" == "$managing_worktree" ]] || fail 'wrong managing root'
+[[ "$(git -C "$managing_worktree" remote get-url origin)" == "$expected_origin" ]] || fail 'wrong repository'
+[[ "$(git -C "$managing_worktree" branch --show-current)" == "$expected_branch" ]] || fail 'wrong branch'
+[[ "$(git -C "$managing_worktree" rev-parse HEAD)" == "$expected_head" ]] || fail 'unexpected HEAD'
+manager_status=$(git -C "$managing_worktree" status --porcelain=v1 --untracked-files=all) || fail 'status failed'
+[[ -z "$manager_status" ]] || fail 'unrelated/dirty/untracked state'
+git -C "$managing_worktree" check-ref-format --branch "$new_branch" >/dev/null || fail 'invalid branch'
+if git -C "$managing_worktree" show-ref --verify --quiet "refs/heads/$new_branch"; then fail 'branch exists'; fi
+
+# Fetch is itself a Git mutation: require the above identity/scope preflight.
+git -C "$managing_worktree" fetch origin || fail 'fetch failed'
+[[ "$(git -C "$managing_worktree" rev-parse origin/main)" == "$expected_base_sha" ]] || fail 'base ref mismatch'
+[[ ! -e "$new_worktree_path" && ! -L "$new_worktree_path" ]] || fail 'destination changed'
+# Explicitly recheck destination parent, authority, and collisions before this line.
+git -C "$managing_worktree" worktree add -b "$new_branch" "$new_worktree_path" "$expected_base_sha" || fail 'create failed'
+[[ "$(git -C "$new_worktree_path" rev-parse --show-toplevel)" == "$new_worktree_path" ]] || fail 'new root mismatch'
+[[ "$(git -C "$new_worktree_path" branch --show-current)" == "$new_branch" ]] || fail 'new branch mismatch'
+[[ "$(git -C "$new_worktree_path" rev-parse HEAD)" == "$expected_base_sha" ]] || fail 'new HEAD mismatch'
 ```
 
-These are illustrative commands, **not** agent authorization. First establish expected values independently of the discovered checkout, confirm permitted parent/destination, branch availability, base and ownership, and stop on any mismatch.
+The script cannot prove Owner authorization, safe destination ownership or external process state. Those are **preconditions** from separately verified evidence, not generated permissions. If any prerequisite is uncertain, **do not run the block**. The example uses an approved \`origin/main\` base; an independently approved stage descendant is also valid when its exact SHA/conformance are verified.
 
 ## Before touching an existing workspace
 
@@ -48,42 +63,49 @@ Never overwrite a directory because it looks obsolete. Untracked/ignored files m
 
 ## Safe cleanup (after Owner-approved disposition)
 
-Bind **both** cleanup variables from the separately approved ownership/cleanup record. The example paths below are placeholders, **not verified facts or authorization**; substitute real absolute values and inspect the read-only commands before any removal:
+Do **not** use a separate copied \`git worktree remove\` line after disconnected inspection commands. The entire inspection and mutation must be in **one guarded shell execution**, and no textual "STOP" or printed state is accepted as a passing predicate.
+
+The values below are deliberately non-operational until replaced with **exact, separately approved** ownership/cleanup record data. \`cleanup_approval_ref\` and \`processes_confirmed_clear\` require real human/operational confirmation, not synthetic approval. Every predicate failure exits **before** removal:
 
 ```bash
+set -euo pipefail
+
 managing_worktree=/absolute/verified/managing-worktree
 owned_worktree_path=/absolute/approved/worktrees/my-task
+expected_origin='https://github.com/OWNER/REPOSITORY.git'
+expected_owned_branch=feat/my-task
+expected_owned_head=REPLACE_WITH_VERIFIED_40_HEX_SHA
+expected_manager_head=REPLACE_WITH_VERIFIED_40_HEX_SHA
+cleanup_approval_ref=''              # verified Owner approval record identifying this exact worktree
+processes_confirmed_clear=no         # change only after independently checking no active users/processes
 
-# STOP unless both substituted values are absolute and distinct.
-[[ "$managing_worktree" == /* && "$owned_worktree_path" == /* ]]
-[[ "$managing_worktree" != "$owned_worktree_path" ]]
+fail() { printf 'STOP: %s\n' "$1" >&2; exit 1; }
 
-# STOP unless observed identity, branch/HEAD, registered owned path and contents
-# all match the approved cleanup record; any failed command is a STOP.
-git -C "$managing_worktree" rev-parse --show-toplevel
-git -C "$managing_worktree" remote get-url origin
-git -C "$managing_worktree" branch --show-current
-git -C "$managing_worktree" rev-parse HEAD
-git -C "$managing_worktree" status --short --branch --untracked-files=all
-git -C "$managing_worktree" worktree list --porcelain
-git -C "$owned_worktree_path" rev-parse --show-toplevel
-git -C "$owned_worktree_path" branch --show-current
-git -C "$owned_worktree_path" rev-parse HEAD
-git -C "$owned_worktree_path" status --short --branch --untracked-files=all
+[[ "$managing_worktree" == /* && "$owned_worktree_path" == /* ]] || fail 'non-absolute path'
+[[ "$managing_worktree" != "$owned_worktree_path" ]] || fail 'same managing/owned path'
+[[ -d "$managing_worktree" && -d "$owned_worktree_path" ]] || fail 'missing checkout'
+[[ ! -L "$managing_worktree" && ! -L "$owned_worktree_path" ]] || fail 'symlink target'
+[[ "$expected_owned_head" =~ ^[0-9a-f]{40}$ && "$expected_manager_head" =~ ^[0-9a-f]{40}$ ]] || fail 'unresolved expected SHA'
+[[ -n "$cleanup_approval_ref" && "$processes_confirmed_clear" == yes ]] || fail 'approval or process check missing'
+[[ "$(git -C "$managing_worktree" rev-parse --show-toplevel)" == "$managing_worktree" ]] || fail 'wrong manager root'
+[[ "$(git -C "$managing_worktree" remote get-url origin)" == "$expected_origin" ]] || fail 'wrong repository'
+[[ "$(git -C "$managing_worktree" rev-parse HEAD)" == "$expected_manager_head" ]] || fail 'manager HEAD changed'
+[[ "$(git -C "$owned_worktree_path" rev-parse --show-toplevel)" == "$owned_worktree_path" ]] || fail 'wrong owned root'
+[[ "$(git -C "$owned_worktree_path" branch --show-current)" == "$expected_owned_branch" ]] || fail 'wrong owned branch'
+[[ "$(git -C "$owned_worktree_path" rev-parse HEAD)" == "$expected_owned_head" ]] || fail 'owned HEAD changed'
+registered=$(git -C "$managing_worktree" worktree list --porcelain) || fail 'registration inspection failed'
+grep -Fxq -- "worktree $owned_worktree_path" <<< "$registered" || fail 'worktree not registered at exact path'
+owned_status=$(git -C "$owned_worktree_path" status --porcelain=v1 --untracked-files=all --ignored=matching) || fail 'status inspection failed'
+[[ -z "$owned_status" ]] || fail 'tracked, untracked or ignored contents must be preserved'
+# Recheck registration, ownership, retained Git/PR evidence and absence of active processes immediately before execution.
+# The script cannot authenticate the Owner approval record or detect every active process:
+# if not independently verified, STOP here and do not execute the mutation.
+git -C "$managing_worktree" worktree remove "$owned_worktree_path" || fail 'worktree removal failed'
 ```
 
-Check that `owned_worktree_path` appears as the **exact registered absolute path** in the managing repository's worktree list, resolves to its own root, and is owned by this task. Check dirty, untracked **and ignored** files, active processes, retained Git/PR evidence, and distinct explicit Owner cleanup authorization. A zero command exit alone does not validate ownership or grant removal permission. **STOP on any mismatch.**
+**Authority boundary:** \`cleanup_approval_ref\` is a declaration referring to **already-verified** Owner authorization, not an access-control mechanism. Setting it to a nonempty value or changing \`processes_confirmed_clear\` cannot establish authorization or OS isolation. Independently verify authorization for the exact owned path, clean/ignored files, running processes, correct managing Git repository and retained PR/commit history **before running this script**. A clean status does not prove absence of running processes. If these conditions cannot be established, preserve the worktree.
 
-1. Confirm the exact task worktree and that its PR/branch history and evidence are retained.
-2. Ensure no agent/process is using it, and no uncommitted, untracked, or ignored files must be preserved.
-3. Confirm the Work Block/task has concluded or was cancelled, and cleanup is authorized.
-4. With a separately verified managing checkout and the exact owned **absolute** destination, use `git -C "$managing_worktree" worktree remove "$owned_worktree_path"` **without** `--force` only for a clean registered worktree and after explicit cleanup authorization.
-5. Use `git -C "$managing_worktree" worktree prune` only for independently inspected stale administrative entries after separate applicable authorization; recheck repository identity and affected worktrees before this mutation.
-6. Remove the branch separately only when its commits are safely retained and Owner explicitly authorizes deletion.
-
-Never run recursive deletion on arbitrary `/tmp` folders or standalone clones as "worktree cleanup." Record `CLEANED`, `PRESERVED`, or `CLEANUP_PENDING`.
-
-No automated cleanup is included in Lite v0.1.
+No \`--force\`, blind recursive deletion, or automatic cleanup. \`git worktree prune\` and branch deletion are **separate mutating actions**, permitted only after inspected stale registration and explicit authorization; this example does not execute either of them. Record \`CLEANED\`, \`PRESERVED\`, or \`CLEANUP_PENDING\` with the observed result.
 
 ## Explicit target verification before mutations
 
