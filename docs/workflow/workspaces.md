@@ -73,6 +73,7 @@ set -euo pipefail
 managing_worktree=/absolute/verified/managing-worktree
 owned_worktree_path=/absolute/approved/worktrees/my-task
 expected_origin='https://github.com/OWNER/REPOSITORY.git'
+expected_manager_branch=main
 expected_owned_branch=feat/my-task
 expected_owned_head=REPLACE_WITH_VERIFIED_40_HEX_SHA
 expected_manager_head=REPLACE_WITH_VERIFIED_40_HEX_SHA
@@ -89,6 +90,7 @@ fail() { printf 'STOP: %s\n' "$1" >&2; exit 1; }
 [[ -n "$cleanup_approval_ref" && "$processes_confirmed_clear" == yes ]] || fail 'approval or process check missing'
 [[ "$(git -C "$managing_worktree" rev-parse --show-toplevel)" == "$managing_worktree" ]] || fail 'wrong manager root'
 [[ "$(git -C "$managing_worktree" remote get-url origin)" == "$expected_origin" ]] || fail 'wrong repository'
+[[ "$(git -C "$managing_worktree" branch --show-current)" == "$expected_manager_branch" ]] || fail 'manager branch changed'
 [[ "$(git -C "$managing_worktree" rev-parse HEAD)" == "$expected_manager_head" ]] || fail 'manager HEAD changed'
 [[ "$(git -C "$owned_worktree_path" rev-parse --show-toplevel)" == "$owned_worktree_path" ]] || fail 'wrong owned root'
 [[ "$(git -C "$owned_worktree_path" branch --show-current)" == "$expected_owned_branch" ]] || fail 'wrong owned branch'
