@@ -30,10 +30,15 @@ fail() { printf 'STOP: %s\n' "$1" >&2; exit 1; }
 [[ "$(git -C "$managing_worktree" remote get-url origin)" == "$expected_origin" ]] || fail 'wrong repository'
 [[ "$(git -C "$managing_worktree" branch --show-current)" == "$expected_branch" ]] || fail 'wrong branch'
 [[ "$(git -C "$managing_worktree" rev-parse HEAD)" == "$expected_head" ]] || fail 'unexpected HEAD'
-manager_status=$(git -C "$managing_worktree" status --porcelain=v1 --untracked-files=all) || fail 'status failed'
-[[ -z "$manager_status" ]] || fail 'unrelated/dirty/untracked state'
+manager_status=$(git -C "$managing_worktree" status --porcelain=v1 --untracked-files=all --ignored=matching) || fail 'manager status failed'
+[[ -z "$manager_status" ]] || fail 'manager tracked/untracked/ignored state requires preservation'
 git -C "$managing_worktree" check-ref-format --branch "$new_branch" >/dev/null || fail 'invalid branch'
-if git -C "$managing_worktree" show-ref --verify --quiet "refs/heads/$new_branch"; then fail 'branch exists'; fi
+if git -C "$managing_worktree" show-ref --verify --quiet "refs/heads/$new_branch"; then
+  fail 'branch already exists'
+else
+  show_ref_status=$?
+  [[ "$show_ref_status" -eq 1 ]] || fail "branch inspection failed (exit $show_ref_status)"
+fi
 
 # Fetch is itself a Git mutation: require the above identity/scope preflight.
 git -C "$managing_worktree" fetch origin || fail 'fetch failed'
@@ -92,6 +97,8 @@ fail() { printf 'STOP: %s\n' "$1" >&2; exit 1; }
 [[ "$(git -C "$managing_worktree" remote get-url origin)" == "$expected_origin" ]] || fail 'wrong repository'
 [[ "$(git -C "$managing_worktree" branch --show-current)" == "$expected_manager_branch" ]] || fail 'manager branch changed'
 [[ "$(git -C "$managing_worktree" rev-parse HEAD)" == "$expected_manager_head" ]] || fail 'manager HEAD changed'
+manager_status=$(git -C "$managing_worktree" status --porcelain=v1 --untracked-files=all --ignored=matching) || fail 'manager status inspection failed'
+[[ -z "$manager_status" ]] || fail 'manager tracked/untracked/ignored state requires preservation'
 [[ "$(git -C "$owned_worktree_path" rev-parse --show-toplevel)" == "$owned_worktree_path" ]] || fail 'wrong owned root'
 [[ "$(git -C "$owned_worktree_path" branch --show-current)" == "$expected_owned_branch" ]] || fail 'wrong owned branch'
 [[ "$(git -C "$owned_worktree_path" rev-parse HEAD)" == "$expected_owned_head" ]] || fail 'owned HEAD changed'
@@ -99,6 +106,9 @@ registered=$(git -C "$managing_worktree" worktree list --porcelain) || fail 'reg
 grep -Fxq -- "worktree $owned_worktree_path" <<< "$registered" || fail 'worktree not registered at exact path'
 owned_status=$(git -C "$owned_worktree_path" status --porcelain=v1 --untracked-files=all --ignored=matching) || fail 'status inspection failed'
 [[ -z "$owned_status" ]] || fail 'tracked, untracked or ignored contents must be preserved'
+# Verify manager remains clean immediately before the destructive Git operation.
+manager_status=$(git -C "$managing_worktree" status --porcelain=v1 --untracked-files=all --ignored=matching) || fail 'manager status recheck failed'
+[[ -z "$manager_status" ]] || fail 'manager changed during cleanup preflight'
 # Recheck registration, ownership, retained Git/PR evidence and absence of active processes immediately before execution.
 # The script cannot authenticate the Owner approval record or detect every active process:
 # if not independently verified, STOP here and do not execute the mutation.
