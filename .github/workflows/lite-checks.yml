@@ -47,7 +47,12 @@ jobs:
             echo 'Missing GITHUB_REPOSITORY' >&2; exit 1
           fi
           test -s PROJECT_BRIEF.md || { echo 'Missing PROJECT_BRIEF.md' >&2; exit 1; }
-          identity_count=$(grep -Ec '^[[:space:]]*- \*\*Repository identity:\*\*' PROJECT_BRIEF.md || true)
+          if identity_count=$(grep -Ec '^[[:space:]]*- \*\*Repository identity:\*\*' PROJECT_BRIEF.md); then
+            :
+          else
+            inspection_status=$?
+            [[ "$inspection_status" -eq 1 ]] || { echo 'Repository identity inspection failed' >&2; exit 1; }
+          fi
           if [[ "$identity_count" -ne 1 ]]; then
             echo 'Repository identity field must occur exactly once' >&2; exit 1
           fi
@@ -56,27 +61,32 @@ jobs:
           if [[ "$GITHUB_REPOSITORY" == 'oleyna80/agentic-sdlc-lite' ]]; then
             exit 0
           fi
-          initialization_count=$(grep -Ec '^[[:space:]]*- \*\*Initialization:\*\*' PROJECT_BRIEF.md || true)
+          if initialization_count=$(grep -Ec '^[[:space:]]*- \*\*Initialization:\*\*' PROJECT_BRIEF.md); then
+            :
+          else
+            inspection_status=$?
+            [[ "$inspection_status" -eq 1 ]] || { echo 'Initialization inspection failed' >&2; exit 1; }
+          fi
           if [[ "$initialization_count" -ne 1 ]]; then
             echo 'Initialization field must occur exactly once' >&2; exit 1
           fi
           grep -Fxq -- '- **Initialization:** INITIALIZED' PROJECT_BRIEF.md || { echo 'Derived project not INITIALIZED' >&2; exit 1; }
           test -s memory_bank/context.md && test -s memory_bank/progress.md || { echo 'Missing derived active memory' >&2; exit 1; }
-          if grep -Eq '^- \*\*Project:\*\* `oleyna80/agentic-sdlc-lite`([[:space:]]|$)' memory_bank/context.md; then
-            echo 'Source project identity in active context' >&2; exit 1
-          fi
-          if grep -Eq '^- \*\*Integrated baseline:\*\* SDLC Lite v0[.]1 Foundation([[:space:]]|[,.;:]|$)' memory_bank/context.md; then
-            echo 'Source integrated baseline in active context' >&2; exit 1
-          fi
-          if grep -Eq '^- \*\*Delivered task:\*\* WB-LITE-001([[:space:]]|[,.;:]|$)' memory_bank/context.md; then
-            echo 'Source task in active context' >&2; exit 1
-          fi
-          if grep -Eq '^- \*\*[0-9]{4}-[0-9]{2}-[0-9]{2} — WB-LITE-001 integrated into Foundation:\*\*([[:space:]]|$)' memory_bank/progress.md; then
-            echo 'Source WB milestone in active progress' >&2; exit 1
-          fi
-          if grep -Eq '^- \*\*[0-9]{4}-[0-9]{2}-[0-9]{2} — Foundation v0[.]1 integrated into `main`:\*\*([[:space:]]|$)' memory_bank/progress.md; then
-            echo 'Source Foundation milestone in active progress' >&2; exit 1
-          fi
+          reject_source_marker() {
+            local pattern=$1 file=$2 diagnostic=$3 grep_status
+            if grep -Eq "$pattern" "$file"; then
+              printf '%s\n' "$diagnostic" >&2
+              exit 1
+            else
+              grep_status=$?
+              [[ "$grep_status" -eq 1 ]] || { printf 'Source marker inspection failed for %s (exit %s)\n' "$file" "$grep_status" >&2; exit 1; }
+            fi
+          }
+          reject_source_marker '^- \*\*Project:\*\* `oleyna80/agentic-sdlc-lite`([[:space:]]|$)' memory_bank/context.md 'Source project identity in active context'
+          reject_source_marker '^- \*\*Integrated baseline:\*\* SDLC Lite v0[.]1 Foundation([[:space:]]|[,.;:]|$)' memory_bank/context.md 'Source integrated baseline in active context'
+          reject_source_marker '^- \*\*Delivered task:\*\* WB-LITE-001([[:space:]]|[,.;:]|$)' memory_bank/context.md 'Source task in active context'
+          reject_source_marker '^- \*\*[0-9]{4}-[0-9]{2}-[0-9]{2} — WB-LITE-001 integrated into Foundation:\*\*([[:space:]]|$)' memory_bank/progress.md 'Source WB milestone in active progress'
+          reject_source_marker '^- \*\*[0-9]{4}-[0-9]{2}-[0-9]{2} — Foundation v0[.]1 integrated into `main`:\*\*([[:space:]]|$)' memory_bank/progress.md 'Source Foundation milestone in active progress'
 
       - name: Reject copied legacy authority paths
         shell: bash
@@ -99,7 +109,9 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          if git rev-parse HEAD^ >/dev/null 2>&1; then
+          commit_count=$(git rev-list --count HEAD) || { echo 'Cannot inspect Git history for whitespace check' >&2; exit 1; }
+          [[ "$commit_count" =~ ^[1-9][0-9]*$ ]] || { echo 'Invalid Git commit count' >&2; exit 1; }
+          if (( commit_count > 1 )); then
             git diff --check HEAD^ HEAD
           else
             git diff-tree --check --root --no-commit-id -r HEAD
