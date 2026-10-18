@@ -37,8 +37,9 @@ These are illustrative commands, **not** agent authorization. First establish ex
 
 Run read-only inspections:
 
-```bash
-# task_worktree is an already verified absolute path, not the inherited cwd.
+``bash
+# Replace this example value with the independently verified absolute task root.
+task_worktree=/absolute/verified/owned-task-worktree
 git -C "$task_worktree" worktree list --porcelain
 git -C "$task_worktree" status --short --branch --untracked-files=all
 ```
@@ -46,6 +47,32 @@ git -C "$task_worktree" status --short --branch --untracked-files=all
 Never overwrite a directory because it looks obsolete. Untracked/ignored files may contain user work. If active state or ownership is unclear, stop.
 
 ## Safe cleanup (after Owner-approved disposition)
+
+Bind **both** cleanup variables from the separately approved ownership/cleanup record. The example paths below are placeholders, **not verified facts or authorization**; substitute real absolute values and inspect the read-only commands before any removal:
+
+```bash
+managing_worktree=/absolute/verified/managing-worktree
+owned_worktree_path=/absolute/approved/worktrees/my-task
+
+# STOP unless both substituted values are absolute and distinct.
+[[ "$managing_worktree" == /* && "$owned_worktree_path" == /* ]]
+[[ "$managing_worktree" != "$owned_worktree_path" ]]
+
+# STOP unless observed identity, branch/HEAD, registered owned path and contents
+# all match the approved cleanup record; any failed command is a STOP.
+git -C "$managing_worktree" rev-parse --show-toplevel
+git -C "$managing_worktree" remote get-url origin
+git -C "$managing_worktree" branch --show-current
+git -C "$managing_worktree" rev-parse HEAD
+git -C "$managing_worktree" status --short --branch --untracked-files=all
+git -C "$managing_worktree" worktree list --porcelain
+git -C "$owned_worktree_path" rev-parse --show-toplevel
+git -C "$owned_worktree_path" branch --show-current
+git -C "$owned_worktree_path" rev-parse HEAD
+git -C "$owned_worktree_path" status --short --branch --untracked-files=all
+```
+
+Check that `owned_worktree_path` appears as the **exact registered absolute path** in the managing repository's worktree list, resolves to its own root, and is owned by this task. Check dirty, untracked **and ignored** files, active processes, retained Git/PR evidence, and distinct explicit Owner cleanup authorization. A zero command exit alone does not validate ownership or grant removal permission. **STOP on any mismatch.**
 
 1. Confirm the exact task worktree and that its PR/branch history and evidence are retained.
 2. Ensure no agent/process is using it, and no uncommitted, untracked, or ignored files must be preserved.
@@ -64,7 +91,9 @@ Read-only inspection of permitted repositories/files **outside** the task worktr
 
 For Git/index/ref/worktree mutations, derive expected identity, absolute root, branch, HEAD, dirty/untracked inventory and authorized scope from mission/checkpoint (not from possibly wrong target). Inspect explicit target:
 
-```bash
+``bash
+# Replace this example value with the independently verified absolute task root.
+task_worktree=/absolute/verified/owned-task-worktree
 git -C "$task_worktree" rev-parse --show-toplevel
 git -C "$task_worktree" remote get-url origin
 git -C "$task_worktree" branch --show-current
