@@ -4,22 +4,43 @@
 
 Keep a persistent, clean checkout of `main`. Use a short-lived task branch, preferably in a separate Git worktree when multiple tasks must coexist. A worktree shares Git objects and refs with the repository; an independent clone does not.
 
-Example (run manually in the correct parent repository only):
+Example (run manually only after the required repository/base, scope, destination and permission checks):
 
 ```bash
-git fetch origin
-git worktree add -b feat/my-task ../worktrees/my-task origin/main
+# Set these explicitly from the approved mission; do not infer them from shell cwd.
+managing_worktree=/absolute/verified/managing-worktree
+new_worktree_path=/absolute/approved/worktrees/my-task
+
+# Verify the existing managing checkout, its expected branch/HEAD and ownership.
+git -C "$managing_worktree" rev-parse --show-toplevel
+git -C "$managing_worktree" remote get-url origin
+git -C "$managing_worktree" branch --show-current
+git -C "$managing_worktree" rev-parse HEAD
+git -C "$managing_worktree" status --short --branch --untracked-files=all
+git -C "$managing_worktree" worktree list --porcelain
+
+# Only after explicit fetch authority, verified target identity and clean ownership:
+git -C "$managing_worktree" fetch origin
+# Recheck the expected base/ref and approved absolute destination (including collisions)
+# before creating the worktree; the destination must not contain unrelated work.
+git -C "$managing_worktree" worktree add -b feat/my-task "$new_worktree_path" origin/main
+# Verify the newly created root, branch, HEAD and status before any source write.
+git -C "$new_worktree_path" rev-parse --show-toplevel
+git -C "$new_worktree_path" branch --show-current
+git -C "$new_worktree_path" rev-parse HEAD
+git -C "$new_worktree_path" status --short --branch --untracked-files=all
 ```
 
-This is **not** an agent authorization command. First verify the repository, selected base, exact branch, permissions, existing paths, and task ownership.
+These are illustrative commands, **not** agent authorization. First establish expected values independently of the discovered checkout, confirm permitted parent/destination, branch availability, base and ownership, and stop on any mismatch.
 
 ## Before touching an existing workspace
 
 Run read-only inspections:
 
 ```bash
-git worktree list --porcelain
-git status --short --branch
+# task_worktree is an already verified absolute path, not the inherited cwd.
+git -C "$task_worktree" worktree list --porcelain
+git -C "$task_worktree" status --short --branch --untracked-files=all
 ```
 
 Never overwrite a directory because it looks obsolete. Untracked/ignored files may contain user work. If active state or ownership is unclear, stop.
@@ -29,8 +50,8 @@ Never overwrite a directory because it looks obsolete. Untracked/ignored files m
 1. Confirm the exact task worktree and that its PR/branch history and evidence are retained.
 2. Ensure no agent/process is using it, and no uncommitted, untracked, or ignored files must be preserved.
 3. Confirm the Work Block/task has concluded or was cancelled, and cleanup is authorized.
-4. Use `git worktree remove <path>` **without** `--force` for a clean registered worktree.
-5. Use `git worktree prune` only for stale administrative entries after inspection.
+4. With a separately verified managing checkout and the exact owned **absolute** destination, use `git -C "$managing_worktree" worktree remove "$owned_worktree_path"` **without** `--force` only for a clean registered worktree and after explicit cleanup authorization.
+5. Use `git -C "$managing_worktree" worktree prune` only for independently inspected stale administrative entries after separate applicable authorization; recheck repository identity and affected worktrees before this mutation.
 6. Remove the branch separately only when its commits are safely retained and Owner explicitly authorizes deletion.
 
 Never run recursive deletion on arbitrary `/tmp` folders or standalone clones as "worktree cleanup." Record `CLEANED`, `PRESERVED`, or `CLEANUP_PENDING`.
