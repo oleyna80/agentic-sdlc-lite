@@ -22,6 +22,14 @@ new_branch=feat/my-task
 
 fail() { printf 'STOP: %s\n' "$1" >&2; exit 1; }
 
+# Preserve both command status and output; comparing stdout alone hides failures.
+checked_equals() {
+  local reason=$1 expected=$2 actual
+  shift 2
+  actual=$("$@") || fail "$reason: inspection failed"
+  [[ "$actual" == "$expected" ]] || fail "$reason"
+}
+
 # Inspect the actual destination and repository BEFORE the mutating fetch.
 [[ "$managing_worktree" == /* && "$new_worktree_path" == /* && "$approved_parent_path" == /* ]] || fail 'non-absolute path'
 [[ "$managing_worktree" != "$new_worktree_path" ]] || fail 'same source and destination'
@@ -30,7 +38,7 @@ fail() { printf 'STOP: %s\n' "$1" >&2; exit 1; }
 [[ -d "$managing_worktree" && ! -L "$managing_worktree" ]] || fail 'managing worktree not present/canonical'
 # The destination must be a direct child of the independently approved, existing,
 # canonical parent; reject symlinked ancestors before any fetch or worktree add.
-[[ "$(dirname -- "$new_worktree_path")" == "$approved_parent_path" ]] || fail 'destination outside approved parent'
+checked_equals 'destination outside approved parent' "$approved_parent_path" dirname -- "$new_worktree_path"
 [[ -d "$approved_parent_path" && ! -L "$approved_parent_path" ]] || fail 'parent absent or symlink'
 resolved_parent=$(realpath -e -- "$approved_parent_path") || fail 'parent resolution failed'
 [[ "$resolved_parent" == "$approved_parent_path" ]] || fail 'parent path contains symlink or is noncanonical'
@@ -38,10 +46,10 @@ observed_parent_uid=$(stat -c %u -- "$approved_parent_path") || fail 'parent own
 [[ "$observed_parent_uid" == "$expected_parent_uid" ]] || fail 'parent owner mismatch'
 [[ -w "$approved_parent_path" && -x "$approved_parent_path" ]] || fail 'parent not writable/searchable'
 [[ ! -e "$new_worktree_path" && ! -L "$new_worktree_path" ]] || fail 'destination collision'
-[[ "$(git -C "$managing_worktree" rev-parse --show-toplevel)" == "$managing_worktree" ]] || fail 'wrong managing root'
-[[ "$(git -C "$managing_worktree" remote get-url origin)" == "$expected_origin" ]] || fail 'wrong repository'
-[[ "$(git -C "$managing_worktree" branch --show-current)" == "$expected_branch" ]] || fail 'wrong branch'
-[[ "$(git -C "$managing_worktree" rev-parse HEAD)" == "$expected_head" ]] || fail 'unexpected HEAD'
+checked_equals 'wrong managing root' "$managing_worktree" git -C "$managing_worktree" rev-parse --show-toplevel
+checked_equals 'wrong repository' "$expected_origin" git -C "$managing_worktree" remote get-url origin
+checked_equals 'wrong branch' "$expected_branch" git -C "$managing_worktree" branch --show-current
+checked_equals 'unexpected HEAD' "$expected_head" git -C "$managing_worktree" rev-parse HEAD
 manager_status=$(git -C "$managing_worktree" status --porcelain=v1 --untracked-files=all --ignored=matching) || fail 'manager status failed'
 [[ -z "$manager_status" ]] || fail 'manager tracked/untracked/ignored state requires preservation'
 git -C "$managing_worktree" check-ref-format --branch "$new_branch" >/dev/null || fail 'invalid branch'
@@ -54,10 +62,10 @@ fi
 
 # Fetch is itself a Git mutation: require the above identity/scope preflight.
 git -C "$managing_worktree" fetch origin || fail 'fetch failed'
-[[ "$(git -C "$managing_worktree" rev-parse origin/main)" == "$expected_base_sha" ]] || fail 'base ref mismatch'
+checked_equals 'base ref mismatch' "$expected_base_sha" git -C "$managing_worktree" rev-parse origin/main
 # Re-run the complete path, identity and ownership check immediately before
 # mutation, because fetch and unrelated processes can change the observed state.
-[[ "$(dirname -- "$new_worktree_path")" == "$approved_parent_path" ]] || fail 'destination parent changed'
+checked_equals 'destination parent changed' "$approved_parent_path" dirname -- "$new_worktree_path"
 [[ -d "$approved_parent_path" && ! -L "$approved_parent_path" ]] || fail 'parent changed'
 resolved_parent=$(realpath -e -- "$approved_parent_path") || fail 'parent resolution changed'
 [[ "$resolved_parent" == "$approved_parent_path" ]] || fail 'parent became noncanonical'
@@ -68,9 +76,9 @@ observed_parent_uid=$(stat -c %u -- "$approved_parent_path") || fail 'parent own
 # Also require independently verified Owner creation authority; this shell
 # cannot authenticate approval or guarantee race-free filesystem operations.
 git -C "$managing_worktree" worktree add -b "$new_branch" "$new_worktree_path" "$expected_base_sha" || fail 'create failed'
-[[ "$(git -C "$new_worktree_path" rev-parse --show-toplevel)" == "$new_worktree_path" ]] || fail 'new root mismatch'
-[[ "$(git -C "$new_worktree_path" branch --show-current)" == "$new_branch" ]] || fail 'new branch mismatch'
-[[ "$(git -C "$new_worktree_path" rev-parse HEAD)" == "$expected_base_sha" ]] || fail 'new HEAD mismatch'
+checked_equals 'new root mismatch' "$new_worktree_path" git -C "$new_worktree_path" rev-parse --show-toplevel
+checked_equals 'new branch mismatch' "$new_branch" git -C "$new_worktree_path" branch --show-current
+checked_equals 'new HEAD mismatch' "$expected_base_sha" git -C "$new_worktree_path" rev-parse HEAD
 ```
 
 The script cannot prove Owner authorization, race-free path ownership or external process state. The parent path and owner UID must be independently approved, not merely discovered from the target. The `realpath -e` and GNU `stat -c` checks assume Linux/GNU userland; they detect symlinked ancestors and permission/owner mismatches in the observed state but are not an OS-level isolation boundary or atomic filesystem guarantee. Those are **preconditions** from separately verified evidence, not generated permissions. If any prerequisite is uncertain, **do not run the block**. The example uses an approved \`origin/main\` base; an independently approved stage descendant is also valid when its exact SHA/conformance are verified.
@@ -109,21 +117,29 @@ processes_confirmed_clear=no         # change only after independently checking 
 
 fail() { printf 'STOP: %s\n' "$1" >&2; exit 1; }
 
+# Preserve both command status and output; comparing stdout alone hides failures.
+checked_equals() {
+  local reason=$1 expected=$2 actual
+  shift 2
+  actual=$("$@") || fail "$reason: inspection failed"
+  [[ "$actual" == "$expected" ]] || fail "$reason"
+}
+
 [[ "$managing_worktree" == /* && "$owned_worktree_path" == /* ]] || fail 'non-absolute path'
 [[ "$managing_worktree" != "$owned_worktree_path" ]] || fail 'same managing/owned path'
 [[ -d "$managing_worktree" && -d "$owned_worktree_path" ]] || fail 'missing checkout'
 [[ ! -L "$managing_worktree" && ! -L "$owned_worktree_path" ]] || fail 'symlink target'
 [[ "$expected_owned_head" =~ ^[0-9a-f]{40}$ && "$expected_manager_head" =~ ^[0-9a-f]{40}$ ]] || fail 'unresolved expected SHA'
 [[ -n "$cleanup_approval_ref" && "$processes_confirmed_clear" == yes ]] || fail 'approval or process check missing'
-[[ "$(git -C "$managing_worktree" rev-parse --show-toplevel)" == "$managing_worktree" ]] || fail 'wrong manager root'
-[[ "$(git -C "$managing_worktree" remote get-url origin)" == "$expected_origin" ]] || fail 'wrong repository'
-[[ "$(git -C "$managing_worktree" branch --show-current)" == "$expected_manager_branch" ]] || fail 'manager branch changed'
-[[ "$(git -C "$managing_worktree" rev-parse HEAD)" == "$expected_manager_head" ]] || fail 'manager HEAD changed'
+checked_equals 'wrong manager root' "$managing_worktree" git -C "$managing_worktree" rev-parse --show-toplevel
+checked_equals 'wrong repository' "$expected_origin" git -C "$managing_worktree" remote get-url origin
+checked_equals 'manager branch changed' "$expected_manager_branch" git -C "$managing_worktree" branch --show-current
+checked_equals 'manager HEAD changed' "$expected_manager_head" git -C "$managing_worktree" rev-parse HEAD
 manager_status=$(git -C "$managing_worktree" status --porcelain=v1 --untracked-files=all --ignored=matching) || fail 'manager status inspection failed'
 [[ -z "$manager_status" ]] || fail 'manager tracked/untracked/ignored state requires preservation'
-[[ "$(git -C "$owned_worktree_path" rev-parse --show-toplevel)" == "$owned_worktree_path" ]] || fail 'wrong owned root'
-[[ "$(git -C "$owned_worktree_path" branch --show-current)" == "$expected_owned_branch" ]] || fail 'wrong owned branch'
-[[ "$(git -C "$owned_worktree_path" rev-parse HEAD)" == "$expected_owned_head" ]] || fail 'owned HEAD changed'
+checked_equals 'wrong owned root' "$owned_worktree_path" git -C "$owned_worktree_path" rev-parse --show-toplevel
+checked_equals 'wrong owned branch' "$expected_owned_branch" git -C "$owned_worktree_path" branch --show-current
+checked_equals 'owned HEAD changed' "$expected_owned_head" git -C "$owned_worktree_path" rev-parse HEAD
 registered=$(git -C "$managing_worktree" worktree list --porcelain) || fail 'registration inspection failed'
 grep -Fxq -- "worktree $owned_worktree_path" <<< "$registered" || fail 'worktree not registered at exact path'
 owned_status=$(git -C "$owned_worktree_path" status --porcelain=v1 --untracked-files=all --ignored=matching) || fail 'status inspection failed'
