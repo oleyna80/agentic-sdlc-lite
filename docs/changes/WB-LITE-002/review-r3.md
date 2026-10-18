@@ -56,10 +56,10 @@ static review.
 
 ## Finding
 
-**Dimensions:** docs, safety, architecture, drift  
+**Dimensions:** docs, safety, architecture, drift
 **Files reviewed:** 21 approved source paths, P, W2, S4..H; focused shell
 review of `docs/workflow/workspaces.md` and workflow review of
-`.github/workflows/lite-checks.yml`.  
+`.github/workflows/lite-checks.yml`.
 **Findings:** 1 total
 
 | Severity | File:Line | Finding | Evidence | Required correction |
