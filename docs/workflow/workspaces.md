@@ -12,6 +12,8 @@ set -euo pipefail
 # Replace every example value using approved independent mission facts.
 managing_worktree=/absolute/verified/managing-worktree
 new_worktree_path=/absolute/approved/worktrees/my-task
+approved_parent_path=/absolute/approved/worktrees
+expected_parent_uid=REPLACE_WITH_VERIFIED_NUMERIC_UID
 expected_origin='https://github.com/OWNER/REPOSITORY.git'
 expected_branch=main
 expected_head=REPLACE_WITH_VERIFIED_40_HEX_SHA
@@ -21,10 +23,20 @@ new_branch=feat/my-task
 fail() { printf 'STOP: %s\n' "$1" >&2; exit 1; }
 
 # Inspect the actual destination and repository BEFORE the mutating fetch.
-[[ "$managing_worktree" == /* && "$new_worktree_path" == /* ]] || fail 'non-absolute path'
+[[ "$managing_worktree" == /* && "$new_worktree_path" == /* && "$approved_parent_path" == /* ]] || fail 'non-absolute path'
 [[ "$managing_worktree" != "$new_worktree_path" ]] || fail 'same source and destination'
 [[ "$expected_head" =~ ^[0-9a-f]{40}$ && "$expected_base_sha" =~ ^[0-9a-f]{40}$ ]] || fail 'unresolved expected SHA'
+[[ "$expected_parent_uid" =~ ^[0-9]+$ ]] || fail 'unresolved approved parent owner UID'
 [[ -d "$managing_worktree" && ! -L "$managing_worktree" ]] || fail 'managing worktree not present/canonical'
+# The destination must be a direct child of the independently approved, existing,
+# canonical parent; reject symlinked ancestors before any fetch or worktree add.
+[[ "$(dirname -- "$new_worktree_path")" == "$approved_parent_path" ]] || fail 'destination outside approved parent'
+[[ -d "$approved_parent_path" && ! -L "$approved_parent_path" ]] || fail 'parent absent or symlink'
+resolved_parent=$(realpath -e -- "$approved_parent_path") || fail 'parent resolution failed'
+[[ "$resolved_parent" == "$approved_parent_path" ]] || fail 'parent path contains symlink or is noncanonical'
+observed_parent_uid=$(stat -c %u -- "$approved_parent_path") || fail 'parent owner inspection failed'
+[[ "$observed_parent_uid" == "$expected_parent_uid" ]] || fail 'parent owner mismatch'
+[[ -w "$approved_parent_path" && -x "$approved_parent_path" ]] || fail 'parent not writable/searchable'
 [[ ! -e "$new_worktree_path" && ! -L "$new_worktree_path" ]] || fail 'destination collision'
 [[ "$(git -C "$managing_worktree" rev-parse --show-toplevel)" == "$managing_worktree" ]] || fail 'wrong managing root'
 [[ "$(git -C "$managing_worktree" remote get-url origin)" == "$expected_origin" ]] || fail 'wrong repository'
@@ -43,15 +55,25 @@ fi
 # Fetch is itself a Git mutation: require the above identity/scope preflight.
 git -C "$managing_worktree" fetch origin || fail 'fetch failed'
 [[ "$(git -C "$managing_worktree" rev-parse origin/main)" == "$expected_base_sha" ]] || fail 'base ref mismatch'
+# Re-run the complete path, identity and ownership check immediately before
+# mutation, because fetch and unrelated processes can change the observed state.
+[[ "$(dirname -- "$new_worktree_path")" == "$approved_parent_path" ]] || fail 'destination parent changed'
+[[ -d "$approved_parent_path" && ! -L "$approved_parent_path" ]] || fail 'parent changed'
+resolved_parent=$(realpath -e -- "$approved_parent_path") || fail 'parent resolution changed'
+[[ "$resolved_parent" == "$approved_parent_path" ]] || fail 'parent became noncanonical'
+observed_parent_uid=$(stat -c %u -- "$approved_parent_path") || fail 'parent owner changed'
+[[ "$observed_parent_uid" == "$expected_parent_uid" ]] || fail 'parent owner mismatch'
+[[ -w "$approved_parent_path" && -x "$approved_parent_path" ]] || fail 'parent permission changed'
 [[ ! -e "$new_worktree_path" && ! -L "$new_worktree_path" ]] || fail 'destination changed'
-# Explicitly recheck destination parent, authority, and collisions before this line.
+# Also require independently verified Owner creation authority; this shell
+# cannot authenticate approval or guarantee race-free filesystem operations.
 git -C "$managing_worktree" worktree add -b "$new_branch" "$new_worktree_path" "$expected_base_sha" || fail 'create failed'
 [[ "$(git -C "$new_worktree_path" rev-parse --show-toplevel)" == "$new_worktree_path" ]] || fail 'new root mismatch'
 [[ "$(git -C "$new_worktree_path" branch --show-current)" == "$new_branch" ]] || fail 'new branch mismatch'
 [[ "$(git -C "$new_worktree_path" rev-parse HEAD)" == "$expected_base_sha" ]] || fail 'new HEAD mismatch'
 ```
 
-The script cannot prove Owner authorization, safe destination ownership or external process state. Those are **preconditions** from separately verified evidence, not generated permissions. If any prerequisite is uncertain, **do not run the block**. The example uses an approved \`origin/main\` base; an independently approved stage descendant is also valid when its exact SHA/conformance are verified.
+The script cannot prove Owner authorization, race-free path ownership or external process state. The parent path and owner UID must be independently approved, not merely discovered from the target. The `realpath -e` and GNU `stat -c` checks assume Linux/GNU userland; they detect symlinked ancestors and permission/owner mismatches in the observed state but are not an OS-level isolation boundary or atomic filesystem guarantee. Those are **preconditions** from separately verified evidence, not generated permissions. If any prerequisite is uncertain, **do not run the block**. The example uses an approved \`origin/main\` base; an independently approved stage descendant is also valid when its exact SHA/conformance are verified.
 
 ## Before touching an existing workspace
 
