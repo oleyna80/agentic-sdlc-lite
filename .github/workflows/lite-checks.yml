@@ -109,9 +109,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          commit_count=$(git rev-list --count HEAD) || { echo 'Cannot inspect Git history for whitespace check' >&2; exit 1; }
-          [[ "$commit_count" =~ ^[1-9][0-9]*$ ]] || { echo 'Invalid Git commit count' >&2; exit 1; }
-          if (( commit_count > 1 )); then
+          if git rev-parse HEAD^ >/dev/null 2>&1; then
             git diff --check HEAD^ HEAD
           else
             git diff-tree --check --root --no-commit-id -r HEAD
