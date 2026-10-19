@@ -72,6 +72,21 @@ resolved_parent=$(realpath -e -- "$approved_parent_path") || fail 'parent resolu
 observed_parent_uid=$(stat -c %u -- "$approved_parent_path") || fail 'parent owner changed'
 [[ "$observed_parent_uid" == "$expected_parent_uid" ]] || fail 'parent owner mismatch'
 [[ -w "$approved_parent_path" && -x "$approved_parent_path" ]] || fail 'parent permission changed'
+# Revalidate managing Git identity, refs and content after fetch, before worktree add.
+# A successful fetch does not mean the managing checkout is still the approved target.
+[[ -d "$managing_worktree" && ! -L "$managing_worktree" ]] || fail 'managing worktree changed'
+checked_equals 'managing root changed' "$managing_worktree" git -C "$managing_worktree" rev-parse --show-toplevel
+checked_equals 'repository changed' "$expected_origin" git -C "$managing_worktree" remote get-url origin
+checked_equals 'manager branch changed' "$expected_branch" git -C "$managing_worktree" branch --show-current
+checked_equals 'manager HEAD changed' "$expected_head" git -C "$managing_worktree" rev-parse HEAD
+manager_status=$(git -C "$managing_worktree" status --porcelain=v1 --untracked-files=all --ignored=matching) || fail 'manager status recheck failed'
+[[ -z "$manager_status" ]] || fail 'manager tracked/untracked/ignored state changed'
+if git -C "$managing_worktree" show-ref --verify --quiet "refs/heads/$new_branch"; then
+  fail 'new branch appeared after fetch'
+else
+  show_ref_status=$?
+  [[ "$show_ref_status" -eq 1 ]] || fail "branch reinspection failed (exit $show_ref_status)"
+fi
 [[ ! -e "$new_worktree_path" && ! -L "$new_worktree_path" ]] || fail 'destination changed'
 # Also require independently verified Owner creation authority; this shell
 # cannot authenticate approval or guarantee race-free filesystem operations.
