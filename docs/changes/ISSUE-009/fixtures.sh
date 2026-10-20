@@ -11,7 +11,7 @@ work_dir=$(mktemp -d)
 trap 'rm -rf "$work_dir"' EXIT
 body="$work_dir/whitespace-body.sh"
 log="$work_dir/results.log"
-printf 'SOURCE=%s\nGIT=%s\nBASH=%s\nWORK=%s\n' "$source_sha" "$($real_git --version)" "$BASH_VERSION" "$work_dir" >"$log"
+printf '# ISSUE-009 fixture evidence\n\nSOURCE=%s\nGIT=%s\nBASH=%s\nWORK=%s\n\n## Preserved unsuccessful pre-final attempts\n\nRecorded at %s. These attempts are diagnostic history only and are not acceptance evidence.\n\n- Initial extraction attempt: `fixture extraction: malformed run block`; the extractor incorrectly rejected blank lines in the YAML literal block.\n- Initial T01 attempt: `Bad file descriptor`; the commit-object reader file descriptor was attached to each `read`, rather than the complete loop.\n\n## Final exact-source execution\n\n' "$source_sha" "$($real_git --version)" "$BASH_VERSION" "$work_dir" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" >"$log"
 
 # Extract exactly one literal YAML run block; no implementation is copied here.
 git -C "$repo_root" show "$source_sha:$workflow" >"$work_dir/workflow.yml"
