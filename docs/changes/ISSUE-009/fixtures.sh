@@ -142,7 +142,7 @@ done
 
 # T07: invalid HEAD and an invalid object type are rejected before either checker.
 invalid_head="$work_dir/invalid-head"; init_repo "$invalid_head"; printf x >"$invalid_head/blob"; blob=$($real_git -C "$invalid_head" hash-object -w blob)
-$real_git -C "$invalid_head" update-ref HEAD "$blob"
+printf '%s\n' "$blob" >"$invalid_head/.git/HEAD"
 run_body T07-invalid-head "$invalid_head" stop
 
 # T08/T09: local file:// depth-2 and depth-1 checkouts.
