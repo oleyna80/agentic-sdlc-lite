@@ -47,9 +47,8 @@ kind=${FIXTURE_FAULT:-}
 match=0
 case "$kind" in
   rev-parse) [[ ${1:-} == rev-parse && ${2:-} == --verify ]] && match=1 ;;
-  cat-file-commit|cat-file-commit-malformed-plus-74) [[ ${1:-} == cat-file && ${2:-} == commit ]] && match=1 ;;
+  cat-file-commit|cat-file-commit-malformed-plus-74|cat-file-empty|cat-file-truncated|cat-file-malformed) [[ ${1:-} == cat-file && ${2:-} == commit ]] && match=1 ;;
   cat-file-parent) [[ ${1:-} == cat-file && ${2:-} == -e ]] && match=1 ;;
-  cat-file-malformed) [[ ${1:-} == cat-file && ${2:-} == commit ]] && match=1 ;;
   diff) [[ ${1:-} == diff && ${2:-} == --check ]] && match=1 ;;
   diff-tree) [[ ${1:-} == diff-tree && ${2:-} == --check ]] && match=1 ;;
 esac
@@ -59,6 +58,8 @@ if (( match )); then
       rev-parse) printf '%s\n' "${FIXTURE_PLAUSIBLE_OID:-0123456789012345678901234567890123456789}" ;;
       cat-file-commit) printf 'tree 0123456789012345678901234567890123456789\nauthor a <a@b> 0 +0000\ncommitter a <a@b> 0 +0000\n\nmessage\n' ;;
       cat-file-commit-malformed-plus-74) printf 'tree not-an-object-id\n\nmessage\n' ;;
+      cat-file-empty) : ;;
+      cat-file-truncated) printf 'tree 0123456789012345678901234567890123456789\nauthor a <a@b> 0 +0000\n' ;;
       cat-file-malformed) printf 'tree not-an-object-id\n\nmessage\n' ;;
       *) printf 'plausible inspection output\n' ;;
     esac
@@ -115,6 +116,9 @@ run_body() {
   inventory "$path" "$id-after"
   {
     printf '\nCASE %s expected=%s rc=%s\n' "$id" "$expected" "$rc"
+    if [[ -n $fault ]]; then
+      printf 'fault: kind=%s plausible=%s forced-exit=%s\n' "$fault" "$plausible" "$fault_rc"
+    fi
     sed 's/^/git: /' "$case_dir/git.log" 2>/dev/null || :
     sed 's/^/stdout: /' "$case_dir/stdout"
     sed 's/^/stderr: /' "$case_dir/stderr"
@@ -133,13 +137,16 @@ run_body() {
   esac
 }
 
-# T01/T02/T13: genuine roots, including a message that resembles a parent header.
+# T01/T02/T13: genuine roots, including a shallow root boundary and a message
+# that resembles a parent header.
 root_clean="$work_dir/root-clean"; init_repo "$root_clean"; commit_file "$root_clean" 'clean\n' root
 run_body T01 "$root_clean" root
 root_bad="$work_dir/root-bad"; init_repo "$root_bad"; commit_file "$root_bad" 'bad \n' root
 run_body T02 "$root_bad" fail
 root_message="$work_dir/root-message"; init_repo "$root_message"; commit_file "$root_message" 'clean\n' $'root\nparent 0123456789012345678901234567890123456789'
-run_body T13 "$root_message" root
+root_remote="$work_dir/root.git"; $real_git init -q --bare "$root_remote"; $real_git -C "$root_message" remote add origin "file://$root_remote"; $real_git -C "$root_message" push -q origin HEAD:main
+root_shallow="$work_dir/root-shallow"; $real_git clone -q --no-local --depth 1 --branch main "file://$root_remote" "$root_shallow"
+run_body T13-shallow-root "$root_shallow" root
 
 # T03/T04 ordinary linear commits.
 ordinary_clean="$work_dir/ordinary-clean"; init_repo "$ordinary_clean"; commit_file "$ordinary_clean" 'base\n' base; commit_file "$ordinary_clean" 'child\n' child
@@ -162,10 +169,14 @@ done
 run_body T06-cat-file-commit-malformed-plus-74 "$ordinary_clean" inspection74 cat-file-commit-malformed-plus-74 1
 run_body T06-malformed-metadata "$ordinary_clean" stop cat-file-malformed 1 0
 
-# T07: invalid HEAD and an invalid object type are rejected before either checker.
+# T07: invalid HEAD plus successful empty, truncated, and malformed commit
+# metadata outputs are rejected before either checker.
 invalid_head="$work_dir/invalid-head"; init_repo "$invalid_head"; printf x >"$invalid_head/blob"; blob=$($real_git -C "$invalid_head" hash-object -w blob)
 printf '%s\n' "$blob" >"$invalid_head/.git/HEAD"
 run_body T07-invalid-head "$invalid_head" stop
+run_body T07-empty-commit-output "$ordinary_clean" stop cat-file-empty 1 0
+run_body T07-truncated-commit-output "$ordinary_clean" stop cat-file-truncated 1 0
+run_body T07-malformed-commit-output "$ordinary_clean" stop cat-file-malformed 1 0
 
 # T08/T09: local file:// depth-2 and depth-1 checkouts.
 remote="$work_dir/remote.git"; $real_git init -q --bare "$remote"
@@ -209,13 +220,18 @@ $real_git -C "$merge_bad" checkout -q side; printf 'side \n' >"$merge_bad/side.t
 $real_git -C "$merge_bad" checkout -q "$bad_branch"; GIT_AUTHOR_DATE='2000-01-01T00:00:00Z' GIT_COMMITTER_DATE='2000-01-01T00:00:00Z' $real_git -C "$merge_bad" merge -q --no-ff side -m merge
 run_body T12-merge-whitespace "$merge_bad" fail
 
-# T14: isolated commit object names an unavailable parent; no shared object is removed.
+# T14: isolated commit objects name unavailable and existing-non-commit parents;
+# no shared object is removed.
 isolated="$work_dir/isolated"; init_repo "$isolated"
 tree=$($real_git -C "$isolated" mktree </dev/null)
 missing_parent=0123456789012345678901234567890123456789
 constructed=$(printf 'tree %s\nparent %s\nauthor Fixture <fixture@example.invalid> 0 +0000\ncommitter Fixture <fixture@example.invalid> 0 +0000\n\nconstructed\n' "$tree" "$missing_parent" | $real_git -C "$isolated" hash-object -t commit -w --stdin)
 $real_git -C "$isolated" update-ref HEAD "$constructed"
 run_body T14 "$isolated" stop
+existing_blob=$(printf 'not a commit\n' | $real_git -C "$isolated" hash-object -w --stdin)
+blob_parent_commit=$(printf 'tree %s\nparent %s\nauthor Fixture <fixture@example.invalid> 0 +0000\ncommitter Fixture <fixture@example.invalid> 0 +0000\n\nblob-parent\n' "$tree" "$existing_blob" | $real_git -C "$isolated" hash-object -t commit -w --stdin)
+$real_git -C "$isolated" update-ref HEAD "$blob_parent_commit"
+run_body T14-existing-blob-parent "$isolated" stop
 
 printf '\nRESULT=PASS T01-T14\n' >>"$log"
 if [[ -n $evidence_output ]]; then
