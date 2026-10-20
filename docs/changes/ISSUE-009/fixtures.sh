@@ -92,8 +92,8 @@ inventory() {
     fi
     printf 'shallow='; git -C "$path" rev-parse --is-shallow-repository
     test -f "$path/.git/shallow" && { printf 'shallow-bytes='; od -An -tx1 "$path/.git/shallow"; } || echo 'shallow-bytes=absent'
-    git -C "$path" for-each-ref --format='ref=%(refname):%(objectname)'
-    git -C "$path" status --porcelain=v1 --untracked-files=all --ignored
+    if git -C "$path" for-each-ref --format='ref=%(refname):%(objectname)'; then :; else inventory_status=$?; printf 'ref-inventory-exit=%s\n' "$inventory_status"; fi
+    if git -C "$path" status --porcelain=v1 --untracked-files=all --ignored; then :; else inventory_status=$?; printf 'status-inventory-exit=%s\n' "$inventory_status"; fi
   } >>"$log"
 }
 run_body() {
