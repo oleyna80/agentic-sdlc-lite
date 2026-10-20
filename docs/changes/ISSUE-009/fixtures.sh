@@ -48,7 +48,7 @@ match=0
 case "$kind" in
   rev-parse) [[ ${1:-} == rev-parse && ${2:-} == --verify ]] && match=1 ;;
   cat-file-commit|cat-file-commit-malformed-plus-74|cat-file-empty|cat-file-truncated|cat-file-malformed|cat-file-malformed-parent) [[ ${1:-} == cat-file && ${2:-} == commit ]] && match=1 ;;
-  cat-file-parent) [[ ${1:-} == cat-file && ${2:-} == -e ]] && match=1 ;;
+  cat-file-parent) [[ ${1:-} == cat-file && ${2:-} == -t ]] && match=1 ;;
   diff) [[ ${1:-} == diff && ${2:-} == --check ]] && match=1 ;;
   diff-tree) [[ ${1:-} == diff-tree && ${2:-} == --check ]] && match=1 ;;
 esac
@@ -62,6 +62,7 @@ if (( match )); then
       cat-file-truncated) printf 'tree 0123456789012345678901234567890123456789\nauthor a <a@b> 0 +0000\n' ;;
       cat-file-malformed) printf 'tree not-an-object-id\n\nmessage\n' ;;
       cat-file-malformed-parent) printf 'tree 0123456789012345678901234567890123456789\nparent not-a-valid-oid\nauthor a <a@b> 0 +0000\ncommitter a <a@b> 0 +0000\n\nmessage\n' ;;
+      cat-file-parent) printf 'commit\n' ;;
       *) printf 'plausible inspection output\n' ;;
     esac
   fi
@@ -222,8 +223,8 @@ $real_git -C "$merge_bad" checkout -q side; printf 'side \n' >"$merge_bad/side.t
 $real_git -C "$merge_bad" checkout -q "$bad_branch"; GIT_AUTHOR_DATE='2000-01-01T00:00:00Z' GIT_COMMITTER_DATE='2000-01-01T00:00:00Z' $real_git -C "$merge_bad" merge -q --no-ff side -m merge
 run_body T12-merge-whitespace "$merge_bad" fail
 
-# T14: isolated commit objects name unavailable and existing-non-commit parents;
-# no shared object is removed.
+# T14: isolated commit objects name unavailable and existing-non-commit parents,
+# including an annotated tag that targets a commit; no shared object is removed.
 isolated="$work_dir/isolated"; init_repo "$isolated"
 tree=$($real_git -C "$isolated" mktree </dev/null)
 missing_parent=0123456789012345678901234567890123456789
@@ -234,6 +235,15 @@ existing_blob=$(printf 'not a commit\n' | $real_git -C "$isolated" hash-object -
 blob_parent_commit=$(printf 'tree %s\nparent %s\nauthor Fixture <fixture@example.invalid> 0 +0000\ncommitter Fixture <fixture@example.invalid> 0 +0000\n\nblob-parent\n' "$tree" "$existing_blob" | $real_git -C "$isolated" hash-object -t commit -w --stdin)
 $real_git -C "$isolated" update-ref HEAD "$blob_parent_commit"
 run_body T14-existing-blob-parent "$isolated" stop
+tag_target=$(printf 'tree %s\nauthor Fixture <fixture@example.invalid> 0 +0000\ncommitter Fixture <fixture@example.invalid> 0 +0000\n\ntag target\n' "$tree" | $real_git -C "$isolated" hash-object -t commit -w --stdin)
+annotated_tag=$(printf 'object %s\ntype commit\ntag parent-tag\ntagger Fixture <fixture@example.invalid> 0 +0000\n\nannotated parent tag\n' "$tag_target" | $real_git -C "$isolated" hash-object -t tag -w --stdin)
+tag_parent_commit=$(printf 'tree %s\nparent %s\nauthor Fixture <fixture@example.invalid> 0 +0000\ncommitter Fixture <fixture@example.invalid> 0 +0000\n\ntag-parent\n' "$tree" "$annotated_tag" | $real_git -C "$isolated" hash-object -t commit -w --stdin)
+$real_git -C "$isolated" update-ref HEAD "$tag_parent_commit"
+{
+  printf 'T14-annotated-tag-parent object-types: parent='; $real_git -C "$isolated" cat-file -t "$annotated_tag"
+  printf 'T14-annotated-tag-parent object-types: target='; $real_git -C "$isolated" cat-file -t "$tag_target"
+} >>"$log"
+run_body T14-annotated-tag-parent "$isolated" stop
 
 printf '\nRESULT=PASS T01-T14\n' >>"$log"
 if [[ -n $evidence_output ]]; then

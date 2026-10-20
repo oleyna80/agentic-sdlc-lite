@@ -189,10 +189,13 @@ jobs:
           fi
 
           first_parent=${parent_oids[0]}
-          if git cat-file -e "${first_parent}^{commit}"; then
+          if parent_type=$(git cat-file -t "$first_parent"); then
             :
           else
             inspection_status=$?
-            stop_history_inspection "$inspection_status" 'first parent is unavailable or not a commit'
+            stop_history_inspection "$inspection_status" 'first parent is unavailable or unreadable'
+          fi
+          if [[ "$parent_type" != commit ]]; then
+            stop_history_inspection 1 'first parent is not a commit object'
           fi
           git diff --check "$first_parent" "$head_oid"
