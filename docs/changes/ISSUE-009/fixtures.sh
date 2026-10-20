@@ -47,7 +47,7 @@ kind=${FIXTURE_FAULT:-}
 match=0
 case "$kind" in
   rev-parse) [[ ${1:-} == rev-parse && ${2:-} == --verify ]] && match=1 ;;
-  cat-file-commit|cat-file-commit-malformed-plus-74|cat-file-empty|cat-file-truncated|cat-file-malformed) [[ ${1:-} == cat-file && ${2:-} == commit ]] && match=1 ;;
+  cat-file-commit|cat-file-commit-malformed-plus-74|cat-file-empty|cat-file-truncated|cat-file-malformed|cat-file-malformed-parent) [[ ${1:-} == cat-file && ${2:-} == commit ]] && match=1 ;;
   cat-file-parent) [[ ${1:-} == cat-file && ${2:-} == -e ]] && match=1 ;;
   diff) [[ ${1:-} == diff && ${2:-} == --check ]] && match=1 ;;
   diff-tree) [[ ${1:-} == diff-tree && ${2:-} == --check ]] && match=1 ;;
@@ -61,6 +61,7 @@ if (( match )); then
       cat-file-empty) : ;;
       cat-file-truncated) printf 'tree 0123456789012345678901234567890123456789\nauthor a <a@b> 0 +0000\n' ;;
       cat-file-malformed) printf 'tree not-an-object-id\n\nmessage\n' ;;
+      cat-file-malformed-parent) printf 'tree 0123456789012345678901234567890123456789\nparent not-a-valid-oid\nauthor a <a@b> 0 +0000\ncommitter a <a@b> 0 +0000\n\nmessage\n' ;;
       *) printf 'plausible inspection output\n' ;;
     esac
   fi
@@ -169,14 +170,15 @@ done
 run_body T06-cat-file-commit-malformed-plus-74 "$ordinary_clean" inspection74 cat-file-commit-malformed-plus-74 1
 run_body T06-malformed-metadata "$ordinary_clean" stop cat-file-malformed 1 0
 
-# T07: invalid HEAD plus successful empty, truncated, and malformed commit
-# metadata outputs are rejected before either checker.
+# T07: invalid HEAD plus successful empty, truncated, malformed-tree, and
+# malformed-parent commit metadata outputs are rejected before either checker.
 invalid_head="$work_dir/invalid-head"; init_repo "$invalid_head"; printf x >"$invalid_head/blob"; blob=$($real_git -C "$invalid_head" hash-object -w blob)
 printf '%s\n' "$blob" >"$invalid_head/.git/HEAD"
 run_body T07-invalid-head "$invalid_head" stop
 run_body T07-empty-commit-output "$ordinary_clean" stop cat-file-empty 1 0
 run_body T07-truncated-commit-output "$ordinary_clean" stop cat-file-truncated 1 0
 run_body T07-malformed-commit-output "$ordinary_clean" stop cat-file-malformed 1 0
+run_body T07-malformed-parent-output "$ordinary_clean" stop cat-file-malformed-parent 1 0
 
 # T08/T09: local file:// depth-2 and depth-1 checkouts.
 remote="$work_dir/remote.git"; $real_git init -q --bare "$remote"
