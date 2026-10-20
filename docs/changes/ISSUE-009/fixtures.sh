@@ -150,7 +150,12 @@ run_body T04 "$ordinary_bad" fail
 # T05/T06: each actual inspection fails, then repeats with plausible stdout.
 for inspection in rev-parse cat-file-commit cat-file-parent; do
   run_body "T05-$inspection" "$ordinary_clean" stop "$inspection" 0
-  run_body "T06-$inspection" "$ordinary_clean" stop "$inspection" 1
+  if [[ $inspection == cat-file-commit ]]; then
+    # Complete-looking commit metadata plus rc 74 must stop before parsing.
+    run_body "T06-$inspection" "$ordinary_clean" inspection74 "$inspection" 1
+  else
+    run_body "T06-$inspection" "$ordinary_clean" stop "$inspection" 1
+  fi
 done
 # A malformed but plausible commit stream with exit 74 must stop on that status
 # before metadata parsing can select a malformed-header failure path.
