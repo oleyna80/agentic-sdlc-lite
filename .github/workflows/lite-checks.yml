@@ -133,6 +133,7 @@ jobs:
           tree_seen=0
           author_seen=0
           committer_seen=0
+          last_header=''
           parent_oids=()
           while IFS= read -r header_line || [[ -n "$header_line" ]]; do
             if (( header_section )); then
@@ -144,16 +145,26 @@ jobs:
               if [[ "$header_line" =~ ^tree\ ([0-9a-f]{40,64})$ ]]; then
                 (( tree_seen == 0 )) || stop_history_inspection 1 'commit metadata has multiple tree headers'
                 tree_seen=1
+                last_header=tree
               elif [[ "$header_line" =~ ^parent\ ([0-9a-f]{40,64})$ ]]; then
                 parent_oids+=("${BASH_REMATCH[1]}")
+                last_header=parent
+              elif [[ "$header_line" == tree\ * || "$header_line" == parent\ * ]]; then
+                stop_history_inspection 1 'commit metadata contains a malformed object header'
               elif [[ "$header_line" =~ ^author\ .+$ ]]; then
                 (( author_seen == 0 )) || stop_history_inspection 1 'commit metadata has multiple author headers'
                 author_seen=1
+                last_header=author
               elif [[ "$header_line" =~ ^committer\ .+$ ]]; then
                 (( committer_seen == 0 )) || stop_history_inspection 1 'commit metadata has multiple committer headers'
                 committer_seen=1
+                last_header=committer
+              elif [[ "$header_line" == author\ * || "$header_line" == committer\ * ]]; then
+                stop_history_inspection 1 'commit metadata contains a malformed identity header'
               elif [[ "$header_line" =~ ^\  ]]; then
-                :
+                [[ -n "$last_header" ]] || stop_history_inspection 1 'commit metadata starts with a continuation line'
+              elif [[ "$header_line" =~ ^[A-Za-z][A-Za-z0-9-]*\ .+$ ]]; then
+                last_header=other
               else
                 stop_history_inspection 1 'commit metadata contains a malformed header'
               fi

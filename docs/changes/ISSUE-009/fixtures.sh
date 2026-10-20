@@ -49,6 +49,7 @@ case "$kind" in
   rev-parse) [[ ${1:-} == rev-parse && ${2:-} == --verify ]] && match=1 ;;
   cat-file-commit) [[ ${1:-} == cat-file && ${2:-} == commit ]] && match=1 ;;
   cat-file-parent) [[ ${1:-} == cat-file && ${2:-} == -e ]] && match=1 ;;
+  cat-file-malformed) [[ ${1:-} == cat-file && ${2:-} == commit ]] && match=1 ;;
   diff) [[ ${1:-} == diff && ${2:-} == --check ]] && match=1 ;;
   diff-tree) [[ ${1:-} == diff-tree && ${2:-} == --check ]] && match=1 ;;
 esac
@@ -57,6 +58,7 @@ if (( match )); then
     case "$kind" in
       rev-parse) printf '%s\n' "${FIXTURE_PLAUSIBLE_OID:-0123456789012345678901234567890123456789}" ;;
       cat-file-commit) printf 'tree 0123456789012345678901234567890123456789\nauthor a <a@b> 0 +0000\ncommitter a <a@b> 0 +0000\n\nmessage\n' ;;
+      cat-file-malformed) printf 'tree not-an-object-id\n\nmessage\n' ;;
       *) printf 'plausible inspection output\n' ;;
     esac
   fi
@@ -84,8 +86,8 @@ inventory() {
     printf '[%s] HEAD=' "$label"
     if git -C "$path" rev-parse HEAD; then :; else inventory_status=$?; printf 'HEAD-resolve-exit=%s\n' "$inventory_status"; fi
     if git -C "$path" cat-file -e 'HEAD^{commit}'; then
-      git -C "$path" show -s --format='parents=%P tree=%T' HEAD
-      git -C "$path" cat-file -p HEAD | sed -n '1,/^$/p'
+      if git -C "$path" show -s --format='parents=%P tree=%T' HEAD; then :; else inventory_status=$?; printf 'HEAD-metadata-display-exit=%s\n' "$inventory_status"; fi
+      if git -C "$path" cat-file -p HEAD | sed -n '1,/^$/p'; then :; else inventory_status=$?; printf 'HEAD-raw-display-exit=%s\n' "$inventory_status"; fi
     else
       inventory_status=$?
       printf 'HEAD-commit-type=unavailable-or-invalid exit=%s\n' "$inventory_status"
@@ -94,10 +96,10 @@ inventory() {
     test -f "$path/.git/shallow" && { printf 'shallow-bytes='; od -An -tx1 "$path/.git/shallow"; } || echo 'shallow-bytes=absent'
     if git -C "$path" for-each-ref --format='ref=%(refname):%(objectname)'; then :; else inventory_status=$?; printf 'ref-inventory-exit=%s\n' "$inventory_status"; fi
     if git -C "$path" status --porcelain=v1 --untracked-files=all --ignored; then :; else inventory_status=$?; printf 'status-inventory-exit=%s\n' "$inventory_status"; fi
-  } >>"$log"
+  } >>"$log" 2>&1
 }
 run_body() {
-  local id=$1 path=$2 expected=$3 fault=${4:-} plausible=${5:-0}
+  local id=$1 path=$2 expected=$3 fault=${4:-} plausible=${5:-0} fault_rc=${6:-74}
   local case_dir="$work_dir/$id"
   mkdir "$case_dir"
   inventory "$path" "$id-before"
@@ -105,7 +107,7 @@ run_body() {
   (
     cd "$path"
     FIXTURE_REAL_GIT="$real_git" FIXTURE_GIT_LOG="$case_dir/git.log" FIXTURE_FAULT="$fault" \
-      FIXTURE_PLAUSIBLE="$plausible" FIXTURE_FAULT_RC=74 PATH="$wrapper_dir:$PATH" bash "$body"
+      FIXTURE_PLAUSIBLE="$plausible" FIXTURE_FAULT_RC="$fault_rc" PATH="$wrapper_dir:$PATH" bash "$body"
   ) >"$case_dir/stdout" 2>"$case_dir/stderr"
   rc=$?
   set -e
@@ -145,6 +147,7 @@ for inspection in rev-parse cat-file-commit cat-file-parent; do
   run_body "T05-$inspection" "$ordinary_clean" stop "$inspection" 0
   run_body "T06-$inspection" "$ordinary_clean" stop "$inspection" 1
 done
+run_body T06-malformed-metadata "$ordinary_clean" stop cat-file-malformed 1 0
 
 # T07: invalid HEAD and an invalid object type are rejected before either checker.
 invalid_head="$work_dir/invalid-head"; init_repo "$invalid_head"; printf x >"$invalid_head/blob"; blob=$($real_git -C "$invalid_head" hash-object -w blob)
@@ -158,9 +161,6 @@ depth2="$work_dir/depth2"; $real_git clone -q --no-local --depth 2 --branch main
 run_body T08-depth2-linear "$depth2" parent
 fetch_depth2="$work_dir/fetch-depth2"; init_repo "$fetch_depth2"; $real_git -C "$fetch_depth2" remote add origin "file://$remote"; $real_git -C "$fetch_depth2" fetch -q --no-tags --depth=2 origin main; $real_git -C "$fetch_depth2" checkout -q --detach FETCH_HEAD
 run_body T08-depth2-fetch-detached "$fetch_depth2" parent
-commit_file "$upstream" 'four \n' bad; $real_git -C "$upstream" push -q origin HEAD:main
-depth2_bad="$work_dir/depth2-bad"; $real_git clone -q --no-local --depth 2 --branch main "file://$remote" "$depth2_bad"
-run_body T08-depth2-whitespace "$depth2_bad" fail
 depth1="$work_dir/depth1"; $real_git clone -q --no-local --depth 1 --branch main "file://$remote" "$depth1"
 run_body T09 "$depth1" stop
 
@@ -168,6 +168,11 @@ run_body T09 "$depth1" stop
 parent=$($real_git -C "$upstream" rev-parse HEAD^)
 $real_git -C "$depth1" fetch -q --depth=1 origin "$parent"
 run_body T10 "$depth1" parent
+
+# A later depth-2 checkout confirms that the checker itself still rejects whitespace.
+commit_file "$upstream" 'four \n' bad; $real_git -C "$upstream" push -q origin HEAD:main
+depth2_bad="$work_dir/depth2-bad"; $real_git clone -q --no-local --depth 2 --branch main "file://$remote" "$depth2_bad"
+run_body T08-depth2-whitespace "$depth2_bad" fail
 
 # T11 selected whitespace checker faults retain its exact status.
 run_body T11-parent "$ordinary_clean" rc74 diff
