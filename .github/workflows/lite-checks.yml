@@ -125,9 +125,12 @@ jobs:
             stop_history_inspection 1 'HEAD inspection returned an invalid object ID'
           fi
 
-          coproc commit_object_reader { git cat-file commit "$head_oid"; }
-          reader_fd=${commit_object_reader[0]}
-          reader_pid=$commit_object_reader_PID
+          if commit_metadata=$(git cat-file commit "$head_oid"); then
+            :
+          else
+            inspection_status=$?
+            stop_history_inspection "$inspection_status" 'cannot read HEAD commit metadata'
+          fi
           header_section=1
           separator_seen=0
           tree_seen=0
@@ -169,14 +172,7 @@ jobs:
                 stop_history_inspection 1 'commit metadata contains a malformed header'
               fi
             fi
-          done <&"$reader_fd"
-          exec {reader_fd}<&-
-          if wait "$reader_pid"; then
-            :
-          else
-            inspection_status=$?
-            stop_history_inspection "$inspection_status" 'cannot read HEAD commit metadata'
-          fi
+          done <<<"$commit_metadata"
           if (( separator_seen == 0 || tree_seen != 1 || author_seen != 1 || committer_seen != 1 )); then
             stop_history_inspection 1 'HEAD commit metadata is incomplete or lacks a header/message separator'
           fi

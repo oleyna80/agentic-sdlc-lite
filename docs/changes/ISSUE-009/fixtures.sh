@@ -47,7 +47,7 @@ kind=${FIXTURE_FAULT:-}
 match=0
 case "$kind" in
   rev-parse) [[ ${1:-} == rev-parse && ${2:-} == --verify ]] && match=1 ;;
-  cat-file-commit) [[ ${1:-} == cat-file && ${2:-} == commit ]] && match=1 ;;
+  cat-file-commit|cat-file-commit-malformed-plus-74) [[ ${1:-} == cat-file && ${2:-} == commit ]] && match=1 ;;
   cat-file-parent) [[ ${1:-} == cat-file && ${2:-} == -e ]] && match=1 ;;
   cat-file-malformed) [[ ${1:-} == cat-file && ${2:-} == commit ]] && match=1 ;;
   diff) [[ ${1:-} == diff && ${2:-} == --check ]] && match=1 ;;
@@ -58,6 +58,7 @@ if (( match )); then
     case "$kind" in
       rev-parse) printf '%s\n' "${FIXTURE_PLAUSIBLE_OID:-0123456789012345678901234567890123456789}" ;;
       cat-file-commit) printf 'tree 0123456789012345678901234567890123456789\nauthor a <a@b> 0 +0000\ncommitter a <a@b> 0 +0000\n\nmessage\n' ;;
+      cat-file-commit-malformed-plus-74) printf 'tree not-an-object-id\n\nmessage\n' ;;
       cat-file-malformed) printf 'tree not-an-object-id\n\nmessage\n' ;;
       *) printf 'plausible inspection output\n' ;;
     esac
@@ -117,12 +118,16 @@ run_body() {
     sed 's/^/git: /' "$case_dir/git.log" 2>/dev/null || :
     sed 's/^/stdout: /' "$case_dir/stdout"
     sed 's/^/stderr: /' "$case_dir/stderr"
+    if [[ $expected == inspection74 ]]; then
+      printf 'assertion: inspection exit 74 was handled before commit metadata parsing; no whitespace checker was invoked\n'
+    fi
   } >>"$log"
   case "$expected" in
     pass) [[ $rc == 0 ]] ;;
     fail) [[ $rc != 0 ]] ;;
     stop) [[ $rc != 0 ]] && grep -Fq 'STOP: cannot establish Git parentage' "$case_dir/stderr" && ! grep -Eq '(^| )diff(-tree)? ' "$case_dir/git.log" ;;
     rc74) [[ $rc == 74 ]] ;;
+    inspection74) [[ $rc == 74 ]] && grep -Fq 'cannot read HEAD commit metadata (exit 74)' "$case_dir/stderr" && ! grep -Eq '(^| )diff(-tree)? ' "$case_dir/git.log" ;;
     root) [[ $rc == 0 ]] && grep -Fq 'diff-tree --check' "$case_dir/git.log" && ! grep -Fq 'diff --check' "$case_dir/git.log" ;;
     parent) [[ $rc == 0 ]] && grep -Fq 'diff --check' "$case_dir/git.log" && ! grep -Fq 'diff-tree --check' "$case_dir/git.log" ;;
   esac
@@ -147,6 +152,9 @@ for inspection in rev-parse cat-file-commit cat-file-parent; do
   run_body "T05-$inspection" "$ordinary_clean" stop "$inspection" 0
   run_body "T06-$inspection" "$ordinary_clean" stop "$inspection" 1
 done
+# A malformed but plausible commit stream with exit 74 must stop on that status
+# before metadata parsing can select a malformed-header failure path.
+run_body T06-cat-file-commit-malformed-plus-74 "$ordinary_clean" inspection74 cat-file-commit-malformed-plus-74 1
 run_body T06-malformed-metadata "$ordinary_clean" stop cat-file-malformed 1 0
 
 # T07: invalid HEAD and an invalid object type are rejected before either checker.
