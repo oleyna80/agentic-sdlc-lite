@@ -102,3 +102,52 @@ S6-to-H6 changes only `docs/changes/ISSUE-009/test-evidence.md`. H6 is therefore
 ### Reviewer conclusion
 
 Exact S6 conforms to the approved P/specification/W boundaries and addresses the prior REWORK finding without expanding scope. The Reviewer verdict applies only to S6 `d737638072d2617b18ae733ecb9eb79f60db28f9`. Any normative successor source commit requires renewed source assurance.
+
+## Reviewer Report — ISSUE-009 / S9
+
+**Verdict for exact source S9:** **READY**
+
+**Dimension:** code, docs, architecture, drift
+**Files reviewed:**
+
+- `.github/workflows/lite-checks.yml`
+- `docs/changes/ISSUE-009/fixtures.sh`
+- `docs/changes/ISSUE-009/test-evidence.md`
+- `docs/changes/ISSUE-009/review.md`
+- `docs/changes/ISSUE-009/specification.md`
+- `docs/changes/ISSUE-009/work-block.md`
+- `plan.md`
+
+**Findings:** 0 total
+
+### Exact subject and provenance
+
+- Approved stacked base: `69246782c99423721fdb4a6adefc693ee6f57613`
+- Approved Project P: `90e4c314b27ea9b9a2575c6fddc3a4e83e7eef74`
+- Accepted specification blob: `688ab2744f19307dc8e15b85d0678930aa02ec92`
+- Frozen W blob: `5f79747f1562eea839ec1a97ba09efbbb0248275`
+- Reviewed source S9: `8df87c7869866edd703aa462d1d3cbb3bc1ec0a4`
+- S9 tree: `426c418866b838d037caa10202618144646c2a45`
+- S9 workflow blob: `a3e67b594e799b781cc0bad571733e2082631cbf`
+- S9 fixture blob: `10b1466d81537a7c12530a58913dd75bdc93278e`
+- Evidence-only H9: `13f906f05ab52d6d52ee2833ba0b8cdc94a6e067`
+
+The approved stacked base is an ancestor of S9. Base-to-S9 `git diff --check` passed.
+
+### Technical review
+
+S9 replaces the parent check using `git cat-file -e "${first_parent}^{commit}"` with `git cat-file -t "$first_parent"`, checks the command status before consuming output, and accepts only exact object type `commit`. This prevents an annotated tag object naming a commit from satisfying the direct parent-object requirement. Missing/unreadable parent inspection and non-commit parent types STOP before either whitespace checker. The selected whitespace checker’s status remains propagated.
+
+The workflow change is confined to the existing `Check introduced whitespace errors` run body. Checkout configuration, triggers, permissions, hooks, other workflow steps and unrelated CI behavior are unchanged.
+
+### T14 annotated-tag assurance
+
+The S9 fixture constructs an isolated annotated tag targeting a commit, then a raw commit whose `parent` header names the tag object. It records parent type `tag` and target type `commit`; the extracted body returns explicit STOP `rc=1` with `first parent is not a commit object`. The command log includes `git cat-file -t <tag-oid>` and no `diff` or `diff-tree` checker invocation.
+
+### Independent execution
+
+The Reviewer independently executed `bash docs/changes/ISSUE-009/fixtures.sh 8df87c7869866edd703aa462d1d3cbb3bc1ec0a4 /tmp/issue-009-review-s9.OABCIg/fixture.log` against the exact S9 source. Process exit was 0 and result was `RESULT=PASS T01-T14`. Independent log SHA-256: `9823c1d42e212be8b6861ffc817530d9810ae4af10d843686f3e3696ba4e6281`. Extracted run-body SHA-256: `e2791002b799375dd21a8d05153a932a7e23b9f8563f25ff05a2307cb0321b23`. Bash syntax checks passed.
+
+### Historical evidence and conclusion
+
+The historical S6 Reviewer report remains byte-preserved at blob `4002a5d920ab0539f476cf7651d3a33f0faf4252`. H9 changes only `docs/changes/ISSUE-009/test-evidence.md` from S9; it does not change the reviewed source or fixture. This READY applies only to S9 `8df87c7869866edd703aa462d1d3cbb3bc1ec0a4`.

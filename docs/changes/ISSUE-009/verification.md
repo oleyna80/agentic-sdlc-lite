@@ -106,3 +106,50 @@ The fixture extracts the `run` body using `git show S6:.github/workflows/lite-ch
 
 - Actual GitHub Actions must still pass on the exact published delivery head.
 - PR publication and final merge remain Owner-controlled.
+
+## Verifier Report — S9
+
+**Tier:** full
+**Work Block:** ISSUE-009 — fail-closed Git history inspection
+**Exact source candidate:** `S9 = 8df87c7869866edd703aa462d1d3cbb3bc1ec0a4`
+**Verdict:** **PASS** for exact S9
+
+This is a fresh execution against S9. No result from S6 was reused.
+
+### Source and planning provenance
+
+- S9 parent: `029f7ca1595dfccbeed7f51ba20aab82cb1382ed`
+- S9 tree: `426c418866b838d037caa10202618144646c2a45`
+- Approved P `90e4c314b27ea9b9a2575c6fddc3a4e83e7eef74` and frozen W1 `80fe489458a8b3cfd290ba8f2ca000b786a9ffe5` are ancestors of S9.
+- Workflow blob: `a3e67b594e799b781cc0bad571733e2082631cbf`
+- Fixture blob: `10b1466d81537a7c12530a58913dd75bdc93278e`
+- Historical S6 verification report blob at S9: `8581641c96d820bd0fad136ab1b76133c52bcf28`
+
+### Executed evidence
+
+The Verifier independently ran `bash docs/changes/ISSUE-009/fixtures.sh 8df87c7869866edd703aa462d1d3cbb3bc1ec0a4` against the exact source. Exit `0`; Git `2.53.0`; Bash `5.3.9(1)-release`; full workflow SHA-256 `9681c9396ff89517b40632fdc031aa20ad848a6c70d1dd0bde372029dd5d5e4c`; fixture SHA-256 `a5f79f752e313cd8e782a8c2abbd91cd4e8f5cc45f7881badf9b61d0da1842ce`; extracted actual run-body SHA-256 `e2791002b799375dd21a8d05153a932a7e23b9f8563f25ff05a2307cb0321b23`; fixture-log path `/tmp/issue-009-verifier-s9-fixtures.log`, SHA-256 `05296d702fa576993f8c29cfe9dd8d60337658f15ebe01583f6e0aa93a480017`.
+
+The harness extracted the actual `Check introduced whitespace errors` body from immutable S9, checked Bash syntax, and executed that body. It did not test a copied implementation.
+
+### Acceptance matrix
+
+- **PASS T01:** clean genuine root selected root checker, rc 0.
+- **PASS T02:** root whitespace defect diagnosed, rc 2.
+- **PASS T03:** clean ordinary commit selected parent diff, rc 0.
+- **PASS T04:** ordinary whitespace defect diagnosed, rc 2.
+- **PASS T05:** injected `rev-parse`, commit inspection and parent-type inspection failures each STOP with rc 74.
+- **PASS T06:** plausible stdout plus nonzero inspection status STOPped before parsing/checker; malformed metadata plus nonzero status retained rc 74.
+- **PASS T07:** invalid HEAD, empty, truncated, malformed-tree and malformed-parent metadata each STOPped before checkers.
+- **PASS T08:** realistic depth-2 linear and detached-fetched checkouts used parent path; whitespace defect returned rc 2.
+- **PASS T09:** depth-1 unavailable parent STOPped rc 128; it did not select root checker.
+- **PASS T10:** fetching parent into depth-1 checkout enabled parent path, rc 0.
+- **PASS T11:** injected `git diff --check` and `git diff-tree --check` failures propagated rc 74.
+- **PASS T12:** merge and PR-merge-like depth-2 checkouts validated first parent; whitespace defect returned rc 2.
+- **PASS T13:** genuine shallow root with parent-like commit message stayed on root path, rc 0.
+- **PASS T14 unavailable parent:** explicit STOP rc 128.
+- **PASS T14 blob parent:** direct object-type inspection STOPped rc 1.
+- **PASS T14 annotated-tag parent:** actual parent type `tag`, target type `commit`; body STOPped rc 1 with `first parent is not a commit object`; neither `diff` nor `diff-tree` invoked.
+- **PASS fixture state preservation:** per-case before/after HEAD, refs, index/status, shallow metadata and object inventory recorded without target-repository mutation.
+- **PASS invariants:** base-to-S9 `git diff --check`, workflow boundary and secret-pattern checks passed.
+
+The historical S6 verifier report remains byte-preserved at blob `8581641c96d820bd0fad136ab1b76133c52bcf28`. This PASS applies only to exact S9. Actual GitHub Actions on the final published delivery head remains a separate gate.
