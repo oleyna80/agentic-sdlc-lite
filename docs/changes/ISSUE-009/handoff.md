@@ -44,3 +44,13 @@ Next steps:
 4. Coder remains blocked until all entries and real permissions hold. Later Reviewer/Verifier must bind same S; actual Actions on H, publication and Owner merge remain distinct. No PR created or push performed in this planning mission.
 
 Formal Project Critic, Stage Critic, Reviewer, Verifier, current-head Actions: **NOT_RUN**. Exact post-checkpoint commit/blob IDs and planning checks are reported after commit, not invented as this file's self-reference. Resume by inspecting Git/status and these paths; do not trust this dated snapshot over live refs.
+
+## Checkpoint: Project P approved; W preparation (2026-10-20)
+
+Exact P `90e4c314b27ea9b9a2575c6fddc3a4e83e7eef74` remains byte-frozen (tree `b100e709d9472a4e617e67dfa42fd46bbb734fc9`, plan blob `399b3bb96c6482d35fed93411104d04d3d191482`, specification blob `688ab2744f19307dc8e15b85d0678930aa02ec92`, specification SHA-256 `1b4c9900b3e73501b7d201a8a785f7422452e83af1ad2592bab69100a021e4c4`). Owner accepted the exact P after independent Project Critic READY; see D3 in [owner-decisions.md](owner-decisions.md) and preserved report [project-critic.md](project-critic.md). This is not authorization to merge.
+
+Live pre-write observation: task branch `docs/issue-009-fail-closed-history`, HEAD P above, direct parent `69246782c99423721fdb4a6adefc693ee6f57613`, clean staged/tracked/untracked/ignored state. Remote stacked branch remains at `69246782c99423721fdb4a6adefc693ee6f57613`; `main` remains `90c101ba2b6091a24c2f458f5ffc8b02e6eb04ab`. PR #11 remains OPEN/DRAFT on `main` at `69246782c99423721fdb4a6adefc693ee6f57613`, with prior observed validate run `39292507255` PASS; Issue #9 remains OPEN. Recheck live before publication or integration.
+
+Current sandbox lacks write permission to this task worktree and shared Git metadata; the authorized narrow escalation is required for task-local records and task-branch commits. No W, workflow change, fixture, Reviewer/Verifier verdict or Issue #9 CI result exists yet.
+
+Next: preserve this approval/report evidence in a separate task commit, prepare one actionable W bound to exact P and D3, commit W, then obtain independent Stage Critic READY before any Coder edit. Keep PR #11, its S12/P/W2 and `main` unchanged.

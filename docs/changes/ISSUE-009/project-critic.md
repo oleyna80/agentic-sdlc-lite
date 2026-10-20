@@ -1,0 +1,348 @@
+# Project Critic report — ISSUE-009
+
+> Evidence note: the readable report below is normalized only to remove Markdown hard-break trailing spaces required by the repository whitespace policy. Its findings and verdict are unchanged. The exact captured report bytes before that normalization are preserved in the Base64 appendix; SHA-256: `5e7f3af1bd489ca29c6e0ea5f59070e8c7af6089eafb0554a2b2f1bd760e9c2a`.
+
+## Project Critic — ISSUE-009
+
+**Verdict:** **READY (Owner review)**
+**Reviewed exact P:** `90e4c314b27ea9b9a2575c6fddc3a4e83e7eef74`
+**P tree:** `b100e709d9472a4e617e67dfa42fd46bbb734fc9`
+**Date:** 2026-10-20
+**Mode:** independent read-only review; no files, refs, workflow, PRs or reports were changed.
+
+The Owner’s current-session acceptance matches the reviewed specification exactly:
+
+| Artifact | Verified identity |
+| --- | --- |
+| Specification blob | `688ab2744f19307dc8e15b85d0678930aa02ec92` |
+| Specification byte size | `11075` |
+| Specification SHA-256 | `1b4c9900b3e73501b7d201a8a785f7422452e83af1ad2592bab69100a021e4c4` |
+| Root `plan.md` blob | `399b3bb96c6482d35fed93411104d04d3d191482` |
+| Owner-decisions blob | `78da9939b363466b3e03ede284c56705df1bc023` |
+| Task handoff blob | `cbe273d87b226c4d025ff8744aa9ad6c4e4094cb` |
+
+The specification’s AC-1…AC-9 and T01…T14 are therefore the accepted requirements reviewed with P. This verdict does **not** approve P or authorize a Work Block, Coder, workflow edit, push, PR, or merge.
+
+### Lifecycle and scope
+
+The candidate follows the canonical significant-project sequence in `docs/workflow/development.md`:
+
+```text
+accepted exact specification
+→ committed P
+→ independent Project Critic READY
+→ separate Owner approval of exact P
+→ committed bounded W
+→ independent Stage Critic READY
+→ Coder
+```
+
+P correctly identifies this as significant because it changes a mandatory CI gate. It places the planned implementation in a single stage and requires a later W to bind the source candidate, write-set, test harness, rollback conditions, and role ownership.
+
+The implementation boundary is precise:
+
+- Only the existing `Check introduced whitespace errors` `run: |` body in `.github/workflows/lite-checks.yml` may change.
+- The workflow step name, shell, checkout version, `fetch-depth: 2`, triggers, permissions, other steps, hooks, dependencies, and shared memory remain outside the authorized source scope.
+- Future task-local artifacts are limited to the ISSUE-009 evidence paths named by P and must be bounded again by W.
+
+The current workflow at P still contains the known unsafe classification:
+
+```bash
+if git rev-parse HEAD^ >/dev/null 2>&1; then
+  git diff --check HEAD^ HEAD
+else
+  git diff-tree --check --root --no-commit-id -r HEAD
+fi
+```
+
+No implementation change was smuggled into P.
+
+### Technical feasibility
+
+The proposed technical direction is adequate for the subsequent W-level design decision.
+
+- S10’s `git rev-list --count HEAD` approach was independently inspected. It checks status more carefully than the current workflow, but a depth-1 checkout of an ordinary commit can still produce count `1`; it cannot establish that HEAD is an actual root. P correctly rejects it as an automatic solution.
+- Reading the raw `commit` object, validating its complete header structure and parent representation, and identifying parent headers before the blank line is a viable way to distinguish an actual root from shallow traversal behavior. A shallow ordinary commit retains its parent header in the object even though history traversal may treat it as a boundary.
+- Verifying the selected first parent as a commit object before invoking `git diff --check <parent> HEAD` addresses the case where metadata names a parent whose object or tree is unavailable.
+- `git diff --check` and `git diff-tree --check` return their own status when invoked as the final selected checker. AC-6 and T11 correctly require that the body preserve an injected checker exit `74`.
+- The specification explicitly requires status capture before using command-substitution stdout, including valid-looking stdout plus a nonzero inspection result. That addresses Bash’s common error-masking failure mode.
+
+The design remains a candidate until W selects exact commands and the mandated extracted-body fixtures execute against the committed candidate S. That is the intended assurance boundary, not a gap in P.
+
+### Shallow history and fault injection
+
+Coverage is sufficient for the stated risk.
+
+- T08 establishes that normal `fetch-depth: 2` linear fetch/checkout can take the parent path with a usable immediate parent while older history remains unavailable.
+- T09 requires a depth-1 ordinary commit with a real but unavailable parent to STOP before either checker is invoked.
+- T10 prevents a blanket rejection of shallow repositories by requiring correct non-root handling when the parent object is independently available.
+- T12 covers first-parent behavior on a merge commit and a depth-2 PR-merge-like checkout.
+- T13 prevents parent-like message text from affecting classification.
+- T14 covers metadata referring to a missing or non-commit parent in an isolated object database.
+- T05–T07 require explicit failure behavior for every required inspection, including exit `74` with plausible stdout and malformed or ambiguous inspection output.
+- T11 separately proves checker-failure propagation.
+
+The fixture requirement to extract the literal body from `git show S:.github/workflows/lite-checks.yml`, check extraction integrity, and run `bash -n` is appropriate. It prevents a hand-copied algorithm from being mistaken for validation of the workflow body.
+
+No fixture was run in this read-only Critic mission.
+
+### Git provenance and preservation
+
+P is a direct child of the approved stacked base:
+
+```text
+90e4c314b27ea9b9a2575c6fddc3a4e83e7eef74
+└─ parent 69246782c99423721fdb4a6adefc693ee6f57613
+```
+
+The following ancestry tests all succeeded:
+
+| Required historical object | Result |
+| --- | --- |
+| Base `69246782…` is ancestor of P | yes |
+| Prior P `b4cbc37e6bc318a5b28f4db8cbeaafd3663c60df` is ancestor of P | yes |
+| Frozen W2 `63ed889d8991a5d2187bb82709f4cbb5773db1cc` is ancestor of P | yes |
+| Source S12 `5e42d2b1239f26962ee5f5942cd318997b51501c` is ancestor of P | yes |
+
+The P commit changes exactly four planning paths relative to its direct parent:
+
+```text
+A  docs/changes/ISSUE-009/handoff.md
+A  docs/changes/ISSUE-009/owner-decisions.md
+A  docs/changes/ISSUE-009/specification.md
+M  plan.md
+```
+
+Preservation checks:
+
+| Preserved artifact | Verified blob |
+| --- | --- |
+| Prior root P plan at `b4cbc37e…` | `fcfda1f6dfa011a5688c5f04111d918d6bbce707` |
+| Frozen W2 work block at `63ed889…` | `19beb072f321a7c9730ea86630112ce8c1b90dbb` |
+| Workflow at S12 and P | `c60e726dd03b72168c4483972e9f11c0ff05453d` |
+
+The historical P, W2, S12, Option A decision, and PR #11 assurance are preserved as reachable Git history. P does not transfer their approvals to ISSUE-009.
+
+### Stacked integration and CI
+
+The Owner-approved stacked route is internally consistent with the canonical lifecycle because it is an explicit Owner exception:
+
+1. ISSUE-009 starts from `69246782…`, the current remote head of `docs/wb-lite-002-implementation`.
+2. Its initial future PR may target `docs/wb-lite-002-implementation`.
+3. A later retarget or integration to `main` requires new live base, ancestry, integration-tree, source-diff, and CI evidence.
+4. Existing WB-LITE-002 assurance remains historical and cannot be applied to a changed tree.
+
+Live GitHub facts were independently checked:
+
+| Item | Current observation |
+| --- | --- |
+| Issue #9 | OPEN |
+| PR #11 | OPEN, draft, base `main`, head `docs/wb-lite-002-implementation` |
+| PR #11 head | `69246782c99423721fdb4a6adefc693ee6f57613` |
+| PR #11 `validate` check | PASS, run `39292507255` |
+| `main` | `90c101ba2b6091a24c2f458f5ffc8b02e6eb04ab` |
+| ISSUE-009 branch remote upstream | none configured; branch is currently local only |
+
+The observed PR #11 check does not provide assurance for ISSUE-009. P correctly requires actual applicable Actions to complete successfully on the later delivery head H.
+
+### Actual permissions and boundaries
+
+The current Critic session can inspect the ISSUE-009 worktree but does not have write permission there: both the task worktree and its `.git` file returned non-writable in the active sandbox. That is compatible with this read-only review.
+
+It is not authority for subsequent work. Before W/Coder activity, the responsible orchestrator must establish an appropriately rooted writable session or authorized sandbox path and recheck the exact task worktree, branch, HEAD, clean state, source paths, shared Git metadata, and publication permissions. P already declares this prerequisite.
+
+### Findings
+
+No REWORK finding was identified.
+
+The pre-acceptance wording in `owner-decisions.md` and `handoff.md` accurately reflects their historical state in P: they say that specification acceptance had not yet been supplied. The Owner supplied exact acceptance afterward in this session. Preserve that chronology; record the actual acceptance in separate subsequent task evidence, bound to the accepted specification blob/hash and P, without changing the reviewed P to manufacture an earlier approval.
+
+### Proposed delegated bounds for Owner review
+
+If the Owner approves this exact Critic-READY P, the proposed bounded delegation in P is:
+
+1. Commit a conforming ISSUE-009 Work Block and obtain independent Stage Critic READY.
+2. After that gate, permit one Coder to change only the named workflow run body and the W-authorized disposable fixture/evidence paths.
+3. Permit scoped task-branch commits, focused fixtures, independent Reviewer/Verifier loops on one source SHA, non-force publication to the ISSUE-009 branch, a draft stacked PR, and applicable CI observation.
+4. Require a new Owner decision for checkout configuration, other workflow content, hooks, permissions, scope expansion, final acceptance, retarget/integration to `main`, and merge.
+
+The next required action is separate Owner approval or rejection of exact P `90e4c314…`, referencing this Critic verdict and the P/spec blobs.
+
+
+## Exact captured report bytes (Base64)
+
+```text
+IyMgUHJvamVjdCBDcml0aWMg4oCUIElTU1VFLTAwOQoKKipWZXJkaWN0OioqICoqUkVBRFkgKE93
+bmVyIHJldmlldykqKiAgCioqUmV2aWV3ZWQgZXhhY3QgUDoqKiBgOTBlNGMzMTRiMjdlYTliOWEy
+NTc1YzZmZGRjM2E0ZTgzZTdlZWY3NGAgIAoqKlAgdHJlZToqKiBgYjEwMGU3MDlkOTQ3MmE0ZTYx
+N2U2N2RmYTQyZmQ0NmJiYjczNGZjOWAgIAoqKkRhdGU6KiogMjAyNi0xMC0yMCAgCioqTW9kZToq
+KiBpbmRlcGVuZGVudCByZWFkLW9ubHkgcmV2aWV3OyBubyBmaWxlcywgcmVmcywgd29ya2Zsb3cs
+IFBScyBvciByZXBvcnRzIHdlcmUgY2hhbmdlZC4KClRoZSBPd25lcuKAmXMgY3VycmVudC1zZXNz
+aW9uIGFjY2VwdGFuY2UgbWF0Y2hlcyB0aGUgcmV2aWV3ZWQgc3BlY2lmaWNhdGlvbiBleGFjdGx5
+OgoKfCBBcnRpZmFjdCB8IFZlcmlmaWVkIGlkZW50aXR5IHwKfCAtLS0gfCAtLS0gfAp8IFNwZWNp
+ZmljYXRpb24gYmxvYiB8IGA2ODhhYjI3NDRmMTkzMDdkYzhlMTViODVkMDY3ODkzMGFhMDJlYzky
+YCB8CnwgU3BlY2lmaWNhdGlvbiBieXRlIHNpemUgfCBgMTEwNzVgIHwKfCBTcGVjaWZpY2F0aW9u
+IFNIQS0yNTYgfCBgMWI0Yzk5MDBiM2U3MzUwMWI3ZDIwMWE4YTc4NWY3NDIyNDUyZTgzYWYxYWQy
+NTkyYmFiNjkxMDBhMDIxZTRjNGAgfAp8IFJvb3QgYHBsYW4ubWRgIGJsb2IgfCBgMzk5YjNiYjk2
+YzY0ODJkMzVmZWQ5MzQxMTEwNGQwNGQzZDE5MTQ4MmAgfAp8IE93bmVyLWRlY2lzaW9ucyBibG9i
+IHwgYDc4ZGE5OTM5YjM2MzQ2NmIzZTAzZWRlMjg0YzU2NzA1ZGYxYmMwMjNgIHwKfCBUYXNrIGhh
+bmRvZmYgYmxvYiB8IGBjYmUyNzNkODdiMjI2YzRkMDI1ZmY4NzQ0YWE5YWQ2YzRlNDA5NGNiYCB8
+CgpUaGUgc3BlY2lmaWNhdGlvbuKAmXMgQUMtMeKApkFDLTkgYW5kIFQwMeKAplQxNCBhcmUgdGhl
+cmVmb3JlIHRoZSBhY2NlcHRlZCByZXF1aXJlbWVudHMgcmV2aWV3ZWQgd2l0aCBQLiBUaGlzIHZl
+cmRpY3QgZG9lcyAqKm5vdCoqIGFwcHJvdmUgUCBvciBhdXRob3JpemUgYSBXb3JrIEJsb2NrLCBD
+b2Rlciwgd29ya2Zsb3cgZWRpdCwgcHVzaCwgUFIsIG9yIG1lcmdlLgoKIyMjIExpZmVjeWNsZSBh
+bmQgc2NvcGUKClRoZSBjYW5kaWRhdGUgZm9sbG93cyB0aGUgY2Fub25pY2FsIHNpZ25pZmljYW50
+LXByb2plY3Qgc2VxdWVuY2UgaW4gYGRvY3Mvd29ya2Zsb3cvZGV2ZWxvcG1lbnQubWRgOgoKYGBg
+dGV4dAphY2NlcHRlZCBleGFjdCBzcGVjaWZpY2F0aW9uCuKGkiBjb21taXR0ZWQgUArihpIgaW5k
+ZXBlbmRlbnQgUHJvamVjdCBDcml0aWMgUkVBRFkK4oaSIHNlcGFyYXRlIE93bmVyIGFwcHJvdmFs
+IG9mIGV4YWN0IFAK4oaSIGNvbW1pdHRlZCBib3VuZGVkIFcK4oaSIGluZGVwZW5kZW50IFN0YWdl
+IENyaXRpYyBSRUFEWQrihpIgQ29kZXIKYGBgCgpQIGNvcnJlY3RseSBpZGVudGlmaWVzIHRoaXMg
+YXMgc2lnbmlmaWNhbnQgYmVjYXVzZSBpdCBjaGFuZ2VzIGEgbWFuZGF0b3J5IENJIGdhdGUuIEl0
+IHBsYWNlcyB0aGUgcGxhbm5lZCBpbXBsZW1lbnRhdGlvbiBpbiBhIHNpbmdsZSBzdGFnZSBhbmQg
+cmVxdWlyZXMgYSBsYXRlciBXIHRvIGJpbmQgdGhlIHNvdXJjZSBjYW5kaWRhdGUsIHdyaXRlLXNl
+dCwgdGVzdCBoYXJuZXNzLCByb2xsYmFjayBjb25kaXRpb25zLCBhbmQgcm9sZSBvd25lcnNoaXAu
+CgpUaGUgaW1wbGVtZW50YXRpb24gYm91bmRhcnkgaXMgcHJlY2lzZToKCi0gT25seSB0aGUgZXhp
+c3RpbmcgYENoZWNrIGludHJvZHVjZWQgd2hpdGVzcGFjZSBlcnJvcnNgIGBydW46IHxgIGJvZHkg
+aW4gYC5naXRodWIvd29ya2Zsb3dzL2xpdGUtY2hlY2tzLnltbGAgbWF5IGNoYW5nZS4KLSBUaGUg
+d29ya2Zsb3cgc3RlcCBuYW1lLCBzaGVsbCwgY2hlY2tvdXQgdmVyc2lvbiwgYGZldGNoLWRlcHRo
+OiAyYCwgdHJpZ2dlcnMsIHBlcm1pc3Npb25zLCBvdGhlciBzdGVwcywgaG9va3MsIGRlcGVuZGVu
+Y2llcywgYW5kIHNoYXJlZCBtZW1vcnkgcmVtYWluIG91dHNpZGUgdGhlIGF1dGhvcml6ZWQgc291
+cmNlIHNjb3BlLgotIEZ1dHVyZSB0YXNrLWxvY2FsIGFydGlmYWN0cyBhcmUgbGltaXRlZCB0byB0
+aGUgSVNTVUUtMDA5IGV2aWRlbmNlIHBhdGhzIG5hbWVkIGJ5IFAgYW5kIG11c3QgYmUgYm91bmRl
+ZCBhZ2FpbiBieSBXLgoKVGhlIGN1cnJlbnQgd29ya2Zsb3cgYXQgUCBzdGlsbCBjb250YWlucyB0
+aGUga25vd24gdW5zYWZlIGNsYXNzaWZpY2F0aW9uOgoKYGBgYmFzaAppZiBnaXQgcmV2LXBhcnNl
+IEhFQUReID4vZGV2L251bGwgMj4mMTsgdGhlbgogIGdpdCBkaWZmIC0tY2hlY2sgSEVBRF4gSEVB
+RAplbHNlCiAgZ2l0IGRpZmYtdHJlZSAtLWNoZWNrIC0tcm9vdCAtLW5vLWNvbW1pdC1pZCAtciBI
+RUFECmZpCmBgYAoKTm8gaW1wbGVtZW50YXRpb24gY2hhbmdlIHdhcyBzbXVnZ2xlZCBpbnRvIFAu
+CgojIyMgVGVjaG5pY2FsIGZlYXNpYmlsaXR5CgpUaGUgcHJvcG9zZWQgdGVjaG5pY2FsIGRpcmVj
+dGlvbiBpcyBhZGVxdWF0ZSBmb3IgdGhlIHN1YnNlcXVlbnQgVy1sZXZlbCBkZXNpZ24gZGVjaXNp
+b24uCgotIFMxMOKAmXMgYGdpdCByZXYtbGlzdCAtLWNvdW50IEhFQURgIGFwcHJvYWNoIHdhcyBp
+bmRlcGVuZGVudGx5IGluc3BlY3RlZC4gSXQgY2hlY2tzIHN0YXR1cyBtb3JlIGNhcmVmdWxseSB0
+aGFuIHRoZSBjdXJyZW50IHdvcmtmbG93LCBidXQgYSBkZXB0aC0xIGNoZWNrb3V0IG9mIGFuIG9y
+ZGluYXJ5IGNvbW1pdCBjYW4gc3RpbGwgcHJvZHVjZSBjb3VudCBgMWA7IGl0IGNhbm5vdCBlc3Rh
+Ymxpc2ggdGhhdCBIRUFEIGlzIGFuIGFjdHVhbCByb290LiBQIGNvcnJlY3RseSByZWplY3RzIGl0
+IGFzIGFuIGF1dG9tYXRpYyBzb2x1dGlvbi4KLSBSZWFkaW5nIHRoZSByYXcgYGNvbW1pdGAgb2Jq
+ZWN0LCB2YWxpZGF0aW5nIGl0cyBjb21wbGV0ZSBoZWFkZXIgc3RydWN0dXJlIGFuZCBwYXJlbnQg
+cmVwcmVzZW50YXRpb24sIGFuZCBpZGVudGlmeWluZyBwYXJlbnQgaGVhZGVycyBiZWZvcmUgdGhl
+IGJsYW5rIGxpbmUgaXMgYSB2aWFibGUgd2F5IHRvIGRpc3Rpbmd1aXNoIGFuIGFjdHVhbCByb290
+IGZyb20gc2hhbGxvdyB0cmF2ZXJzYWwgYmVoYXZpb3IuIEEgc2hhbGxvdyBvcmRpbmFyeSBjb21t
+aXQgcmV0YWlucyBpdHMgcGFyZW50IGhlYWRlciBpbiB0aGUgb2JqZWN0IGV2ZW4gdGhvdWdoIGhp
+c3RvcnkgdHJhdmVyc2FsIG1heSB0cmVhdCBpdCBhcyBhIGJvdW5kYXJ5LgotIFZlcmlmeWluZyB0
+aGUgc2VsZWN0ZWQgZmlyc3QgcGFyZW50IGFzIGEgY29tbWl0IG9iamVjdCBiZWZvcmUgaW52b2tp
+bmcgYGdpdCBkaWZmIC0tY2hlY2sgPHBhcmVudD4gSEVBRGAgYWRkcmVzc2VzIHRoZSBjYXNlIHdo
+ZXJlIG1ldGFkYXRhIG5hbWVzIGEgcGFyZW50IHdob3NlIG9iamVjdCBvciB0cmVlIGlzIHVuYXZh
+aWxhYmxlLgotIGBnaXQgZGlmZiAtLWNoZWNrYCBhbmQgYGdpdCBkaWZmLXRyZWUgLS1jaGVja2Ag
+cmV0dXJuIHRoZWlyIG93biBzdGF0dXMgd2hlbiBpbnZva2VkIGFzIHRoZSBmaW5hbCBzZWxlY3Rl
+ZCBjaGVja2VyLiBBQy02IGFuZCBUMTEgY29ycmVjdGx5IHJlcXVpcmUgdGhhdCB0aGUgYm9keSBw
+cmVzZXJ2ZSBhbiBpbmplY3RlZCBjaGVja2VyIGV4aXQgYDc0YC4KLSBUaGUgc3BlY2lmaWNhdGlv
+biBleHBsaWNpdGx5IHJlcXVpcmVzIHN0YXR1cyBjYXB0dXJlIGJlZm9yZSB1c2luZyBjb21tYW5k
+LXN1YnN0aXR1dGlvbiBzdGRvdXQsIGluY2x1ZGluZyB2YWxpZC1sb29raW5nIHN0ZG91dCBwbHVz
+IGEgbm9uemVybyBpbnNwZWN0aW9uIHJlc3VsdC4gVGhhdCBhZGRyZXNzZXMgQmFzaOKAmXMgY29t
+bW9uIGVycm9yLW1hc2tpbmcgZmFpbHVyZSBtb2RlLgoKVGhlIGRlc2lnbiByZW1haW5zIGEgY2Fu
+ZGlkYXRlIHVudGlsIFcgc2VsZWN0cyBleGFjdCBjb21tYW5kcyBhbmQgdGhlIG1hbmRhdGVkIGV4
+dHJhY3RlZC1ib2R5IGZpeHR1cmVzIGV4ZWN1dGUgYWdhaW5zdCB0aGUgY29tbWl0dGVkIGNhbmRp
+ZGF0ZSBTLiBUaGF0IGlzIHRoZSBpbnRlbmRlZCBhc3N1cmFuY2UgYm91bmRhcnksIG5vdCBhIGdh
+cCBpbiBQLgoKIyMjIFNoYWxsb3cgaGlzdG9yeSBhbmQgZmF1bHQgaW5qZWN0aW9uCgpDb3ZlcmFn
+ZSBpcyBzdWZmaWNpZW50IGZvciB0aGUgc3RhdGVkIHJpc2suCgotIFQwOCBlc3RhYmxpc2hlcyB0
+aGF0IG5vcm1hbCBgZmV0Y2gtZGVwdGg6IDJgIGxpbmVhciBmZXRjaC9jaGVja291dCBjYW4gdGFr
+ZSB0aGUgcGFyZW50IHBhdGggd2l0aCBhIHVzYWJsZSBpbW1lZGlhdGUgcGFyZW50IHdoaWxlIG9s
+ZGVyIGhpc3RvcnkgcmVtYWlucyB1bmF2YWlsYWJsZS4KLSBUMDkgcmVxdWlyZXMgYSBkZXB0aC0x
+IG9yZGluYXJ5IGNvbW1pdCB3aXRoIGEgcmVhbCBidXQgdW5hdmFpbGFibGUgcGFyZW50IHRvIFNU
+T1AgYmVmb3JlIGVpdGhlciBjaGVja2VyIGlzIGludm9rZWQuCi0gVDEwIHByZXZlbnRzIGEgYmxh
+bmtldCByZWplY3Rpb24gb2Ygc2hhbGxvdyByZXBvc2l0b3JpZXMgYnkgcmVxdWlyaW5nIGNvcnJl
+Y3Qgbm9uLXJvb3QgaGFuZGxpbmcgd2hlbiB0aGUgcGFyZW50IG9iamVjdCBpcyBpbmRlcGVuZGVu
+dGx5IGF2YWlsYWJsZS4KLSBUMTIgY292ZXJzIGZpcnN0LXBhcmVudCBiZWhhdmlvciBvbiBhIG1l
+cmdlIGNvbW1pdCBhbmQgYSBkZXB0aC0yIFBSLW1lcmdlLWxpa2UgY2hlY2tvdXQuCi0gVDEzIHBy
+ZXZlbnRzIHBhcmVudC1saWtlIG1lc3NhZ2UgdGV4dCBmcm9tIGFmZmVjdGluZyBjbGFzc2lmaWNh
+dGlvbi4KLSBUMTQgY292ZXJzIG1ldGFkYXRhIHJlZmVycmluZyB0byBhIG1pc3Npbmcgb3Igbm9u
+LWNvbW1pdCBwYXJlbnQgaW4gYW4gaXNvbGF0ZWQgb2JqZWN0IGRhdGFiYXNlLgotIFQwNeKAk1Qw
+NyByZXF1aXJlIGV4cGxpY2l0IGZhaWx1cmUgYmVoYXZpb3IgZm9yIGV2ZXJ5IHJlcXVpcmVkIGlu
+c3BlY3Rpb24sIGluY2x1ZGluZyBleGl0IGA3NGAgd2l0aCBwbGF1c2libGUgc3Rkb3V0IGFuZCBt
+YWxmb3JtZWQgb3IgYW1iaWd1b3VzIGluc3BlY3Rpb24gb3V0cHV0LgotIFQxMSBzZXBhcmF0ZWx5
+IHByb3ZlcyBjaGVja2VyLWZhaWx1cmUgcHJvcGFnYXRpb24uCgpUaGUgZml4dHVyZSByZXF1aXJl
+bWVudCB0byBleHRyYWN0IHRoZSBsaXRlcmFsIGJvZHkgZnJvbSBgZ2l0IHNob3cgUzouZ2l0aHVi
+L3dvcmtmbG93cy9saXRlLWNoZWNrcy55bWxgLCBjaGVjayBleHRyYWN0aW9uIGludGVncml0eSwg
+YW5kIHJ1biBgYmFzaCAtbmAgaXMgYXBwcm9wcmlhdGUuIEl0IHByZXZlbnRzIGEgaGFuZC1jb3Bp
+ZWQgYWxnb3JpdGhtIGZyb20gYmVpbmcgbWlzdGFrZW4gZm9yIHZhbGlkYXRpb24gb2YgdGhlIHdv
+cmtmbG93IGJvZHkuCgpObyBmaXh0dXJlIHdhcyBydW4gaW4gdGhpcyByZWFkLW9ubHkgQ3JpdGlj
+IG1pc3Npb24uCgojIyMgR2l0IHByb3ZlbmFuY2UgYW5kIHByZXNlcnZhdGlvbgoKUCBpcyBhIGRp
+cmVjdCBjaGlsZCBvZiB0aGUgYXBwcm92ZWQgc3RhY2tlZCBiYXNlOgoKYGBgdGV4dAo5MGU0YzMx
+NGIyN2VhOWI5YTI1NzVjNmZkZGMzYTRlODNlN2VlZjc0CuKUlOKUgCBwYXJlbnQgNjkyNDY3ODJj
+OTk0MjM3MjFmZGI0YTZhZGVmYzY5M2VlNmY1NzYxMwpgYGAKClRoZSBmb2xsb3dpbmcgYW5jZXN0
+cnkgdGVzdHMgYWxsIHN1Y2NlZWRlZDoKCnwgUmVxdWlyZWQgaGlzdG9yaWNhbCBvYmplY3QgfCBS
+ZXN1bHQgfAp8IC0tLSB8IC0tLSB8CnwgQmFzZSBgNjkyNDY3ODLigKZgIGlzIGFuY2VzdG9yIG9m
+IFAgfCB5ZXMgfAp8IFByaW9yIFAgYGI0Y2JjMzdlNmJjMzE4YTViMjhmNGRiOGNiZWFhZmQzNjYz
+YzYwZGZgIGlzIGFuY2VzdG9yIG9mIFAgfCB5ZXMgfAp8IEZyb3plbiBXMiBgNjNlZDg4OWQ4OTkx
+YTVkMjE4N2JiODI3MDlmNGNiYjU3NzNkYjFjY2AgaXMgYW5jZXN0b3Igb2YgUCB8IHllcyB8Cnwg
+U291cmNlIFMxMiBgNWU0MmQyYjEyMzlmMjY5NjJlZTVmNTk0MmNkMzE4OTk3YjUxNTAxY2AgaXMg
+YW5jZXN0b3Igb2YgUCB8IHllcyB8CgpUaGUgUCBjb21taXQgY2hhbmdlcyBleGFjdGx5IGZvdXIg
+cGxhbm5pbmcgcGF0aHMgcmVsYXRpdmUgdG8gaXRzIGRpcmVjdCBwYXJlbnQ6CgpgYGB0ZXh0CkEg
+IGRvY3MvY2hhbmdlcy9JU1NVRS0wMDkvaGFuZG9mZi5tZApBICBkb2NzL2NoYW5nZXMvSVNTVUUt
+MDA5L293bmVyLWRlY2lzaW9ucy5tZApBICBkb2NzL2NoYW5nZXMvSVNTVUUtMDA5L3NwZWNpZmlj
+YXRpb24ubWQKTSAgcGxhbi5tZApgYGAKClByZXNlcnZhdGlvbiBjaGVja3M6Cgp8IFByZXNlcnZl
+ZCBhcnRpZmFjdCB8IFZlcmlmaWVkIGJsb2IgfAp8IC0tLSB8IC0tLSB8CnwgUHJpb3Igcm9vdCBQ
+IHBsYW4gYXQgYGI0Y2JjMzdl4oCmYCB8IGBmY2ZkYTFmNmRmYTAxMWE1Njg4YzVmMDQxMTFkOTE4
+ZDZiYmNlNzA3YCB8CnwgRnJvemVuIFcyIHdvcmsgYmxvY2sgYXQgYDYzZWQ4ODnigKZgIHwgYDE5
+YmViMDcyZjMyMWE3Yzk3MzBlYTg2NjMwMTEyY2U4YzFiOTBkYmJgIHwKfCBXb3JrZmxvdyBhdCBT
+MTIgYW5kIFAgfCBgYzYwZTcyNmRkMDNiNzIxNjhjNDQ4Mzk3MmU5ZjExYzBmZjA1NDUzZGAgfAoK
+VGhlIGhpc3RvcmljYWwgUCwgVzIsIFMxMiwgT3B0aW9uIEEgZGVjaXNpb24sIGFuZCBQUiAjMTEg
+YXNzdXJhbmNlIGFyZSBwcmVzZXJ2ZWQgYXMgcmVhY2hhYmxlIEdpdCBoaXN0b3J5LiBQIGRvZXMg
+bm90IHRyYW5zZmVyIHRoZWlyIGFwcHJvdmFscyB0byBJU1NVRS0wMDkuCgojIyMgU3RhY2tlZCBp
+bnRlZ3JhdGlvbiBhbmQgQ0kKClRoZSBPd25lci1hcHByb3ZlZCBzdGFja2VkIHJvdXRlIGlzIGlu
+dGVybmFsbHkgY29uc2lzdGVudCB3aXRoIHRoZSBjYW5vbmljYWwgbGlmZWN5Y2xlIGJlY2F1c2Ug
+aXQgaXMgYW4gZXhwbGljaXQgT3duZXIgZXhjZXB0aW9uOgoKMS4gSVNTVUUtMDA5IHN0YXJ0cyBm
+cm9tIGA2OTI0Njc4MuKApmAsIHRoZSBjdXJyZW50IHJlbW90ZSBoZWFkIG9mIGBkb2NzL3diLWxp
+dGUtMDAyLWltcGxlbWVudGF0aW9uYC4KMi4gSXRzIGluaXRpYWwgZnV0dXJlIFBSIG1heSB0YXJn
+ZXQgYGRvY3Mvd2ItbGl0ZS0wMDItaW1wbGVtZW50YXRpb25gLgozLiBBIGxhdGVyIHJldGFyZ2V0
+IG9yIGludGVncmF0aW9uIHRvIGBtYWluYCByZXF1aXJlcyBuZXcgbGl2ZSBiYXNlLCBhbmNlc3Ry
+eSwgaW50ZWdyYXRpb24tdHJlZSwgc291cmNlLWRpZmYsIGFuZCBDSSBldmlkZW5jZS4KNC4gRXhp
+c3RpbmcgV0ItTElURS0wMDIgYXNzdXJhbmNlIHJlbWFpbnMgaGlzdG9yaWNhbCBhbmQgY2Fubm90
+IGJlIGFwcGxpZWQgdG8gYSBjaGFuZ2VkIHRyZWUuCgpMaXZlIEdpdEh1YiBmYWN0cyB3ZXJlIGlu
+ZGVwZW5kZW50bHkgY2hlY2tlZDoKCnwgSXRlbSB8IEN1cnJlbnQgb2JzZXJ2YXRpb24gfAp8IC0t
+LSB8IC0tLSB8CnwgSXNzdWUgIzkgfCBPUEVOIHwKfCBQUiAjMTEgfCBPUEVOLCBkcmFmdCwgYmFz
+ZSBgbWFpbmAsIGhlYWQgYGRvY3Mvd2ItbGl0ZS0wMDItaW1wbGVtZW50YXRpb25gIHwKfCBQUiAj
+MTEgaGVhZCB8IGA2OTI0Njc4MmM5OTQyMzcyMWZkYjRhNmFkZWZjNjkzZWU2ZjU3NjEzYCB8Cnwg
+UFIgIzExIGB2YWxpZGF0ZWAgY2hlY2sgfCBQQVNTLCBydW4gYDM5MjkyNTA3MjU1YCB8CnwgYG1h
+aW5gIHwgYDkwYzEwMWJhMmI2MDkxYTI0YzJmNDU4ZjVmZmM4YjAyZTZlYjA0YWJgIHwKfCBJU1NV
+RS0wMDkgYnJhbmNoIHJlbW90ZSB1cHN0cmVhbSB8IG5vbmUgY29uZmlndXJlZDsgYnJhbmNoIGlz
+IGN1cnJlbnRseSBsb2NhbCBvbmx5IHwKClRoZSBvYnNlcnZlZCBQUiAjMTEgY2hlY2sgZG9lcyBu
+b3QgcHJvdmlkZSBhc3N1cmFuY2UgZm9yIElTU1VFLTAwOS4gUCBjb3JyZWN0bHkgcmVxdWlyZXMg
+YWN0dWFsIGFwcGxpY2FibGUgQWN0aW9ucyB0byBjb21wbGV0ZSBzdWNjZXNzZnVsbHkgb24gdGhl
+IGxhdGVyIGRlbGl2ZXJ5IGhlYWQgSC4KCiMjIyBBY3R1YWwgcGVybWlzc2lvbnMgYW5kIGJvdW5k
+YXJpZXMKClRoZSBjdXJyZW50IENyaXRpYyBzZXNzaW9uIGNhbiBpbnNwZWN0IHRoZSBJU1NVRS0w
+MDkgd29ya3RyZWUgYnV0IGRvZXMgbm90IGhhdmUgd3JpdGUgcGVybWlzc2lvbiB0aGVyZTogYm90
+aCB0aGUgdGFzayB3b3JrdHJlZSBhbmQgaXRzIGAuZ2l0YCBmaWxlIHJldHVybmVkIG5vbi13cml0
+YWJsZSBpbiB0aGUgYWN0aXZlIHNhbmRib3guIFRoYXQgaXMgY29tcGF0aWJsZSB3aXRoIHRoaXMg
+cmVhZC1vbmx5IHJldmlldy4KCkl0IGlzIG5vdCBhdXRob3JpdHkgZm9yIHN1YnNlcXVlbnQgd29y
+ay4gQmVmb3JlIFcvQ29kZXIgYWN0aXZpdHksIHRoZSByZXNwb25zaWJsZSBvcmNoZXN0cmF0b3Ig
+bXVzdCBlc3RhYmxpc2ggYW4gYXBwcm9wcmlhdGVseSByb290ZWQgd3JpdGFibGUgc2Vzc2lvbiBv
+ciBhdXRob3JpemVkIHNhbmRib3ggcGF0aCBhbmQgcmVjaGVjayB0aGUgZXhhY3QgdGFzayB3b3Jr
+dHJlZSwgYnJhbmNoLCBIRUFELCBjbGVhbiBzdGF0ZSwgc291cmNlIHBhdGhzLCBzaGFyZWQgR2l0
+IG1ldGFkYXRhLCBhbmQgcHVibGljYXRpb24gcGVybWlzc2lvbnMuIFAgYWxyZWFkeSBkZWNsYXJl
+cyB0aGlzIHByZXJlcXVpc2l0ZS4KCiMjIyBGaW5kaW5ncwoKTm8gUkVXT1JLIGZpbmRpbmcgd2Fz
+IGlkZW50aWZpZWQuCgpUaGUgcHJlLWFjY2VwdGFuY2Ugd29yZGluZyBpbiBgb3duZXItZGVjaXNp
+b25zLm1kYCBhbmQgYGhhbmRvZmYubWRgIGFjY3VyYXRlbHkgcmVmbGVjdHMgdGhlaXIgaGlzdG9y
+aWNhbCBzdGF0ZSBpbiBQOiB0aGV5IHNheSB0aGF0IHNwZWNpZmljYXRpb24gYWNjZXB0YW5jZSBo
+YWQgbm90IHlldCBiZWVuIHN1cHBsaWVkLiBUaGUgT3duZXIgc3VwcGxpZWQgZXhhY3QgYWNjZXB0
+YW5jZSBhZnRlcndhcmQgaW4gdGhpcyBzZXNzaW9uLiBQcmVzZXJ2ZSB0aGF0IGNocm9ub2xvZ3k7
+IHJlY29yZCB0aGUgYWN0dWFsIGFjY2VwdGFuY2UgaW4gc2VwYXJhdGUgc3Vic2VxdWVudCB0YXNr
+IGV2aWRlbmNlLCBib3VuZCB0byB0aGUgYWNjZXB0ZWQgc3BlY2lmaWNhdGlvbiBibG9iL2hhc2gg
+YW5kIFAsIHdpdGhvdXQgY2hhbmdpbmcgdGhlIHJldmlld2VkIFAgdG8gbWFudWZhY3R1cmUgYW4g
+ZWFybGllciBhcHByb3ZhbC4KCiMjIyBQcm9wb3NlZCBkZWxlZ2F0ZWQgYm91bmRzIGZvciBPd25l
+ciByZXZpZXcKCklmIHRoZSBPd25lciBhcHByb3ZlcyB0aGlzIGV4YWN0IENyaXRpYy1SRUFEWSBQ
+LCB0aGUgcHJvcG9zZWQgYm91bmRlZCBkZWxlZ2F0aW9uIGluIFAgaXM6CgoxLiBDb21taXQgYSBj
+b25mb3JtaW5nIElTU1VFLTAwOSBXb3JrIEJsb2NrIGFuZCBvYnRhaW4gaW5kZXBlbmRlbnQgU3Rh
+Z2UgQ3JpdGljIFJFQURZLgoyLiBBZnRlciB0aGF0IGdhdGUsIHBlcm1pdCBvbmUgQ29kZXIgdG8g
+Y2hhbmdlIG9ubHkgdGhlIG5hbWVkIHdvcmtmbG93IHJ1biBib2R5IGFuZCB0aGUgVy1hdXRob3Jp
+emVkIGRpc3Bvc2FibGUgZml4dHVyZS9ldmlkZW5jZSBwYXRocy4KMy4gUGVybWl0IHNjb3BlZCB0
+YXNrLWJyYW5jaCBjb21taXRzLCBmb2N1c2VkIGZpeHR1cmVzLCBpbmRlcGVuZGVudCBSZXZpZXdl
+ci9WZXJpZmllciBsb29wcyBvbiBvbmUgc291cmNlIFNIQSwgbm9uLWZvcmNlIHB1YmxpY2F0aW9u
+IHRvIHRoZSBJU1NVRS0wMDkgYnJhbmNoLCBhIGRyYWZ0IHN0YWNrZWQgUFIsIGFuZCBhcHBsaWNh
+YmxlIENJIG9ic2VydmF0aW9uLgo0LiBSZXF1aXJlIGEgbmV3IE93bmVyIGRlY2lzaW9uIGZvciBj
+aGVja291dCBjb25maWd1cmF0aW9uLCBvdGhlciB3b3JrZmxvdyBjb250ZW50LCBob29rcywgcGVy
+bWlzc2lvbnMsIHNjb3BlIGV4cGFuc2lvbiwgZmluYWwgYWNjZXB0YW5jZSwgcmV0YXJnZXQvaW50
+ZWdyYXRpb24gdG8gYG1haW5gLCBhbmQgbWVyZ2UuCgpUaGUgbmV4dCByZXF1aXJlZCBhY3Rpb24g
+aXMgc2VwYXJhdGUgT3duZXIgYXBwcm92YWwgb3IgcmVqZWN0aW9uIG9mIGV4YWN0IFAgYDkwZTRj
+MzE04oCmYCwgcmVmZXJlbmNpbmcgdGhpcyBDcml0aWMgdmVyZGljdCBhbmQgdGhlIFAvc3BlYyBi
+bG9icy4K
+```
