@@ -125,7 +125,13 @@ jobs:
             stop_history_inspection 1 'HEAD inspection returned an invalid object ID'
           fi
 
-          if commit_metadata=$(git cat-file commit "$head_oid"); then
+          if commit_metadata_file=$(mktemp "${RUNNER_TEMP:-${TMPDIR:-/tmp}}/issue-009-commit.XXXXXX"); then
+            trap 'rm -f -- "$commit_metadata_file"' EXIT
+          else
+            inspection_status=$?
+            stop_history_inspection "$inspection_status" 'cannot create commit metadata inspection file'
+          fi
+          if git cat-file commit "$head_oid" >"$commit_metadata_file"; then
             :
           else
             inspection_status=$?
@@ -172,7 +178,7 @@ jobs:
                 stop_history_inspection 1 'commit metadata contains a malformed header'
               fi
             fi
-          done <<<"$commit_metadata"
+          done <"$commit_metadata_file"
           if (( separator_seen == 0 || tree_seen != 1 || author_seen != 1 || committer_seen != 1 )); then
             stop_history_inspection 1 'HEAD commit metadata is incomplete or lacks a header/message separator'
           fi
