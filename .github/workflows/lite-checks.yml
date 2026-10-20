@@ -134,7 +134,7 @@ jobs:
           author_seen=0
           committer_seen=0
           parent_oids=()
-          while IFS= read -r header_line <&"$reader_fd" || [[ -n "$header_line" ]]; do
+          while IFS= read -r header_line || [[ -n "$header_line" ]]; do
             if (( header_section )); then
               if [[ -z "$header_line" ]]; then
                 header_section=0
@@ -158,7 +158,7 @@ jobs:
                 stop_history_inspection 1 'commit metadata contains a malformed header'
               fi
             fi
-          done
+          done <&"$reader_fd"
           exec {reader_fd}<&-
           if wait "$reader_pid"; then
             :

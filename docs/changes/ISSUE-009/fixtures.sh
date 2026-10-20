@@ -21,9 +21,10 @@ step_count=$(grep -Fxc '      - name: Check introduced whitespace errors' "$work
 awk '
   $0 == "      - name: Check introduced whitespace errors" { wanted=1; next }
   wanted && $0 == "        run: |" { run=1; next }
-  wanted && !run { exit 2 }
+  wanted && !run && /^      - / { exit 2 }
   run && /^      - / { exit }
   run {
+    if ($0 == "") { print ""; next }
     if ($0 !~ /^          /) exit 3
     sub(/^          /, "")
     print
