@@ -156,6 +156,11 @@ remote="$work_dir/remote.git"; $real_git init -q --bare "$remote"
 upstream="$work_dir/upstream"; init_repo "$upstream"; commit_file "$upstream" 'one\n' one; commit_file "$upstream" 'two\n' two; commit_file "$upstream" 'three\n' three; $real_git -C "$upstream" remote add origin "file://$remote"; $real_git -C "$upstream" push -q origin HEAD:main
 depth2="$work_dir/depth2"; $real_git clone -q --no-local --depth 2 --branch main "file://$remote" "$depth2"
 run_body T08-depth2-linear "$depth2" parent
+fetch_depth2="$work_dir/fetch-depth2"; init_repo "$fetch_depth2"; $real_git -C "$fetch_depth2" remote add origin "file://$remote"; $real_git -C "$fetch_depth2" fetch -q --no-tags --depth=2 origin main; $real_git -C "$fetch_depth2" checkout -q --detach FETCH_HEAD
+run_body T08-depth2-fetch-detached "$fetch_depth2" parent
+commit_file "$upstream" 'four \n' bad; $real_git -C "$upstream" push -q origin HEAD:main
+depth2_bad="$work_dir/depth2-bad"; $real_git clone -q --no-local --depth 2 --branch main "file://$remote" "$depth2_bad"
+run_body T08-depth2-whitespace "$depth2_bad" fail
 depth1="$work_dir/depth1"; $real_git clone -q --no-local --depth 1 --branch main "file://$remote" "$depth1"
 run_body T09 "$depth1" stop
 
@@ -170,15 +175,21 @@ run_body T11-root "$root_clean" rc74 diff-tree
 
 # T12: two-parent merge and a depth-2 file:// checkout of that merge.
 merge_repo="$work_dir/merge"; init_repo "$merge_repo"; commit_file "$merge_repo" 'base\n' base
+main_branch=$($real_git -C "$merge_repo" symbolic-ref --short HEAD)
 $real_git -C "$merge_repo" branch side
-commit_file "$merge_repo" 'main\n' main
-$real_git -C "$merge_repo" checkout -q side; commit_file "$merge_repo" 'side\n' side
-$real_git -C "$merge_repo" checkout -q master
+printf 'main\n' >"$merge_repo/main.txt"; $real_git -C "$merge_repo" add main.txt; GIT_AUTHOR_DATE='2000-01-01T00:00:00Z' GIT_COMMITTER_DATE='2000-01-01T00:00:00Z' $real_git -C "$merge_repo" commit -q -m main
+$real_git -C "$merge_repo" checkout -q side; printf 'side\n' >"$merge_repo/side.txt"; $real_git -C "$merge_repo" add side.txt; GIT_AUTHOR_DATE='2000-01-01T00:00:00Z' GIT_COMMITTER_DATE='2000-01-01T00:00:00Z' $real_git -C "$merge_repo" commit -q -m side
+$real_git -C "$merge_repo" checkout -q "$main_branch"
 GIT_AUTHOR_DATE='2000-01-01T00:00:00Z' GIT_COMMITTER_DATE='2000-01-01T00:00:00Z' $real_git -C "$merge_repo" merge -q --no-ff side -m merge
 run_body T12-merge "$merge_repo" parent
 merge_remote="$work_dir/merge.git"; $real_git init -q --bare "$merge_remote"; $real_git -C "$merge_repo" remote add origin "file://$merge_remote"; $real_git -C "$merge_repo" push -q origin HEAD:main
 merge_depth2="$work_dir/merge-depth2"; $real_git clone -q --no-local --depth 2 --branch main "file://$merge_remote" "$merge_depth2"
 run_body T12-depth2-pr-merge "$merge_depth2" parent
+merge_bad="$work_dir/merge-bad"; init_repo "$merge_bad"; commit_file "$merge_bad" 'base\n' base; bad_branch=$($real_git -C "$merge_bad" symbolic-ref --short HEAD); $real_git -C "$merge_bad" branch side
+printf 'main\n' >"$merge_bad/main.txt"; $real_git -C "$merge_bad" add main.txt; GIT_AUTHOR_DATE='2000-01-01T00:00:00Z' GIT_COMMITTER_DATE='2000-01-01T00:00:00Z' $real_git -C "$merge_bad" commit -q -m main
+$real_git -C "$merge_bad" checkout -q side; printf 'side \n' >"$merge_bad/side.txt"; $real_git -C "$merge_bad" add side.txt; GIT_AUTHOR_DATE='2000-01-01T00:00:00Z' GIT_COMMITTER_DATE='2000-01-01T00:00:00Z' $real_git -C "$merge_bad" commit -q -m side
+$real_git -C "$merge_bad" checkout -q "$bad_branch"; GIT_AUTHOR_DATE='2000-01-01T00:00:00Z' GIT_COMMITTER_DATE='2000-01-01T00:00:00Z' $real_git -C "$merge_bad" merge -q --no-ff side -m merge
+run_body T12-merge-whitespace "$merge_bad" fail
 
 # T14: isolated commit object names an unavailable parent; no shared object is removed.
 isolated="$work_dir/isolated"; init_repo "$isolated"
