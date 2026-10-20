@@ -81,9 +81,15 @@ commit_file() {
 inventory() {
   local path=$1 label=$2
   {
-    printf '[%s] HEAD=' "$label"; git -C "$path" rev-parse HEAD
-    git -C "$path" show -s --format='parents=%P tree=%T' HEAD
-    git -C "$path" cat-file -p HEAD | sed -n '1,/^$/p'
+    printf '[%s] HEAD=' "$label"
+    if git -C "$path" rev-parse HEAD; then :; else inventory_status=$?; printf 'HEAD-resolve-exit=%s\n' "$inventory_status"; fi
+    if git -C "$path" cat-file -e 'HEAD^{commit}'; then
+      git -C "$path" show -s --format='parents=%P tree=%T' HEAD
+      git -C "$path" cat-file -p HEAD | sed -n '1,/^$/p'
+    else
+      inventory_status=$?
+      printf 'HEAD-commit-type=unavailable-or-invalid exit=%s\n' "$inventory_status"
+    fi
     printf 'shallow='; git -C "$path" rev-parse --is-shallow-repository
     test -f "$path/.git/shallow" && { printf 'shallow-bytes='; od -An -tx1 "$path/.git/shallow"; } || echo 'shallow-bytes=absent'
     git -C "$path" for-each-ref --format='ref=%(refname):%(objectname)'
