@@ -54,3 +54,11 @@ Live pre-write observation: task branch `docs/issue-009-fail-closed-history`, HE
 Current sandbox lacks write permission to this task worktree and shared Git metadata; the authorized narrow escalation is required for task-local records and task-branch commits. No W, workflow change, fixture, Reviewer/Verifier verdict or Issue #9 CI result exists yet.
 
 Next: preserve this approval/report evidence in a separate task commit, prepare one actionable W bound to exact P and D3, commit W, then obtain independent Stage Critic READY before any Coder edit. Keep PR #11, its S12/P/W2 and `main` unchanged.
+
+## Checkpoint: W1 Stage Critic READY (2026-10-20)
+
+Exact W1 `80fe489458a8b3cfd290ba8f2ca000b786a9ffe5`, blob `5f79747f1562eea839ec1a97ba09efbbb0248275`, tree `8d6a6b85dd2599d3dc6b9aadfc55220f9419ceba`, parent approval/evidence commit `f884cb28ae06d3792d1ba7b4111e594162af4087`. Independent Stage Critic returned READY with no blocking conformance/testability findings; exact captured report is [stage-critic.md](stage-critic.md). Its stated prerequisite remains: Orchestrator must establish authorized writable task environment and recheck exact W, refs, clean state and permissions before Coder entry.
+
+Live pre-Coder evidence: current branch `docs/issue-009-fail-closed-history`, exact W HEAD above; P/spec and stacked-base ancestry verified; worktree clean including ignored/untracked; remote `docs/wb-lite-002-implementation` remains `69246782c99423721fdb4a6adefc693ee6f57613`; `main` remains `90c101ba2b6091a24c2f458f5ffc8b02e6eb04ab`; PR #11 remains OPEN/DRAFT and Issue #9 OPEN. Active sandbox denies direct writes to task worktree and shared Git metadata. A narrowly scoped escalation was approved for previous task-local evidence and W commits; Coder must use an equally scoped platform-approved writable operation and stop if denied or if broader permissions are required. No workflow edits or fixtures have started.
+
+Next: Coder may implement only W1's exact source and fixture/evidence paths after the fresh check and platform permission confirmation. Then commit candidate S and execute the full T01–T14 matrix against its extracted workflow body. Reviewer and Verifier must independently bind the same S. No publication or merge has occurred.
