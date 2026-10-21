@@ -4,13 +4,13 @@
 
 ## Detect uninitialized project
 
-Check `git remote -v`, current branch, HEAD and `PROJECT_BRIEF.md`. If the repository is not the source `oleyna80/agentic-sdlc-lite` but `PROJECT_BRIEF.md` still describes the Lite template, **STOP feature work**: the repository is not initialized. Do not trust inherited `memory_bank/context.md` branch names, PR numbers or task outcomes.
+Check verified repository identity and `GITHUB_REPOSITORY`, branch, HEAD and `PROJECT_BRIEF.md`. The limited first-use CI guard checks exact identity, INITIALIZED and five active-memory marker groups; passing it is not full initialization acceptance. If the repository is not the source `oleyna80/agentic-sdlc-lite` but `PROJECT_BRIEF.md` still describes the Lite template, **STOP feature work**: the repository is not initialized. Do not trust inherited `memory_bank/context.md` branch names, PR numbers or task outcomes.
 
 ## Initialization checklist
 
 1. Create a `docs/initialize-project` task branch, unless this is an initial repository bootstrap with an explicitly approved different workflow. Do not rewrite the source template's `main`.
 2. Replace `PROJECT_BRIEF.md` with **your product name, actual project repository ID, audience, scope, interfaces, data/secret boundaries and deployment assumptions**. Set the project identity field and mark setup complete.
-3. Update `PROJECT_MAP.md` with real source directories, test/build commands and environment paths. If this is a multi-stage project, optionally create **one root `plan.md`** from `docs/templates/plan.md`; otherwise omit it. Replace any inherited source-project roadmap rather than using its stage statuses.
+3. Update `PROJECT_MAP.md` with real source directories, test/build commands and environment paths. Remove an inherited **source project root `plan.md`** from the derived project's active contract. For future significant project work, accept Owner specification, then create **complete root P** via `docs/templates/plan.md`, obtain independent Project Critic READY and separate Owner exact-P approval before any stage; routine setup does not approve P.
 4. **Reset only the new project's inherited operational memory files**:
    - `memory_bank/context.md` — current project objective, verified branch/HEAD and next setup action; no Lite PR #1 or source branches.
    - `memory_bank/progress.md` — initial milestone and checks for the *new* repository.

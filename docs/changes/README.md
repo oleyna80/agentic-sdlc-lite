@@ -1,25 +1,23 @@
-# Work Block Records and Recoverable Handoffs
+# Project and Stage Work Records
 
-Significant new stages use one **frozen** task contract, with later operational state in separate documents:
+The sole lifecycle authority is [Development Protocol](../workflow/development.md). **Conditional checkpoint matrix** and recovery are defined only in [Memory Protocol](../workflow/memory.md). Templates, folders, reports and Skills grant no permissions.
+
+**Project definition:** Owner accepts project specification. Orchestrator commits complete root `plan.md` as P. Independent **Project Critic** reviews exact committed P **before Owner approval**. A separate Owner decision approves exact P and delegated scope; progress/verdicts never mutate P.
+
+**Autonomous stages:** Orchestrator derives actionable committed W under approved P, verifies conformance and uses independent **Stage Critic** READY before Coder. There is **no Owner approval per conforming W**, but actual sandbox permissions and material-change escalation still apply. Ordinary Stage/Coder/Reviewer/Verifier REWORK loops and authorized delivery can proceed within P.
 
 ```text
 docs/changes/<task>/
-├── work-block.md      # fixed planning scope/acceptance; Critic reviews exact SHA
-├── intent.md          # only if useful
-├── spec.md            # only if useful
-├── critic-review.md   # separate exact-WB-revision report
-├── handoff.md         # mutable working phase, gate evidence and next action
-├── review.md          # separate source Reviewer evidence when kept here
-├── verification.md    # separate Verifier evidence when kept here
-└── closeout.md        # final task status, independently recorded PR/merge facts
+├── work-block.md      # committed reviewed W, frozen subject
+├── critic-review.md   # Stage Critic verdict, separate from Project Critic
+├── handoff.md         # mutable task phase, P/W/S/H evidence and next action
+├── review.md          # independent source Reviewer if required
+├── verification.md    # independent source Verifier if required
+├── closeout.md        # final task status and separate PR/merge state
+├── intent.md          # optional clarification
+└── spec.md            # optional task-specific acceptance details
 ```
 
-An optional single **repository-root `plan.md`** is the whole-project roadmap, copied from `docs/templates/plan.md`. It lists stages and dependencies; Orchestrator instantiates a stage's Work Block only when actionable. No project roadmap is required for a standalone significant WB or routine task.
+Routine short uninterrupted low-risk tasks (including safe tiny code fixes) can use an adequate PR/issue without P/W/Critic or handoff, with honest N/A rationale; interrupted/parallel/significant work follows the matrix in memory.md. `DELIVERY_READY` is a working phase, not COMPLETE. Task COMPLETE, project-stage acceptance, PR merge and deployment have separate evidence.
 
-**Legacy compatibility:** Previously approved `docs/changes/<task>/plan.md` files are task-specific implementation plans, *not* additional project roadmaps. Preserve their approved Critic evidence and exact review SHA; do not rename, overwrite or silently reinterpret them. A new WB derived from a legacy plan must explicitly cite its predecessor and renew affected Owner/Critic decisions for material changes.
-
-After Critic READY, the Work Block remains **frozen**. Do not fill verdict/status/source SHA/PR fields in it: task-local handoff, independent reports and PR carry those records with the exact reviewed planning SHA. `DELIVERY_READY` is only a working phase. Final task closeout remains `COMPLETE / BLOCKED / CANCELLED` (which can occur before PR merge), separate from roadmap-stage acceptance, merge, MVP testing and deployment.
-
-Task-local `handoff.md` is required for significant/concurrent work, not a trivial one-commit task with adequate PR details. Do not overwrite another task's handoff or the integrated `memory_bank/context.md` with one unmerged branch's state. Authority, exact candidate checks and post-merge reconciliation are only defined in `docs/workflow/development.md` / `docs/workflow/memory.md`. A template/folder name grants no permissions.
-
-New projects must handle source-template-specific task history using `docs/workflow/initialization.md`.
+Legacy approved `docs/changes/<task>/plan.md` are historic per-task contracts with original Owner/Critic provenance; do not reinterpret them as root project P or rewrite their reviewed content. New derived repositories must follow [Initialization](../workflow/initialization.md).

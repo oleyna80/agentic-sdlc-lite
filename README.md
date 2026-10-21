@@ -1,33 +1,23 @@
 # Agentic SDLC Lite
 
-A portable, Git-native development kit for AI coding assistants. Designed for **consistent instructions**, **reproducible delivery**, and **project memory that survives chats and agent sessions**.
-
-No Controller, admission registry, SQLite, background orchestration service or competing SDD/lifecycle protocol.
+A portable Git-native engineering kit for Codex, Claude Code and other native AI-agent harnesses, with consistent instructions, exact Git provenance and durable task memory. No custom Controller, registry, scheduler, database or competing lifecycle runtime.
 
 ## Getting started
 
-1. **When creating a new project from this GitHub template, first complete [First-use Initialization](docs/workflow/initialization.md).** It replaces Lite's inherited source-project identity, task state and decisions. Do not treat the template's memory as your project's.
-2. Configure `PROJECT_BRIEF.md`, `PROJECT_MAP.md` and the new project's committed memory. Optionally create one **root `plan.md`** from `docs/templates/plan.md` for a multi-stage product roadmap.
-3. Agents start with [AGENTS.md](AGENTS.md), the shared root contract, then the relevant [Development Protocol](docs/workflow/development.md) and [Memory Protocol](docs/workflow/memory.md).
-4. Opt into local Git hooks per clone if useful:
+1. **Derived projects:** complete [First-use Initialization](docs/workflow/initialization.md), replacing source Lite identity/active memory/decisions before feature work. Template GitHub protections and permissions are **not** copied.
+2. Read [AGENTS.md](AGENTS.md), [canonical Development Protocol](docs/workflow/development.md), [Memory Protocol](docs/workflow/memory.md) and the actual task's branch/handoff. Verify repository/worktree/branch/HEAD and permissions, not chat state.
+3. Classify work by impact/risk. **Routine** low-risk tasks (including safe tiny code fixes) use bounded checks, optional independent gates and an adequate task PR/issue; no mandatory P/W/handoff for one uninterrupted routine.
+4. **Significant projects:** Owner accepts exact specification. Orchestrator prepares a complete root `plan.md` as project P; **independent Project Critic reviews P before Owner approves exact P**. Reviewed P stays frozen; status, approvals and evidence remain separate.
+5. **Autonomous stages:** Orchestrator prepares committed actionable W inside approved P, obtains its **own independent Stage Critic READY**, then delegates bounded Coder. Independent Reviewer READY and Verifier PASS cover the same source S. Authorized commits/push/actual CI and durable stage closeout allow the next stage inside P **without Owner approval per WB**. Merge/deployment are separate Owner decisions.
+6. Optional conventional Git hooks can be enabled locally only with appropriate permissions: `git config --local core.hooksPath .githooks`. Hooks are cooperative and are not filesystem/sandbox enforcement; new hook rollout is a separate scoped decision.
 
-   ```bash
-   git config --local core.hooksPath .githooks
-   ```
+## Navigation
 
-   Git and Bash are required. The repository's GitHub settings, rulesets and required CI are not copied by GitHub template creation.
-5. For a significant delivery stage prepare a frozen `docs/changes/<task>/work-block.md` for independent Critic approval, then use scoped Coder, independent Reviewer and Verifier through harness-native delegation. Work in short-lived task branches, submit PRs, and obtain Owner approval before merge. MVP validation and production deployment are separately authorized.
+- [Project scope](PROJECT_BRIEF.md), [project map](PROJECT_MAP.md) and [architecture](docs/architecture/overview.md).
+- [Workspaces and target verification](docs/workflow/workspaces.md); [first-use procedure](docs/workflow/initialization.md).
+- [Portable agent roles](.agents/roles/README.md), [role index](docs/workflow/agent-roles.md), [copy-on-use templates](docs/templates/).
+- [Task evidence and handoffs](docs/changes/), [integrated memory](memory_bank/README.md), [accepted decisions](docs/decisions/) and [security boundaries](docs/security/boundaries.md).
 
-## Project documentation
+**Provenance and gates:** project P READY means only ready for Owner review; stage W READY plus approved P/conformance and actual permissions permits Coder; actual source assurance binds a single S and current-head CI binds delivery H. `DELIVERY_READY` is not task COMPLETE, merge or deployment. Task CHECKPOINT requirements depend on interruption, significance and parallel writers.
 
-- [Project scope](PROJECT_BRIEF.md) and [navigation](PROJECT_MAP.md).
-- [Architecture and dependencies](docs/architecture/overview.md).
-- [Git branches, worktrees and safe cleanup](docs/workflow/workspaces.md).
-- [Portable agent/subagent roles](.agents/roles/README.md).
-- [Canonical security details](docs/security/boundaries.md).
-- [Durable decisions](docs/decisions/), [task records](docs/changes/) and [shared project memory](memory_bank/README.md).
-- [Copy-on-use templates](docs/templates/).
-
-There are two levels of effort: **routine** small, reversible low-risk tasks (including tiny safe code fixes) with focused checks and a PR; and **significant** Work Blocks requiring Owner-accepted design/scope, independent Critic and same-SHA Reviewer/Verifier gates. A project roadmap is optional and advances only on independent stage acceptance; task closeout can precede PR merge and never implies deployment. The canonical rules are in the Development Protocol.
-
-The v0.1 Foundation is integrated into the source repository's `main`, but is not a certified technical security boundary. Hooks are cooperative; real GitHub/OS authorization must be configured outside this kit. Origin: AzurSysTech Agentic SDLC concepts without its trusted Controller.
+SDLC Lite is a documented workflow, **not** certified technical isolation. Significant changes to security or agent authority are significant even when Markdown-only. Original historic decisions/legacy contracts retain their SHA and verdict.

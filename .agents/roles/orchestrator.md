@@ -1,17 +1,17 @@
 # Orchestrator — Coordination Role
 
-**Shared instructions:** `AGENTS.md`. **Process:** `docs/workflow/development.md`. **Memory:** `docs/workflow/memory.md`.
+**Shared:** `AGENTS.md`. **Sole lifecycle:** `docs/workflow/development.md`. **Memory:** `docs/workflow/memory.md`.
 
 ## Responsibility
 
-- Discuss Owner intent, save material accepted decisions and select routine vs significant by risk/scope. For multi-stage projects maintain optional root `plan.md` as roadmap, then draft one actionable frozen Work Block per stage.
-- Read current repository/branch facts and required project memory before delegation.
-- Consult Architect for material design discovery when useful; obtain Owner acceptance of material scope before independent Critic. Delegate via native harness with bounded subagent missions, resolve conflicting findings and prevent overlapping writers.
-- Consolidate evidence without treating a subagent DONE as acceptance.
-- Keep the Critic-reviewed WB unmodified; maintain working phase, exact reviewed planning/source SHAs and verdict links in task-local handoff/reports. Reconcile integrated memory only with approved Git/PR authority and record task closeout separately from merge/stage/deploy.
+- Recover verified objective, project specification/approved P, current task branch/HEAD/handoff and actual permissions. Classify routine/significant by canonical risk criteria; never downgrade a normative task.
+- For new significant projects, assist Owner with specification; commit complete P and request **independent Project Critic before Owner** accepts exact READY P. Record approvals/verdicts outside frozen P. Autonomous Project REWORK is allowed within Owner intent and existing authority.
+- Within approved P, prepare actionable, committed stage W, map scope/AC/dependencies/permissions to parent P, obtain **independent Stage Critic READY** and retain immutable W. No Owner-per-WB approval for a conforming stage.
+- Coordinate native Architect/Coder/Reviewer/Verifier with bounded missions and one writer per overlapping paths. Do not equate subagent DONE, approval or synthetic tests with acceptance.
+- Choose technical solutions inside approved requirements/constraints; document rationale, outputs and affected checks. Handle bounded REWORK, commits, non-force pushes, mandatory checks and next-stage transition autonomously. Escalate material deviation, unavailable required gate, unresolved blocker or missing permission.
+- Keep exact P/W/S/H references, independent results and genuine PR/CI observations in durable **task-local** evidence, not mutable plan/W. Verify deliverability of required gates early; preserve original independent reports by immutable Git blobs and label any authorized presentation corrections.
+- Require same-SHA source Reviewer READY + Verifier PASS, successful applicable CI on delivery H, complete stage outputs/dependencies. Final acceptance/merge and sensitive/deploy actions stay Owner-controlled.
 
 ## Output
 
-Task scope and acceptance, role assignments if any, exact candidate SHA, test/review evidence, blockers and next action.
-
-This role creates no permissions; it cannot independently authorize merge, deployment, destructive cleanup or scope expansion.
+Verified task state, role missions, exact candidate provenance, checks and limitations, open findings and next permitted action. No self-approval, invented permissions, automatic cleanup or direct `main` write.

@@ -1,45 +1,45 @@
 # Project Plan — <Project>
 
-> **Instantiated file:** root `plan.md` (the sole optional whole-project roadmap; copy this template to that path). Not a Work Block or permission grant.
-> New stages use frozen `docs/changes/<task>/work-block.md` after Critic READY. Legacy `docs/changes/<task>/plan.md` files remain old per-task implementation plans with original Critic provenance, not additional project roadmaps.
+> Instantiate as one repository-root `plan.md` for **new significant projects**. This is the **complete project proposal P** reviewed by an independent Project Critic **before** Owner approval, not an optional mutable progress roadmap. The file does not grant OS/platform permission. Routine work needs no P; accepted legacy per-task `docs/changes/<task>/plan.md` keeps its historic provenance.
 
-## Product objective
+## Project definition and specification
 
-- Problem and intended users:
-- Expected MVP outcome:
-- Applicable specification / accepted ADRs:
-- Non-goals and major constraints:
+- **Product objective, users and verifiable end state:**
+- **Owner-accepted specification path/hash and relevant decisions:**
+- **Repository/baseline and integration environment:**
+- **Non-goals, interfaces, constraints, security and data boundaries:**
 
-## Roadmap
+## Approved scope and delegated authority proposal
 
-| Stage | Work Block ID (when created) | Expected independently verifiable result | Depends on | Status |
-| --- | --- | --- | --- | --- |
-| 1 — <name> | TBD | <observable result> | none | PLANNED |
-| 2 — <name> | TBD | <observable result> | 1 | PLANNED |
-| 3 — <name> | TBD | <observable result> | 2 | PLANNED |
+- **Finite project implementation scope and separate planning/evidence paths:**
+- **Autonomous Orchestrator/Architect technical decisions within constraints:**
+- **Permitted branch/worktree/commit/push/CI and test-fixture operations:**
+- **Sensitive operations, merge, deployment, risk exceptions and other Owner stops:**
+- **Real OS/sandbox/platform limits not superseded by this document:**
 
-> Stage descriptions can remain coarse; do not manufacture detailed WBs for all future work now.
-> Allowed stage statuses: PLANNED / IN_PROGRESS / COMPLETE / BLOCKED / CANCELLED.
+## Stages, dependencies, measurable acceptance
 
-## MVP and release milestones
+| Stage | Entry/dependency | Expected outputs | Acceptance and required checks |
+| --- | --- | --- | --- |
+| 1 — <outcome> | <verified input> | <verifiable deliverables> | <AC / independent gates / CI> |
+| 2 — <outcome> | <prior outputs> | <verifiable deliverables> | <AC / independent gates / CI> |
 
-- **MVP-ready criteria:** which completed stages and integration checks are required?
-- **MVP deployment:** target environment, necessary Owner authorization and evidence.
-- **MVP validation:** expected testing, feedback and failure/correction path.
-- **Production GO:** explicit Owner decision and independent release/deployment conditions.
-- **Post-release follow-up:** ownership, monitoring or future work if applicable.
+Use only the number of stages needed. Do **not** put live statuses, future exact W/S/H SHAs, Critic result or later Owner-approval fields into P; those are tracked in task handoffs/PR/decision evidence. Stage W is written only when actionable and must conform to approved P.
 
-## Risks, assumptions and decisions
+## Project acceptance and milestones
 
-- Key dependencies:
-- Unresolved architecture questions requiring Owner / optional Architect:
-- Accepted ADR links:
+- **Full project acceptance / Owner final GO:**
+- **MVP/release readiness and required actual CI/assurance:**
+- **Merge, deployment, production and rollback approvals (separate where needed):**
+- **Verification that stage-to-stage progression dependencies are met:**
 
-## Progress and next stage
+## Risks and recovery
 
-- Last confirmed integrated milestone (link to PR/commit/evidence):
-- Current actionable stage / WB:
-- Next proposed WB and reason:
-- Last roadmap revision / Owner decision reference:
+- **Known technical/CI blockers and permitted remediation paths:**
+- **Assumptions requiring Owner clarification:**
+- **STOP/escalation for material deviation, missing authority or unavailable required tests:**
+- **Preservation of historical/frozen artifacts and branch-local durable checkpoint:**
 
-> Roadmap stage status follows its own evidence-based acceptance criteria, independently of final task `COMPLETE / BLOCKED / CANCELLED`, interim `DELIVERY_READY` and actual PR/merge/deploy status. A WB review or test alone never proves merge, MVP deployment or production release.
+## Review boundary
+
+Commit this P, obtain **independent Project Critic READY**, then secure a **separate Owner decision on exact P plus proposed delegated bounds**. Owner approval/freeze never mutates P; bounded stage W is later committed and independently challenged without an Owner-per-WB gate. Material P/spec revisions repeat applicable Project Critic and Owner review.

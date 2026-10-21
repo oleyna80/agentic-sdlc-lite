@@ -1,65 +1,42 @@
-# Work Block — WB-<ID>: <Stage / Deliverable>
+# Work Block — WB-<ID>: <Actionable Stage>
 
-> Mandatory for nontrivial engineering delivery. One bounded result, one independently reviewed execution contract. This is a **template**, not current task authorization. For a routine, low-risk bounded task (including a tiny safe code fix), a Work Block is unnecessary.
+> Template only. Mandatory for a **new significant stage inside Owner-approved, Project-Critic-reviewed P**. Routine low-risk bounded tasks (including a tiny safe code fix) may use a mission without P/W/Critic. This template is not authorization.
 
-## Identity and source
+## Identity and binding
 
-- **WB ID / title:**
-- **Project / optional parent plan stage:**
-- **Planned branch/worktree, initial Git base revision:**
-- **Owner-approved requirement / spec / ADR references:**
+- **Stage ID/title and observable end state:**
+- **Repository, verified task branch/worktree and initial base:**
+- **Approved parent P commit and `plan.md` Git blob:**
+- **Accepted specification blob / Owner exact-P approval reference:**
+- **Dependencies / inputs and entry conditions:**
+- **Applicable ADRs/accepted constraints and parent conformance evidence path:**
 
-## Objective
+## Scope and acceptance
 
-What business/technical problem must this stage solve, and why now?
+- **Explicit approved implementation write paths:** <finite paths, not wildcard>
+- **Separate authorized evidence paths:** <finite paths>
+- **Out of scope / preserved original artifacts:**
+- **Expected outputs and dependency mapping:**
+- **AC-1:** <observable condition>
+- **AC-2:** <observable condition>
+- **Checks (positive/negative/native/CI) with required provenance and feasible execution route:**
 
-## Expected final result
+## Technical latitude and stops
 
-One concrete observable end state, including the deliverable and what must remain unchanged.
+- **Bounded engineering decisions Orchestrator/Architect may take:**
+- **Sensitive or consequential operations requiring separate Owner/platform GO:**
+- **Material scope/spec/risk/architecture-change escalation:**
+- **Rollback/recovery, target verification and one-writer rules:**
 
-## Scope and boundaries
+## Roles and delivery
 
-- **In scope:**
-- **Out of scope:**
-- **Affected components / approved write paths:**
-- **Dependencies / prerequisites:**
-- **Already accepted architectural constraints and external interfaces:**
+- **Orchestrator:** map W to P, commit W, get independent Stage Critic and coordinate autonomous stage.
+- **Stage Critic:** READY/REWORK on **exact committed W**, report separately; never re-use Project Critic verdict.
+- **Coder:** bounded implementation after Stage READY, source S and focused checks.
+- **Reviewer / Verifier:** independent same-SHA S assurance with actual evidence.
+- **Delivery:** authorized S/H commits, non-force PR/CI exact H, durable closeout, verified next-stage dependencies; merge requires separate Owner GO.
+- **Optional Skills:** known approved references only; they do not grant permissions or gates.
 
-## Implementation approach
+## Immutable review contract
 
-Describe required behavior and constraints, meaningful steps or milestones, and permissible autonomy. Do not prescribe unnecessary agent micro-steps; detailed private implementation planning belongs to the Coder within approved scope.
-
-## Roles and handoffs
-
-- **Orchestrator:** coordination, decisions, recordkeeping, final synthesis.
-- **Architect (if necessary):** research/design question and expected document.
-- **Critic:** independent review of this exact WB/planning revision, READY/REWORK.
-- **Coder:** scoped implementation, focused tests, candidate commit.
-- **Reviewer:** independent source/diff and scope/design inspection, READY/REWORK.
-- **Verifier:** independent acceptance checks and evidence, PASS/FAIL/BLOCKED.
-- **Skills (optional):** names/source references only when needed; harness selects/installs natively outside Lite.
-
-## Acceptance criteria
-
-- [ ] AC-1: <measurable observable condition>
-- [ ] AC-2: <measurable observable condition>
-
-## Verification and evidence
-
-- Relevant tests/checks and expected evidence:
-- Required independent review/verification and exact candidate identity:
-- Documentation and project-memory deliverables:
-
-## Risks, stop conditions and recovery
-
-- Risks / expected side effects:
-- Rollback/recovery:
-- **Owner stops:** material design/scope changes, merge, deployment, destructive or consequential external action, unavailable required assurance, access/secret boundary changes.
-- Proposed next action on failure or BLOCKED:
-
-## Frozen planning contract
-
-- **Owner design/scope decision reference (set before Critic):** <required when material>
-- **Separate status/report convention:** post-review Critic verdict and exact reviewed WB SHA, working phase, source candidate/review/verification SHAs and PR/merge disposition are recorded **only in task-local `handoff.md`, closeout, Critic/review/verification reports or PR**; there are no later-fillable approval/status fields inside this WB.
-
-> Freeze this WB before independent Critic review; subsequent status/verdict/evidence must not mutate the reviewed contract. Substantive WB changes require renewed affected Owner/Critic acceptance and a new exact revision; never classify a post-freeze WB edit as harmless evidence. Reviewer READY and Verifier PASS must reference the same exact source candidate, with final PR HEAD separately reconciled.
+This W is committed **before** independent Stage Critic. Neither W nor approved P is edited to record verdict/status, approval, source/PR SHA or later events. An affected W correction produces **new committed W and Stage Critic**, without Owner-per-WB approval inside P; a material project change requires new P/Project Critic/Owner. Keep all outcomes in separate handoff/reports. No placeholders inside frozen W need post-review filling.

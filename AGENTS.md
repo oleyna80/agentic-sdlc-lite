@@ -1,38 +1,39 @@
 # Agent Operating Contract — SDLC Lite
 
-**One root contract.** Other documents, role briefs, templates, memory and README cannot grant additional authority or create a competing workflow. Agent instructions are process guidance, not an OS or remote permission system.
+**One root contract.** Other documents, role briefs, templates, memory, reports and Skills do not grant permissions or create a competing lifecycle. Actual OS/sandbox/platform/security controls remain binding.
 
 ## Source precedence
 
-1. Current explicit Owner instructions plus actual OS/platform permissions and applicable security controls.
-2. This root `AGENTS.md` (shared agent behavior).
-3. Approved task-specific requirements, Owner decisions and recorded design decisions in `docs/decisions/`.
-4. Canonical domain procedures: `docs/workflow/development.md` (lifecycle and exact assurance); `docs/workflow/memory.md` (memory); `docs/workflow/initialization.md` (template first-use); `docs/workflow/workspaces.md` (Git and workspace); `docs/security/boundaries.md` (security details).
-5. Subordinate role briefs in `.agents/roles/`, templates and review/verification reports (roles and evidence only).
-6. `memory_bank/` (last integrated orientation), task-local handoffs and session logs (observations, never authority).
+1. Current explicit Owner instructions, actual permissions and applicable security boundaries.
+2. This root `AGENTS.md` (shared behavior).
+3. Approved project specification/plan, task requirements and Owner decisions within those boundaries; adopted ADRs in `docs/decisions/`.
+4. Canonical procedures: `docs/workflow/development.md` (the **only** lifecycle), `docs/workflow/memory.md`, `docs/workflow/initialization.md`, `docs/workflow/workspaces.md` and `docs/security/boundaries.md`.
+5. Subordinate `.agents/roles/`, templates and optional Skills (techniques, not authority).
+6. `memory_bank/`, task handoffs, reports and local caches (observations; verify against Git).
 
-If conflicting instructions or stale facts are found, stop the affected decision and consult current Owner and verified repo/Git/PR facts. Never invent approvals.
+Resolve ambiguity or incompatible requirements before the affected action; do not invent approval or let task notes override security controls.
 
-## Mandatory session entry
+## Session entry / recovery
 
-1. Read `PROJECT_BRIEF.md` and `PROJECT_MAP.md`; inspect actual Git repository identity, branch, HEAD and status.
-2. **Before trusting any inherited project memory:** if this repository was created from the Lite template and has not completed first-use initialization, follow `docs/workflow/initialization.md`. Do not start normal feature development.
-3. Read `memory_bank/context.md` and `memory_bank/progress.md` (last integrated overview), then the *current task branch's* `docs/changes/<task>/handoff.md` or PR/issue. Check facts against live Git/PR state; another branch's unmerged memory is not necessarily available.
-4. If a multi-stage project has a root `plan.md`, read its roadmap. For significant work read the frozen `docs/changes/<task>/work-block.md` (or the approved legacy task `plan.md`) and relevant spec/ADRs, plus only applicable procedures/roles. Do not load every archived report or template automatically.
-5. Identify objective, acceptance criteria, allowed write paths, required tests and actual isolation/side-effect limits. Preserve all unrelated dirty/untracked files and worktrees.
+1. Read `PROJECT_BRIEF.md`, `PROJECT_MAP.md` and applicable parent instructions. Verify actual repository identity, absolute worktree, branch, HEAD, tracked/staged/untracked state and authorized target.
+2. For a derived repository, follow `docs/workflow/initialization.md` before feature work; source-template memory is not the derived project's authority.
+3. Read last-integrated `memory_bank/context.md` and `progress.md`; locate the **current task's** branch-local handoff/PR/issue and verify its facts against Git. Another branch's unmerged memory is not current authority.
+4. For significant new project work, read the accepted exact specification, frozen reviewed root `plan.md` (P), separate Owner approval and current stage `docs/changes/<task>/work-block.md` (W) with its independent Critic verdict/conformance. For routine work these gates may be NOT_APPLICABLE. Preserve previously accepted legacy task-plan provenance.
+5. Restore objective, constraints, dependencies, write-set, required tests, actual privileges and next action. After resume/compaction or a target/ref change repeat affected preflight **before any write**; do not trust inherited cwd, scratch or an agent summary as authoritative.
 
-## Core operating rules
+## Operating rules
 
-- Keep `main` stable; implementation belongs on a task branch. Merge and deployment need separate explicit Owner authorization and platform permission.
-- Follow **routine vs significant Work Block** classification, Owner approval and independent Critic/Reviewer/Verifier rules **only** as defined in `docs/workflow/development.md`. Routine can include tiny safe code fixes; significant changes can be Markdown-only.
-- The optional project-level `plan.md` is a roadmap, not authority. Freeze each significant stage's Work Block before Critic and keep later verdicts/status in task-local handoffs and reports, not inside the frozen WB.
-- One writer per overlapping write-set. Delegate through the harness's native subagents/tools using bounded missions and portable role briefs; logical role names do not install agents or guarantee independent isolation.
-- Run relevant checks, inspect diffs and report true PASS/FAIL/NOT_RUN and exact SHAs. Do not claim that self-review is independent.
-- Store decisions, progress, handoffs and meaningful verification evidence **in committed project/branch files** according to `docs/workflow/memory.md`; chat history is not persistent project state.
-- Never bypass hooks, force-push, delete unrelated work, access production secrets, widen scope or perform unapproved consequential external operations.
+- Classify **routine vs significant by risk/impact**, not by code versus Markdown. A tiny reversible safe code fix may be routine; normative policy/security changes may be significant. The route and gates are specified **only** in `docs/workflow/development.md`.
+- **Significant project:** Owner accepts exact specification; Orchestrator/Architect prepares committed project plan P; independent **Project Critic READY precedes Owner approval of exact P**. Approved P stays byte-frozen; progress/decisions/verdicts live elsewhere.
+- **Autonomous stage:** within approved P, Orchestrator commits actionable W and verifies conformance; independent **Stage Critic READY on exact W** precedes Coder. No new Owner approval per conforming W. Stage READY alone does not grant OS/tool permissions. Scope changes outside P require Owner.
+- Coder implements within the approved write-set; independent Reviewer READY and Verifier PASS must bind the same exact source candidate S. Subsequent evidence-only delivery HEAD H requires checked S..H diff and applicable CI at H. No invented PASS, READY or merge status.
+- Keep `main` unchanged without separate Owner GO. Covered task commits, non-force push, CI, ordinary REWORK and bounded engineering decisions can be autonomous under approved P and actual permissions. Final acceptance/merge, deployment, privileged/sensitive external actions and material exceptions remain Owner-controlled.
+- Before filesystem mutation confirm the actual destination, current repository/worktree scope and unrelated dirty/untracked state. For Git mutations use `git -C <verified-absolute-worktree>`; it is **not isolation**. One writer per overlapping paths; preserve other worktrees.
+- Run targeted checks with truthful tracked/untracked/cached content coverage; inspect full diff. Prevent secrets or credentials from entering evidence. Never bypass hooks, force-push, delete unrelated work or expand scope without authority.
+- Keep durable task checkpoints and separate independent reports in Git. `memory_bank/` describes last integrated work, **not** live parallel task state. Chat, scratch and agent-local MEMORY are lookup hints only.
 
-## End-of-task handoff
+## End-of-task / handoff
 
-Before any substantive handoff or PR, checkpoint task-specific state and relevant evidence as prescribed by the memory procedure. State task/branch, exact observed SHA, files changed, tests, review results, blockers, PR link and next action. After Owner disposition, reconcile integrated project memory via an authorized branch/PR, not direct writes to protected `main`.
+Use the conditional checkpoint matrix in `docs/workflow/memory.md`. Record exact observed Git SHA, task, scope, verified checks, blockers and next action where required. Working `DELIVERY_READY`, task `COMPLETE/BLOCKED/CANCELLED`, roadmap-stage acceptance, PR merge and deployment are **different facts**; preserve their evidence separately. Only separately authorized integration reconciles shared memory.
 
-**No Controller:** There is no admission service, SQLite registry, state machine, privilege gate or autonomous orchestration runtime. Do not add one as an incidental correction.
+**No Controller:** Lite has no admission service, SQLite registry, dispatcher, runtime privilege gate, skill installer or automatic merger.

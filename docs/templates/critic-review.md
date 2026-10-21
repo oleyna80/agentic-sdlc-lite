@@ -1,19 +1,34 @@
-# Independent Critic Review — <Task>
+# Independent Critic Review — <Project P / Stage W>
 
-- **Reviewed frozen Work Block (or approved legacy task plan) path and exact committed planning SHA:**
-- **Reviewer identity/session:**
-- **Verdict:** READY / REWORK
+- **Review level:** PROJECT / STAGE
+- **Repository, branch, worktree and observed HEAD/status:**
+- **Exact reviewed P or W commit/path/Git blob:**
+- **For Project:** accepted specification hash/blob, baseline and pending Owner exact-P approval.
+- **For Stage:** approved parent P/spec blobs, Owner approval reference, conformance evidence.
+- **Native agent/session identity and actual read-only/isolation limitations:**
+- **Verdict:** READY / REWORK / BLOCKED (required evidence/independence unavailable)
 
-## Scope and assumptions
+## Scope / provenance verification
 
-## Risks and contradictions
+- Exact committed subject and cross-file dependency checks:
+- Source/implementation write-set and separate evidence paths:
+- Unexpected changed, dirty or untracked paths:
+- Immutable subjects and accepted historical decisions:
 
-## Requirements / acceptance gaps
+## Adversarial analysis
 
-## Blocking findings (if REWORK)
+- Requirement/acceptance/dependency contradictions:
+- Mandatory assurance/CI feasibility and previously known failing checks:
+- Permission/trust-boundary issues, unsupported premises and unneeded complexity:
+- Whether Owner escalation is actually needed versus bounded autonomous REWORK:
 
-## Minimum corrections
+## Findings and remediation
 
-## Residual risks and limits of review
+- **Finding ID, severity, exact source evidence, impact and minimum correction:**
+- **Blocking findings / accepted nonblocking risks:**
+- **Executed commands, numeric exit codes/diagnostics vs NOT_RUN:**
+- **Separate independent report provenance:** original Git blob/commit and any disclosed authorized presentation copy.
 
-Keep this verdict in a separate report/PR review, never as a post-review mutation of the frozen WB or legacy task plan itself. Independence must be truthful; do not label self-review independent.
+## Verdict and next authorized action
+
+A **Project READY** means only Owner review; a **Stage READY** requires approved P/conformance/real permissions before Coder. The verdict is stored **outside** the exact reviewed P/W; no file names, templates or role label grant authority. Never present self-review or untested fixtures as independent PASS.
