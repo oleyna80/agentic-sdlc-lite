@@ -776,3 +776,717 @@ Spec SPEC-1 is treated as accepted before P2 for the V-20 fixture. This is not a
 ```
 
 Read-only fixture command used to recover these exact inputs: `git -C /tmp/wb-lite-002-v20.JD4A8I/repo show <commit>:<path>`. The initial attempt to read `SPEC.md` (instead of `specification.md`) exited 128; the correct-path inspection succeeded. The P2 setup's initial overwrite attempt exited 1; native follow-up inspection of the committed P2 succeeded. These errors are disclosed and are not credited as passes.
+
+
+---
+
+## Assurance recovery 2026-10-21 — R1-original-BLOCKED
+
+This is a byte-identical original independent artifact, preserved separately after the unchanged historical S2 content. Source subject: S12 `5e42d2b1239f26962ee5f5942cd318997b51501c`. Historical verdicts retain their original scope and date. SHA-256: `7c6a2c517e49dbc0087bfc963636613d618283e26171e95c68363a3a2985fcb6`; bytes: 31443. The surrounding custody text is Orchestrator evidence, not part of the original.
+
+<!-- BEGIN ORIGINAL R1-original-BLOCKED -->
+# WB-LITE-002 — Independent Verifier R1, exact S12
+
+Дата исполнения: 2026-10-19. Это отдельная Verifier mission после сообщённого Owner результата Independent Reviewer R8 READY. Ни один результат R8 не засчитан как исполнение Verifier. Источник — immutable Git S12; временные native/shell fixtures и журналы лежат под `/tmp/wb-lite-002-verifier-r1-s12`. Отчёт не закоммичен и не является durable repository checkpoint.
+
+## Binding, repository entry and synchronization
+
+| Subject | Exact revision / blob |
+|---|---|
+| Source S12 | `5e42d2b1239f26962ee5f5942cd318997b51501c` |
+| Observed evidence HEAD H | `2df62ab96d5b5411e5a55a98c0f40671b61746b9` |
+| Approved project P | `b4cbc37e6bc318a5b28f4db8cbeaafd3663c60df` |
+| Frozen Stage W2 | `63ed889d8991a5d2187bb82709f4cbb5773db1cc` |
+| Main baseline B | `90c101ba2b6091a24c2f458f5ffc8b02e6eb04ab` |
+| P `plan.md` blob | `fcfda1f6dfa011a5688c5f04111d918d6bbce707` |
+| W2 work-block blob | `19beb072f321a7c9730ea86630112ce8c1b90dbb` |
+| Accepted spec blob | `e8a20a4ae87ae8438b0e66be13c119673260c480` |
+| S12 workspace blob | `baadc348775a69f720ac0cf23f931658e518e47f` |
+| S12 workflow blob | `c60e726dd03b72168c4483972e9f11c0ff05453d` |
+
+Verified root: `/home/azur/Projects/WSL/agentic-sdlc-lite-worktrees/wb-lite-002-implementation`; branch `docs/wb-lite-002-implementation`; origin fetch/push `https://github.com/oleyna80/agentic-sdlc-lite.git`. Initial local HEAD was `df3d9816a1c2097a3569a7f5ddd74f747f686626`, clean tracked/staged/untracked/ignored. Existing five worktrees were inventoried: main, adr-0001-status, audit-r1 detached, implementation and planning. No competing task writer was observed; this is an observation, not process isolation.
+
+Executed `git -C <verified-root> fetch origin` (exit 0); verified expected continuation df3d981→2df62ab, evidence-only handoff addition, clean target and safe fast-forward; then exact authorized `git -C /home/azur/Projects/WSL/agentic-sdlc-lite-worktrees/wb-lite-002-implementation pull --ff-only origin docs/wb-lite-002-implementation` (exit 0, fast-forward). No other real-project Git or filesystem mutation was performed. Git inventories and exact commands at H are in `logs/integrity.json`, with final recheck separately recorded.
+
+P/W2/B/S12 are available commits and their required ancestry checks return 0. S12→H consists of two evidence commits and only `docs/changes/WB-LITE-002/handoff.md`, +20 lines; inspected full diff, no normative changes. P/W2/spec blobs equal their original versions at both S12 and H. `git diff --check B S12`, `git diff --check B H`, working and cached checks all return 0. Actual worktree has no untracked or ignored paths; disposable tests separately cover dirty/untracked/staged content.
+
+Read actual root/parent instructions, PROJECT_BRIEF/MAP, last integrated context/progress, accepted spec, frozen P/W2, separate Owner decisions and task handoff, canonical development/memory/initialization/workspaces/security procedures, actual CI workflow, applicable role briefs/templates and historical independent reports. Owner specification acceptance records SHA256 `2e63d5706838c0f84b2965ad2216cff4575897a1289e0daec6f6dfd5fb457691`; separate 2026-10-17 decision accepts exact Critic-READY P and OD-1…OD-5. Stage Critic R2 READY is preserved separately on exact W2. Earlier PENDING/REWORK records remain historical, not current gates.
+
+Full B→S12 diff: 34 changed paths = 21 approved normative/source paths plus 13 planning/evidence paths. Complete diff retained as `logs/baseline-to-S12.diff`, SHA256 `ff555d5831ab65fe828843b57454899b52953efdc33b6d5972d63f33ae68a57c`. All 21 source files were inspected/hashed and checked for whitespace/conflict markers/local links (`logs/content-coverage.json`). `.githooks`, `docs/decisions`, `memory_bank` and PROJECT_BRIEF are byte-unchanged B→S12. Workflow outside the authorized first-use guard is byte-unchanged (`logs/scope-and-workflow.json`). Owner-published R3 and separately authorized R6 evidence additions are distinguished from normative source; their historical publication/formatting disposition is not silently treated as extra source permission.
+
+Original Project Critic commit/blob `ce2e59223dff648a34d33870a0d07ad8437a9d2b` / `fbf8bfded08de7e77c5045906ddfe157fc109881`; normalized presentation blob `de1c475e159ee7c2f33e009541cf4e05342617c8`: only two trailing ASCII spaces removed at line154. Original Stage Critic R1 commit/blob `dca76731c5aaa1a11130162d30df227252c48a26` / `62f32538380f1c561e08f2d172bf4e0fb79cc241`; W2 presentation `683eab66668dac834f5af797b42cc34faf5250e3`: only two spaces at line66 removed. Original bytes remain reachable. Current Stage report additionally preserves independent R2 under a separate heading; it is not byte-identical to original R1. Exact commands/diffs are preserved in integrity logs.
+
+## Execution evidence and reproducibility
+
+`extract-repro.py` re-extracts all five actual YAML `run` blocks and four workspace Bash fences using immutable `git show S12:path`, asserts unique expected counts and byte equality with executed scripts; exit 0, `logs/extraction-recheck.json`. CI blocks retain their source inter-step blank separator line. Workflow SHA256 `6fdb416c9f8ea5a3819c461be3a40803125c8ac72d929ebba711718c16a2bf80`; individual body hashes are in `extraction.json`. Create body hash `ddad6bd4f78e126d28d1b77d670599e62af37de29b6268a88998a1ae03d46823`, removal `6f37a05edcdd377374bdc275bde4a72fd6039eed6c66abddf1704f8cb45b2308`.
+
+- `ci-detailed/driver.py`, `ci-detailed/logs/ci-results.json`: all exact mutations, full before/after input text and SHA256, environment including absent vs empty, command/cwd, expected/actual numeric exits and stdout/stderr. `ci-tests.py` and first-pass log independently preserve initial executions. Actual five CI bodies run on detached full-history S12 with explicit `GITHUB_REPOSITORY=oleyna80/agentic-sdlc-lite`, all exit 0. Nine syntax checks exit 0. These are local executions, not GitHub Actions runs.
+- `baseline-markers.json`: exact five real baseline marker lines with Markdown punctuation/backticks. Each separately rejected, as are inherited complete context/progress and the two variants changing only milestone date to 2031-02-03. Derived/source/provenance/identity/environment duplicates and grep74 errors are distinct cases, never simplified pseudo-markers.
+- `workspace-tests/run.py`, `C*/subject.sh`, `C*/evidence.json`: exact S12 Bash, independently supplied target facts, real Git repositories/bare origin/worktrees, fault-injected real tool statuses and mutations, full command/output/exit, file/index/HEAD/refs/worktree inventories and fetch/add/remove counters. Positive create 0 with 1/1/0; positive remove 0 with 0/0/1. Every negative returns 1 with specific STOP. Correct-looking stdout + exit74 is rejected. Post-fetch negatives retain injected state, fetch1/add0/remove0.
+- All six historical drift types were independently executed: branch, HEAD, origin, tracked, untracked, ignored. Own case IDs are C39–C43 plus C45(ignored); own C44(new_branch) is additional. Exact historical C44 numbering cannot be independently authenticated without original R8 raw evidence; no relabelling of execution evidence was performed.
+- `workspace-tests/content-and-target.py`: A→B and B→A actual absolute Python writes/copy and explicit `git -C destination add`, six cases with correct destination/index changes and preserved other checkout/HEAD. V15 twelve content cases cover untracked whitespace, conflict, broken local link, clean no-index, authorized clean staging, cached full content and invalidation after content change. No-index clean/broken-link returns 1/no diagnostics; whitespace/conflict returns 3 with diagnostics; cached defects return 2. Diagnostics and content determine the result.
+- `native-routine/report.md` plus original positive/negative/parallel logs: four actual fresh native Coder missions, seven permitted bounded scenarios and seventeen STOP scenarios. Final two were genuinely simultaneous on separate linked A/B worktrees. Synthetic inputs include local issue/checkpoint/Owner/Critic records; actual model/tool execution is native. Independent audit compares 25 inventories, all HEAD/index preserved, exactly 10 allowed file paths changed in seven positive cases; 17 negatives and untouched sibling have zero mutations. No source write attempt occurred in negatives. Missing commit authority yields NOT_COMMITTED and INCOMPLETE final durable checkpoint; no recovery PASS is claimed for those uncommitted final checkpoints.
+
+Reproduction uses retained standalone drivers and exact per-case scripts/JSON, not a new tracked test framework. Drivers that prepare fixtures require a fresh authorized temporary root: do not rerun blindly over preserved evidence. Read-only `python3 extract-repro.py`, `python3 native-routine/audit.py` reproduce extraction/inventory checks. Native decisions require reissuing independent mission against regenerated fixture inputs; no deterministic Python oracle substitutes for model decisions. Source and all temporary Git objects/input artifacts are preserved in the evidence archive.
+
+Audit harness corrections are disclosed: initial workflow comparison regex omitted `shell: bash` and matched zero; corrected extractor requires exactly one guard and outside-guard comparison passes. Reproduction extractor initially excluded the YAML blank separator line (assertion exit1), then matched exact retained bytes. Workspace no-index assertions initially expected2 rather than actual3 for two diagnostics; four executions reran with corrected expectations. Initial failures remain evidence, not source defects or erased tests. CI second full pass added full input inventories/environment evidence, rather than inflating distinct scenario count.
+
+## Known findings, GitHub and security limits
+
+`FND-VER-S8-001` and `FND-REV-R7-001` remain historical findings on earlier candidates. Independent S12 error-propagation, correct-stdout/74, nested substitution, show-ref and all six post-fetch drift kinds now reject before prohibited mutation. Their prior BLOCKED/REWORK is not retroactively rewritten. No newly introduced source defect was found in the completed shell/guard/routine coverage.
+
+**Known deferred Issue #9: reproduced FAIL**, diagnostic correctness/fail-closed defect, severity MEDIUM. Exact source `scripts/ci-4.sh` uses `if git rev-parse HEAD^ …; then ... else git diff-tree --check --root ... fi`. In a real non-root S12 clone, injected wrapper prints plausible output and returns74 for `rev-parse HEAD^`; every other Git invocation is real. Actual extracted step returns0 with empty diagnostics, expected nonzero STOP. It silently takes the fallback; it does execute fallback whitespace validation, so this report does not claim all whitespace checking was skipped. Driver and exact wrapper are preserved in CI artifacts. The same defect is reproduced in both passes; it is one distinct failed robustness case, not two defects.
+
+This whitespace step is unchanged B→S12 and outside P/W2 permitted CI modifications (only first-use guard may change). Deferral is neither a waiver nor a PASS: the fault-path check remains FAIL. W2 V02 nominal five-body execution and direct full B→S12/H whitespace checks passed; those do not establish fail-closed handling of Issue9 or actual CI. No explicit W2 requirement to repair this unchanged fault path was inferred, and no repair authority was assumed. If acceptance requires this failure path itself to pass, acceptance needs separate scope/disposition and correction; current report cannot close it by deferral.
+
+Earlier successful read-only GitHub snapshot (`logs/github.json`), commands all exit0: branch Actions runs `total_count:0`; all-state branch PR list `[]`; Issue9 OPEN at https://github.com/oleyna80/agentic-sdlc-lite/issues/9. At that successful snapshot final-head CI was NOT_RUN, not PENDING or PASS. Final refresh (`logs/final-state.json`) instead returns exit1: Actions HTTP404, PR/Issue HTTP401 requiring authentication. Consequently current GitHub state at closeout is BLOCKED/unavailable; the earlier empty PR/run lists and OPEN Issue9 are observations at their recorded time, not guaranteed latest state. No auth/settings change was attempted. Workflow triggers PR and main pushes, not feature-branch pushes. No PR was created to manufacture CI. Applicable current-head Actions remains a later delivery gate, blocking complete AC7/8 and V02 real-CI portion/V12.
+
+R8 READY on exact S12 is explicitly supplied by Owner and faithfully summarized in H; its original report/execution archive is not independently preserved in Git. Reported local path/hash is not verified durable evidence. Verifier's fresh execution does not create or retroactively preserve the Reviewer original. Preserve original R8 through an authorized evidence path/attachment before closeout without overwriting history. Current report itself is temporary and NOT_COMMITTED, as required by this mission.
+
+No fixes, real source edits, new tracked files/runtime/Controller/hooks/framework, commits, push, PR, merge, deployment or settings changes. Local fixture commits/non-force pushes target only owned disposable bare repositories under /tmp. Existing real project worktrees were not used for negative mutation tests. Cooperative native STOP and shell guard behavior do not prove OS enforcement or isolation; concurrent races remain possible. Actual native compaction/resume event NOT_RUN; W2 V16 explicitly permits synthetic fresh-context replay, which was executed with stale context and real native preflight. No native hook execution/installation is claimed; existing hook syntax/executable bits only were tested unchanged.
+
+## Итоговый verdict: BLOCKED
+
+S12 не получает Verifier PASS и WB-LITE-002 не готов к delivery. Основной blocker — незавершённое обязательное независимое execution coverage V-21…V-25. Native lifecycle workers и их независимые роли остановились с platform error `You've hit your usage limit`; дальнейшее независимое исполнение в этой миссии недоступно. Не заменено self-review или synthetic reasoning. Дополнительно отсутствует подтверждённый actual current-head Actions PASS; финальный GitHub refresh недоступен (HTTP401/404), а оригинал R8 не сохранён независимо в Git. Известный Issue9 воспроизведён как отдельный FAIL, а не закрыт deferral.
+
+Финальные local Git assertions PASS: root/branch/origin/HEAD соответствуют заданию, H неизменён, tracked/staged/untracked/ignored state чист, пять исходных project worktrees сохранены, main остаётся B. `logs/final-state.json` содержит все argv/stdout/stderr/числовые exits, `logs/final-local-assertions.json` — отдельную проверку локальных результатов. Заключительный общий assertion первоначально завершился1 из-за трёх неуспешных GitHub calls; это сохранено и не ошибочно объявлено успешным refresh.
+
+Статусы ниже: INSPECTED означает чтение/сравнение, EXECUTED — реальный запуск; PASS относится только к заявленному scope. Ожидаемый negative STOP — успешный тест, но не разрешение выполнить запрещённую запись. BLOCKED не означает обнаруженный дефект S12. NOT_RUN означает отсутствие исполнения, а не PASS. Ни один обязательный V не скрыт под NOT_APPLICABLE.
+
+## Полная матрица W2 V-01…V-26
+
+| V | Выполнение и результат | Воспроизводимые свидетельства / незакрытая часть |
+|---|---|---|
+| V-01 | INSPECTED + EXECUTED, PASS | Full B→S12 diff, 21 approved source +13 evidence/planning paths, hashes/links/conflicts/whitespace; clean real tree; separate untracked/cached tests. `logs/integrity.json`, `logs/content-coverage.json`, `logs/scope-and-workflow.json`, workspace V15 cases. |
+| V-02 | EXECUTED local PASS; overall BLOCKED | Five exact CI bodies and nine syntax checks0; hooks unchanged, existing bits checked; both original Critic blobs and two authorized whitespace normalizations inspected; full B→S12/H checks0. Actual PR/H CI not established, final refresh401/404. Supplemental Issue9 robustness FAIL described separately. |
+| V-03 | EXECUTED PASS | Source template under derived env guard exits1 with expected diagnostics. `ci-detailed/logs/ci-results.json`. |
+| V-04 | EXECUTED PASS | Inherited baseline memory, five exact markers separately and two date-only mutations all exit1. Exact lines/input hashes retained; no simplified marker substitution. Same CI log and `baseline-markers.json`. |
+| V-05 | EXECUTED PASS | Own exact identity, INITIALIZED, fresh own memory and canonical files: exit0. Same CI log. |
+| V-06 | EXECUTED PASS | Suffix/prefix/other owner/missing/duplicate identities and source-like fork/suffix negatives exit1. Same CI log. |
+| V-07 | EXECUTED PASS | Empty/absent env, initialization duplicates/missing/source state, missing/empty memory negatives exit1. Same CI log. |
+| V-08 | EXECUTED PASS | Genuine source baseline memory0; derived historical provenance/prose/blockquote0; longer own ID0. Historical source files unchanged. Same CI log. |
+| V-09 | EXECUTED native PASS | Routine bounded Coder without mandatory P/W plus significant/routine misclassification, missing P/W/stage READY, expansion and gate N/A STOP cases. `native-routine/report.md`, original native logs and audit. |
+| V-10 | EXECUTED native PASS within synthetic-input recovery scope | Fresh agents recover from issue/committed own handoff; genuinely parallel A/B own handoffs without shared memory writes. Missing commit authority explicitly NOT_COMMITTED/INCOMPLETE; no false durable recovery claim. Same native report. |
+| V-11 | EXECUTED separate Verifier mission; BLOCKED closure | All source claims bind S12, no Reviewer execution reused. Owner-reported R8 READY binds S12, original independent report not Git-preserved. Mandatory execution matrix incomplete; no same-S12 Verifier PASS. |
+| V-12 | NOT_RUN publication/current-head CI; BLOCKED | No authorized Verifier publication performed. Earlier actual run/PR lists empty; final refresh401/404. `logs/github.json`, `logs/final-state.json`. No manufactured PR/PASS. |
+| V-13 | EXECUTED PASS | Six A→B/B→A absolute non-Git write/copy and git-C staging cases, external read/inspection; target index changes only, opposite checkout/HEAD preserved. `workspace-tests/content-and-target.py` and evidence. |
+| V-14 | EXECUTED shell + native PASS | Real disposable wrong identity/root/branch/HEAD/origin/state/destination/relative cwd/copy/cleanup negatives STOP; stdout74 and nested substitutions; all six post-fetch drift types; fetch/add/remove counts and inventories retained. `workspace-tests/report.md`, C*/evidence.json and native negatives. |
+| V-15 | EXECUTED PASS | Twelve untracked/whitespace/conflict/local-link/cached/full staged content cases. no-index1 inspected with diagnostics; defect cases actual3, cached defects2; no silently omitted untracked content. Workspace content artifacts. |
+| V-16 | EXECUTED permitted fresh-context replay PASS; native compaction NOT_RUN | Native fresh agent actually restores Git/mission/checkpoint after synthetic interruption/stale context. This is W2-permitted replay, not observed native compaction/resume. `native-routine/report.md`. |
+| V-17 | EXECUTED native PASS | Synthetic scratch/MEMORY READY unsupported by Git rejected; missing temporary path exit1. Zero prohibited writes, no real MEMORY/report mutation. Native negative logs. |
+| V-18 | EXECUTED native PASS, bounded scope | Consecutive edits in stable verified context; no new mandatory P/W/Critic/own handoff. Fixtures already contain unrelated committed handoffs, so no claim of fully empty handoff tree. Native positive logs. |
+| V-19 | INSPECTED PASS | All 21 exact S12 normative files and cross-links inspected against two-level lifecycle; routine route retained, no new Controller, Owner-per-W or mandatory stage merge. `logs/normative.diff`, content/scope reports. Runtime lifecycle gaps remain separate. |
+| V-20 | EXECUTED independent native PASS | Actual committed defective P1 → native Critic REWORK → corrected P2 → native Critic READY before separate synthetic Owner. `native-lifecycle/critic-p1.json`, `critic-p2.json`, `refs.json`, `commands.json`. |
+| V-21 | EXECUTED positive and some negatives; BLOCKED full coverage | Actual P2 → separate synthetic Owner → committed Wbad REWORK → W1 stage Critic READY → Coder; frozen blobs checked. Native V09 covers several missing gates. Remaining artifact-mutation negatives were prepared but their independent read/STOP/inventory execution NOT_RUN. 26 prose scenarios are reasoning only, not substitute. |
+| V-22 | EXECUTED material + bounded re-planning; BLOCKED full negatives | Actual material P3 independent Critic REWORK → P3B READY → separate synthetic Owner before affected implementation. Actual Wbad→W1 bounded stage REWORK without Owner-per-W. Full affected invalidation/mutation operational negative set incomplete. `critic-p3*.json`, `critic-w*.json`, commands. |
+| V-23 | EXECUTED partial; BLOCKED | Actual S1 native Reviewer REWORK → S2 Reviewer READY + independent Verifier FAIL (required synthetic CI failed and local bare delivery absent then) → corrected S3 and local tests/bare push. Renewed independent Reviewer/Verifier on S3 NOT_RUN/completed reports absent due platform limit. Merge/security/permission scenarios evaluated as reasoning only, insufficient for full closure. |
+| V-24 | NOT_RUN full two-stage progression; BLOCKED | Stage1 correction exists but renewed S3 assurance unavailable; second consecutive W/stage-Critic/Coder/outputs chain not completed. Dependency/CI/missing output negative fixture setup does not establish execution. No invented stage2, merge, current CI or autonomous progression. |
+| V-25 | INSPECTED / native reasoning only; BLOCKED | 26-scenario native probe reasons about bounded choice/material escalation, but requested actual two-option Architect→Orchestrator rationale/checks and affected new-W re-Critic chain not completed. No reasoning-only PASS. |
+| V-26 | EXECUTED provenance-specific PASS with explicitly synthetic inputs | Actual inherited refs/blobs, real alternate-base repo with retained refs and synthetic disposition:2 positive provenance decisions. Six STOP cases mix actual missing Git objects128/plan byte mutation and clearly labeled synthetic wrong-subject/disposition/scratch inputs. `provenance-probe.json` includes exact applicability limits. Synthetic final-tree mapping is not real integration/Owner authorization. |
+
+V-21…V-25 BLOCKED rows are mandatory unfinished acceptance coverage, independent of delivery publication. Thus postponing GitHub CI alone cannot close this Verifier mission.
+
+## AC-1…AC-15 assessment
+
+| AC | Status | Основание / что остаётся |
+|---|---|---|
+| AC-1 | BLOCKED full acceptance; inspected/routine portions PASS | Two-level source model consistent, routine/significant execution covered; full consecutive-stage runtime model incomplete V21…25. |
+| AC-2 | PASS scoped | Conditional checkpoint/recovery/parallel/no-authority distinctions executed; incomplete final checkpoint explicitly disclosed. |
+| AC-3 | PASS | Exact identity/init/source exception/environment/duplicates executed. |
+| AC-4 | PASS | Fresh derived memory accepted; exact inherited markers rejected; historical provenance accepted. |
+| AC-5 | PASS inspected + bounded execution | No new authority/Controller/lifecycle; exact permitted source scope retained. No OS enforcement claim. |
+| AC-6 | PASS scoped | Routine N/A accepted only where allowed; required gates stop; historical report verdicts retained. |
+| AC-7 | BLOCKED | Scope/frozen originals/full B→H diff checks PASS, hooks/settings/shared memory unchanged. Actual current-head CI success not established; final GitHub refresh blocked. Issue9 remains reproduced FAIL, no waiver inferred. |
+| AC-8 | BLOCKED | R8 READY is Owner-reported exact S12; original persistence limited. Current Verifier cannot issue PASS due incomplete mandatory cases. No later H CI PASS. |
+| AC-9 | PASS tested scope | Actual A↔B destinations, inventories, shell/natively cooperative STOP and cadence covered. No isolation/race/OS guarantee inferred. |
+| AC-10 | PASS | Precise tracked/untracked/staged bytes and diagnostics checked. |
+| AC-11 | PASS via explicitly permitted recovery replay | Fresh-context native recovery executed; actual compaction event NOT_RUN, no equivalence claim beyond W2 allowance. |
+| AC-12 | PASS tested scope | Scratch/MEMORY denied authority; short routine no new mandatory planning/handoff; future hooks not prerequisite. |
+| AC-13 | BLOCKED full negative closure | Real native P1→P2 Critic before synthetic Owner PASS; remaining wrong/missing approval artifact mutation scenarios unfinished. |
+| AC-14 | BLOCKED | Positive W conformance, bounded REWORK and material P3 loop executed; complete stage permission/frozen mutation negatives not executed. |
+| AC-15 | BLOCKED | Reviewer REWORK and Verifier FAIL observed, correction/push local only; renewed S3 same-SHA independent assurance, consecutive stages and actual bounded-choice chain incomplete. |
+
+## Native lifecycle evidence, counts and limitations
+
+`native-lifecycle/refs.json` binds disposable (not project) subjects:
+
+- P1 `b2065855393710cc38b924e0dc094c4aacde9aca`; corrected P2 `25088174acfabad2dc6a606dfb91d2990b6d0e32`; separate synthetic Owner `ce473baaf40739ffc6f0c261b36eba0466110410`.
+- Wbad `63f22465fe0a2cf656e3ff80aec00da41f5ab66d`; corrected W1 `8c401c71a3567207123e2f35c52a4afd16bc48c7`.
+- Material P3 `7ed2435bd03664810f297f7865b2db6a9b771313`; READY P3B `0ac97ab1f78ed8543d9d4f9884d23a6453430e43`; separate synthetic Owner `081ace3ef232210cc8a9880a7df6819ead5afb0e`.
+- S1 `982134c6916b34da0a6cb95ec01c7c9d37778e58`; S2 `f27c765d898609535b2b8b3d38965b02c67ccdce`; S3 `ea8ca9d602dc1d212c0f2ce5d8d594c9e42628a8`.
+
+These are synthetic-project Git revisions, never substitutes for actual project S12. Runtime defect at S1 is deliberate fixture input, not an S12 product defect. S2 behavior passes independent execution; Verifier FAIL is explicitly required synthetic CI/delivery failure, not a runtime bug missed by Reviewer. A missed-Reviewer-runtime-defect variant is NOT_TESTED. S2 tests include 16,388 actual inputs; not exhaustive over all strings. S3 correction/local push0 does not supply missing independent reports.
+
+| Suite | Distinct completed items | Outcome |
+|---|---:|---|
+| Exact CI/init/guard/syntax and supplemental fault injection | 48 | 47 expected, 1 FAIL Issue9; two passes =96 executions, not96 distinct tests |
+| Workspace/absolute target/content | 75 | 75 final expected;79 executions include preserved superseded harness expectations |
+| Native routine/recovery/safety | 24 | 7 permitted +17 expected STOP;791 subprocess calls, not791 test cases |
+| Native lifecycle independent role reports | 9 completed reports | 6 Project/Stage Critic,2 Reviewer,1 Verifier; expected REWORK/READY/FAIL decisions; not full V20…25 closure |
+| Native provenance probe | 8 | 2 provenance-only positive +6 STOP; actual/synthetic input types explicitly logged |
+| Native gate reasoning probe | 26 inputs | 23 STOP,1 bounded choice,1 corrective planning,1 unsupported claim rejection; reasoning-only, excluded from completed operational acceptance count |
+| Additional actual lifecycle negative clones | 22 prepared | NOT_RUN independent execution; before inventories alone not PASS |
+
+The first three completed suites contain **147 distinct cases,146 expected results and1 known-defect FAIL**. This aggregate excludes partial lifecycle reports, reasoning scenarios and unexecuted fixture setup. It is not a count of satisfied mandatory W2 rows. Lifecycle setup/commands log has260 calls with actual exits, including failed setup attempts; it is not260 successful tests. Some native reports embed their own complete commands/exits separately. No global pass percentage is used to override missing mandatory cases.
+
+`native-lifecycle/gate-probe.json` explicitly states one native agent reasoned over26 supplied scenarios with no requested source mutation. It cannot establish before/after zero-write behavior for22 later prepared real negative clones. Their directories and N*-before.json remain evidence of preparation only. Native independent missions terminated at platform usage limit; no retries/self-approval were used to manufacture READY/PASS. Temporary lifecycle findings and original report bytes are preserved, including an original S2 report with EOF whitespace retained as encoded bytes in disposable history, not silently rewritten.
+
+## Outstanding acceptance / delivery gates and disposition
+
+1. Complete independent operational V-21…V-25 gaps with actual native roles when available: artifact negatives with after inventories; corrected S3 renewed same-SHA Reviewer/Verifier; full two-stage outputs/dependencies/required synthetic CI flow; actual bounded technical choice and material escalation. Preserve previous evidence and do not count reasoning as execution.
+2. Issue9 remains a separately tracked MEDIUM defect in unchanged CI. Its exact fault-path test FAIL is not waived by deferral; any repair needs separately authorized scope. No blanket claim that all failure-injection requirements pass.
+3. Preserve original Reviewer R8 independently through authorized evidence persistence; current handoff summary is not its original report. Do not alter historical findings `FND-VER-S8-001`, `FND-REV-R7-001` or R8 reported READY.
+4. Complete authorized delivery evidence persistence/publication separately, inspect actual final PR HEAD H and applicable GitHub Actions success. Final refresh currently blocked by authentication/access errors; do not infer no PR/no run from401/404. Recheck S12→eventual H evidence-only diff or renew source assurance if normative bytes change.
+5. Verifier PASS, working DELIVERY_READY, task COMPLETE, stage acceptance, Owner final acceptance/merge and deployment are separate facts. None is granted by this BLOCKED report. Main unchanged; no real source fixes, evidence commits, publication, merge or deploy performed.
+
+**Conclusion:** verification mission ends with truthful **BLOCKED**, not delivery readiness and not automatic implementation REWORK. Completed S12 guard/workspace/routine tests found no new source defect in their covered scope. Remaining execution/provenance/delivery requirements need closure; known Issue9 independently remains FAIL. Stop after this report as instructed.
+
+<!-- END ORIGINAL R1-original-BLOCKED -->
+
+
+---
+
+## Assurance recovery 2026-10-21 — R2-initial-original-BLOCKED
+
+This is a byte-identical original independent artifact, preserved separately after the unchanged historical S2 content. Source subject: S12 `5e42d2b1239f26962ee5f5942cd318997b51501c`. Historical verdicts retain their original scope and date. SHA-256: `a04d9d6814ff5d71122c6bbf406d00a2df92419b4292c05758233addc2b78a74`; bytes: 10353. The surrounding custody text is Orchestrator evidence, not part of the original.
+
+<!-- BEGIN ORIGINAL R2-initial-original-BLOCKED -->
+# WB-LITE-002 — Independent Verifier R2: BLOCKED
+
+Focused assignment V-21…V-25 only. No complete V-01…V-26 rerun. R1 original BLOCKED verdict is unchanged. This report is temporary independent evidence, not a committed project report or delivery authorization.
+
+## Immutable subject and synchronization
+
+Source S12: `5e42d2b1239f26962ee5f5942cd318997b51501c`.
+Approved P: `b4cbc37e6bc318a5b28f4db8cbeaafd3663c60df`; plan blob `fcfda1f6dfa011a5688c5f04111d918d6bbce707`.
+Frozen W2: `63ed889d8991a5d2187bb82709f4cbb5773db1cc`; work-block blob `19beb072f321a7c9730ea86630112ce8c1b90dbb`.
+Observed HEAD and local origin tracking: `2df62ab96d5b5411e5a55a98c0f40671b61746b9`.
+Assignment expected evidence HEAD: `bb3a2ff146de7d7abf21ac27ba77745f5902b5e0`, NOT AVAILABLE locally.
+
+Absolute root `/home/azur/Projects/WSL/agentic-sdlc-lite-worktrees/wb-lite-002-implementation`, origin `https://github.com/oleyna80/agentic-sdlc-lite.git`, branch `docs/wb-lite-002-implementation` verified by actual git commands, exit0. Tracked/staged/untracked/ignored state clean before and after. Five linked worktrees inventoried; no competing changes observed, which is not OS isolation. Main remains baseline `90c101ba2b6091a24c2f458f5ffc8b02e6eb04ab` in the inventory.
+
+Mandatory command `git -C /home/azur/Projects/WSL/agentic-sdlc-lite-worktrees/wb-lite-002-implementation fetch origin`:
+- Default sandbox exit255: cannot open shared Git worktree FETCH_HEAD, Read-only file system.
+- Authorized escalation was permitted, then actual fetch exit128: `fatal: could not read Username for 'https://github.com': No such device or address`.
+- `git -C <root> cat-file -t bb3a2ff146de7d7abf21ac27ba77745f5902b5e0` exit128, `fatal: git cat-file: could not get object info`.
+
+No automatic-review rejection occurred. No credentials/settings changed. No pull attempted because its prerequisites failed. Remote state after successful fetch is unavailable; stale origin tracking is not current remote evidence. Therefore expected authorized continuation and S12→expected-H normative equality cannot be verified. User mandatory STOP applies before fixture missions. Local S12 ancestry check exit0; local S12→observed-H name-status lists only handoff.md. Frozen P/W2 blobs at S12 match their original revisions. This does not verify the missing expected HEAD.
+
+Exact argv, outputs and numeric exits: preflight.json, fetch-escalated.json, post-block-readonly-checks.json and final-readonly-inventory.json.
+
+## Original evidence inspection
+
+Original R1 report and archive exist. Archive SHA256 verified MATCH:
+`d1f9dc2cbca0eb35bd6e3777963e8783238996887d67ad821d3c62a1e2de4343` at `/tmp/wb-lite-002-verifier-r1-s12-evidence.tar.gz`.
+Original R8 archive exists. SHA256 verified MATCH:
+`2a361472a7442c2c35ca161e201d62a5746dc349feb84864c818e768158d4128` at `/tmp/review-r8-s12-tl1ht3jc.tar.gz`.
+
+R1 full report read; nine original independent lifecycle JSON records examined, including their subject SHAs, roles, embedded commands/exits and verdicts. Twelve exact original files (report, refs, commands and nine role records) copied from the verified archive to prior-originals; byte equality with retained originals checked. prior-record-audit.json contains hashes, archive members, identities, subjects and commands. Original archives/reports were not rewritten.
+
+R8 archive availability/hash are now confirmed locally. No standalone original narrative Reviewer R8 report was identified among its archive members. Local archive verification does not establish preservation of the original report in Git. Owner-reported R8 READY on S12 and its original-report persistence limitation remain separate facts.
+
+R1 completed CI/workspace/routine suites were not repeated. Its nine lifecycle reports establish bounded prior observations, not completion of all V-21…V-25. Its 26 reasoning-only cases and 22 prepared negative fixtures are not credited as operational acceptance evidence.
+
+## Operational coverage
+
+Every R2 operational entry is NOT_RUN because synchronization STOP preceded native invocation. All five requirement verdicts are BLOCKED. The 41 entries under scenarios/ are planned steps/subcases, not 41 executed tests. No R2 native agent was invoked; native availability/quota was not tested. This is not another observed quota failure.
+
+| Group | Verifiable prior R1 execution | Required remaining coverage | R2 verdict |
+|---|---|---|---|
+| V-21 | P2 Project Critic READY; separate synthetic Owner; Wbad REWORK→W1 READY; fixture implementation | Full native positive closure and six STOP negatives: absent Owner, wrong P, no Stage READY, out-of-P W, missing actual permission, mutated frozen W; independent before/after evidence | BLOCKED |
+| V-22 | Material P3 REWORK→P3B READY, synthetic Owner record; bounded Wbad→W1 REWORK/READY | Complete affected material implementation and invalidation/no-early-mutation path; fully evidenced bounded implementation and frozen/historical status preservation | BLOCKED |
+| V-23 | S1 Reviewer REWORK; S2 Reviewer READY + distinct Verifier FAIL; corrected S3 local tests/publication recorded | Native Reviewer READY and Verifier PASS on exact S3; actual STOP cases for permission, mandatory gate, sensitive operation, unapproved merge | BLOCKED |
+| V-24 | Full consecutive-stage chain not completed | Both stages/output hashes/same-source assurance/local authorized publication/synthetic CI/progression; missing/stale/hash mismatch/different-SHA/CI PENDING,FAIL,NOT_RUN/acceptance/scope/required-merge negatives | BLOCKED |
+| V-25 | Reasoning only, insufficient | Distinct native Architect and Orchestrator, two-option comparison, selection, rationale, affected checks; material/security/scope/unavailable-assurance/unresolved-blocker negatives | BLOCKED |
+
+Detailed NOT_RUN inventory and next incomplete entry: scenarios/*.json, groups/V-21.json … V-25.json. No full group PASS is derived from summaries or Python policy decisions.
+
+## Source candidates and role separation (prior execution only)
+
+Disposable fixture repository `/tmp/wb-lite-002-verifier-r1-s12/native-lifecycle/repo`, branch `task/lifecycle`:
+- P2 `25088174acfabad2dc6a606dfb91d2990b6d0e32`, plan blob `1065ad659dd8436261a58ee4e39c3da68ad3b3ca`.
+- W1 `8c401c71a3567207123e2f35c52a4afd16bc48c7`, W blob `e12eca32c7624518a9b2d4d07945323450517745`.
+- S1 `982134c6916b34da0a6cb95ec01c7c9d37778e58`, src/greeting.py blob `71495407c0baa6602600119b56fcde742dca3358`: Reviewer REWORK, hardcoded Alice ignores input.
+- S2 `f27c765d898609535b2b8b3d38965b02c67ccdce`, source blob `b443fa09509d0a597ea9908ea830c4b78e49b3fe`: Reviewer READY; independent Verifier FAIL because required synthetic CI was FAIL and bare delivery absent at observation, while behavior checks passed.
+- S3 `ea8ca9d602dc1d212c0f2ce5d8d594c9e42628a8`: correction/local checks/local publication in R1 commands. Renewed independent Reviewer/Verifier reports absent. No READY/PASS transfers from S2.
+
+Original native identities: `/root/native_lifecycle/project_stage_critic` supplied Project/Stage Critic and Reviewer records; `/root/native_lifecycle/native_gate_probe` supplied material Project Critic and separate Verifier S2. Fixture Coder/orchestration recorded under `/root/native_lifecycle`. These are prior native mission identities, not new R2 invocations. Role separation is bounded by those records; no OS isolation inferred. Synthetic Owner/CI records never establish actual Owner authorization or GitHub Actions success. R1 deliberately faulty greeting is a disposable input, not an S12 source defect.
+
+## Findings, mutation limits and assurance
+
+R2 infrastructure blocker: mandatory origin fetch authentication unavailable (exit128), expected HEAD absent (exit128). Reproduce with the two exact Git commands above. Severity: blocks this verification entry; not evidence of a normative S12 defect. No new S12 source defect established.
+
+No R2 operational source mutation, fixture commit or publication. Actual repository tracked/staged/untracked/ignored state clean at final observation; final diff and cached diff empty, HEAD unchanged. Fetch attempts may touch Git metadata; no claim of zero filesystem writes by fetch. All new report/checkpoint writes confined to this user-owned temporary directory. No normative/historical report/shared memory writes, hooks, permanent framework, real PR/push/merge/deploy/settings or Issue9 changes.
+
+Issue9 retains R1 independently reproduced fault-path FAIL, MEDIUM: in unchanged whitespace CI body a plausible-output `git rev-parse HEAD^` exit74 falls through to root fallback; body returns0 instead of failing closed. Fallback whitespace validation still executes. This was not retested or repaired in R2; deferral is not PASS or waiver. Its acceptance impact remains the explicit unresolved disposition recorded in R1.
+
+Current GitHub PR/Actions was NOT_RUN in R2 after mandatory preflight STOP. No current-head Actions PASS established; R1 older snapshots are not current GitHub status. Current remote access, authorized archive/report persistence, eventual S12→delivery-H evidence-only verification, real applicable Actions at H and final Owner acceptance/merge remain separate gates.
+
+Focused R2 verdict: BLOCKED for V-21…V-25. Overall S12 assurance: BLOCKED; mandatory native coverage remains incomplete. Combining inspected R1 evidence with zero new R2 native executions cannot yield Verifier PASS. WB-LITE-002 is not established ready for delivery. R1 verdict and historical findings FND-VER-S8-001 / FND-REV-R7-001 / reported R8 READY remain unchanged.
+
+Next authorized action: restore authorized origin read authentication in the execution environment, then resume from manifest.json after successful mandatory fetch, verified evidence-only expected continuation and safe synchronization. Continue only incomplete native scenarios; do not rerun completed suites without an evidence reason. No new verifier or delivery action is initiated by this report.
+
+Checkpoint root: `/tmp/wb-lite-002-verifier-r2-s12-57gt0hm4`. All JSON checkpoint validation and SHA256 inventory are in checkpoint-validation.json and checksums.json. External archive checksum sidecar accompanies the final archive. Temporary storage is not durable Git memory; an authorized evidence writer must preserve original evidence separately. STOP after reporting.
+
+<!-- END ORIGINAL R2-initial-original-BLOCKED -->
+
+
+---
+
+## Assurance recovery 2026-10-21 — R2-focused-original-PASS-V21-V25-only
+
+This is a byte-identical original independent artifact, preserved separately after the unchanged historical S2 content. Source subject: S12 `5e42d2b1239f26962ee5f5942cd318997b51501c`. Historical verdicts retain their original scope and date. SHA-256: `4dfe24ffcea2c1c353e3a3a0322bf5bd72f2ddedca2116a3637582744fade04f`; bytes: 19294. The surrounding custody text is Orchestrator evidence, not part of the original.
+
+<!-- BEGIN ORIGINAL R2-focused-original-PASS-V21-V25-only -->
+# Independent Verifier R2 — S12 focused continuation
+
+**Focused R2 verdict: PASS for V-21, V-22, V-23, V-24 and V-25. Overall full acceptance/delivery: BLOCKED.** All assigned mandatory operational lifecycle subcases have verified execution/reuse evidence; required actual current-head GitHub CI and delivery gates remain outstanding. Original R1 BLOCKED and earlier R2 report remain unchanged.
+
+## Immutable subjects and real repository
+
+- Repository: oleyna80/agentic-sdlc-lite; absolute worktree /home/azur/Projects/WSL/agentic-sdlc-lite-worktrees/wb-lite-002-implementation.
+- Branch docs/wb-lite-002-implementation; approved P b4cbc37e6bc318a5b28f4db8cbeaafd3663c60df; frozen W2 63ed889d8991a5d2187bb82709f4cbb5773db1cc.
+- Normative subject S12 **5e42d2b1239f26962ee5f5942cd318997b51501c**. All contract/source assertions use this immutable object, not evidence HEAD.
+- Assignment evidence H bb3a2ff146de7d7abf21ac27ba77745f5902b5e0 is ancestor of observed H **bceaa971589f3485b417978127b7a3a4a1c01917**. Baseline 90c101ba2b6091a24c2f458f5ffc8b02e6eb04ab.
+- plan.md blob fcfda1f6dfa011a5688c5f04111d918d6bbce707; W2 blob 19beb072f321a7c9730ea86630112ce8c1b90dbb; approved specification blob e8a20a4ae87ae8438b0e66be13c119673260c480. Ancestry and immutable blob checks retain R1 exact evidence; S12 canonical exports/hash binding are source-binding.json.
+- Preflight verified root/origin/branch/HEAD, staged/tracked/untracked/ignored state and all five linked worktrees. No unrelated dirty work or competing writer observed. Cooperative inspection is not race prevention or OS isolation.
+- Origin https://github.com/oleyna80/agentic-sdlc-lite.git. Exact authorized `git -C <absolute-worktree> fetch origin` exit 0; post-fetch identity/clean/ancestry checks succeeded; `git -C <absolute-worktree> pull --ff-only origin docs/wb-lite-002-implementation` exit 0, Already up to date. See fetch.json, post-fetch.json, pull.json and entry-tool-results.json.
+- Full S12..H diff inspected: only docs/changes/WB-LITE-002/handoff.md evidence updates. Full baseline..H `git diff --check` exit 0, empty diagnostics. Final inventory exit 0 clean; local HEAD == origin branch == bceaa971... . No normative, historical report, hooks, settings, shared memory or actual source writes performed.
+
+## Original evidence and reuse
+
+- R1 original report /tmp/wb-lite-002-verifier-r1-s12/report.md available. Archive /tmp/wb-lite-002-verifier-r1-s12-evidence.tar.gz available and actual SHA-256 **d1f9dc2cbca0eb35bd6e3777963e8783238996887d67ad821d3c62a1e2de4343**, matches expected. Original R1 verdict **BLOCKED remains unchanged**.
+- R8 archive /tmp/review-r8-s12-tl1ht3jc.tar.gz available; actual SHA-256 **2a361472a7442c2c35ca161e201d62a5746dc349feb84864c818e768158d4128**, matches expected. Scripts/fixture evidence available. Standalone original independent R8 narrative report was not identified as a preserved Git artifact; Owner-reported READY on exact S12 is retained with this provenance limitation, not invented as original report.
+- Earlier R2 BLOCKED report and archive remain byte-preserved. Archive /tmp/wb-lite-002-verifier-r2-s12-57gt0hm4-evidence.tar.gz SHA-256 4acd4787807fc1b79f609d30c1a8ef16d85baf4261bdae1f74d1b7ac08e6ceb9.
+- Reused **147 distinct R1 operational cases**, not rerun: CI/initialization48 (47 expected, Issue9 FAIL1), workspace/target/content75 expected outcomes, native routine/recovery24 (7 allowed/17 expected STOP). Parent inspected original detailed raw evidence and compared75 original files byte-for-byte to hash-verified archive, plus current exact-S12 canonical blob equality. r1-147-record-audit.json SHA-256 5cbb80a7c5588f41c51d5a1d4e092895554991b79eb6ce93af984d194842584a.
+- Original nine independent lifecycle reports reused only after original bytes, candidate SHA/blob/ancestry and execution commands verified (prior-record-audit.json, group reused-chain mappings). Eight provenance checks retain explicit synthetic-input limits.
+- 26 reasoning-only scenarios and22 prepared unexecuted R1 negatives are NOT operational evidence. Original41 prepared R2 negative inputs remain NOT_RUN as original attempts; current operational replacement coverage is mapped by final group manifests, never retroactively assigned execution.
+
+## Native execution and limits
+
+Native actual roles are recorded by returned collaboration identities, exact invocation prompts/task files and operational command logs. Separate Coder, Critic, Reviewer, Verifier missions execute real fixture reads/tests/writes. Roles share filesystem; independence of missions is demonstrated, OS/process security isolation is not. Owner/spec/CI fixture inputs are explicitly synthetic. Local bare publication is real local Git, not GitHub publication. Missing-permission cases observe actual0555 mode/access false then STOP; no failed write syscall is claimed. Gate-unavailability input is synthetic, not actual Codex quota failure. No actual native compaction observed; prior W2-permitted fresh-context recovery remains distinct.
+
+## V21 / V22 completed checkpoint
+
+See v21-v22/summary.md, V-21-summary-final.json, V-22-summary.json, group-manifest.json, scenario-*/record.json + commands.json and parent-V21-V22-checkpoint-audit.json.
+
+V21 **PASS**: approved exact P2 25088174acfabad2dc6a606dfb91d2990b6d0e32, native Project Critic READY reused from original, separate synthetic Owner, committed W1 8c401c71a3567207123e2f35c52a4afd16bc48c7 and independent Stage READY, distinct native Coder source a3580933e069728a04b7424daed668b109cbac8b. Four actual outputs and syntax exit0. Seven accepted native STOP: no current Owner approval; approval wrong P; W missing READY; W outside P; actual permissions unavailable; frozen W mutation; extra missing Project Critic READY. All prohibited source/index/ref/file mutations0.
+
+Three initial no-owner/wrong-P/no-stage-READY attempts were operationally zero-write but insufficient fixtures because valid historical approvals/READY remained reachable. Final assessment PARTIAL; original bytes preserved. New explicit current Owner withdrawal/supersession and genuinely new W without READY eliminate ambiguity. V21 accounting11attempts =8acceptedPASS+3retainedPARTIAL, not product defects.
+
+V22 **PASS**,4operational records: material-old-approval STOP (input6a9827f1c3c62833b029fe09ce5e0b820f4c3bc7); new P3B0ac97ab1f78ed8543d9d4f9884d23a6453430e43 → independent Project Critic original → separate synthetic Owner081ace3ef232210cc8a9880a7df6819ead5afb0e → W3 207747dae795c5a6981a8bd8dd792987683711be → new independent native Stage Critic READY → Coder source5d25a51627959ece45630c984b152831f558f709 (20outputs+syntax0). W3blob9a1db18960ea4013913b9f4bae284b82ca833861. Bounded WbadREWORK→correctedW1READY→Coder85332eeba40a99505d31be35361346b3af9e006f (4outputs+syntax0), P2frozen, historicalWbad63f22465fe0a2cf656e3ff80aec00da41f5ab66d/report retained, no Owner-per-W. Separate status/handoff evidenceH ab08fec957e5b224ddf080672933d6bb88e2f8dc changes only2evidencefiles; P/spec/Wblobs identical. Source assurance/delivery for these lifecycle-entry candidates NOT_RUN, never self-issued by Coder.
+
+## V23 completed checkpoint
+
+V23 **PASS**. Original independently executed chain reused with exact records:
+
+| Candidate | Exact SHA | Independent outcome |
+|---|---|---|
+| S1 | 982134c6916b34da0a6cb95ec01c7c9d37778e58 | Reviewer REWORK; hardcoded Alice behavior |
+| S2 | f27c765d898609535b2b8b3d38965b02c67ccdce | Reviewer READY; separate Verifier FAIL, required synthetic CI exit7 and local publication missing |
+| S3 | ea8ca9d602dc1d212c0f2ce5d8d594c9e42628a8 | Corrected source/evidence/CI; new R2 independent Reviewer READY + Verifier PASS on exact same S3 |
+
+New reviewer-s3.json SHA5bb0890aaf14ed92b4448a73da979bbe8b67210bab633598d505b6a7346b69da (39commands;135inputs) and verifier-s3.json SHAb46b524b370524a41e976b6487c7f1e6df1b43737a51f99b46d5ffce4b9f0af6 (38commands;20acceptancechecks/16518inputs), all required behavior/CI commands exit0. Original S2FAIL preserved, no verdict transfer between SHAs. Inventories files/index/refs/HEAD/bare unchanged by assurance missions. New real local synthetic CI and exact local-bare publication succeeded exit0. Four distinct native STOP cases missingpermission/mandatorygate/sensitiveoperation/unapprovedmerge all zero mutations. See reused-v23-chain.json, V23-S3-CI-publication.json, V23-stop-*.json and original independent reports.
+
+## V24 completed checkpoint
+
+V24 **PASS**: two consecutive stages actually completed in the disposable project. Native Orchestrator verified Stage A output SHA-256 a72a862d6adefc39f4b2fb4fbb73963bf4b63d6d391caa82ec11ac6f3b56d916, exact-S3 independent READY/PASS, actual required local synthetic CI and authorized non-force own-bare publication. Stage A evidence-only HA is 961a6e3cc3755d7d8045a39bee662cb943425b9d. It autonomously prepared committed Stage B W2 e6394cede62309b098e31088040dd2c545dee9e4, blob fe51b686daba644134c50e54261c71650c923afc. A distinct native Stage Critic returned READY before a separate Stage B Coder.
+
+Stage B source **c84ff7ac65decf6be57bfa0ea5902178aef05df3** adds only docs/usage.md (blob9b73224c18cf549163357d63ee123a77910aed56). Independent native Reviewer READY and Verifier PASS bind this exact SB. Reviewer report SHA-256 bfc9fb4303069bfd3c1584d218202aec123a7729ed1a1712a870ef8fc697f69b; Verifier report SHA-256 8243076f23ca04c9a71935dfd7a03a18e7c082cee3c20993557d4858979d5174. Actual documented import, Alice/BOB/X/{A} exact examples, ASCII domain, output hashes, dependency and frozen contracts checked. Source CI/local-bare publication actually executed exit0. The independent Verifier made no fixture mutations.
+
+Stage B delivery HB **e7203fa128776b0394f0fabc5215bc5956d8499c** adds only six evidence files. P/spec/W1/W2/greeting and SB documentation blobs unchanged. Actual local synthetic CI on HB exit0 and authorized non-force own-bare publication exit0; native Orchestrator accepted Stage B. docs/usage.md SHA-256 d7f53791b02b2944cd9da2609889ef1739e9e3c56589359201b53611d21469f8. No additional Owner approval per conforming W2, no required or performed intermediate merge. All Owner/CI fixture inputs explicitly synthetic, no real project acceptance claimed.
+
+Ten separate native negative progression missions PASS with STOP and zero files/index/HEAD/refs mutations: missing output; stale dependency; output hash mismatch; different-source Reviewer/Verifier; required CI PENDING; FAIL; NOT_RUN; unsatisfied acceptance state; W2 outside delegated write-set; explicit merge prerequisite without actual merge/Owner GO. Before/after inventories equal in each.
+
+See v23-v24/V24-summary.md, V24-stage-b-delivery-acceptance.json, group-result.json, execution-counts.json, original critic/coder/reviewer/verifier reports and parent-V23-V24-checkpoint-audit.json. Final group manifest SHA-256 ccfe76a7385c19ad8e1eaa45bda6e659864d042a838bb15a3db984e0879f6a22.
+
+## V25 completed checkpoint
+
+V25 **PASS**,6operational cases: actual native Architect compares concatenation vsf-string (14inlinechecks0), distinct Orchestrator selects f-string and records feasibility/risk/test rationale, modifies onlysrc/greeting.py, executes7actual-sourcechecks0, commits disposable fdbdab8a2ddd8a24741e474f86aafe495b8b71ad. Pblobd3e337d14ecf758fb8adf435e74bfcab3f9b7c55, Wblob5a0a0197d39992c668ba0f10894d1ec2b4d5392f frozen. Five native STOP alternatives: materialrequirement, security/risk, expandedscope, unavailablemandatoryassurance, unresolvedrequirement. All negative before/after files/index/HEAD/refs equal, mutations0. See v25/summary.md, records/*.json, execution-counts.json, actual prompts and parent-V25-checkpoint-audit.json. No new Owner-per-W for boundedchoice, no invented source assurance.
+
+## Findings and overall boundary
+
+- No new S12 normative source defect established by completed focused operational cases. FND-VER-S8-001 and FND-REV-R7-001 preserved as historical findings; their S12 regression evidence reused without rerunning147cases.
+- **LOW verifier-process scope deviation**: native Architect wrote intermediate read capture /tmp/v25-native-architect-reads.json outside assigned report-only path. No normative or fixture source mutation. Original retained; exact copy v25/architect-read-capture-original.json SHA-256 4b01e6dbd86eb7479e7175433aa51c210663a895805555271fbfd61f23d8c349; scope-deviation.json records exact full hash. No unauthorized cleanup. This is a verifier execution deviation, not a S12 implementation defect.
+- Three incomplete original V21 fixture attempts disclosed PARTIAL and corrected by separate cases. Parent audit initial KeyError1 on differently-shaped status record corrected by optional-field handling; no tests/source mutation. Stage B Coder no-index exit1 empty diagnostics correctly treated as content difference after inspection, whitespace/staged checks0. Stage B Verifier guessed-path exit128 was diagnosed and correct W path then inspected; an overstrict literal-SHA push-refspec harness assertion was corrected against actual HEAD binding with no source correction. V21/V22 also preserves a nonapplicable historic-W probe exit128, not used for ancestry. Evidence retains diagnostics and numeric exits, no fictitious allcommands0 claim.
+- **Issue9 MEDIUM, independently established fault-path FAIL remains open**. Extracted unchanged whitespace CI body uses `if git rev-parse HEAD^ ...; then ... else git diff-tree --check --root ... fi`. Inject plausible stdout plus exit74 for history inspection; other Git calls real; actualstep0, expectednonzeroSTOP. Fallback whitespace validation still runs; failure is history-error misclassification/fail-closed diagnostic behavior. Outside P/W2 permitted first-use-guard changes. Deferral is no waiver/PASS/repairauthority. Nominal V02localchecks/directdiffPASS does not prove this faultpath; if acceptance requires faultpathPASS, separate authorized disposition/correction needed.
+- Actual GitHub authenticated reads this continuation exit0: branch runs total_count0/runs[], all-state branch PRlist[], Issue9OPEN. CurrentH Actions **NOT_RUN**. NoPR/push/settings/merge/deploy manufactured. Saved raw outputs entry-tool-results.json.
+- Overall WB-LITE-002 assurance is **BLOCKED for full acceptance/delivery**, not unqualified Verifier PASS. R2 closes all assigned operational lifecycle gaps. AC1/13/14/15 lifecycle gaps close within tested scope; R1other scoped ACs retain evidence. AC7/8 and V02realCI/V12delivery remain open: currentH GitHubCI absent, originalR8 independent-report persistence limited, R2 originals onlylocal/tmp pending authorized preservation, finalOwneracceptance/merge separate.
+- Next authorized action after final report: Orchestrator/evidence writer verify archive SHA and preserve original independent reports/checkpoints under separately verified evidence write authority, then handle actualPR/currentHCI and explicitIssue9disposition/finalOwnergates. This Verifier stops after reporting; no automatic newVerifier/fixes/sourcewrites/delivery.
+
+## Consolidated operational matrix and native identities
+
+| Requirement | Accepted focused scenarios | Additional preserved attempts | Result |
+|---|---:|---:|---|
+| V-21 | 8 (positive +7 STOP) |3 PARTIAL initial ambiguous fixtures| PASS |
+| V-22 | 4 (material STOP/new cycle/bounded REWORK/frozen status evidence) |0| PASS |
+| V-23 | 5 (complete corrective chain +4 STOP) |0| PASS |
+| V-24 | 11 (complete two-stage chain +10 STOP) |0| PASS |
+| V-25 | 6 (bounded choice +5 STOP) |0| PASS |
+| Total |34 PASS (27 STOP +7 positive/evidence paths)|3 PARTIAL|Focused PASS|
+
+37 attempted scenario paths include three preserved insufficient attempts. This count includes completed chains partly reusing verified prior native records, not34 entirely fresh end-to-end chains. 47 resumed checkpoint actions (15+26+6) are evidence/gate/implementation actions, not47 distinct mandatory scenarios. No new mandatory focused scenarios remain BLOCKED or NOT_RUN. The41 original prepared R2 inputs retain their original NOT_RUN status; replacement coverage maps to detailed executed scenario IDs in final-checkpoint-index.json and per-group summaries. Reasoning-only oracles do not contribute acceptance evidence.
+
+V23/V24 have570 raw command records:566 exit0,3 exit1 (absent-ref and inspected no-index differences),1 diagnosed wrong-path exit128. Individual numerical input tests are not counted as independent scenarios. V25 records172 Orchestrator CLI +12 Architect commands. Every original scenario command, numeric exit, stdout/stderr, input SHA/branch/fixture, authority input and inventory is retained in detailed records; no shortened command summaries substitute execution evidence.
+
+Actual distinct R2 subagent identities (10), plus parent Independent Verifier /root:
+
+| Native identity | Actual mission responsibility |
+|---|---|
+| /root/r2_v21_v22 | Orchestrator, isolated V21/V22 fixture preparation/checkpoints |
+| /root/r2_v21_v22/native_coder | Coder implementations and prerequisite STOP missions |
+| /root/r2_v21_v22/independent_stage_critic | Independent exact material W3 READY |
+| /root/r2_v23_v24 | Orchestrator, local CI/publication and two-stage progression |
+| /root/r2_v23_v24/negative_coder | Coder prerequisite STOP, separate later Orchestrator progression STOP missions |
+| /root/r2_v23_v24/s3_reviewer | Independent exactS3 Reviewer; later Stage Critic and Stage B Reviewer, no authored source |
+| /root/r2_v23_v24/s3_verifier | Independent exactS3 and exactSB Verifier |
+| /root/r2_v23_v24/stage_b_coder | Separate Stage B implementation |
+| /root/r2_v25 | Distinct V25 Orchestrator selects bounded technical alternative |
+| /root/r2_v25/native_architect | Independent technical alternatives comparison |
+
+Actual spawn/followup prompts and task hashes are group native-invocations/task files. Followup missions reuse identities; identity count is not invocation count. Original R1 native Project/Stage Critic, S1/S2 Coder/Reviewer/Verifier reports remain original verified reuse, not new R2 identities. No role labels are used as proof of OS isolation.
+
+## Checkpoint preservation and next action
+
+Root manifest.json now identifies COMPLETE focused R2, all five PASS, exact subjects, original references,47 hash-validated action records and next authorized preservation step. Original pre-resume manifest is manifest-before-resume.json. original-R2-preservation-audit.json verifies67 original file checksums; prior report remains byte-preserved. Final-checkpoint-index.json validates every current47 record against its group manifest.
+
+Evidence archive target (outside evidence root, no overwrite): /tmp/wb-lite-002-verifier-r2-s12-57gt0hm4-resume-20261019-evidence.tar.gz. It includes the complete current R2 evidence root and untouched original R1/R8/earlier-R2 archives under original-archives/. Final archive SHA-256 and read-back validation are external .sha256 / .validation.json sidecars and the final user report; this avoids self-referential archive hashing. Local /tmp is not guaranteed durable project memory. Authorized Orchestrator/evidence writer must verify hashes and preserve originals in the project under its own checked write-set/authority. No evidence commit, real push, PR, merge or deployment was performed by this Verifier.
+
+<!-- END ORIGINAL R2-focused-original-PASS-V21-V25-only -->
+
+
+---
+
+## Assurance recovery 2026-10-21 — R3-original-independent-report
+
+This is a byte-identical original independent artifact, preserved separately after the unchanged historical S2 content. Source subject: S12 `5e42d2b1239f26962ee5f5942cd318997b51501c`. Historical verdicts retain their original scope and date. SHA-256: `f53049f0aeac9fdfb454fd24d25a2553cedcef1681de6eee77d29c40d9cf3647`; bytes: 40775. The surrounding custody text is Orchestrator evidence, not part of the original.
+
+<!-- BEGIN ORIGINAL R3-original-independent-report -->
+# WB-LITE-002 — Independent Verifier R3: original report
+
+Дата проверки: 2026-10-21. Native identity: `/root/wb002_verifier_r3`. Subject: immutable S12 `5e42d2b1239f26962ee5f5942cd318997b51501c`. Работа выполнена независимо от Coder, Orchestrator и Reviewer R9. Это новый собственный Verifier verdict; исторические R1/R2 и Reviewer R8 не переименованы.
+
+## 1. Independent verdict and decision boundaries
+
+**Overall independent verification verdict: PASS для mandatory in-scope AC-1…AC-15 / V-01…V-26 на exact S12.** Достаточность каждого критерия установлена по исходным executable records, независимо проверенной integrity/source binding, новым read-only Git/GitHub checks и genuine independent Reviewer R9 READY на том же S12. Этот PASS не получается сложением заголовков прежних отчётов: проверены их фактическое покрытие, незавершённые попытки, реальные commands/exit codes и ограничения.
+
+**Release/merge readiness сейчас: BLOCKED.** Новый R9 и этот R3 ещё требуют разрешённого durable Git custody; eventual evidence-only H требует новой проверки S12→H и actual GitHub Actions на том H. Известный Issue #9 fault-path остаётся реально наблюдённым FAIL вне W2 implementation scope и требует отдельного явного Owner risk disposition перед интеграцией PR #11. Final Owner acceptance и Merge GO отсутствуют. PASS выше не разрешает merge, изменение CI, P/W2 или shared memory. Evidence-only publication уже имеет отдельное Owner authorization и может продолжаться после разрешённого сохранения отчётов; этот Verifier не выдаёт дополнительных полномочий.
+
+AC-8/V-11 technical same-S12 gate закрывается genuine R9 READY + настоящим R3 PASS. Сохранение точных оригинальных bytes в Git является следующим самостоятельным custody gate. Исторический недостаток R8 не скрыт и не исправлен задним числом. Новые отчёты дают новое независимое assurance.
+
+## 2. Exact provenance and read-only preflight
+
+Проверен абсолютный worktree `/home/azur/Projects/WSL/agentic-sdlc-lite-worktrees/wb-lite-002-implementation`, origin `https://github.com/oleyna80/agentic-sdlc-lite.git`, branch `docs/wb-lite-002-implementation`. До и после проверки HEAD равен H ниже; `git status --porcelain=v1 --untracked-files=all --ignored` пуст. Это включает tracked/staged/untracked/ignored состояние; staged source не подменял Git objects S12. Все шесть linked worktrees перечислены через `git worktree list --porcelain`; они не изменялись этим Verifier.
+
+| Объект | Exact SHA / blob |
+| --- | --- |
+| Baseline B / main | `90c101ba2b6091a24c2f458f5ffc8b02e6eb04ab` |
+| Approved P | `b4cbc37e6bc318a5b28f4db8cbeaafd3663c60df` |
+| P tree | `0159812db4de9c6f4ec68c73c0bcfb2576fa43be` |
+| Frozen W2 | `63ed889d8991a5d2187bb82709f4cbb5773db1cc` |
+| W2 tree | `e607c78e8e59fab6bb4d9e61c6ee3c9dd2b9fbb2` |
+| Normative S12 | `5e42d2b1239f26962ee5f5942cd318997b51501c` |
+| S12 tree | `01e9de8212a4b2c277e0bcfdc75d98403026bd1d` |
+| Observed PR #11 H | `69246782c99423721fdb4a6adefc693ee6f57613` |
+| H tree | `95a51da691a24d7b253c5f59aa190a220eae272d` |
+| `plan.md`, P = S12 = H | `fcfda1f6dfa011a5688c5f04111d918d6bbce707` |
+| accepted `docs/changes/lite-v01-corrective-project/spec.md` | `e8a20a4ae87ae8438b0e66be13c119673260c480` |
+| `docs/changes/WB-LITE-002/work-block.md`, W2 = S12 = H | `19beb072f321a7c9730ea86630112ce8c1b90dbb` |
+| S12 workflow | `c60e726dd03b72168c4483972e9f11c0ff05453d` |
+| S12 workspaces | `baadc348775a69f720ac0cf23f931658e518e47f` |
+| historical `review.md` prefix blob | `1f7058ff15f4b9f68ef1216a8020d824131d7677` |
+| historical `verification.md` prefix blob | `d00619c34b0ff4960d016c4d310983f9722569b9` |
+
+Actual `merge-base --is-ancestor` B→P, P→W2, W2→S12, S12→H each exit0. `git diff --name-status B S12` gives34paths:21 approved normative source paths plus13 planning/evidence paths. `git diff --name-status S12 H` gives only `M docs/changes/WB-LITE-002/handoff.md`. Full `git diff --check B H` exit0. No fetch, reset, staging, commit, push, settings mutation, real worktree mutation, merge or retarget was performed by R3.
+
+Read applicable root/parent instructions, PROJECT_BRIEF/MAP, integrated context/progress, canonical development/security procedures, Verifier role, accepted exact spec/P and W2 including §7/§8. Frozen P/W and separate approval are not replaced with branch-local summaries. Original Project Critic and Stage Critic report objects remain reachable. R9 independently inspected the21path source diff and historical normalization mapping; R3 checked its genuine report and binding rather than attributing those source-review operations to R3 execution.
+
+## 3. Evidence authentication and classification
+
+Protected local custody root C is `/home/azur/Projects/WSL/agentic-sdlc-lite-evidence/WB-LITE-002/S12`. R3 recalculated all10 entries in `manifests/SHA256SUMS`:10/10 exact matches. This is protected local custody, **not an off-machine backup**. Restricted archives were neither published nor extracted into the real repository. R1 contains hardlinks/absolute symlinks; inspection used `tarfile.getmember` + `isfile()` + `extractfile()` for regular members only, never `extractall()`.
+
+### 3.1 Original archives, reports and copies
+
+| Evidence | SHA-256; provenance and actual status |
+| --- | --- |
+| R1 archive, `originals/verifier-r1/wb-lite-002-verifier-r1-s12-evidence.tar.gz` | `d1f9dc2cbca0eb35bd6e3777963e8783238996887d67ad821d3c62a1e2de4343`; original execution/archive, historical BLOCKED |
+| R1 archive member `wb-lite-002-verifier-r1-s12/report.md` | `7c6a2c517e49dbc0087bfc963636613d618283e26171e95c68363a3a2985fcb6`; byte-identical to `reports/verifier-r1-original-report.md`, independently compared |
+| R2 initial archive, `originals/verifier-r2/wb-lite-002-verifier-r2-s12-57gt0hm4-evidence.tar.gz` | `4acd4787807fc1b79f609d30c1a8ef16d85baf4261bdae1f74d1b7ac08e6ceb9`; original BLOCKED |
+| R2 initial member `wb-lite-002-verifier-r2-s12-57gt0hm4/report.md` | `a04d9d6814ff5d71122c6bbf406d00a2df92419b4292c05758233addc2b78a74`; original report,41 prepared cases NOT_RUN |
+| R2 focused archive, `originals/verifier-r2/wb-lite-002-verifier-r2-s12-57gt0hm4-resume-20261019-evidence.tar.gz` | `322aa3952866a5fa52233ac660f04357d601b85e37c33c3ba49ace0bf330fd29`; focused V21–25 PASS only, original overall BLOCKED unchanged |
+| R2 focused member `wb-lite-002-verifier-r2-s12-57gt0hm4/resume-20261019/report-r2-resume.md` | `4dfe24ffcea2c1c353e3a3a0322bf5bd72f2ddedca2116a3637582744fade04f`; byte-identical to `reports/verifier-r2-focused-original-report.md`, independently compared |
+| R8 original execution archive, `originals/reviewer-r8/review-r8-s12-tl1ht3jc.tar.gz` | `2a361472a7442c2c35ca161e201d62a5746dc349feb84864c818e768158d4128`; genuine drivers/logs/records, original standalone narrative `report.md` absent |
+| R7 original execution archive | `40053e8a93f59f557637e0c63e6a0452b15fc3ee6b82128f0466e50aa909f7ed`; historical S11, not S12 assurance; no missing narrative invented |
+| custody `manifests/evidence-manifest.json` | `613a680f64bf5dc383eac4e982e7abfef356ef0d43a2b4121d6bb8216debf0e7`; derived inventory, not independent verdict |
+| custody `reports/preservation-report.md` | `8f0d616244376ad15fbf3cf1ba7f71c76f272370f18cfedca86af4f7aef59caf`; preservation report, not executable result |
+| R2 focused original manifest sidecar | `84f8166f2b01e89cfb0a9a00b8da006c087fc087e6b120e01471f67360be7ebd`; manifest, not additional tests |
+| fresh genuine R9 `/tmp/wb002-r9-snookq9n/report.md` | `1de1579c5469a69c0dca52dac8e8ed8b37342bfafb9932d67ff33253d1e1493a`; native `/root/wb002_reviewer_r9`, READY exact S12; full report independently read |
+| R9 `final-command-records.json` | `6a50ec6005035a7f77aecdce6bcd13c719e651c5b2a2a0dac158b0f52c4a0bc6`; genuine companion command record, independently hashed |
+
+Owner-supplied R8 conclusion was retrieved independently via `gh api repos/oleyna80/agentic-sdlc-lite/issues/comments/6272936061` exit0. Comment expressly labels the text a **verbatim excerpt copied from an Owner-uploaded transcript**, not the original machine-local report. Comment body SHA256 `7612aeda8c57215f5527baa653a0b4bf9a3e7ec930351b722064d31569d46008`; local GET JSON SHA256 `07432ef3a2ba6c0a7fe2bcb76a98178452903c9940df80ed8571606712657bdf`. Its uploaded complete-transcript SHA256 claim is attributed metadata, not independently rehashed absent uploaded file. R8 archive drivers `run_review.py` and `run_ci.py` independently match quoted hashes `84f845e283fb391e14ca965a408e01a8834bc4c9f02e8f1296091da80deca694` and `997c378f2dd835134ca463891097c81f1caeb61dddbb657b72d8d4414fd9f9ef`. This corroborates execution custody, not missing original narrative. R9 supplies fresh independent current Reviewer assurance.
+
+### 3.2 Reused original executable evidence — independently validated
+
+References R1 below resolve inside the authenticated R1 archive under prefix `wb-lite-002-verifier-r1-s12/`; references R2F resolve inside authenticated focused archive under `wb-lite-002-verifier-r2-s12-57gt0hm4/resume-20261019/`. The archive/member/hash references are intentional authenticated custody references, not dependence on an unretained disposable pathname. All fixture commands, full mutations/inputs, drivers, source exports, numeric exits, diagnostics, and native operational logs remain regular archive members. Source Git commits remain independently addressable.
+
+| Key | Authenticated original members; observed evidence |
+| --- | --- |
+| E-CI | R1 `logs/ci-results.json` SHA256 `a0ca402ceaf885f6773dae23fe6b15167503d98e0452b5b96c7b6d0ab61d45c6`; detailed repeat `ci-detailed/logs/ci-results.json` SHA256 `2e0a922618d3c06308a9822fb5d661aba8d11addfda08b5044f5dc2d001d3e4b`.48distinct cases,47expected +1actual known Issue9 FAIL; detailed repeat also48/47. Environment distinguishes absent/empty; actual markers/date-only mutations retained. `ci-tests.py` full reproducible driver SHA256 `8506297b7eb114c61ea4d3f90080581667a4a914df22eabf8e54b49288c2db97`. |
+| E-EXTRACT | R1 `extraction.json` SHA256 `64e874025a5916111112236ff936f838e3ebb7c886f8862dfb45f7e66b27cbb6`; all five `scripts/ci-0.sh`…`ci-4.sh` byte-match freshly extracted actual S12 workflow bodies. All four `scripts/workspace-0.sh`…`workspace-3.sh` byte-match actual S12 Bash fences. This excludes copied implementation substitution. |
+| E-WS | R1 `workspace-tests/summary.json` SHA256 `891bcb306619d3a3e40d4891e6d8e57490a684d478fbf772920c0920d1b79b0d`:57actual create/remove cases. R3 inspected every `C*/evidence.json`:57/57 actual exit equals expected, commands/tool wrapping/diagnostics/pre/post inventories and mutation counters present. Negative scripts never call worktree add/remove. Nine injected post-fetch drift scenarios legitimately change prepared fixture state through the injector; they are not globally unchanged snapshots. Source script binding SHA256 `6ce481d9d07243fdee3c6e859febe3e73585c768fe5d8182209aa734e4dea9c7`; `run.py` SHA256 `b8e788c6923dd70b547abd0307d03424138a1c71ede1b18cc54f0d4a8c9b7202`. |
+| E-CONTENT | R1 `workspace-tests/content-and-target.json` SHA256 `c233dcab46ee3c6fa59d844c0ca0e9c1e68bb6d6b40f501585b8a88eeb8ee021`:18cases, initially16expected due two harness exit expectations; `no-index-recheck.json` SHA256 `1688e05b834866d9a956140243f27b0d58e6245f13248714d500a15e88c134e7` runs4affected commands,4expected. Whitespace/conflict diagnostics produce actual3, clean/broken-link no-index differences actual1 with empty diagnostics; link checks independently reject broken link. Combining57+18 with these two corrected assertions reconstructs75final PASS,79executions, not79distinct successes. Original errors remain. Full drivers `content-and-target.py` SHA256 `93af2e9897cee7574d850b19257dd3f419f963a3510977cc44fdab32c5f99db2` and `recheck-no-index.py` SHA256 `b00e8de0d40f570930255b7a1dcf368dca647e55962471c6383e55a0d4739699`. Six A↔B real non-Git writes/copies/explicit Git staging with inventory of both checkouts; staged-content and untracked-content coverage present. |
+| E-NATIVE | R1 `native-routine/report.md` SHA256 `de26530f904664dee567a3ee38b9ad83607631cff68b22e668275780c6426e89`; `native-routine/audit.json` SHA256 `86495faf1f8fad23e1adc50ffe47ffaaa6a687cd2a4124021005b7c13f875ea6`. Four actual native Coder identities;24cases:7positive/17STOP. R3 recalculated25before/after comparisons (24cases+sibling):all HEAD/index unchanged,17STOP+sibling files unchanged,7positive exactly10allowed paths changed. Full original native logs, commands and synthetic mission inputs retained.7canonical source-contract path hashes independently equal actual S12. Cooperative STOP does not establish OS enforcement. |
+| E-PROJECT | R1 `native-lifecycle/critic-p1.json`, `critic-p2.json`, `refs.json`, `commands.json`:native independent Critic REWORK defective committed P1, corrected P2 READY before synthetic Owner. These reports are genuine native results on disposable subjects, not approvals of real P. |
+| E-PROV | R1 `native-lifecycle/provenance-probe.json` SHA256 `7e6016d1a9912724c0e1005a685fa1cb6b48e4371aff10f6a878587058e32f63`:2positive/6STOP provenance cases with exact limits. Actual Git ancestry/blob/retained-ref/alternate-base operations; actual missing object exit128 and byte mutation; wrong-subject/scratch disposition cases include explicitly synthetic input and native evaluation. No claim of8real policy-enforcement mechanisms or real integration. |
+| E-FOCUS | R2F `source-binding.json` SHA256 `cb10cc8f9b488600e4f679e8d19902b91e9b03b9b5688bd45879d6db331d82fe`:11canonical source files independently match Git blob and SHA256 at S12. `final-checkpoint-index.json` SHA256 `fcf016f5397f7adc247cd035ee620edc15e284d682d7bbf8dfe288e8193e1c24`:R3 recomputed all47raw report hashes and inspected command/observed/before-after/source/limitation fields.47checkpoint actions are not47distinct scenarios.34accepted operational cases (7positive/27STOP);3earlier PARTIAL attempts preserved, not counted as PASS. |
+| E-21/22 | R2F `v21-v22/group-manifest.json` SHA256 `62900a54087a910bfeb348abc288380d68687a6d3049354ddf3eb09288caa999`; final V21 summary `c8e7d6488f65f136604f8e12bb52d82e960da4625c364eaf28d24b9ae3e7b7ee`, V22 summary `f1405206919c31e400f7ac36261de9e244bf497c30f1670fbef78eeaeb91a1a0`. Individual `scenario-*/record.json` contains actual native identity/invocation, inputSHA, commands, before/after, mutation counts and observed decisions. Three initial absence tests were insufficient because historical approvals remained reachable; explicit revoked/superseded/new-W corrected tests establish required STOP, with originals retained. |
+| E-23/24 | R2F `v23-v24/group-manifest.json` SHA256 `ccfe76a7385c19ad8e1eaa45bda6e659864d042a838bb15a3db984e0879f6a22`; actual native Reviewer REWORK→newS2READY/VerifierFAIL→newS3 `ea8ca9d602dc1d212c0f2ce5d8d594c9e42628a8` renewed independent READY/PASS. `reviewer-s3.json` SHA256 `5bb0890aaf14ed92b4448a73da979bbe8b67210bab633598d505b6a7346b69da`, `verifier-s3.json` SHA256 `b46b524b370524a41e976b6487c7f1e6df1b43737a51f99b46d5ffce4b9f0af6`. StageB W `e6394cede62309b098e31088040dd2c545dee9e4`, source `c84ff7ac65decf6be57bfa0ea5902178aef05df3`, evidence H `e7203fa128776b0394f0fabc5215bc5956d8499c2`; independent Stage Critic/Coder/Reviewer/Verifier, local checks/bare push and10negative progression records. StageB Reviewer hash `bfc9fb4303069bfd3c1584d218202aec123a7729ed1a1712a870ef8fc697f69b`; Verifier `8243076f23ca04c9a71935dfd7a03a18e7c082cee3c20993557d4858979d5174`. Local CI/Owner records explicitly synthetic. |
+| E-25 | R2F `v25/group-manifest.json` SHA256 `af683c7160de9d254a829ad367270492f5a7928a015da02fde755ebf0934abbd`; actual native Architect2bounded alternatives/14inline checks, independent Orchestrator choice/7source checks, rationale commit `fdbdab8a2ddd8a24741e474f86aafe495b8b71ad`;5negative alternatives/blockers STOP. One intermediate read/tmp capture outside assigned report location is preserved LOW harness observation, not hidden source mutation or new scope permission. |
+
+No blanket operational reruns were necessary: the mandatory missing independent current Reviewer/Verifier closure is supplied by new R9/R3, while missing prior GitHub observation is supplied by direct current GETs. Archived executable coverage remained intact and exactly source-bound. R3 did not claim personally executing the historical native missions or test bodies again. New R3 executions are read-only extraction, integrity, inventories, Git provenance/diff and GitHub observation.
+
+## 4. Full acceptance matrix — all AC rows
+
+Every row below binds exact S12. Modes: **I** = new R3 inspection/hash/Git check; **R** = independently validated reuse of original executed evidence; **N** = genuine separately identified native independent role; **G** = new R3 live GitHub observation. PASS is limited to the contractual tested scope. A negative fixture that correctly STOPs is an expected result, not a successful prohibited action. Evidence references resolve through §3.
+
+| Criterion | Result | Observed evidence, execution mode and limit |
+| --- | --- | --- |
+| AC-1 | PASS | I/R/N:21source-path bindings plus R9 full source review; E-NATIVE routine route, E-PROJECT and E-21/22/23/24/25 demonstrate actual project-before-Owner and autonomous stage sequence. No mandatory Owner-per-WB or routine P/W introduced. |
+| AC-2 | PASS | I/R:E-NATIVE original positive/parallel/negative command and inventory logs demonstrate separate short-issue, interrupted committed-handoff, significant/parallel contexts; missing commit authority reports NOT_COMMITTED/INCOMPLETE, not fabricated durable PASS. Canonical checkpoint matrix consistent under R9 review. |
+| AC-3 | PASS | I/R:E-CI actual exact-identity, absent/empty env, duplicate/init/source-exception negatives return expected nonzero; source exception positive exact-only. E-EXTRACT binds actual guard. |
+| AC-4 | PASS | I/R:E-CI own fresh derived positive returns0; five independently extracted actual marker lines, inherited set and two date-only milestone variants return nonzero; provenance/prose/blockquote/history/longer-own-ID positives return0. |
+| AC-5 | PASS | I/R/N:R9 normative boundary inspection, actual canonical source bindings and E-NATIVE/FOCUS STOPs. No new authority tier, Controller, runtime or competing lifecycle. Cooperative agent behavior only. |
+| AC-6 | PASS | I/R:E-NATIVE routine optional-gates N/A accepted; mandatory-gate N/A/misclassification STOP, no edits; historical verdicts retain meanings and originals. R1/R2 BLOCKED not changed by this new verdict. |
+| AC-7 | PASS | I/G/R9:B→S12 approved21normative+13planning/evidence, S12→H handoff-only; frozen plan/W2 blobs equal; original Critic blobs retained, permitted presentation trailing-space normalization only; B→H diff-check0 and actual H Actions success. This is actual clean-check evidence, not a waiver of whitespace or alteration of its CI step. Subsequent newH custody/CI pending. |
+| AC-8 | PASS | N/I:R9 READY and this independently justified R3 PASS bind the same immutable S12. Original executable reuse/new static/synthetic/native/NOT_RUN expressly separated. G:actual current H CI observed independently. Durable report Git custody and any eventual newH check remain separate gates. |
+| AC-9 | PASS | I/R:E-CONTENT6real cross-target write/copy/staging scenarios and E-NATIVE wrong-target STOPs, both-checkout inventory and HEAD/index coverage; E-WS guarded bootstrap/create/remove and post-fetch checks. Shared refs/races/OS isolation not claimed. |
+| AC-10 | PASS | I/R:E-CONTENT tracked-only exclusion, clean/defective untracked, no-index diagnostics, link/conflict checks, cached/full staged checks. Corrected actual3 diagnostics explicitly retained; affected content cannot inherit prior PASS. |
+| AC-11 | PASS | I/R:E-NATIVE fresh native agent synthetic fresh-context replay restores objective/instructions/target/Git/scope/checkpoint/next action before permitted write; stale mismatch STOP. Native compaction event NOT_RUN; W2 expressly permits replay. |
+| AC-12 | PASS | I/R:E-NATIVE synthetic scratch/MEMORY falseauthority STOP, stable short routine no extra gate, canonical Memory Protocol source binding; PROC001–005 executed within covered operational scope rather than deferred. |
+| AC-13 | PASS | I/R/N:E-PROJECT genuine Critic REWORK→newP2READY before synthetic Owner, E-21/22 invalid approval/READY negatives; frozen bytes unchanged by approval/status records. No real approval inferred from synthetic records. |
+| AC-14 | PASS | I/R/N:E-21/22 actual native Stage Critic/Coder sequence; missing/revoked/wrongP/projectREADY/stageREADY/permission/postreview/outsideP scenarios STOP before source mutation; boundedW REWORK vs materialP newcycle distinguished. |
+| AC-15 | PASS | I/R/N:E-23/24 same-newSHA renewed assurance, authorized local commits/nonforce barepush/required localCI, nextstage dependencies; E-25 bounded local choice. Material/security/missinggate/merge scenarios STOP. Real Owner final acceptance/merge remain unresolved. |
+
+## 5. Full verification matrix — all V rows
+
+| Criterion | Result | Exact observed result and original executable reference |
+| --- | --- | --- |
+| V-01 | PASS | I/R/R9:full B→S12 scope34paths with21normative; S12→H handoff-only; B→H diff-check exit0; all untracked runtime content addressed E-CONTENT; current worktree untracked/ignored/staged empty. R9 links64relative targets zero missing; ADR/shared-memory/history protected and frozen blobs exact. |
+| V-02 | PASS | I/R/G:E-EXTRACT5actual workflow bodies equal original executed bytes; E-CI expected source Lite Checks/syntax/memory/legacy/hook-executable/whitespace checks. Critic exact original objects retained, normalized presentation mapping reviewed; B→H diff-check0. Actual H GitHub success separately §6. Known unrelated Issue9 fault FAIL disclosed §7, not passed as fault validation. |
+| V-03 | PASS | R:E-CI derived env with uninitialized source template guard actual nonzero as required. |
+| V-04 | PASS | R:E-CI identity/INITIALIZED-only base-memory fixture, each5real formatted source marker lines and2date-only variants actual nonzero; full source inputs and mutations are in detailed records and driver. |
+| V-05 | PASS | R:E-CI exact own identity/INITIALIZED/fresh context/progress positive actual0 with required files present. |
+| V-06 | PASS | R:E-CI suffix/prefix/otherowner/missing/duplicatecorrect+wrong/duplicatecorrect+correct actual nonzero; source-like suffix/fork no exception. |
+| V-07 | PASS | R:E-CI absent vs empty GITHUB_REPOSITORY, missing/duplicateinit, SOURCE_REPOSITORY derived and missingmemory actual nonzero. |
+| V-08 | PASS | R:E-CI actual source exact positive0, initializedderived provenance/prose/blockquote/history/longer ownWB positive0; historical documents untouched. |
+| V-09 | PASS | R/N:E-NATIVE genuine native Coder safe routine mission withoutWB positive; significant missingP/W/conformance/READY, normative underRoutine, scopeexpansion and mandatoryN/A negative decisions STOP with original before/after zero target changes. |
+| V-10 | PASS | R/N:E-NATIVE issue-based short routine, committed own interrupted handoff and truly parallel A/B distinct handoff recoveries executed. Missing commit authority finalcheckpoint explicitly incomplete/NOT_COMMITTED, no implicit commit/push or recoveryPASS for unavailable durable record. |
+| V-11 | PASS | N/I/R:fresh independent R9 exact-source/full-diff/normative boundary READY, this separate R3 exactS12 full acceptance/evidence verification PASS. Mandatory executable evidence independently source/hash/record validated; no self-review substituting for independent role. Pendingdurablecustody separate. |
+| V-12 | PASS | G:PR11 exactH6924 and completed successful Actions39292507255 retrieved directly. Never inferred PASS from queued/local/synthetic CI. Any newdeliveryHEAD requires its own observation; no settings/PR6/merge writes performed. |
+| V-13 | PASS | R:E-CONTENT A→B andB→A actual absolute nonGitwrite/copy/explicitGitindex with both-checkout before/after, expectedindexonly, unchangedHEAD; approved external readonly inspection/read/copy present. No actualmain/task fixture mutations. |
+| V-14 | PASS | R/N:E-NATIVE wrongroot/branch/HEAD/tracked/untracked/outside-sibling/relativecwd/copydestination STOP with files/index/HEAD unchanged relative preparedstate. E-WS adds path/origin/dirty/inspection74/pre-postfetch guard coverage; driftinjector's expectedstatechange distinguished from forbidden worktreeadd/remove. |
+| V-15 | PASS | I/R:E-CONTENT tracked-only check excludes defectiveuntracked, targetedwhitespace/conflict/link checks detect it; cleanuntracked and noindex1withdiagnosticsreview covered; whitespace/conflict noindex3 correctlydiagnosed after twooriginalharnesscorrections; cachedfullstagedcheck rejects defects. |
+| V-16 | PASS | R/N:W2-permitted explicitly synthetic fresh-context replay actually executed by freshnative agent; stalehints notauthority, preflightbeforewrite; mismatchSTOP. Actualnativecompactionevent NOT_RUN and notclaimed. |
+| V-17 | PASS | R/N:E-NATIVE synthetic temporaryscratch/MEMORY/summary unsupportedREADY,missingtemp path actualexit1 and STOP; originalGit/taskrecord inspected, no realMEMORY/evidencerepoedit. |
+| V-18 | PASS | R/N:E-NATIVE shortcontinuousroutine/seriesstablecontextedits actualfocusedcoverage withN/A gates and no newlyrequiredhandoff. Existingunrelatedcommittedhandoffs infixture acknowledged; no fullyemptyhistoryclaim. Positiveexternalread/copy E-CONTENT. |
+| V-19 | PASS | I/R/R9:21exactsourcebindings, R9fullnormativecrossfilereview, canonicalP/Wauthorityconsistent; noOwnerperW/postOwneronlyCritic/frozenprogress/mandatoryinterstagemerge/latefill shortcut. Historicallegacyreferences retain context. |
+| V-20 | PASS | R/N:E-PROJECT committeddefectiveP1 genuinelyindependentCriticREWORK, correctedP2genuineREADY beforeseparatesyntheticOwner; exactdisposableSHAs/diffs/reports/commandsretained. BoundedREWORKdidnotaddOwnereveryrevision. |
+| V-21 | PASS | I/R/N:E-21/22 correctedfinal8acceptedV21cases:1positive7STOP. ActualnativeOrchestrator/StageCritic/Coder withoutOwnerperW, immutableP/Wbindings; explicit revoked/superseded/newWinputs closefirst3PARTIALtests. Fullbefore/after/commands preserved. |
+| V-22 | PASS | R/N:E-21/22 fouracceptedcases coveroldmaterialSTOP/newP3affectedCriticOwnersyntheticcycle,boundedWnewreviewwithoutOwnerperW, status/handofffrozen. Materialrequestsnotrelabelledevidence-only; old3PARTIALrecordsnotdeleted. |
+| V-23 | PASS | R/N:E-23/24 genuineReviewerREWORK→S2ReviewerREADY+VerifierFAIL→S3ea8ca9...renewedindependentREADY/PASSsameS3, realfixturelocalchecks/nonforcebarepush.4missingpermission/gate/sensitive/unapprovedmergeSTOP withinventories. SyntheticCI/OwnernotrealGitHub. |
+| V-24 | PASS | R/N:E-23/24 actualtwostageflowdependencyhashes/entryconditions/committedW/StageCriticbeforeCoder/independentReviewerVerifier/localbarepushchecks.10negativeprogressionSTOPs covermissing/stale/hash/differentsourceCIpending/fail/notrun/unmetAC/write-set/requiredmergeabsent. Noactualmergeasserted. |
+| V-25 | PASS | R/N:E-25 actualnativeArchitect2boundedoptions→Orchestratorchoice/rationale/affectedchecks,5materialscope/security/gate/blockerSTOPs. OriginalLOWtmp/readcapturedeviationdisclosed; notnewauthorityorS12sourcefinding. |
+| V-26 | PASS | I/R:E-PROVactualancestryandblobchecks/planningrefsretained/alternatebasesyntheticdispositioncontext; missingobjects128/bytechanges/wrongsubject/scratchSTOP differentiatedfromreasoninginputs. ActualS12P/Wlineageconfirmed. NoactualintegrationorOwnerriskacceptanceinferred. |
+
+Totals:15/15 AC rows and26/26 V rows sufficient within accepted W2 scope. This is41criteria, **not41newly executed operational tests**. R1 contains147distinct operational cases (48CI+75workspace+24native),146expected+1knownIssue9FAIL; CIrepeat96executions; workspaces79executions with2supersededharnessassertionerrors, not79distinct cases. FocusedR2 contributes34accepted cases and3preservedPARTIALattempts;47checkpointrecords are integrity targets, notextra47tests. R1reasoning26scenarios and22preparedNOT_RUNnegatives, R2initial41NOT_RUN preparations, and actualnativecompactionNOT_RUN are not falsely counted as executions. R2focused corrects missing specific operational coverage without erasing those historical facts.
+
+## 6. Actual current-head GitHub state
+
+Direct read-only API commands each returned exit0:
+
+```bash
+gh api repos/oleyna80/agentic-sdlc-lite/pulls/11
+gh api repos/oleyna80/agentic-sdlc-lite/actions/runs/39292507255
+gh api repos/oleyna80/agentic-sdlc-lite/commits/69246782c99423721fdb4a6adefc693ee6f57613/check-runs
+gh api repos/oleyna80/agentic-sdlc-lite/pulls/12
+gh api repos/oleyna80/agentic-sdlc-lite/actions/runs/39478665216
+```
+
+PR11 OPEN/draft, basemain `90c101b...`, head `69246782c99423721fdb4a6adefc693ee6f57613`, observedmergeabletrue/clean. Run [39292507255](https://github.com/oleyna80/agentic-sdlc-lite/actions/runs/39292507255), pull_request event, `head_sha` exactlyH, completed/success,2026-10-19T17:15:08Z–17:15:19Z. Observed validate check successful. This establishes actual Actions for observedH. Required-check configuration is not established by observedchecksuccess; R3didnotobtainbranchprotectionsettings.
+
+PR12 OPEN/draft, base `docs/wb-lite-002-implementation` H6924, head `1fefca201ade283fec283fd3853f8b3d46d136e6`, observedmergeabletrue/clean. Run [39478665216](https://github.com/oleyna80/agentic-sdlc-lite/actions/runs/39478665216), pull_request event, exactH10, completed/success,2026-10-20T18:53:17Z–18:53:31Z. This R3 independently verified head/CI, not PR12's complete S9 technical matrix or independent reports. Orchestrator's separate S9 `8df87c7869866edd703aa462d1d3cbb3bc1ec0a4` ReviewerREADY/VerifierPASS mapping is an input requiring its own preserved evidence; it is not counted as S12 fix or R3S12 executablecoverage.
+
+New PR11 evidence-only H will change PR12 base relationship. Orchestrator must verify actualdiff/ancestry/mergeability/checks then; old run atH6924 is not transferred to future H. No merge/retarget performed.
+
+## 7. Known Issue #9, accepted limits and remaining gates
+
+E-CI original case `ISSUE9-history74` executes actual extracted `scripts/ci-4.sh`; `git rev-parse HEAD^` wrapper produces correct-lookingstdout andexit74, otherGitcommandsreal. Expectednonzero1, actual0, emptystdout/stderr. This is a genuine failure: inspectionfailure entersrootfallback and whitespacecheckcanPASS. HistoricalR1BLOCKED and this actualFAIL remain exact. W2 permits only first-useguardrun-body modification; unchangedwhitespacestep was explicitly OwnerOptionA/outsideW2. R3has noauthority to fixit or relabeltestPASS. PR12fix does not modify unchangedS12 retroactively.
+
+An explicit temporary Owner risk decision is required before integrating PR11 while that unchanged workflowfault remains. No such acceptance was found/provided in this mission. This is a **release risk gate**, not permission to waive AC7's actual baselinewhitespace/current-headCI requirements: those requirements were actually checked andpassed. SourceS12 allmandatoryin-scopechecks are sufficient, while the separateout-of-scopefault remains disclosedFAIL.
+
+Remaining actions, smallest scope:
+
+1. Preserve genuine R9 original report and companioncommands, plus R1/R2initial/R2focused original reports and this R3, under existingauthorized review.md/verification.md through clearlyseparatedappendonlyrecords. PreservehistoricalS2bytes exactly andrecordoffset/length/SHA, resultingcommit/blob. No rewrite of historicalverdicts. W2§4.2 plus currentexplicitOwnerinstruction coverthoseexistingpaths; authoritydoesnotextendtonewreportpaths or publishingrestrictedarchives.
+2. Keep authenticated local archive/member references sufficient to reproduceW2§8checks; verifycustodyhashes andaccessibleoriginals. User explicitly permitsdurablyretainedauthenticatedreferences; withtheexactreferences/driverhashes aboveandretainedfulloriginalarchives thisis sufficientreproducibilityevidence. `/tmp` alone isinsufficient. Protected local retention + byte-identical publication of original reports + the authenticated archive/member references satisfy W2 §8 under the current explicit Owner authority, provided the referenced protected originals remain accessible. No mandatory off-machine backup requirement was established; lack of off-machine backup is a disclosed preservation limitation, not an additional invented blocker. The temporary R3 auxiliary files are optional inspection aids: the embedded reproduction recipe and retained original references are the durable verification basis, so publishing those bulky scratch exports is not required. Missing R7/R8 narratives remain missing historical records; current Reviewer assurance is supplied by fresh R9 only.
+3. If authorizeddeliverycontinues, verifyS12→newHfullcontentisevidenceonly, commit/pushonlycoveredtaskbranch, obtainactualnewHGitHubActionsresult. Preserveoriginalsubjects. ThisR3doesnotpre-certifyfutureH.
+4. ObtainexplicitOwnerIssue9temporaryriskdisposition andfinalacceptance/MergeGO. No currentmergepermission. MergecommitpreservesexactP/W/S12ancestry; squash/rebasecanloseitandrequireseparateapprovedprovenancemappingandcontextapplicability—notassumedbythisreport. Retarget/PR12integrationseparate.
+
+Residual limits: native agent compliance is not OS policy enforcement; shared refs/races remain cooperative risks. SyntheticOwner/localCI/inputrecords prove specified fixturebehavior only. Nativecompactionevent not observed, permittedfreshcontextreplay isobserved. RequiredGitHubprotectionsettings unauthenticated; observedCIandmergeability arepoint-in-timefacts. R3 nofreshoperationalreruns because validatedoriginalcoveragewas sufficient; thisdecision isexplicit, not anomissionhiddenasexecution.
+
+## 8. Reproducibility of this R3 inspection
+
+Scratch `/tmp/wb002-r3-6xnw7rz0` contains read-only `audit.py`, `supplement.py`, `commands.json`, `audit-results.json`, `supplement-results.json`, exact selected regular-member copies and rawGHGETresponses. They are sessionworkingfiles, not durablecheckpoint. A guessed incorrect W path caused initialread-onlygitexit128, correctedtoactual`docs/changes/WB-LITE-002/` beforeusingresults. Supplement first assertedglobalinventoryequalityforallnegativeCcases; actualpost-fetchdrift evidence disprovedthatassertion, so itwas narrowed toexpectedequalityexceptexplicitinjectordrift, while everynegativeadd/removezero remainsasserted. These are disclosedinspection-harnesserrors, not S12sourcefailures or suppressedtestresults.
+
+Minimal reproducible read-only custody/source audit follows. Run from a retained source repository that still contains exactS12 and accessible custodyC. It doesnotexecuteoperationalfixtures or mutateGit; reproducingtheoriginalruntimecases additionallyrequiresregeneratingdisposablefixturesfromtheauthenticatedfullarchiveddrivers and reissuingnative missions withtheirpreservedinputs. Neverrerunoveroriginalevidenceorrealworktrees.
+
+```python
+import pathlib, tarfile, hashlib, json, subprocess, re
+R = pathlib.Path('/home/azur/Projects/WSL/agentic-sdlc-lite-worktrees/wb-lite-002-implementation')
+C = pathlib.Path('/home/azur/Projects/WSL/agentic-sdlc-lite-evidence/WB-LITE-002/S12')
+S = '5e42d2b1239f26962ee5f5942cd318997b51501c'
+B = '90c101ba2b6091a24c2f458f5ffc8b02e6eb04ab'
+P = 'b4cbc37e6bc318a5b28f4db8cbeaafd3663c60df'
+W = '63ed889d8991a5d2187bb82709f4cbb5773db1cc'
+H = '69246782c99423721fdb4a6adefc693ee6f57613'
+def sha(b): return hashlib.sha256(b).hexdigest()
+def git(*a):
+    p = subprocess.run(['git', '-C', str(R), *a], capture_output=True)
+    print('git', a, 'exit', p.returncode)
+    assert p.returncode == 0, p.stderr
+    return p.stdout
+for a, b in [(B,P), (P,W), (W,S), (S,H)]:
+    git('merge-base', '--is-ancestor', a, b)
+git('diff', '--check', B, H)
+print(git('diff', '--name-status', S, H).decode())
+for line in (C/'manifests/SHA256SUMS').read_text().splitlines():
+    expected, relative = line.split(None, 1)
+    assert sha((C/relative.lstrip('*')).read_bytes()) == expected
+archive = C/'originals/verifier-r1/wb-lite-002-verifier-r1-s12-evidence.tar.gz'
+assert sha(archive.read_bytes()) == 'd1f9dc2cbca0eb35bd6e3777963e8783238996887d67ad821d3c62a1e2de4343'
+with tarfile.open(archive) as t:
+    def raw(name):
+        m = t.getmember('wb-lite-002-verifier-r1-s12/'+name)
+        assert m.isfile()
+        return t.extractfile(m).read()
+    assert raw('report.md') == (C/'reports/verifier-r1-original-report.md').read_bytes()
+    lines = git('show', S+':.github/workflows/lite-checks.yml').decode().splitlines(True)
+    bodies = []
+    for i, line in enumerate(lines):
+        if re.match(r'^        run: \|\s*$', line.rstrip('\n')):
+            body = []
+            for z in lines[i+1:]:
+                if z.strip() and not z.startswith('          '): break
+                body.append(z[10:] if z.startswith('          ') else z)
+            bodies.append(''.join(body).encode())
+    assert len(bodies) == 5
+    for i, body in enumerate(bodies):
+        assert body == raw(f'scripts/ci-{i}.sh')
+        print(i, sha(body))
+    cases = json.loads(raw('logs/ci-results.json'))
+    assert len(cases) == 48
+    bad = [x for x in cases if x['exit'] != x['expected_exit']]
+    assert len(bad) == 1 and bad[0]['name'] == 'ISSUE9-history74'
+    print('Known out-of-scope actual FAIL:', bad)
+    ws = [json.loads(t.extractfile(m).read()) for m in t.getmembers()
+          if m.isfile() and '/workspace-tests/C' in m.name and m.name.endswith('/evidence.json')]
+    assert len(ws) == 57
+    for x in ws:
+        assert x['exit'] == x['expected_exit'] and x['PASS']
+        if x['expected_exit']:
+            assert x['mutation_counts']['add'] == x['mutation_counts']['remove'] == 0
+            assert x['before_after_equal'] or x.get('drift') is not None
+    original = json.loads(raw('workspace-tests/content-and-target.json'))['tests']
+    final = {x['name']:x for x in original}
+    recheck = json.loads(raw('workspace-tests/no-index-recheck.json'))['tests']
+    for x in recheck: final[x['name']] = x
+    assert len(final) == 18 and all(x['PASS'] for x in final.values())
+    assert len(ws) + len(final) == 75
+focus = C/'originals/verifier-r2/wb-lite-002-verifier-r2-s12-57gt0hm4-resume-20261019-evidence.tar.gz'
+assert sha(focus.read_bytes()) == '322aa3952866a5fa52233ac660f04357d601b85e37c33c3ba49ace0bf330fd29'
+with tarfile.open(focus) as t:
+    prefix = 'wb-lite-002-verifier-r2-s12-57gt0hm4/resume-20261019/'
+    def raw(name):
+        m = t.getmember(prefix+name)
+        assert m.isfile()
+        return t.extractfile(m).read()
+    for path, d in json.loads(raw('source-binding.json')).items():
+        assert sha(git('show', S+':'+path)) == d['sha256']
+        assert git('rev-parse', S+':'+path).decode().strip() == d['blob']
+    index = json.loads(raw('final-checkpoint-index.json'))
+    assert len(index['records']) == 47
+    for d in index['records']:
+        name = d['report'].split('/resume-20261019/',1)[1]
+        assert sha(raw(name)) == d['sha256']
+print('Read-only authenticated source/custody inspection complete')
+```
+
+New read-only numeric observations: all four ancestrychecks0, fullB→Hdiffcheck0, initial/finalstatus0empty, directGHGETs0, all10custodyentriesmatch, fiveworkflow/fourworkspacebodybyteequal,11R2sourcebindingsand7R1nativebindingsmatch, all47checkpointrecordhashesmatch,75workspacefinalcasesreconstructed. No additional runtimePASS was manufactured.
+
+## 9. Return to Orchestrator
+
+**R3 PASS exact S12 in approved W2 scope.** Same-source technical AC8/V11 now has independent R9READY+R3PASS. Authorised evidencepreservation and newdeliveryvalidation may proceed only under actualproject/Ownerbounds. This report supplies no riskacceptance, currentfutureHEADCI, finalOwneracceptance or MergeGO. **Release remains BLOCKED until the separate gates in §7 are satisfied.** Stopbeforemerge.
+
+<!-- END ORIGINAL R3-original-independent-report -->
+
+
+---
+
+## Orchestrator custody index — 2026-10-21
+
+This index is derived custody evidence, not an independent verdict. Current Owner mission and W2 §4.2 authorize separately marked append-only evidence in existing review/verification paths. No source, approved P, frozen W2 or historical verdict was edited. All byte offsets below are zero-based into the final containing file; later append-only records do not change these ranges.
+
+| Original artifact | Authorized containing file | Offset | Bytes | SHA-256 |
+| --- | --- | ---: | ---: | --- |
+| R9-original-report | `docs/changes/WB-LITE-002/review.md` | 9109 | 15535 | `1de1579c5469a69c0dca52dac8e8ed8b37342bfafb9932d67ff33253d1e1493a` |
+| R9-original-command-records | `docs/changes/WB-LITE-002/review.md` | 25225 | 1624 | `6a50ec6005035a7f77aecdce6bcd13c719e651c5b2a2a0dac158b0f52c4a0bc6` |
+| R1-original-BLOCKED | `docs/changes/WB-LITE-002/verification.md` | 56429 | 31443 | `7c6a2c517e49dbc0087bfc963636613d618283e26171e95c68363a3a2985fcb6` |
+| R2-initial-original-BLOCKED | `docs/changes/WB-LITE-002/verification.md` | 88455 | 10353 | `a04d9d6814ff5d71122c6bbf406d00a2df92419b4292c05758233addc2b78a74` |
+| R2-focused-original-PASS-V21-V25-only | `docs/changes/WB-LITE-002/verification.md` | 99419 | 19294 | `4dfe24ffcea2c1c353e3a3a0322bf5bd72f2ddedca2116a3637582744fade04f` |
+| R3-original-independent-report | `docs/changes/WB-LITE-002/verification.md` | 119320 | 40775 | `f53049f0aeac9fdfb454fd24d25a2553cedcef1681de6eee77d29c40d9cf3647` |
+
+### Historical prefix and recovery
+
+Historical S2 reports remain exact prefixes. Both were last committed at `3b81b63f74fc853b808f495d48aab96a021fc51c` and remain reachable through retained ancestry: review blob `1f7058ff15f4b9f68ef1216a8020d824131d7677`, 8587 bytes, SHA-256 `7bad909551b8b1ab9176058f1cc279d8e7cc36b66cc6e2f45d285ab2392ca478`; verification blob `d00619c34b0ff4960d016c4d310983f9722569b9`, 55905 bytes, SHA-256 `3878d6abe20a575e8d1aa759184bc7f22a83b1ce22f70020a8bda011011b9aa7`.
+
+Recover any embedded original without Markdown parsing or normalization using its containing immutable evidence commit, path, offset, length and expected SHA from the table:
+
+```python
+import hashlib, subprocess
+commit = "<retained-evidence-commit>"
+path = "<authorized-containing-path>"
+offset, length = <zero_based_offset>, <length_bytes>
+expected = "<sha256_from_table>"
+whole = subprocess.check_output(["git", "show", f"{commit}:{path}"])
+original = whole[offset:offset + length]
+assert len(original) == length
+assert hashlib.sha256(original).hexdigest() == expected
+```
+
+### Authenticated retained originals
+
+Protected local custody root: `/home/azur/Projects/WSL/agentic-sdlc-lite-evidence/WB-LITE-002/S12`. Directory/files are restricted local custody, not an off-machine backup. Archives are not included in this commit or uploaded. All ten manifest-listed objects were independently rehashed by Orchestrator, R9 and R3; all match. Archived commands, mutations, numerical exits, diagnostics, exact source/body exports, inventories and native operational records remain accessible to an authorized local reader. A hash alone is not a substitute for the retained bytes; if custody is lost, perform targeted recovery/re-execution rather than infer PASS.
+
+| Protected relative path | SHA-256 |
+| --- | --- |
+| `manifests/evidence-manifest.json` | `613a680f64bf5dc383eac4e982e7abfef356ef0d43a2b4121d6bb8216debf0e7` |
+| `originals/reviewer-r7/r7-s11-evidence.tar.gz` | `40053e8a93f59f557637e0c63e6a0452b15fc3ee6b82128f0466e50aa909f7ed` |
+| `originals/reviewer-r8/review-r8-s12-tl1ht3jc.tar.gz` | `2a361472a7442c2c35ca161e201d62a5746dc349feb84864c818e768158d4128` |
+| `originals/verifier-r1/wb-lite-002-verifier-r1-s12-evidence.tar.gz` | `d1f9dc2cbca0eb35bd6e3777963e8783238996887d67ad821d3c62a1e2de4343` |
+| `originals/verifier-r2/wb-lite-002-verifier-r2-s12-57gt0hm4-evidence.tar.gz` | `4acd4787807fc1b79f609d30c1a8ef16d85baf4261bdae1f74d1b7ac08e6ceb9` |
+| `originals/verifier-r2/wb-lite-002-verifier-r2-s12-57gt0hm4-resume-20261019-evidence.tar.gz` | `322aa3952866a5fa52233ac660f04357d601b85e37c33c3ba49ace0bf330fd29` |
+| `reports/preservation-report.md` | `8f0d616244376ad15fbf3cf1ba7f71c76f272370f18cfedca86af4f7aef59caf` |
+| `reports/verifier-r1-original-report.md` | `7c6a2c517e49dbc0087bfc963636613d618283e26171e95c68363a3a2985fcb6` |
+| `reports/verifier-r2-focused-original-manifest.json` | `84f8166f2b01e89cfb0a9a00b8da006c087fc087e6b120e01471f67360be7ebd` |
+| `reports/verifier-r2-focused-original-report.md` | `4dfe24ffcea2c1c353e3a3a0322bf5bd72f2ddedca2116a3637582744fade04f` |
+
+For integrity verification: `cd /home/azur/Projects/WSL/agentic-sdlc-lite-evidence/WB-LITE-002/S12` then `sha256sum -c manifests/SHA256SUMS`; observed exit 0, ten OK. Archive entry inspection must avoid wholesale extraction: R1 includes links. Select regular files with Python `tarfile.open(...).getmember(...)`, require `member.isfile()`, then read `extractfile(member)` and verify its recorded hash. Do not follow archive links or publish restricted archives.
+
+Original report members: R1 `wb-lite-002-verifier-r1-s12/report.md`; R2 initial `wb-lite-002-verifier-r2-s12-57gt0hm4/report.md`; focused R2 `wb-lite-002-verifier-r2-s12-57gt0hm4/resume-20261019/report-r2-resume.md`. Their exact recovered bytes are preserved above, including BLOCKED verdicts. R9 and R3 are genuine new independent native outputs on S12, separately identified.
+
+R8 original execution archive is retained and source-bound; the original R8 narrative was not recovered. Owner concluding comment https://github.com/oleyna80/agentic-sdlc-lite/pull/11#issuecomment-6272936061 is an attributed transcript copy, not an original independent narrative. R7 narrative is also unavailable; its execution archive is retained. Fresh R9 supplies current source assurance without rewriting either historical reviewer verdict. Summaries, this index and handoff remain derived Orchestrator records.
+
+### Decision boundary
+
+R1 original BLOCKED and R2 initial BLOCKED remain unchanged; focused R2 PASS is V-21…V-25 only. Fresh R3 independently determines the overall in-scope AC/V verdict. Known Issue #9 remains an observed out-of-scope fault-path FAIL in unchanged S12. Separate PR #12 does not retroactively fix S12. Explicit temporary Owner risk acceptance and final release/merge authorization remain outstanding. No merge, retarget, source fix, settings/hook change or off-machine archive publication is authorized by this evidence record.
+
+Current independent R3 overall verdict: PASS on exact S12 within W2; release integration remains subject to the Owner decisions above.
