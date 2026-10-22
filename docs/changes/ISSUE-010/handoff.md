@@ -89,3 +89,15 @@ Current phase: **OWNER_P_APPROVAL_REQUIRED**. This entry supersedes earlier next
 - T01–T22 future implementation tests: **NOT_RUN**. Owner P approval: **PENDING**. W/Stage Critic, normative implementation, source Reviewer/Verifier: **NOT_STARTED**. No merge authority.
 
 Next: verify and commit only this report/handoff checkpoint, non-force push the authorized task branch, verify actual CI on the resulting exact delivery HEAD, then present exact P and proposed delegated bounds for separate Owner approval. Obtain the checkpoint's actual SHA via Git/PR rather than embedding a future self SHA. Final CI observation belongs to the PR check records and Owner report; the P-candidate CI above does not claim to cover a future HEAD. Stop before W or normative source edits. Recheck live refs, candidate blobs and actual permissions on resume; any base drift requires affected re-evaluation.
+
+## Stage W preparation checkpoint — 2026-10-22
+
+This checkpoint supersedes older current-state fields; previous observations and independent verdicts remain historical.
+
+- Verified planning predecessor HEAD: `6aa1f1007a784c6289ea39e365aa7911d6a33f83`, on authorized branch `docs/issue-010-documentation-model-r2`, PR #14 DRAFT; `main` remained `ec5d8efaf4a04202e0fb2ed5f1e6b536d9a78ddb` at preflight. Prior delivery run [39803538464](https://github.com/oleyna80/agentic-sdlc-lite/actions/runs/39803538464) was SUCCESS on earlier exact `f27a5aca…`; that is not evidence of a future Stage W or implementation S/H.
+- **Owner-approved P:** `41530894af15ecdb9347b8f39e9ee6f939f0bc16:docs/projects/issue-010-documentation-model/plan.md`, blob `5b0dfb2654ed3072b655de73068b438dc4cb9b1a`. Independent formal Project Critic R2 READY is preserved in `project-critic.md`, original R1 BLOCKED retained. Separate direct Owner exact-P acceptance is transcribed in `owner-decisions.md` OD-010-05 at approval-record commit `6aa1f1007a784c6289ea39e365aa7911d6a33f83`, blob `93dfe6b1f243e6219b20bd89541d048cccda9333`.
+- **Accepted specification unchanged:** `e391d09cc908e886d4e019d54987fc26d34bbb55:docs/projects/issue-010-documentation-model/spec.md`, blob `a364ec0fbd21767a36820653bd851d552c8ab7a7`.
+- **New stage candidate:** `docs/changes/ISSUE-010/work-block.md`, stage ID `WB-ISSUE-010-01`, with explicit 17-path normative scope, separate task evidence paths, Proposal R2 T01–T22 including R2-L01 subcases. Its own commit/blob must be observed after publication; not predicted or embedded in W.
+- **Stage Critic:** PENDING. Do not perform any normative source edits before independent Critic READY on exact W, conformance and permissions. All T01–T22 implementation checks NOT_RUN. Independent source Reviewer/Verifier and final Owner Merge GO remain PENDING. Root `plan.md`, historical P/W, shared memory, CI, hooks, roles and ADR-0001 are outside scope.
+
+Next permitted action: obtain independent local Codex Stage Critic on the actual committed W and current exact parent chain, preserving authentic report in stage-critic evidence. If REWORK, correct only bounded W with a new exact review; if READY, verify gate and commence coordinated source edits. No automatic merge.
