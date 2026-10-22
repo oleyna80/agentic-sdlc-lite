@@ -1,18 +1,20 @@
-# Task / Session Handoff — <Task>
+# Task / Session Handoff — <task-id>
 
-> Required according to **conditional checkpoint matrix** in `docs/workflow/memory.md`. A short uninterrupted routine with sufficient task PR/issue does **not** require a separate handoff.
+> Conditional checkpoint according to `docs/workflow/memory.md`. Small uninterrupted routine tasks with adequate PR/issue do not require a separate handoff. This is **mutable branch-local observation**, not approval or a frozen contract.
 
-- **Observed date, repository identity, verified absolute worktree, branch/HEAD/status:**
-- **Task objective/classification, exact write-set and separate evidence paths:**
-- **Approved specification/P commit and blobs, Project Critic and Owner exact-P approval (or reasoned routine N/A):**
-- **Stage W commit/blob, conformance, Stage Critic, entry dependencies (or reasoned routine N/A):**
+- **Observed date, repository identity, absolute worktree, task branch/base/HEAD/dirty/untracked:**
+- **Task classification, unique task ID and stable project ID (or routine N/A):**
+- **Initiative intent origin and exact accepted Spec commit/path/blob + external Owner acceptance (or routine N/A):**
+- **Exact P commit/path/blob + original Project Critic READY + separate Owner P approval (or routine N/A):**
+- **Exact committed W path/commit/blob, conformance and independent Stage Critic report (or routine N/A):**
+- **Finite implementation/evidence write-sets and assigned single Git writers:**
+- **Objective, constraints, prerequisite gates and STOPs:**
 - **Working phase:** DRAFT / CRITIC_PENDING / IN_PROGRESS / DELIVERY_READY
 - **Final task status if concluded:** COMPLETE / BLOCKED / CANCELLED
-- **Dirty/staged/untracked paths to preserve and any parallel writers:**
-- **Observed predecessor HEAD / actual last checkpoint (never future self SHA):**
-- **Exact source candidate S, separate delivery HEAD H and inspected S..H evidence-only diff:**
-- **Executed tests and numeric codes, explicit NOT_RUN, actual CI status on H:**
-- **Independent Reviewer/Verifier same-SHA verdicts and original report provenance:**
-- **Owner/material decisions still required, risk, next concrete authorized action:**
+- **Last observed predecessor SHA** (not a speculative self commit), actual CI and linked PR:
+- **Exact source candidate S, separate delivery H and independently inspected S..H changes:**
+- **Executed tests, native vs fixture, numeric results and explicit NOT_RUN/BLOCKED:**
+- **Same-S Reviewer READY / Verifier PASS and original report provenance:**
+- **Live blockers / next permitted action / Owner decisions required:**
 
-This record is branch-local and never substitutes for integrated shared memory. Do not backfill frozen P/W with verdicts or later status. DELIVERY_READY is not final closeout or merge.
+Recover authorized task → W → P → Spec/intent via exact Git subjects; missing/bad approval STOP. Neither this handoff nor source ROADMAP/memory may choose a latest or root P for significant work. Do not backfill frozen Spec/P/W with outcomes or merge statuses.

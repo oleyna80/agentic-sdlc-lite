@@ -1,26 +1,26 @@
-# Native Subagent Mission — <Task / Role>
+# Native Subagent Mission — <task-id / role>
 
-> A role brief does not install an agent, grant OS/tool permissions or prove independent isolation.
+> A role brief does not install an agent, grant OS/tool permissions or prove independent isolation. Fill **exact current subject** before independent review.
 
 - **Role, objective and verifiable output:**
-- **Route:** ROUTINE / SIGNIFICANT; risk/impact classification:
-- **Repo identity, verified absolute worktree, expected branch/base/HEAD:**
-- **For significant:** Owner-accepted spec, exact P commit/blob, Project Critic and separate Owner approval:
-- **For significant:** exact committed W commit/blob, Stage Critic READY, P conformance and dependencies:
-- **For routine:** P/W/independent gates NOT_APPLICABLE with reason unless Owner requires:
-- **Read first:** parent/root AGENTS, canonical procedures, branch-local handoff, spec/ADR/source
-- **Finite authorized source and task-evidence paths:** <none for read-only reviewer>
-- **Out of scope; preserve unrelated dirty/untracked files and shared refs:**
-- **Actually available tools, sandbox, credentials, network and independent isolation:**
-- **Relevant optional Skills:** <approved source only; no permission grant>
-- **Positive/negative tests, exact candidate SHA and applicable CI:**
-- **STOP/Owner escalation and expected report recipient:**
+- **Route:** ROUTINE / SIGNIFICANT; classification and Owner constraints:
+- **Repository identity, stable project ID, task ID and verified absolute worktree; current branch/base/HEAD:**
+- **For significant:** initiative intent provenance and **accepted Spec** commit/path/blob + Owner exact acceptance:
+- **For significant:** **approved project-local P** commit/path/blob, original independent Project Critic READY + separate Owner exact-P approval:
+- **For significant:** **exact committed W** commit/path/blob, parent conformance and independent Stage Critic READY:
+- **For routine:** exact reason P/W/Critic/intent-file/ROADMAP are NOT_APPLICABLE unless Owner requires:
+- **Read first:** parent/root AGENTS, sole canonical development procedure, security, task handoff, accepted ADRs
+- **Finite implementation/evidence write paths and single Git recorder:** <empty implementation paths for read-only Critics/Reviewer>
+- **Outside scope; preserve other checkout, dirty/untracked paths and shared refs:**
+- **Actually available tools/network/sandbox and constraints; native independence vs logical role:**
+- **Exact source candidate SHA and positive/negative tests, diagnostics and current applicable CI:**
+- **STOP/Owner escalation, expected signed-off report recipient:**
 
 ## Required response
 
-- Exact reviewed P/W/S or modified candidate SHA/blob and path coverage.
-- Role-specific result: Project/Stage Critic READY/REWORK/BLOCKED; Reviewer READY/REWORK; Verifier PASS/FAIL/BLOCKED; or routine results with justified N/A.
-- Actual commands, numeric exit codes, diagnostics, NOT_RUN and synthetic/native distinction.
-- Changed paths and observed commit or NOT_COMMITTED (read-only if applicable), risks and next step.
+- Exact repository/task/Spec/P/W/S subjects (commit/path/Git blob) and original Owner/Critic references, or justified routine N/A.
+- Role result: Project/Stage Critic READY/REWORK/BLOCKED; Reviewer READY/REWORK; Verifier PASS/FAIL/BLOCKED; or routine result.
+- Commands/actions, numeric exit codes, errors, actual independent native behavior and explicit NOT_RUN vs synthetic fixtures.
+- Examined diff/paths, observed commit or NOT_COMMITTED (read-only), risks and next permitted action.
 
-Never present same-session self-review as independent assurance. Do not edit frozen P/W for verdicts or invent permissions.
+Never self-approve or reuse another role's verdict. Do not mutate frozen contracts, choose another project's P or treat current ROADMAP as execution authority.

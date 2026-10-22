@@ -11,8 +11,8 @@ flowchart TD
     INIT -->|Yes| CLASS["Risk/impact classification"]
     SETUP --> CLASS
     CLASS -->|Routine| ROUTINE["Bounded direct task and focused checks"]
-    CLASS -->|Significant| SPEC["Specification: Owner accepts exact content"]
-    SPEC --> P["Orchestrator/Architect commit full Project Plan P"]
+    CLASS -->|Significant| SPEC["Project-local Requirements + Design spec.md: Owner accepts exact revision"]
+    SPEC --> P["Commit project-local docs/projects/id/plan.md P, binding exact Spec"]
     P --> PC{"Independent Project Critic READY?"}
     PC -->|REWORK| P
     PC -->|READY| PO{"Owner approves exact P + delegated bounds?"}
@@ -52,10 +52,14 @@ flowchart TD
     ROOT --> WORK["workspaces.md — explicit write targets"]
     ROOT --> SEC["security/boundaries.md"]
     ROOT --> ROLES[".agents/roles — subordinate missions"]
-    DEV --> PLAN["root plan.md — frozen approved P"]
-    DEV --> STAGE["docs/changes/task/work-block.md — frozen W"]
+    DEV --> PLAN["docs/projects/id/plan.md — exact approved frozen P"]
+    DEV --> SPEC["docs/projects/id/spec.md — accepted exact requirements/design"]
+    SPEC --> PLAN
+    PLAN --> STAGE["docs/changes/task/work-block.md — frozen W"]
     MEM --> HANDOFF["task handoff + independent reports — mutable evidence"]
     MEM --> BANK["memory_bank — last integrated facts"]
+    ROOT --> BRIEF["PROJECT_BRIEF.md — enduring product intent"]
+    ROOT --> ROADMAP["ROADMAP.md — dated non-authoritative journey"]
     ROOT --> CLAUDE["CLAUDE.md — imports AGENTS.md"]
 ```
 
@@ -69,12 +73,14 @@ project/
 ├── CLAUDE.md                 # import, not another policy
 ├── PROJECT_BRIEF.md          # identity and product constraints
 ├── PROJECT_MAP.md            # navigation
-├── plan.md                   # approved project P for significant work, immutable
+├── ROADMAP.md                # dated human project journey; optional downstream
+├── plan.md                   # existing historical legacy root P; NOT default for new work
 ├── .agents/roles/            # portable role briefs
 ├── docs/
 │   ├── workflow/             # canonical procedures
 │   ├── architecture/         # descriptive diagrams
 │   ├── decisions/            # accepted rationale
+│   ├── projects/<project-id>/ # project-local accepted Spec and frozen reviewed P
 │   ├── changes/<task>/       # reviewed W, separate handoff/reports
 │   ├── templates/            # non-authoritative forms
 │   └── security/             # security boundaries
@@ -83,4 +89,4 @@ project/
 └── .github/workflows/        # structural CI and bounded first-use guard
 ```
 
-Previously approved legacy `docs/changes/<task>/plan.md` preserve original provenance. Lite does not contain a Controller, SQLite authority registry, hook installer, native agent runtime, skill-fetcher or automated merge/deploy.
+For new significant work, recover the authorized task and exact W before binding stable repository/project identity → exact approved P commit/path/blob → exact accepted Spec/intent/Owner evidence. Project Critic, Owner exact-P approval and Stage Critic are distinct gates. Neither the source ROADMAP nor historical root `plan.md` is a fallback or implementation grant. Previously approved root and per-task legacy plans preserve their original Git subjects and exceptions. Lite does not contain a Controller, SQLite authority registry, hook installer, native agent runtime, skill-fetcher or automated merge/deploy.
