@@ -1,0 +1,109 @@
+# Stage Critic evidence capture
+
+> The readable report below removes only Markdown hard-break trailing spaces. Findings and verdict are unchanged. Exact captured bytes before that normalization are preserved in the Base64 appendix; SHA-256: `ec6ae302e8b33296994fbbc1da2368ee2c84f5b3ce2e164ac8a246f2dfd8a335`.
+
+## Stage Critic — ISSUE-009 W1
+
+**Verdict: READY**
+**Reviewed W:** `80fe489458a8b3cfd290ba8f2ca000b786a9ffe5`
+**W blob:** `5f79747f1562eea839ec1a97ba09efbbb0248275`
+**W tree:** `8d6a6b85dd2599d3dc6b9aadfc55220f9419ceba`
+**Parent:** `f884cb28ae06d3792d1ba7b4111e594162af4087`
+**Approved P:** `90e4c314b27ea9b9a2575c6fddc3a4e83e7eef74`
+**Specification blob:** `688ab2744f19307dc8e15b85d0678930aa02ec92`
+
+### Provenance and conformance
+
+I verified the exact W commit/blob, the approved plan and specification blobs, and the ancestry:
+
+- W’s parent is the checkpoint commit containing Owner P approval D3.
+- The approved P, D3 checkpoint, and stacked base `69246782c99423721fdb4a6adefc693ee6f57613` are ancestors of W.
+- D3 binds the exact P/specification artifacts and records the Project Critic report with READY.
+- The target branch is `docs/issue-009-fail-closed-history`, at the exact W commit. The worktree was clean, including ignored and untracked status.
+
+W is consistent with approved AC-1…AC-9 and T01…T14. It limits source changes to the existing whitespace step’s `run` body and names separate fixture, test-evidence, and independent-report paths. It preserves checkout depth, triggers, permissions, other steps, frozen WB-LITE-002 artifacts, PR #11, and `main`. It defines Coder entry only after this exact Stage Critic READY and a fresh permission/worktree check.
+
+### Testability and technical constraints
+
+The matrix specifies actual extraction of the literal run body from exact candidate S, extraction checks, a body checksum, and `bash -n`; it does not permit testing a manually copied algorithm. It covers root and ordinary commits, depth-2 linear and merge-like checkouts, shallow missing and independently available parents, missing/non-commit parent objects, malformed or empty inspection output, plausible output with exit 74, checker exit 74, and command/fixture state evidence.
+
+The W also requires wrapper logs of actual Git arguments, numeric exit codes and diagnostics, shallow metadata, before/after fixture inventories, and isolated disposable repositories. These provisions are adequate to evaluate the specification’s failure-propagation, shallow-history, and no-false-root requirements. No material test coverage gap found.
+
+### Live feasibility and prerequisites
+
+Current GitHub observations: Issue #9 is OPEN; PR #11 is OPEN and draft, based on `main`, with head `69246782c99423721fdb4a6adefc693ee6f57613`; its `validate` check is successful. The workflow has an unconditional `pull_request` trigger, so a draft stacked PR targeting `docs/wb-lite-002-implementation` has a plausible route to the required Actions run. The remote stacked base remains at `69246782…`; the Issue #9 branch has no remote ref yet. Actual Actions on a future delivery HEAD remain unverified.
+
+The active sandbox cannot write to the Issue #9 worktree or its Git metadata. This is an execution prerequisite, not a W-quality defect: **before Coder entry**, the Orchestrator must establish an authorized writable task environment and recheck exact refs, clean state, and permissions. Publication permission and CI on the eventual delivery HEAD must also be verified when reached.
+
+**Findings:** No blocking W conformance or testability findings. The operational prerequisites above remain explicit and must not be inferred from this READY verdict.
+
+**Coder authorization condition:** After recording this verdict, Coder may begin only once the Orchestrator confirms the required writable environment and rechecks the exact committed W and task state.
+
+
+## Exact captured report bytes (Base64)
+
+```text
+IyMgU3RhZ2UgQ3JpdGljIOKAlCBJU1NVRS0wMDkgVzEKCioqVmVyZGljdDogUkVBRFkqKiAgCioq
+UmV2aWV3ZWQgVzoqKiBgODBmZTQ4OTQ1OGE4YjNjZmQyOTBiYThmMmNhMDAwYjc4NmE5ZmZlNWAg
+IAoqKlcgYmxvYjoqKiBgNWY3OTc0N2YxNTYyZWVhODM5ZWMxYTk3YmEwOWVmYmJiMDI0ODI3NWAg
+IAoqKlcgdHJlZToqKiBgOGQ2YTZiODVkZDI1OTlkM2RjNmI5YWFkZmM1NTIyMGY5NDE5Y2ViYWAg
+IAoqKlBhcmVudDoqKiBgZjg4NGNiMjhhZTA2ZDM3OTJkMWJhN2I0MTExZTU5NDE2MmFmNDA4N2Ag
+IAoqKkFwcHJvdmVkIFA6KiogYDkwZTRjMzE0YjI3ZWE5YjlhMjU3NWM2ZmRkYzNhNGU4M2U3ZWVm
+NzRgICAKKipTcGVjaWZpY2F0aW9uIGJsb2I6KiogYDY4OGFiMjc0NGYxOTMwN2RjOGUxNWI4NWQw
+Njc4OTMwYWEwMmVjOTJgCgojIyMgUHJvdmVuYW5jZSBhbmQgY29uZm9ybWFuY2UKCkkgdmVyaWZp
+ZWQgdGhlIGV4YWN0IFcgY29tbWl0L2Jsb2IsIHRoZSBhcHByb3ZlZCBwbGFuIGFuZCBzcGVjaWZp
+Y2F0aW9uIGJsb2JzLCBhbmQgdGhlIGFuY2VzdHJ5OgoKLSBX4oCZcyBwYXJlbnQgaXMgdGhlIGNo
+ZWNrcG9pbnQgY29tbWl0IGNvbnRhaW5pbmcgT3duZXIgUCBhcHByb3ZhbCBEMy4KLSBUaGUgYXBw
+cm92ZWQgUCwgRDMgY2hlY2twb2ludCwgYW5kIHN0YWNrZWQgYmFzZSBgNjkyNDY3ODJjOTk0MjM3
+MjFmZGI0YTZhZGVmYzY5M2VlNmY1NzYxM2AgYXJlIGFuY2VzdG9ycyBvZiBXLgotIEQzIGJpbmRz
+IHRoZSBleGFjdCBQL3NwZWNpZmljYXRpb24gYXJ0aWZhY3RzIGFuZCByZWNvcmRzIHRoZSBQcm9q
+ZWN0IENyaXRpYyByZXBvcnQgd2l0aCBSRUFEWS4KLSBUaGUgdGFyZ2V0IGJyYW5jaCBpcyBgZG9j
+cy9pc3N1ZS0wMDktZmFpbC1jbG9zZWQtaGlzdG9yeWAsIGF0IHRoZSBleGFjdCBXIGNvbW1pdC4g
+VGhlIHdvcmt0cmVlIHdhcyBjbGVhbiwgaW5jbHVkaW5nIGlnbm9yZWQgYW5kIHVudHJhY2tlZCBz
+dGF0dXMuCgpXIGlzIGNvbnNpc3RlbnQgd2l0aCBhcHByb3ZlZCBBQy0x4oCmQUMtOSBhbmQgVDAx
+4oCmVDE0LiBJdCBsaW1pdHMgc291cmNlIGNoYW5nZXMgdG8gdGhlIGV4aXN0aW5nIHdoaXRlc3Bh
+Y2Ugc3RlcOKAmXMgYHJ1bmAgYm9keSBhbmQgbmFtZXMgc2VwYXJhdGUgZml4dHVyZSwgdGVzdC1l
+dmlkZW5jZSwgYW5kIGluZGVwZW5kZW50LXJlcG9ydCBwYXRocy4gSXQgcHJlc2VydmVzIGNoZWNr
+b3V0IGRlcHRoLCB0cmlnZ2VycywgcGVybWlzc2lvbnMsIG90aGVyIHN0ZXBzLCBmcm96ZW4gV0It
+TElURS0wMDIgYXJ0aWZhY3RzLCBQUiAjMTEsIGFuZCBgbWFpbmAuIEl0IGRlZmluZXMgQ29kZXIg
+ZW50cnkgb25seSBhZnRlciB0aGlzIGV4YWN0IFN0YWdlIENyaXRpYyBSRUFEWSBhbmQgYSBmcmVz
+aCBwZXJtaXNzaW9uL3dvcmt0cmVlIGNoZWNrLgoKIyMjIFRlc3RhYmlsaXR5IGFuZCB0ZWNobmlj
+YWwgY29uc3RyYWludHMKClRoZSBtYXRyaXggc3BlY2lmaWVzIGFjdHVhbCBleHRyYWN0aW9uIG9m
+IHRoZSBsaXRlcmFsIHJ1biBib2R5IGZyb20gZXhhY3QgY2FuZGlkYXRlIFMsIGV4dHJhY3Rpb24g
+Y2hlY2tzLCBhIGJvZHkgY2hlY2tzdW0sIGFuZCBgYmFzaCAtbmA7IGl0IGRvZXMgbm90IHBlcm1p
+dCB0ZXN0aW5nIGEgbWFudWFsbHkgY29waWVkIGFsZ29yaXRobS4gSXQgY292ZXJzIHJvb3QgYW5k
+IG9yZGluYXJ5IGNvbW1pdHMsIGRlcHRoLTIgbGluZWFyIGFuZCBtZXJnZS1saWtlIGNoZWNrb3V0
+cywgc2hhbGxvdyBtaXNzaW5nIGFuZCBpbmRlcGVuZGVudGx5IGF2YWlsYWJsZSBwYXJlbnRzLCBt
+aXNzaW5nL25vbi1jb21taXQgcGFyZW50IG9iamVjdHMsIG1hbGZvcm1lZCBvciBlbXB0eSBpbnNw
+ZWN0aW9uIG91dHB1dCwgcGxhdXNpYmxlIG91dHB1dCB3aXRoIGV4aXQgNzQsIGNoZWNrZXIgZXhp
+dCA3NCwgYW5kIGNvbW1hbmQvZml4dHVyZSBzdGF0ZSBldmlkZW5jZS4KClRoZSBXIGFsc28gcmVx
+dWlyZXMgd3JhcHBlciBsb2dzIG9mIGFjdHVhbCBHaXQgYXJndW1lbnRzLCBudW1lcmljIGV4aXQg
+Y29kZXMgYW5kIGRpYWdub3N0aWNzLCBzaGFsbG93IG1ldGFkYXRhLCBiZWZvcmUvYWZ0ZXIgZml4
+dHVyZSBpbnZlbnRvcmllcywgYW5kIGlzb2xhdGVkIGRpc3Bvc2FibGUgcmVwb3NpdG9yaWVzLiBU
+aGVzZSBwcm92aXNpb25zIGFyZSBhZGVxdWF0ZSB0byBldmFsdWF0ZSB0aGUgc3BlY2lmaWNhdGlv
+buKAmXMgZmFpbHVyZS1wcm9wYWdhdGlvbiwgc2hhbGxvdy1oaXN0b3J5LCBhbmQgbm8tZmFsc2Ut
+cm9vdCByZXF1aXJlbWVudHMuIE5vIG1hdGVyaWFsIHRlc3QgY292ZXJhZ2UgZ2FwIGZvdW5kLgoK
+IyMjIExpdmUgZmVhc2liaWxpdHkgYW5kIHByZXJlcXVpc2l0ZXMKCkN1cnJlbnQgR2l0SHViIG9i
+c2VydmF0aW9uczogSXNzdWUgIzkgaXMgT1BFTjsgUFIgIzExIGlzIE9QRU4gYW5kIGRyYWZ0LCBi
+YXNlZCBvbiBgbWFpbmAsIHdpdGggaGVhZCBgNjkyNDY3ODJjOTk0MjM3MjFmZGI0YTZhZGVmYzY5
+M2VlNmY1NzYxM2A7IGl0cyBgdmFsaWRhdGVgIGNoZWNrIGlzIHN1Y2Nlc3NmdWwuIFRoZSB3b3Jr
+ZmxvdyBoYXMgYW4gdW5jb25kaXRpb25hbCBgcHVsbF9yZXF1ZXN0YCB0cmlnZ2VyLCBzbyBhIGRy
+YWZ0IHN0YWNrZWQgUFIgdGFyZ2V0aW5nIGBkb2NzL3diLWxpdGUtMDAyLWltcGxlbWVudGF0aW9u
+YCBoYXMgYSBwbGF1c2libGUgcm91dGUgdG8gdGhlIHJlcXVpcmVkIEFjdGlvbnMgcnVuLiBUaGUg
+cmVtb3RlIHN0YWNrZWQgYmFzZSByZW1haW5zIGF0IGA2OTI0Njc4MuKApmA7IHRoZSBJc3N1ZSAj
+OSBicmFuY2ggaGFzIG5vIHJlbW90ZSByZWYgeWV0LiBBY3R1YWwgQWN0aW9ucyBvbiBhIGZ1dHVy
+ZSBkZWxpdmVyeSBIRUFEIHJlbWFpbiB1bnZlcmlmaWVkLgoKVGhlIGFjdGl2ZSBzYW5kYm94IGNh
+bm5vdCB3cml0ZSB0byB0aGUgSXNzdWUgIzkgd29ya3RyZWUgb3IgaXRzIEdpdCBtZXRhZGF0YS4g
+VGhpcyBpcyBhbiBleGVjdXRpb24gcHJlcmVxdWlzaXRlLCBub3QgYSBXLXF1YWxpdHkgZGVmZWN0
+OiAqKmJlZm9yZSBDb2RlciBlbnRyeSoqLCB0aGUgT3JjaGVzdHJhdG9yIG11c3QgZXN0YWJsaXNo
+IGFuIGF1dGhvcml6ZWQgd3JpdGFibGUgdGFzayBlbnZpcm9ubWVudCBhbmQgcmVjaGVjayBleGFj
+dCByZWZzLCBjbGVhbiBzdGF0ZSwgYW5kIHBlcm1pc3Npb25zLiBQdWJsaWNhdGlvbiBwZXJtaXNz
+aW9uIGFuZCBDSSBvbiB0aGUgZXZlbnR1YWwgZGVsaXZlcnkgSEVBRCBtdXN0IGFsc28gYmUgdmVy
+aWZpZWQgd2hlbiByZWFjaGVkLgoKKipGaW5kaW5nczoqKiBObyBibG9ja2luZyBXIGNvbmZvcm1h
+bmNlIG9yIHRlc3RhYmlsaXR5IGZpbmRpbmdzLiBUaGUgb3BlcmF0aW9uYWwgcHJlcmVxdWlzaXRl
+cyBhYm92ZSByZW1haW4gZXhwbGljaXQgYW5kIG11c3Qgbm90IGJlIGluZmVycmVkIGZyb20gdGhp
+cyBSRUFEWSB2ZXJkaWN0LgoKKipDb2RlciBhdXRob3JpemF0aW9uIGNvbmRpdGlvbjoqKiBBZnRl
+ciByZWNvcmRpbmcgdGhpcyB2ZXJkaWN0LCBDb2RlciBtYXkgYmVnaW4gb25seSBvbmNlIHRoZSBP
+cmNoZXN0cmF0b3IgY29uZmlybXMgdGhlIHJlcXVpcmVkIHdyaXRhYmxlIGVudmlyb25tZW50IGFu
+ZCByZWNoZWNrcyB0aGUgZXhhY3QgY29tbWl0dGVkIFcgYW5kIHRhc2sgc3RhdGUuCg==
+```
