@@ -1,45 +1,46 @@
-# Project Plan — <Project>
+# Project Plan P — <project-id>
 
-> Instantiate as one repository-root `plan.md` for **new significant projects**. This is the **complete project proposal P** reviewed by an independent Project Critic **before** Owner approval, not an optional mutable progress roadmap. The file does not grant OS/platform permission. Routine work needs no P; accepted legacy per-task `docs/changes/<task>/plan.md` keeps its historic provenance.
+> Instantiate as `docs/projects/<project-id>/plan.md` for **new significant initiatives** after acceptance of the exact project-local requirements/design Spec. A committed P is reviewed by an **independent Project Critic before separate Owner exact-P approval**. It is a frozen execution proposal/contract, **not** product ROADMAP, permission registry or mutable task status. No P for ordinary routine work; historical root `plan.md` and legacy per-task plans retain original exact provenance.
 
-## Project definition and specification
+## Project identity and exact specification
 
-- **Product objective, users and verifiable end state:**
-- **Owner-accepted specification path/hash and relevant decisions:**
-- **Repository/baseline and integration environment:**
-- **Non-goals, interfaces, constraints, security and data boundaries:**
+- **Repository and unique stable ID** (ASCII kebab-case, never reused):
+- **Product outcome and initiative intent provenance:**
+- **Owner-accepted exact Spec:** `docs/projects/<project-id>/spec.md`; source commit, path, Git blob and separate Owner acceptance evidence
+- **Starting repository baseline (commit/tree), relevant adopted ADRs:**
+- **In/out scope, dependencies, interfaces, data/security/operational constraints:**
 
-## Approved scope and delegated authority proposal
+## Finite scope and proposed delegation
 
-- **Finite project implementation scope and separate planning/evidence paths:**
-- **Autonomous Orchestrator/Architect technical decisions within constraints:**
-- **Permitted branch/worktree/commit/push/CI and test-fixture operations:**
-- **Sensitive operations, merge, deployment, risk exceptions and other Owner stops:**
-- **Real OS/sandbox/platform limits not superseded by this document:**
+- **Explicit approved implementation paths and separate evidence/report paths:** <list actual paths, no wildcards>
+- **Stage-level source subset and exact evidence/report writer assignment requirement:**
+- **Permitted engineering choices and authorized branch/commit/CI/fixture operations:**
+- **Sensitive changes, merge, deployment and other Owner stops:**
+- **Actual platform/OS/sandbox limits beyond this document:**
 
-## Stages, dependencies, measurable acceptance
+## Stages and verifiable acceptance
 
-| Stage | Entry/dependency | Expected outputs | Acceptance and required checks |
+| Stage | Actual entry/dependency | Finite outputs | Testable acceptance/independent gates |
 | --- | --- | --- | --- |
-| 1 — <outcome> | <verified input> | <verifiable deliverables> | <AC / independent gates / CI> |
-| 2 — <outcome> | <prior outputs> | <verifiable deliverables> | <AC / independent gates / CI> |
+| S1 — <outcome> | <approved inputs> | <verified artifacts> | <AC, real tests, CI> |
+| S2 — <outcome> | <S1 evidence> | <verified artifacts> | <AC, independent checks> |
 
-Use only the number of stages needed. Do **not** put live statuses, future exact W/S/H SHAs, Critic result or later Owner-approval fields into P; those are tracked in task handoffs/PR/decision evidence. Stage W is written only when actionable and must conform to approved P.
+Write only stages needed; W becomes detailed only when actionable. Approved P does **not** self-authorize implementation.
 
-## Project acceptance and milestones
+## Recovery, concurrency and revisions
 
-- **Full project acceptance / Owner final GO:**
-- **MVP/release readiness and required actual CI/assurance:**
-- **Merge, deployment, production and rollback approvals (separate where needed):**
-- **Verification that stage-to-stage progression dependencies are met:**
+- **Task/project linking:** current authorized task W → exact repository + project ID → exact P commit/path/blob → accepted Spec commit/path/blob and Owner evidence → original Project Critic READY → separate Owner approval → W/Stage Critic. Include original intent binding and STOP on mismatch.
+- **Parallel projects, one writer per path, actual branch/base drift and conflicts:**
+- **Historical legacy approvals and paths retained without migration:**
+- **Material Spec/P revisions require affected Owner/Project Critic decisions; W-only conforming revisions use new W/Stage Critic.**
 
-## Risks and recovery
+## Risks, checks and delivery boundaries
 
-- **Known technical/CI blockers and permitted remediation paths:**
-- **Assumptions requiring Owner clarification:**
-- **STOP/escalation for material deviation, missing authority or unavailable required tests:**
-- **Preservation of historical/frozen artifacts and branch-local durable checkpoint:**
+- **Feasible positive/negative/native/CI test strategy; evidence and failure handling:**
+- **Required independent Reviewer/Verifier on exact S, evidence-only S..H and actual CI H:**
+- **Owner final merge/deployment GO and rollback/STOP conditions:**
+- **Durable task checkpoint and original independent report location:**
 
-## Review boundary
+## Independent review boundary
 
-Commit this P, obtain **independent Project Critic READY**, then secure a **separate Owner decision on exact P plus proposed delegated bounds**. Owner approval/freeze never mutates P; bounded stage W is later committed and independently challenged without an Owner-per-WB gate. Material P/spec revisions repeat applicable Project Critic and Owner review.
+Commit the complete P **without placeholders requiring later mutation**; independent Project Critic reviews its exact commit/path/blob and accepted Spec; Owner then separately approves/rejects the exact P and delegated limits. Neither a Critic verdict nor Owner approval is inserted into frozen P. A W must be separately committed and independently Stage-Critic reviewed before bounded execution. Do not derive authority from ROADMAP/latest/root P.
