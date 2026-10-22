@@ -202,3 +202,78 @@ Stage Critic R1: REWORK на exact W 132c7411047d9a219b657bc852d711a65a2f19a3, b
 4. После READY повторить entry preflight, проверить actual permissions и назначенных writers; затем запускать bounded Coder.
 
 Повторный Owner approval для указанной conforming W correction не нужен. До устранения finding текущий W не готов к переходу Coder.
+
+---
+
+## R2 — separately received native Stage Critic response (2026-10-22)
+
+Preservation: R2 text was supplied directly by Owner in the active ChatGPT conversation as Codex's standalone R2 result. This is a transcription of the user-supplied output, not an independently retrieved native-runtime transcript or cryptographic identity assertion. R1 remains unchanged above. R2 subject: exact W commit `f20e9296cd483f88ef850bfe7023a845f6a68b2d`, blob `4f179db45b890591af635476a43cbd607f8130e7`.
+
+# Independent Stage Critic R2 — ISSUE-010
+
+**Вердикт: READY** для запуска ограниченного Coder на точном W `f20e9296cd483f88ef850bfe7023a845f6a68b2d` — после повторной проверки фактических прав и назначения writer перед любыми записями.
+
+## Проверенные объекты
+
+| Объект | Проверенная идентичность |
+| --- | --- |
+| Репозиторий | `oleyna80/agentic-sdlc-lite` |
+| Удалённая ветка | `docs/issue-010-documentation-model-r2` |
+| Точный W commit | `f20e9296cd483f88ef850bfe7023a845f6a68b2d` |
+| W tree | `4e09134a5ff6c85b08af09ab4959f12fd4a35f9d` |
+| W path / blob | `docs/changes/ISSUE-010/work-block.md` / `4f179db45b890591af635476a43cbd607f8130e7` |
+| W SHA-256 | `383ebc4c8b3dedbd943591fe291ef3ac01f6739fb45f40e6e831d6b3adfd7235` |
+| Исходный W R1 | commit `132c7411047d9a219b657bc852d711a65a2f19a3`, blob `698da324726a9d7ec7b1ff298ec513b098705185` |
+| Approved P | commit `41530894af15ecdb9347b8f39e9ee6f939f0bc16`, blob `5b0dfb2654ed3072b655de73068b438dc4cb9b1a` |
+| Принятая спецификация | commit `e391d09cc908e886d4e019d54987fc26d34bbb55`, blob `a364ec0fbd21767a36820653bd851d552c8ab7a7` |
+| Formal Project Critic R2 | `docs/changes/ISSUE-010/project-critic.md`, blob `0ddfe900d15ec8fd1905212b77fc5d27498e8a17`, READY |
+| Owner approval OD-010-05 | commit `6aa1f1007a784c6289ea39e365aa7911d6a33f83`, blob `93dfe6b1f243e6219b20bd89541d048cccda9333` |
+| Оригинальный Stage Critic R1 | `docs/changes/ISSUE-010/stage-critic.md`, blob `8cfe0d028253dbf86731e2589dae560f5596d772` |
+
+## Выполненные проверки
+
+Независимый native Stage Critic R2 проверил удалённые refs, PR #14, точные Git объекты и parent chain. P и принятая спецификация являются предками проверяемого W. PR #14 открыт как Draft, указывает на точный W commit; live mergeability — `true`, состояние — `clean`.
+
+Полный diff от W R1 до W R2 затрагивает три evidence-пути: `handoff.md`, `stage-critic.md` и `work-block.md`. В оригинальном Stage Critic R1 подтверждены исторический вердикт **REWORK** и finding `STAGE-R1-001`; они не переписаны и не заменены.
+
+Lite Checks run [39814463136](https://github.com/oleyna80/agentic-sdlc-lite/actions/runs/39814463136) завершился **SUCCESS** на точном W commit `f20e9296cd483f88ef850bfe7023a845f6a68b2d`. CI подтверждает только этот planning/evidence commit.
+
+## STAGE-R1-001 и соответствие W родительским условиям
+
+W2 добавляет матрицу авторов и Git recorders для evidence/report paths. Она назначает ответственного за содержательное выполнение и отдельно — единственного recorder в Git:
+
+- Independent Stage Critic, Reviewer и Verifier создают собственные отчёты и verdicts; Orchestrator только сохраняет их с исходной атрибуцией.
+- Фактический исполнитель отвечает за test observations; Verifier отдельно проверяет свои acceptance tests.
+- Orchestrator ведёт handoff на основе проверенных наблюдений.
+- Owner принимает решения; Orchestrator может только записать действительно полученное решение с точным subject и provenance.
+- Матрица не расширяет Coder write-set: его implementation scope остаётся ограниченным 17 нормативными путями.
+- Actual writer, checkout и права необходимо перепроверить перед записью. READY сам по себе не предоставляет ОС- или GitHub-права.
+
+Таким образом, разрешённые evidence paths имеют назначенных авторов и единственного recorder; competing writers и подразумеваемые полномочия Coder не обнаружены. `STAGE-R1-001` устранён в рамках одобренного P. Новый Owner approval для этого изменения W не требуется, пока его scope и полномочия не расширяются.
+
+## Scope, acceptance design и feasibility
+
+W сохраняет утверждённые 17 implementation paths и AC-01…AC-12. Добавленные R2-L01 negative cases отдельно охватывают неправильные spec commit/path/blob, принятие другой revision при внешне валидном содержимом, а также отсутствующую или относящуюся к другой инициативе intent provenance. Для них предписаны STOP до затронутой записи и проверка неизменности inventory.
+
+T01–T22 охватывают параллельные проекты, точную привязку артефактов, approvals, legacy P/W, downstream initialization, ROADMAP и routine work. T15 требует реального восстановления через новый native session без исходного чата; T16 разделяет обязательную проверку missing/stale checkpoint и условную compaction; T22 требует независимых Reviewer и Verifier на одном S, проверки S→H и CI на точном H.
+
+Эти требования достаточны для ограниченного Stage W, но **не являются выполненными тестами**.
+
+## Дополнительные findings и ограничения
+
+Дополнительных BLOCKER, HIGH или MEDIUM findings не выявлено.
+
+В этой миссии **NOT_RUN**:
+
+- реализация 17 нормативных путей;
+- T01–T22, включая native T15;
+- actual compaction;
+- Reviewer READY и Verifier PASS для implementation source S;
+- проверка evidence-only S→H и CI на delivery H;
+- интеграция, merge и deployment.
+
+Stage Critic R2 выполнил проверку read-only; изменения файлов, Git refs и GitHub metadata не производились.
+
+## Следующий допустимый шаг
+
+Повторить входную проверку branch/HEAD, назначения worktree, фактических прав и текущего writer; затем запустить bounded Coder в пределах 17 разрешённых нормативных путей и W. Вердикт READY не означает, что T01–T22, source assurance или merge checks уже прошли.

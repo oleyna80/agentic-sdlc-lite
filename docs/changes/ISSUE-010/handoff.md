@@ -113,3 +113,10 @@ The complete Stage Critic R1 response section provided in the local Codex log wa
 Current stage state at this checkpoint: W correction being committed; Stage Critic R2 PENDING, T01–T22 NOT_RUN, implementation NOT_STARTED, source Reviewer/Verifier NOT_RUN, final Owner Merge GO NOT_GRANTED. Previous `main` baseline remains `ec5d8efaf4a04202e0fb2ed5f1e6b536d9a78ddb` at last observed preflight.
 
 Next: publish this bounded correction on the existing branch with non-force push, verify exact W/blob/P/spec, full baseline diff and CI, then request a new read-only independent Stage Critic. Future W HEAD is obtained from Git and must not be inserted into the frozen W itself.
+
+## Stage Critic R2 READY and Coder entry — 2026-10-22
+
+- Original Stage Critic R1 REWORK remains retained with finding STAGE-R1-001. Following finite writer mapping correction, independent native Stage Critic R2 returned **READY** on exact W `f20e9296cd483f88ef850bfe7023a845f6a68b2d`, blob `4f179db45b890591af635476a43cbd607f8130e7`. The R2 response is preserved as separately attributable text in `stage-critic.md`; it is not a raw runtime archive.
+- Actual GitHub Actions `39814463136`: SUCCESS at exact W R2 HEAD. `main` preflight remained `ec5d8efaf4a04202e0fb2ed5f1e6b536d9a78ddb`. Connector repository permissions include `push=true`; task branch `docs/issue-010-documentation-model-r2` is sole authorized recorder target. GitHub connector does not expose local Codex checkout permissions; those remain the Critic's read-only concern.
+- Coder gate now open to **exactly 17 normative source paths** after source preflight. T01–T22, Reviewer/Verifier on S, actual delivery H CI and Owner merge GO **NOT_RUN/PENDING**. Root `plan.md`, integrated memory, frozen prior P/W/reports, CI/hooks, roles and security instructions preserved.
+- Source author via connected GitHub has no local worktree and must verify remote HEAD/parent tree and complete target blobs before creating a single coherent source candidate commit. Subsequent write must re-check branch lease; actual source S then requires independent same-S reviewers and test evidence. No merge authorization.
