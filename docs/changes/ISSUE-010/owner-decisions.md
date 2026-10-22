@@ -1,0 +1,56 @@
+# ISSUE-010 — Owner Decisions and Planning Gate
+
+**Repository:** `oleyna80/agentic-sdlc-lite`  
+**Project identity:** `issue-010-documentation-model`  
+**Recorded:** 2026-10-22  
+**Status:** exact specification accepted for gated planning; Project P/implementation/merge approvals PENDING.
+
+## OD-010-01 — Documentation architecture direction
+
+The Owner approved the following model in the active conversation before Architecture R2:
+
+- `PROJECT_BRIEF.md` — enduring product intent/identity.
+- `ROADMAP.md` — dated human-readable journey: origin, current position, direction; overview only, not execution authority. Optional in derived repositories.
+- Project-local `intent.md` — optional when authenticated Owner request/Issue suffices.
+- Project-local `spec.md` — accepted requirements and design.
+- Project-local `plan.md` — reviewed and separately Owner-approved frozen Project P.
+- `docs/changes/<task-id>/work-block.md` — bounded stage W.
+- Handoff/assurance/delivery evidence and integrated memory retain existing distinct roles.
+
+No new controller/registry, mandatory intent approval or new routine-work gate. Existing exact Owner/Critic/Verifier/merge boundaries remain in force. This is an architecture decision, **not** a prior formal Project Critic/Stage Critic result.
+
+## OD-010-02 — Exact specification acceptance and implementation-process authorization
+
+**Owner's subsequent chat statement, following explicit presentation and recommendation to accept the exact candidate specification:**  
+> «Отлично. можем перейти к реализации прямо здесь через [$github](app://connector_76869538009648d5b282a4bb21c3d157) а в локальный Codex передать ревью»
+
+The immediately preceding decision subject was [the exact ISSUE-010 candidate specification](https://github.com/oleyna80/agentic-sdlc-lite/blob/e391d09cc908e886d4e019d54987fc26d34bbb55/docs/projects/issue-010-documentation-model/spec.md), identified there by commit/blob. This affirmative response is recorded as **acceptance of that exact specification for subsequent formal planning**, not as acceptance of a not-yet-reviewed P. If the Owner disputes that interpretation, STOP and correct the evidence before any normative implementation.
+
+Exact accepted specification:
+
+- Repository: `oleyna80/agentic-sdlc-lite`
+- Source commit: `e391d09cc908e886d4e019d54987fc26d34bbb55`
+- Path: `docs/projects/issue-010-documentation-model/spec.md`
+- Git blob: `a364ec0fbd21767a36820653bd851d552c8ab7a7`
+- SHA-256 of UTF-8 content: `866a3cb1ba0958cb0e19fcc392cfb5cb960837b70042c772c0778a08dc1ffa14`
+- Scope: AC-01…AC-12, proposed 17 normative source paths, ADR-0002, source `ROADMAP.md`, historical root-P preservation, optional downstream roadmap.
+- Architecture Proposal R2: `docs/changes/ISSUE-010/proposal-r2.md` at same source commit, blob `5480ac967f597290138466c8ae38ac275a25be46`.
+- Independent Architecture Critic R2: READY for Owner architecture review only, report at `docs/changes/ISSUE-010/architecture-critic-r2.md`, blob `2901f80ac5aec310526d4b414986e857c3714e74`; finding R2-L01 retained.
+
+**Provenance limitation:** The Owner message originates in the current ChatGPT conversation. This file transcribes it through a connected GitHub assistant; it is not a cryptographic signature or a GitHub comment authored personally by the Owner. A future reviewer must distinguish the original chat decision from this documentary record; do not infer approval from a copied hash alone.
+
+## OD-010-03 — Current authorization boundary
+
+The Owner asked for GitHub-based authoring with an **independent local Codex review**. This authorizes the bounded planning phase: creation and ordinary publication of the candidate P and this decision evidence on the existing ISSUE-010 task branch, plus a Draft PR for review.
+
+**Not yet authorized:**
+
+- Claiming formal Project Critic READY; local Codex must actually review exact committed P/spec and report.
+- Owner acceptance of exact P or delegated execution bounds.
+- Committing stage W as executable/Stage Critic READY or changing the 17 normative source files.
+- Claiming independent source Reviewer/Verifier results or executed T01–T22.
+- Merge to `main`, deployment, branch-protection/CI/hooks/settings changes, history rewrite/force push.
+
+Next gate: independent **formal Project Critic** for exact committed Project P. Its READY enables, but does not replace, a separate Owner exact-P approval. Only then a conforming W plus independent Stage Critic can authorize bounded normative editing, subject to real tool permissions.
+
+Record later decisions in a separate attributable entry; **do not mutate the reviewed/approved P to append statuses or signatures**.
