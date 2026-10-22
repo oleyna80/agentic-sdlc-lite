@@ -47,6 +47,24 @@ Exactly **17 source paths**. No wildcard or implicit expansion:
 - `docs/changes/ISSUE-010/owner-decisions.md` — later attributable Owner decisions only, preserving prior originals. No fabricated Owner approval.
 - Original `proposal-r2.md`, `architecture-critic-r2.md`, `project-critic.md` are **read-only historical evidence**, not editable reporting surfaces.
 
+### Exact evidence/report authors and Git recorders (STAGE-R1-001 resolution)
+
+The **author/executor** produces the substantive evidence. The **Git recorder** performs authorized task-branch file writes, commits and non-force publication while preserving that evidence's origin, exact subject and verdict. In this stage the Orchestrator is the **single Git repository recorder for evidence paths**; this is not an authority to impersonate Owner or independent agents. Specific native agent instances, checkout/write ownership and actual permissions are checked at each mission entry.
+
+| Exact path | Substantive author / executor | Single repository recorder and constraints |
+| --- | --- | --- |
+| `docs/changes/ISSUE-010/work-block.md` | Orchestrator, optionally consulting Architect for bounded stage design | Orchestrator; original R1 W is retained at its exact historical commit/blob. New revision frozen after Stage Critic READY; no verdict appended here. |
+| `docs/changes/ISSUE-010/stage-critic.md` | Independent native Stage Critic R1/R2; Critic produces genuine read-only verdicts | Orchestrator; preserve R1 original and append future exact independent review reports with separate subjects, without rewriting findings/verdicts. |
+| `docs/changes/ISSUE-010/test-evidence.md` | Actual test executor (bounded Coder/Orchestrator/native test agent) records commands, failures and before/after state; independent Verifier separately validates its required tests | Orchestrator; attribute each result to its executor and exact Git/fixture subject, preserve original raw diagnostics or identify any presentation normalization. |
+| `docs/changes/ISSUE-010/review.md` | Independent native Reviewer only; original same-S source review and findings | Orchestrator; verbatim or explicitly mapped original preservation; cannot alter REVIEW verdict or masquerade as Reviewer. |
+| `docs/changes/ISSUE-010/verification.md` | Independent native Verifier only; original same-S required acceptance results | Orchestrator; original preservation and exact source S, independent from Reviewer and Coder. |
+| `docs/changes/ISSUE-010/handoff.md` | Orchestrator, using externally verified Git/CI/role observations | Orchestrator; append dated checkpoints; historical status is not overwritten to rewrite the past. |
+| `docs/changes/ISSUE-010/owner-decisions.md` | Owner makes decisions in an attributable exchange; Orchestrator never authors or invents Owner approval | Orchestrator transcribes authentic Owner statements and their exact subjects/provenance, with no forged signature or approval. |
+
+**Normative source authorship:** the bounded Coder is assigned exactly the 17 implementation paths listed in §2, while Orchestrator is the coordinated Git task-branch recorder/publisher for approved source commits. Orchestrator may coordinate bounded authoring through GitHub only after Stage Critic READY and verified platform rights. Independent Critics, Reviewer and Verifier do not edit normative source or silently accept changes on behalf of Owner.
+
+**One writer per overlapping path:** evidence contributors supply outputs read-only to the assigned Orchestrator recorder. No direct competing edits by different agents to any shared evidence path. A change to any actor's actual writable scope, unresolvable conflict or unavailable independent executor invokes STOP and affected approval/review, not implicit privilege.
+
 **Explicitly preserved / out of scope:** root `plan.md` and all historical approved P/W/spec/reports, `docs/decisions/0001-lite-foundation.md`, `memory_bank/*`, `.agents/roles/*`, `docs/workflow/workspaces.md`, `docs/security/boundaries.md`, hooks, `.github/workflows/*`, GitHub platform settings, Skills/adapters, Controller/runtime code. A discovered mandatory additional normative path requires Owner scope decision and affected gates.
 
 ## 3. Scope, execution design and acceptance

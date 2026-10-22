@@ -101,3 +101,15 @@ This checkpoint supersedes older current-state fields; previous observations and
 - **Stage Critic:** PENDING. Do not perform any normative source edits before independent Critic READY on exact W, conformance and permissions. All T01–T22 implementation checks NOT_RUN. Independent source Reviewer/Verifier and final Owner Merge GO remain PENDING. Root `plan.md`, historical P/W, shared memory, CI, hooks, roles and ADR-0001 are outside scope.
 
 Next permitted action: obtain independent local Codex Stage Critic on the actual committed W and current exact parent chain, preserving authentic report in stage-critic evidence. If REWORK, correct only bounded W with a new exact review; if READY, verify gate and commence coordinated source edits. No automatic merge.
+
+## Stage Critic R1 REWORK and corrected W checkpoint — 2026-10-22
+
+Earlier W at commit `132c7411047d9a219b657bc852d711a65a2f19a3`, blob `698da324726a9d7ec7b1ff298ec513b098705185`, received independent native Stage Critic R1 **REWORK**, finding `STAGE-R1-001 MEDIUM`: exact evidence/report path → substantive author/executor → single Git recorder assignments were incomplete relative to approved P §3.
+
+The complete Stage Critic R1 response section provided in the local Codex log was preserved verbatim at `docs/changes/ISSUE-010/stage-critic.md` in commit `3693b33c87329a6844ba225e5d5b2de628fcf0ee`, blob `8cfe0d028253dbf86731e2589dae560f5596d772`. This is evidence copied from the supplied Codex report text, not the raw native-agent execution archive; R1 verdict and original subject remain unchanged.
+
+**Bounded correction:** new W revision adds only a finite role/recorder assignment matrix for existing source and evidence paths; no expansion of the 17 normative source paths, no new gate/authority/runtime and no modification of approved P/spec. Orchestrator is the sole Git recorder for shared stage evidence, preserving attributable independent/Owner authorship. Owner P approval OD-010-05 is unchanged. The new W must be reviewed by **independent Stage Critic R2** on its actual committed revision before any normative source edits; R1 REWORK does not become READY retroactively.
+
+Current stage state at this checkpoint: W correction being committed; Stage Critic R2 PENDING, T01–T22 NOT_RUN, implementation NOT_STARTED, source Reviewer/Verifier NOT_RUN, final Owner Merge GO NOT_GRANTED. Previous `main` baseline remains `ec5d8efaf4a04202e0fb2ed5f1e6b536d9a78ddb` at last observed preflight.
+
+Next: publish this bounded correction on the existing branch with non-force push, verify exact W/blob/P/spec, full baseline diff and CI, then request a new read-only independent Stage Critic. Future W HEAD is obtained from Git and must not be inserted into the frozen W itself.
