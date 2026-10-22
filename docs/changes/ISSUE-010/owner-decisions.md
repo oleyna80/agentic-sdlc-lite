@@ -1,8 +1,8 @@
 # ISSUE-010 — Owner Decisions and Planning Gate
 
-**Repository:** `oleyna80/agentic-sdlc-lite`  
-**Project identity:** `issue-010-documentation-model`  
-**Recorded:** 2026-10-22  
+**Repository:** `oleyna80/agentic-sdlc-lite`
+**Project identity:** `issue-010-documentation-model`
+**Recorded:** 2026-10-22
 **Status:** exact specification accepted for gated planning; Project P/implementation/merge approvals PENDING.
 
 ## OD-010-01 — Documentation architecture direction
@@ -21,7 +21,7 @@ No new controller/registry, mandatory intent approval or new routine-work gate. 
 
 ## OD-010-02 — Exact specification acceptance and implementation-process authorization
 
-**Owner's subsequent chat statement, following explicit presentation and recommendation to accept the exact candidate specification:**  
+**Owner's subsequent chat statement, following explicit presentation and recommendation to accept the exact candidate specification:**
 > «Отлично. можем перейти к реализации прямо здесь через [$github](app://connector_76869538009648d5b282a4bb21c3d157) а в локальный Codex передать ревью»
 
 The immediately preceding decision subject was [the exact ISSUE-010 candidate specification](https://github.com/oleyna80/agentic-sdlc-lite/blob/e391d09cc908e886d4e019d54987fc26d34bbb55/docs/projects/issue-010-documentation-model/spec.md), identified there by commit/blob. This affirmative response is recorded as **acceptance of that exact specification for subsequent formal planning**, not as acceptance of a not-yet-reviewed P. If the Owner disputes that interpretation, STOP and correct the evidence before any normative implementation.
@@ -54,3 +54,13 @@ The Owner asked for GitHub-based authoring with an **independent local Codex rev
 Next gate: independent **formal Project Critic** for exact committed Project P. Its READY enables, but does not replace, a separate Owner exact-P approval. Only then a conforming W plus independent Stage Critic can authorize bounded normative editing, subject to real tool permissions.
 
 Record later decisions in a separate attributable entry; **do not mutate the reviewed/approved P to append statuses or signatures**.
+
+## OD-010-04 — Explicit exact-specification confirmation (2026-10-22)
+
+The Owner directly confirmed in the active conversation:
+
+> Подтверждаю принятие specification ISSUE-010 из commit e391d09cc908e886d4e019d54987fc26d34bbb55, файл docs/projects/issue-010-documentation-model/spec.md, blob a364ec0fbd21767a36820653bd851d552c8ab7a7, включая AC-01…AC-12 и scope из 17 paths. Это принятие specification, не approval Project P.
+
+This is a new explicit Owner decision, transcribed from the current conversation. It resolves the exact-specification binding gap raised by formal Project Critic R1 without reconstructing or authenticating the earlier OD-010-02 exchange. No cryptographic identity or personally authored GitHub signature is claimed or required. The original R1 BLOCKED verdict remains historical evidence, not a retroactive READY.
+
+The accepted spec commit/path/blob and SHA-256 remain exactly those recorded above. Project P approval, W/Stage Critic, normative implementation and merge remain PENDING. The Owner separately authorized ordinary in-scope planning corrections (trailing whitespace, current handoff and repeat independent review), without an additional Owner approval for each correction.

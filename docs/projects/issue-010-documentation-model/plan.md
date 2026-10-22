@@ -1,18 +1,18 @@
 # Project Plan P — ISSUE-010 Documentation Architecture Adoption
 
-**Classification:** SIGNIFICANT — normative SDLC lifecycle and source-of-truth changes.  
-**Repository:** `oleyna80/agentic-sdlc-lite`  
-**Stable project ID:** `issue-010-documentation-model`  
-**Project P path:** `docs/projects/issue-010-documentation-model/plan.md` — one-time Owner-authorized non-root planning-path exception while the current canonical root-P requirement is still active.  
+**Classification:** SIGNIFICANT — normative SDLC lifecycle and source-of-truth changes.
+**Repository:** `oleyna80/agentic-sdlc-lite`
+**Stable project ID:** `issue-010-documentation-model`
+**Project P path:** `docs/projects/issue-010-documentation-model/plan.md` — one-time Owner-authorized non-root planning-path exception while the current canonical root-P requirement is still active.
 **Proposed review gate:** committed candidate P → independent formal Project Critic READY → separate Owner exact-P approval → independently reviewed stage W. This document **does not assert** that any of those future gates has happened.
 
 ## 1. Definition, approved specification, and provenance
 
 **Objective:** Adopt the Owner-selected documentation architecture for SDLC Lite without introducing a second lifecycle or weakening existing assurance and Owner boundaries. New significant initiatives have unique project-local `spec.md` and frozen `plan.md` revisions, linked to bounded `work-block.md` stages. The product has a distinct `PROJECT_BRIEF.md` and dated, non-authoritative `ROADMAP.md`.
 
-**Exact specification presented for Owner acceptance:**
+**Exact Owner-accepted specification:**
 
-- Owner-accepted initiative description and gate record: `docs/changes/ISSUE-010/owner-decisions.md`, OD-010-01/02, which explicitly describes the original chat-message provenance and its limits.
+- Owner-accepted initiative description and gate record: `docs/changes/ISSUE-010/owner-decisions.md`, OD-010-01/02 and the explicit exact-spec confirmation OD-010-04. The separate evidence record discloses chat-message provenance and its limits.
 - Committed specification subject: `e391d09cc908e886d4e019d54987fc26d34bbb55:docs/projects/issue-010-documentation-model/spec.md`.
 - Specification blob: `a364ec0fbd21767a36820653bd851d552c8ab7a7`; content SHA-256 `866a3cb1ba0958cb0e19fcc392cfb5cb960837b70042c772c0778a08dc1ffa14`.
 - Accepted scope: specification AC-01…AC-12 and its exact 17 normative source paths. Any material enlargement requires new Owner disposition and affected gates.
