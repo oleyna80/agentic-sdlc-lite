@@ -108,4 +108,3 @@ Findings: 0 total
 ### Next permitted action
 
 Run the independent Verifier against exactly b5dbc4764292b881c2e370404a7919be94d3b4e3. Any normative correction creates a new S and requires a fresh affected source review and verification.
-
