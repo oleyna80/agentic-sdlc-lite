@@ -91,3 +91,26 @@ Source: Owner mission “SDLC Lite — ISSUE-010 / Documentation Architecture Co
 > Не использовать утверждение архитектурного направления как безусловное разрешение менять canonical source.
 >
 > **Merge/deployment authorization: NOT GRANTED.**
+
+## OD-010-05 — Owner exact Project P approval (2026-10-22)
+
+The Owner directly confirmed in this conversation, after examining the independent Project Critic R2 READY and exact P identity:
+
+> проверил. Утверждаю Project P ISSUE-010, commit `41530894af15ecdb9347b8f39e9ee6f939f0bc16`, blob `5b0dfb2654ed3072b655de73068b438dc4cb9b1a`, с указанными границами автономии
+
+**Exact approved Project P:**
+
+- Repository: `oleyna80/agentic-sdlc-lite`; stable project ID: `issue-010-documentation-model`.
+- Review subject commit: `41530894af15ecdb9347b8f39e9ee6f939f0bc16`.
+- Path: `docs/projects/issue-010-documentation-model/plan.md`.
+- Git blob: `5b0dfb2654ed3072b655de73068b438dc4cb9b1a`.
+- Content SHA-256: `aa94c2510d7d27a4d66c3bbd9c04ceb8a3770a7f7e1a8622f89e22cf20a18e75`.
+- Accepted specification: `e391d09cc908e886d4e019d54987fc26d34bbb55:docs/projects/issue-010-documentation-model/spec.md`, Git blob `a364ec0fbd21767a36820653bd851d552c8ab7a7`, accepted by OD-010-04.
+- Formal independent Project Critic: **R2 READY**, original response preserved inside `docs/changes/ISSUE-010/project-critic.md` at evidence commit `f27a5aca92a47e9355242685c4326047d3e97408`, report Git blob `0ddfe900d15ec8fd1905212b77fc5d27498e8a17`, with historical R1 BLOCKED retained; this report is not an Owner approval.
+- Approved project scope: the exact 17 documentation-source paths defined in accepted Spec §4 and Project P §3; AC-01…AC-12 and proposal T01…T22; preservation of legacy P/W, ADR-0001 and source policy boundaries.
+
+**Owner delegation and constraints:** Approves preparation/commit/publication of one bounded stage W on the existing ISSUE-010 branch, with independent Stage Critic review, followed by autonomous changes limited to the approved source/evidence write sets **only after actual Stage Critic READY** and applicable parent conformance/permission checks. The existing project P establishes normal branch commits, non-force push, PR/CI and independent same-source assurance. No new Owner-per-conforming-W approval is implied. The Owner's immediately preceding message separately authorized preparation of the Stage W design.
+
+**Not authorized by this decision:** any normative source edit before committed W + independent Stage Critic READY; broad scope enlargement; changes to historical frozen contracts, CI/hooks/permissions/branch settings, Skills/runtime; direct `main` writes, merge, deployment, or claims that T01–T22 / future Reviewer/Verifier / delivery CI already passed. Final Owner Merge GO remains a distinct future decision.
+
+**Provenance:** Original direct chat assent transcribed via the connected GitHub assistant, attributed as an Owner decision for this task. No cryptographic or personally signed GitHub identity assertion is made; the explicit exact P subject above is the authorization boundary. Any contradiction with later authentic Owner instructions requires STOP before affected writes.
