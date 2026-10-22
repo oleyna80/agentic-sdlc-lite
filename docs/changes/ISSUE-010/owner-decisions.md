@@ -64,3 +64,30 @@ The Owner directly confirmed in the active conversation:
 This is a new explicit Owner decision, transcribed from the current conversation. It resolves the exact-specification binding gap raised by formal Project Critic R1 without reconstructing or authenticating the earlier OD-010-02 exchange. No cryptographic identity or personally authored GitHub signature is claimed or required. The original R1 BLOCKED verdict remains historical evidence, not a retroactive READY.
 
 The accepted spec commit/path/blob and SHA-256 remain exactly those recorded above. Project P approval, W/Stage Critic, normative implementation and merge remain PENDING. The Owner separately authorized ordinary in-scope planning corrections (trailing whitespace, current handoff and repeat independent review), without an additional Owner approval for each correction.
+
+### Original planning authorization excerpt
+
+Source: Owner mission “SDLC Lite — ISSUE-010 / Documentation Architecture Compatibility Review R2”, §7, in this conversation. The following is the exact bounded excerpt establishing the project-local planning exception and gate order; it is retained with the direct exact-spec confirmation above, not a claim of personally signed GitHub evidence.
+
+> Owner разрешает развитие документации SDLC Lite в рамках утверждённой архитектурной модели.
+>
+> В этой миссии разрешено подготовить отдельную task branch и bounded planning/proposal artifacts для ISSUE-010, не затрагивая существующие frozen документы.
+>
+> **Однократное planning-path exception:** допускается создание candidate specification и candidate P по новому project-local пути `docs/projects/issue-010-documentation-model/`, чтобы проверить предложенную структуру. Это не утверждение их содержания и не отмена действующего Project Critic → Owner exact-P approval.
+>
+> Planning/evidence scope должен быть предварительно явно перечислен, проверен на коллизии и ограничен документами ISSUE-010.
+>
+> Порядок:
+>
+> 1. Выполнить compatibility audit и Architecture Critic R2.
+> 2. При READY представить Owner уточнённую exact specification и предлагаемый scope.
+> 3. Получить Owner acceptance exact spec.
+> 4. Подготовить committed P и независимый formal Project Critic.
+> 5. Получить отдельное Owner approval exact P.
+> 6. Подготовить W и независимый Stage Critic.
+> 7. Только затем выполнять нормативные source edits.
+> 8. Independent Reviewer/Verifier, actual CI, отдельный Owner Merge GO.
+>
+> Не использовать утверждение архитектурного направления как безусловное разрешение менять canonical source.
+>
+> **Merge/deployment authorization: NOT GRANTED.**
