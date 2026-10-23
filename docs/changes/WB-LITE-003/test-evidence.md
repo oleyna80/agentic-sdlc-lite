@@ -6,9 +6,9 @@
 
 ## Source evidence
 
-- First jointly committed corpus/oracle SHA: `0b56dbecc4894e776fbf26d0a4d8dc6629350167`.
+- Initial authored corpus commit (oracle EOF whitespace later corrected): `0b56dbecc4894e776fbf26d0a4d8dc6629350167`.
 - `eval-cases.jsonl` blob: `521f65a7e0223b144b90d2969184665305f056f3`.
-- `eval-oracles.md` blob: `bded65da501ef899b0b5ba0a7ce9db5268a8e915`.
+- `eval-oracles.md` blob: `7e79599150fe692cfb12541671ae5443824c0869`.
 
 ## Checks actually executed
 
