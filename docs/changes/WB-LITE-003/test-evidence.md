@@ -36,3 +36,29 @@
 **NOT_RUN / NOT_TESTED:** actual Codex catalog root/nested discovery, typed inputs, implicit selection or internal loading, all planned 94 scored runs, executable negative fixtures, OS sandbox policy, before/after state and native Reviewer/Verifier. A successful GitHub structural CI does not establish any of these. Actual CI on this or a subsequent handoff commit is recorded separately only after checking its exact run.
 
 Future changes to case/oracle text after scoring would require a new pinned revision and affected retest; pre-existing SHA and original reports are not overwritten.
+
+## S2 — Author-side static Skill evidence (2026-10-24)
+
+**Source revision:** `238bdb68c2bcd449958f9a80f4585345be4895e5`; approved W-S2 `b1562a7725c3b6cf184b4e865fb4ed8a07e45d26`, blob `2ff9507ba81792b142dd9374bba9ecc03b48d013`; [original independent Stage Critic R1 READY](https://github.com/oleyna80/agentic-sdlc-lite/pull/16#issuecomment-6383170777). This is **not** an independent source inspection, T2 or final source S.
+
+| Exact Skill source path | Git blob | Description code points |
+| --- | --- | ---: |
+| `.agents/skills/assurance-evidence/SKILL.md` | `694f36b037fb85fa6371eedea2b15e51325973b6` | 184 |
+| `.agents/skills/change-impact-analysis/SKILL.md` | `dbf88a918149b7813e500391709106a1c375b7be` | 189 |
+| `.agents/skills/context-recovery/SKILL.md` | `ee1671d92145b2891253e28614ff1482b68c5768` | 190 |
+| `.agents/skills/documentation-validation/SKILL.md` | `6ad8717ea28771343e9c408e848406a0880d0f31` | 193 |
+| `.agents/skills/git-safety/SKILL.md` | `4eaf81e7082b925c27d3db957a5c5c9dce427bde` | 195 |
+| `.agents/skills/requirements-clarification/SKILL.md` | `62845604a52ade3a80506c51979a0b6b5353c5d8` | 192 |
+| `.agents/skills/skill-evaluation/SKILL.md` | `981fb23ff0a979d348ec14fc9b0d06a41cabbe38` | 171 |
+| `.agents/skills/systematic-debugging/SKILL.md` | `d70e56fdfd88e588bc3f5ce5a52892ae010f4d6c` | 181 |
+| `.agents/skills/task-decomposition/SKILL.md` | `2728df58070d19c488325e5e3c84a739e615e14a` | 187 |
+| `.agents/skills/test-design/SKILL.md` | `338f7b7d99db673f18e193deea10964843a7ca6f` | 186 |
+| `.agents/skills/workflow-to-skill/SKILL.md` | `3848df0f07cdb6a05c0d69b1839242c14c74b450` | 199 |
+
+**AUTHOR STATIC_CHECKED:** all eleven GitHub-retrieved Skill documents had matching direct paths and `name` frontmatter, quoted YAML `description` fields, individually ≤240 Unicode code points, **total 2067/2640**, required use/skip, procedure, output and STOP sections, one final newline, no dangling Markdown fences or trailing whitespace. Exact source commit changed only the eleven approved `SKILL.md` paths; Spec/P/W-S2 and S1 oracle/corpus blobs remain unchanged.
+
+**Bounded safety content scan:** searched for destructive shell shortcut patterns and unexpected shell fences; none found. This is static inspection only, not proof of runtime correctness or OS isolation. Skills were drafted as original Lite-native prose based on approved Spec/P/W and root/canonical process requirements; no third-party text/code was copied. Any future identifiable external reuse must have separately pinned source/licence/notice treatment.
+
+**STRUCTURAL CI SUCCESS:** [Lite Checks #40087243185](https://github.com/oleyna80/agentic-sdlc-lite/actions/runs/40087243185) on exact `238bdb68c2bcd449958f9a80f4585345be4895e5`.
+
+**PENDING:** independent read-only source/static content and security inspection bound to exact source/eleven blobs. Reinspect affected source if corrected. **T2 NOT_DESIGNATED** before independent content result; **NATIVE_NOT_RUN** for actual Codex discovery/selection/loading, sandbox, evaluator, baseline and 94 measured cases. Reviewer READY / Verifier PASS on final S remain later distinct gates.
