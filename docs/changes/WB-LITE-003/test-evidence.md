@@ -62,3 +62,28 @@ Future changes to case/oracle text after scoring would require a new pinned revi
 **STRUCTURAL CI SUCCESS:** [Lite Checks #40087243185](https://github.com/oleyna80/agentic-sdlc-lite/actions/runs/40087243185) on exact `238bdb68c2bcd449958f9a80f4585345be4895e5`.
 
 **PENDING:** independent read-only source/static content and security inspection bound to exact source/eleven blobs. Reinspect affected source if corrected. **T2 NOT_DESIGNATED** before independent content result; **NATIVE_NOT_RUN** for actual Codex discovery/selection/loading, sandbox, evaluator, baseline and 94 measured cases. Reviewer READY / Verifier PASS on final S remain later distinct gates.
+
+## S2 — Independent Static Source Inspector R1 REWORK and author correction (2026-10-27)
+
+Original independent report: https://github.com/oleyna80/agentic-sdlc-lite/pull/16#issuecomment-6438701479. **REWORK** on source `238bdb68c2bcd449958f9a80f4585345be4895e5`; two blockers F01 (routine vs significant route) and F02 (project-specific eleven-Skill assumption), two optional O01/O02. Original verdict remains historical.
+
+**Revised Skill source:** `0abec29e835cdc486a8b17fdb9e59a1e78a9030a` (source only, not T2). Changed exactly six W-S2-owned Skill files.
+
+| Skill | Old Git blob | Corrected Git blob | Finding |
+| --- | --- | --- | --- |
+| `change-impact-analysis` | `dbf88a918149b7813e500391709106a1c375b7be` | `5404b3167420b6e92638255a9c1ab78e8b58d664` | O02 |
+| `context-recovery` | `ee1671d92145b2891253e28614ff1482b68c5768` | `d924f320c375a2796bd2306a3009ee46e918a77a` | F01 |
+| `skill-evaluation` | `981fb23ff0a979d348ec14fc9b0d06a41cabbe38` | `9fa1d755fa6275b1f29d75f5a6187231f885e34a` | F02 |
+| `systematic-debugging` | `d70e56fdfd88e588bc3f5ce5a52892ae010f4d6c` | `d18f31b1bf96ced49c5730b1eadf12ca87c0f1cf` | F01/O01 |
+| `task-decomposition` | `2728df58070d19c488325e5e3c84a739e615e14a` | `b8d3fdac33d7177d8ff1b330a1f4988d2fbc6591` | F01 |
+| `test-design` | `338f7b7d99db673f18e193deea10964843a7ca6f` | `52943d46f5deaf945b56a3bb80c84f1883756cff` | F01 |
+
+**Unchanged Skill blobs:** `assurance-evidence`=`694f36b037fb85fa6371eedea2b15e51325973b6`; `documentation-validation`=`6ad8717ea28771343e9c408e848406a0880d0f31`; `git-safety`=`4eaf81e7082b925c27d3db957a5c5c9dce427bde`; `requirements-clarification`=`62845604a52ade3a80506c51979a0b6b5353c5d8`; `workflow-to-skill`=`3848df0f07cdb6a05c0d69b1839242c14c74b450`.
+
+**F01 author correction:** `systematic-debugging`, `task-decomposition`, `test-design` and `context-recovery` now use task-classification-dependent authorization. Routine tasks may mark P/W/Critic NOT_APPLICABLE with reasons; significant-work independent gates are not waived.
+
+**F02 author correction:** `skill-evaluation` binds the actually authorized Skill evaluation scope; WB-LITE-003 S3 still explicitly binds all eleven and final source S. **O01/O02:** no artificial second debugging hypothesis for directly proven cause; optional decomposition only when needed.
+
+**Executed author static checks:** all 11 corrected source blobs fetched from GitHub, metadata names/descriptions and mandatory sections valid, all description code points unchanged (2067/2640), six changed paths only and unchanged parent P/Spec/W/corpus. [Lite Checks 40484246836 SUCCESS](https://github.com/oleyna80/agentic-sdlc-lite/actions/runs/40484246836) on exact source SHA `0abec29e835cdc486a8b17fdb9e59a1e78a9030a`.
+
+**Not established:** independent static R2 READY (PENDING); preliminary T2 NOT_DESIGNATED; native discovery/routing/94 scored cases and final source Reviewer/Verifier NOT_RUN. This is an author disposition, not independent acceptance.
