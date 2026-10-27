@@ -17,11 +17,11 @@ Requirements are still undecided, the change is not yet accepted, or one local a
 
 ## Procedure
 
-1. State the accepted objective, task classification, applicable authorization and nonnegotiable constraints; for significant work bind exact approved P/Spec/W. Do not infer scope.
+1. State the accepted objective, current phase (project planning, stage planning or implementation), task classification, applicable predecessor authority and constraints. When drafting significant Project P, bind the accepted Spec/Owner intent; when drafting Stage W, bind the approved parent P/Spec; require an independently Stage-READY W **before implementation**, never as a prerequisite to drafting that W. Do not infer scope.
 2. Decompose into the smallest independently inspectable deliverables and order hard dependencies before parallel tasks.
 3. Propose finite source/evidence paths and a single writer for overlapping targets; mark changes outside approved scope for Owner decision.
 4. For each stage define observable done criteria, positive/negative checks, rollback and the actual evidence/capabilities needed.
-5. For significant work distinguish the current actionable Work Block from future coarse stages. For classified routine work keep the lightweight task path and record nonapplicable gates; never invent extra approvals.
+5. For significant work distinguish a proposed W awaiting its independent Stage Critic from an already Stage-READY actionable W and future coarse stages. For classified routine work keep the lightweight task path and record nonapplicable gates; never invent extra approvals.
 
 ## Observable output
 
@@ -29,7 +29,7 @@ A finite dependency map: task, prerequisite, accountable writer, exact proposed 
 
 ## STOP and authority
 
-Missing **applicable mandatory** approval for the task's actual classification, unclear write targets or overlapping writers → STOP before implementation. P/Spec/W/Critic may be NOT_APPLICABLE with a reason for routine work; they remain required for new significant work. A breakdown never authorizes writes.
+Missing approval **required for the current action and phase**, unclear authorized write targets or overlapping writers → STOP before the affected action. For significant planning, a not-yet-authored P/W or its pending future Critic is not missing prerequisite approval to **draft** that document; its actual predecessor approvals remain required. Significant implementation still requires its independently Stage-READY W; routine P/Spec/W/Critic may be NOT_APPLICABLE with reason. A breakdown never authorizes implementation.
 
 ## Differentiation
 
