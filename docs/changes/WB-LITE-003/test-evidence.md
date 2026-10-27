@@ -104,3 +104,13 @@ Original independent report: https://github.com/oleyna80/agentic-sdlc-lite/pull/
 **Four analysis scenarios to recheck independently:** significant P authoring before P/Project Critic exists; significant W authoring after approved P but before W/Stage Critic exists; significant implementation without W Stage Critic (MUST STOP); routine authorized work with NOT_APPLICABLE P/W/Critic. Also check stale/foreign predecessor rejection and no regressions.
 
 **Unverified:** independent static inspector **R3 PENDING** (no automatic READY), preliminary T2 NOT_DESIGNATED, native discovery/observer smoke/94 scored cases/sandbox NOT_RUN, final S same-source Reviewer/Verifier NOT_RUN. Corrected source and evidence SHA are distinct; future R3 must review source bytes at the corrected source SHA.
+
+## S2 — Independent R3 READY; preliminary T2 designation (2026-10-27)
+
+[Original Owner-supplied independent Static Source Inspector R3 READY](https://github.com/oleyna80/agentic-sdlc-lite/pull/16#issuecomment-6439680947) verified corrected source `b3015b0a1073759d24d5af7c3d01e3f7571537b5`, exact updated `task-decomposition` blob `fcf4d86840b019a9f7870f950f9a991626f530d4` and `context-recovery` blob `1867b0f81cc1b31f91b875b810e0a83928d10aeb`. Verdict READY, SRC-R2-F01 CLOSED, 0 blocking, R1 findings still CLOSED/RESOLVED. No native evaluation performed.
+
+**[Recorder T2 designation](https://github.com/oleyna80/agentic-sdlc-lite/pull/16#issuecomment-6439702361): preliminary S2 snapshot T2 = `33ec738439c7150d590b0f5bf06c864d32dbd0d4`, tree `f2b90921236cedbf98a9603dcf7e298c14dbb4b9`**. At this already-existing commit, 11/11 R3-reviewed Skill blob IDs match exactly; accepted P/Spec, W-S2, root AGENTS, Development and S1 cases/oracles are unchanged. The source `b3015b0…` to T2 diff is only the task-local `handoff.md` and `test-evidence.md`. See previous source-inventory entries and immutable R3/T2 PR comments for complete eleven-blob map.
+
+**Actual CI:** [source run 40486385291 SUCCESS](https://github.com/oleyna80/agentic-sdlc-lite/actions/runs/40486385291) on `b3015b0…`; [T2 run 40486788892 SUCCESS](https://github.com/oleyna80/agentic-sdlc-lite/actions/runs/40486788892) on `33ec738…`. Checks establish structural validity, not native Skill discovery/routing or OS sandbox.
+
+**Phase and limits:** S2 STATIC_CONTENT_READY/T2_PINNED only. T2 is NOT final full-tree source S. W-S3 needs a newly committed chronological W and independent Stage Critic READY before S is designated. Native observer smoke, root/nested `skills/list`, typed activation, 94 measured cases, safety fixtures, baseline, independent same-S Reviewer/Verifier and merge remain NOT_RUN/NOT_AUTHORIZED.
