@@ -18,14 +18,14 @@ Current exact task, contracts, refs and permissions remain freshly verified.
 ## Procedure
 
 1. Verify actual repo/project identity; inherited template approvals never apply to a newly derived project without initialization.
-2. Identify the task first; bind exact accepted Spec and Owner decision, independently reviewed P and Owner approval, exact actionable W and its own Stage Critic READY.
+2. Identify and classify the task first using the canonical routine/significant criteria. For new significant work, bind exact accepted Spec, Owner decision, independently reviewed P/Owner approval, actionable W and its own Stage Critic READY. For routine work, recover its authorized task scope and explicitly mark nonrequired P/W/Critic gates NOT_APPLICABLE with rationale.
 3. Read actual branch/HEAD, tracked/staged/untracked/ignored files and overlapping writers. Compare them with branch-local handoff; do not trust latest-file or cached status.
 4. Recover root `AGENTS.md`, relevant canonical procedures, finite scope and actual permissions; distinguish source from reports and memory.
 5. State verified facts, missing evidence, safe next step and STOP points. Route any imminent mutation through a fresh `git-safety` preflight.
 
 ## Observable output
 
-Verified task→Spec→P/Owner/Critic→W/Stage Critic→Git HEAD/status→allowed next step with discrepancies.
+Verified task/classification→applicable exact authority (significant: Spec/P/Owner/Critic/W; routine: authorized scope and reasoned NOT_APPLICABLE gates)→Git HEAD/status→allowed next step with discrepancies.
 
 ## STOP and authority
 

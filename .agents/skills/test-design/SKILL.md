@@ -30,7 +30,7 @@ AC→case ID→inputs/fixture→positive, negative and boundary expectation→ob
 
 ## STOP and authority
 
-Missing accepted AC, unverified disposable fixture, unsafe action or post-results oracle change → STOP. No execution without W/OS permissions and no invented test PASS.
+Missing accepted AC, unsafe action, required but unverified fixture, or post-results oracle change → STOP for the affected action. Execute tests only with applicable task authorization and actual fixture/OS permissions; require a Stage-READY W when the canonical significant-work route applies, not for every routine test. No invented test PASS.
 
 ## Differentiation
 

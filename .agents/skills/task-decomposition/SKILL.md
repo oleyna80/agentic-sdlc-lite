@@ -17,11 +17,11 @@ Requirements are still undecided, the change is not yet accepted, or one local a
 
 ## Procedure
 
-1. State the approved objective, exact parent authority and nonnegotiable constraints; do not infer new scope.
+1. State the accepted objective, task classification, applicable authorization and nonnegotiable constraints; for significant work bind exact approved P/Spec/W. Do not infer scope.
 2. Decompose into the smallest independently inspectable deliverables and order hard dependencies before parallel tasks.
 3. Propose finite source/evidence paths and a single writer for overlapping targets; mark changes outside approved scope for Owner decision.
 4. For each stage define observable done criteria, positive/negative checks, rollback and the actual evidence/capabilities needed.
-5. Distinguish a current actionable Work Block from future coarse stages; avoid inventing duplicate approvals and administrative gates.
+5. For significant work distinguish the current actionable Work Block from future coarse stages. For classified routine work keep the lightweight task path and record nonapplicable gates; never invent extra approvals.
 
 ## Observable output
 
@@ -29,7 +29,7 @@ A finite dependency map: task, prerequisite, accountable writer, exact proposed 
 
 ## STOP and authority
 
-Missing approved P/Spec/W, unclear write targets or shared writers → STOP before implementation. The breakdown does not authorize writes.
+Missing **applicable mandatory** approval for the task's actual classification, unclear write targets or overlapping writers → STOP before implementation. P/Spec/W/Critic may be NOT_APPLICABLE with a reason for routine work; they remain required for new significant work. A breakdown never authorizes writes.
 
 ## Differentiation
 

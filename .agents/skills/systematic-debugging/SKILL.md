@@ -18,10 +18,10 @@ No actual/testable defect exists, or only acceptance-case design or change-impac
 ## Procedure
 
 1. Pin actual version, environment and minimal input; state expected versus observed output and whether reproduction was actually executed.
-2. Build two or more discriminating root-cause hypotheses and the smallest safe experiment for each, without editing source first.
+2. If the cause is not directly established, compare plausible discriminating hypotheses and the smallest safe experiment for each; when direct evidence establishes one cause, record it without manufacturing alternatives or editing source first.
 3. Use actual logs, exit codes, traces and before/after state to eliminate explanations; label unperformed experiments NOT_RUN.
 4. Identify the smallest supported root cause and propose the least invasive fix plus positive, negative and regression tests.
-5. Only under independently Stage-READY W and actual permissions may the designated implementer modify or exercise the fixture; record precise source and observed results.
+5. Modify source or execute a fixture only under the **applicable authorized task route** and actual permissions. Significant work requires an independently Stage-READY W; a classified routine fix follows the canonical routine workflow with nonapplicable gates noted. Record precise source and observed results.
 
 ## Observable output
 

@@ -22,7 +22,7 @@ An obviously local reversible change has no credible downstream coupling, or the
 3. Differentiate confirmed effects, credible risk and unknown coupling; assess blast radius, severity, reversibility and cost proportionately.
 4. Compare minimal compatibility/migration/rollback approaches and explicit STOP conditions, without prematurely changing source.
 5. Map affected positive/negative/integration/regression tests and required review; note unaffected surfaces to keep scope finite.
-6. Recommend a bounded Owner/architect decision. Only **after** approval route accepted implementation through `task-decomposition`.
+6. Recommend a bounded Owner/architect decision. After approval, use `task-decomposition` **only if** the accepted change materially needs bounded multi-step planning; do not require another Skill for a safe one-step task.
 
 ## Observable output
 

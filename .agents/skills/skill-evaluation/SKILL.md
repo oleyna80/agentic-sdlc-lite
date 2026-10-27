@@ -17,8 +17,8 @@ No Skill source subject exists, only a generic AC needs tests, or the sole reque
 
 ## Procedure
 
-1. Bind exact source S and eleven source blobs, pre-fixed case and oracle revisions, repeat counts, allowed Skill sets, runtime/model/config and task context before any scored observation.
-2. With an actually authorized native evaluation W, assess root/nested discovery, typed explicit, implicit-positive, unrelated/nonmatch, near-match and matching skill-absent baseline cases.
+1. Bind the applicable approved exact source revision and **all Skills in this evaluation's authorized scope**, with their Git blobs, pre-fixed case/oracle revisions, repeat counts, allowed sets, runtime/model/config and task context before scoring. For WB-LITE-003 S3 specifically, bind final source S and all eleven approved Skill blobs.
+2. Only with applicable task authorization and verified native evaluation permissions, assess root/nested discovery, typed explicit, implicit-positive, unrelated/nonmatch, near-match and matching skill-absent baseline cases. WB-LITE-003 S3 requires its independently Stage-READY W-S3; routine workflows use their canonical task route.
 3. Distinguish catalog listing, explicit supplied input, attributable Skill path/event access, user-visible output and inaccessible internal loading; model self-report is not selection evidence.
 4. Require observer positive **and negative completeness** smoke before interpreting absence of an activation. Mark inaccessible mandatory events NOT_OBSERVABLE/BLOCKED, not PASS.
 5. Keep candidate/baseline prompts and applicable instructions equivalent, inventory system/user Skills and collisions, capture before/after effects and raw recorder evidence.
