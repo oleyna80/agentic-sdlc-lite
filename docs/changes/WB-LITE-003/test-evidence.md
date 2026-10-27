@@ -87,3 +87,20 @@ Original independent report: https://github.com/oleyna80/agentic-sdlc-lite/pull/
 **Executed author static checks:** all 11 corrected source blobs fetched from GitHub, metadata names/descriptions and mandatory sections valid, all description code points unchanged (2067/2640), six changed paths only and unchanged parent P/Spec/W/corpus. [Lite Checks 40484246836 SUCCESS](https://github.com/oleyna80/agentic-sdlc-lite/actions/runs/40484246836) on exact source SHA `0abec29e835cdc486a8b17fdb9e59a1e78a9030a`.
 
 **Not established:** independent static R2 READY (PENDING); preliminary T2 NOT_DESIGNATED; native discovery/routing/94 scored cases and final source Reviewer/Verifier NOT_RUN. This is an author disposition, not independent acceptance.
+
+## S2 — Independent Static Source Inspector R2 REWORK; SRC-R2-F01 corrected (2026-10-27)
+
+[Original R2 independent findings/disposition extract in PR #16](https://github.com/oleyna80/agentic-sdlc-lite/pull/16#issuecomment-6439143119). R2 inspected `0abec29e835cdc486a8b17fdb9e59a1e78a9030a`, confirmed R1 F01/F02 CLOSED and O01/O02 RESOLVED, but returned **REWORK** for `SRC-R2-F01` (circular requirement for Stage-READY W during P/W authoring). This comment is a faithful attributed extract, not a byte-identical original report.
+
+**Corrected source revision `b3015b0a1073759d24d5af7c3d01e3f7571537b5`**; only two current W-S2-authorized source files changed, with exact blob mapping:
+
+| Skill | R2 reviewed blob | New corrected blob | Source-content correction |
+| --- | --- | --- | --- |
+| `task-decomposition` | `b8d3fdac33d7177d8ff1b330a1f4988d2fbc6591` | `fcf4d86840b019a9f7870f950f9a991626f530d4` | Phase-aware approved predecessors for drafting P vs W vs implementing, explicit STOP only before affected unauthorized action |
+| `context-recovery` | `d924f320c375a2796bd2306a3009ee46e918a77a` | `1867b0f81cc1b31f91b875b810e0a83928d10aeb` | Task classification and current phase, actual future-gate PENDING/NOT_YET_CREATED, significant implementation unchanged |
+
+**Author observed static checks:** full eleven Skill blobs fetched; frontmatter name/description and required sections valid, Unicode metadata **2067/2640** unchanged, two-file changed-path inventory exact, parent Spec/P/W-S2/S1 blobs unchanged. [Lite Checks #40486385291 SUCCESS on exact corrected source](https://github.com/oleyna80/agentic-sdlc-lite/actions/runs/40486385291).
+
+**Four analysis scenarios to recheck independently:** significant P authoring before P/Project Critic exists; significant W authoring after approved P but before W/Stage Critic exists; significant implementation without W Stage Critic (MUST STOP); routine authorized work with NOT_APPLICABLE P/W/Critic. Also check stale/foreign predecessor rejection and no regressions.
+
+**Unverified:** independent static inspector **R3 PENDING** (no automatic READY), preliminary T2 NOT_DESIGNATED, native discovery/observer smoke/94 scored cases/sandbox NOT_RUN, final S same-source Reviewer/Verifier NOT_RUN. Corrected source and evidence SHA are distinct; future R3 must review source bytes at the corrected source SHA.
