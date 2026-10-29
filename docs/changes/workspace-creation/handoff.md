@@ -2,7 +2,7 @@
 
 ## Observed state and current phase
 
-- Phase: accepted Spec committed; complete Project P independently reviewed READY; separate Owner exact-P decision pending.
+- Phase: exact Project-Critic-READY P accepted by Owner; implementation entry is waiting for the separate hook-task checkpoint required by P §3.
 - Classification: significant normative workspace-procedure change. Preparing requirements/design is authorized; implementation gates have not been reached.
 - Repository: `oleyna80/agentic-sdlc-lite`, origin `https://github.com/oleyna80/agentic-sdlc-lite.git`.
 - Stable project/task ID: `workspace-creation`. No path history under this ID was found in the locally available refs; this is not an authenticated global registry check.
@@ -11,7 +11,7 @@
 - No new branch/worktree is created for these bounded proposal files. This location is a preparation location, not an approved implementation branch or authority inherited from the hook task.
 - Owner accepted the exact [Spec](../../projects/workspace-creation/spec.md) and instructed local fixation/planning: [OD-WC-001](owner-decisions.md). Spec blob is `12d01f34ae18d97c767ceabd90d733fd2f1e180e`; its accepted SHA-256 is recorded in that decision.
 - Frozen reviewed P: commit `3161c40a74a55fd2f44e0f1ab1591b353b9aca5e`, `docs/projects/workspace-creation/plan.md`, Git blob `938bc3a27542dd9dae241bcded6068a3ba0cfa75`. Independent [Project Critic](project-critic.md): **READY for Owner review**, no blocking findings. Original report blob `1be11b2182a2bfd2637f2f36775aa8890b2b15db`, SHA-256 `6901e8a1306a7e89c24df9c07eea2348a0a4c7e0fd202533fcf3719f60549b1a`; preserved without normalization or edits by the Git recorder.
-- No Owner P approval, W, Stage Critic, Reviewer, Verifier or CI success is claimed at this checkpoint. Project Critic READY is not implementation permission.
+- Owner accepted this exact reviewed P with “посмотрел спек и план. можем начинать”; see [OD-WC-002](owner-decisions.md). No W, Stage Critic, Reviewer, Verifier or CI success is claimed at this checkpoint. Approval does not waive P's dependency.
 
 ## Write-set and preservation
 
@@ -30,7 +30,7 @@ The following pre-existing local changes belong to the hook-connection task and 
 - `docs/changes/git-hook-connection/handoff.md`.
 - `docs/changes/git-hook-connection/validation.md`.
 
-No normative procedure, real Git configuration, existing worktree registration, integrated memory, hook file or pilot file is edited. The accepted Spec was staged alone and committed with its accepted bytes. Local planning/evidence commits and independent Project Critic are now authorized; no fetch, push, merge, deployment, cleanup or runtime experiment is part of this phase.
+No normative procedure, real Git configuration, existing worktree registration, integrated memory, hook file or pilot file is edited at this entry checkpoint. The accepted Spec was staged alone and committed with its accepted bytes. Exact-P acceptance now authorizes its delegated actions after their entry gates; the previous hook task's own commit remains outside P. No fetch, push, merge, deployment, cleanup or runtime experiment has been performed at this checkpoint.
 
 ## Prepared result
 
@@ -38,7 +38,7 @@ The Spec defines separate operation contracts, an available-exact-commit route w
 
 Acceptance is designed before runtime tests: positive/negative disposable cases, native `post-checkout` observation, manager/index preservation, partial-failure state and CLI process-friction evidence. These are future requirements, not executed results.
 
-The complete [Project P](../../projects/workspace-creation/plan.md) proposes one sequential implementation/validation stage. It pins the pending hook-documentation dependency to exact full-document/section hashes, uses the existing workspace with a later task branch instead of bootstrapping through the proposed creation rule, assigns finite source/evidence paths and preserves the separate CLI test mission. Proposed push/PR/CI bounds require future exact-P approval; they are not current authority.
+The accepted [Project P](../../projects/workspace-creation/plan.md) defines one sequential implementation/validation stage. It pins the pending hook-documentation dependency to exact full-document/section hashes, uses the existing workspace with a later task branch instead of bootstrapping through the proposed creation rule, assigns finite source/evidence paths and preserves the separate CLI test mission. Its push/PR/CI bounds are accepted through OD-WC-002; dependency and assurance gates still precede delivery.
 
 ## Preparation verification
 
@@ -51,9 +51,10 @@ The complete [Project P](../../projects/workspace-creation/plan.md) proposes one
 - During fixation/planning, SHA-256 comparison confirmed all four pre-existing hook-task files unchanged; non-task refs and `main` remained unchanged; the index was empty after the P commit. Only this preparation branch advanced through the authorized task commits.
 - Runtime fixtures, Stage Critic, same-S Reviewer/Verifier, actual compaction and hosted CI: NOT_RUN in this preparation.
 - The original proposal was NOT_COMMITTED. This planning checkpoint is staged/committed only under the subsequent Owner instruction; source execution still requires exact-P approval, satisfied dependency, W and independent Stage Critic.
+- On Owner acceptance, entry inspection observed predecessor HEAD `3cbe8f473d9d8b3205d33704b70c3952d78e9a89`, branch `docs/git-hook-connection`, empty index and the same four pending hook-task files. Their SHA-256 values still match the prior preservation checkpoint. The workspace document matches P's required future B bytes, but those bytes are still uncommitted. Seven Bash fences pass syntax checks; removing only the hook section reproduces the old committed workspace document exactly. These static checks do not replace the recorded CLI routing experiments or establish new runtime results.
 
 ## Next action and dependency
 
-Present exact Project-Critic-READY P `3161c40a74a55fd2f44e0f1ab1591b353b9aca5e` and its original report to Owner for a separate decision. Record any attributable exact-P acceptance separately; do not edit frozen P or the original Critic report. Do not implement before that approval, the satisfied dependency and the subsequent W/Stage Critic gate. No executable W is actionable yet.
+Exact-P acceptance is recorded in OD-WC-002. A separate permission request is pending for one local hook-task commit containing only its four already prepared files. Until that permission arrives and the committed baseline/ownership predicates are satisfied, preserve the drafts and do not create actionable W, switch task branch or implement. If authorized, commit the hook checkpoint separately, verify B and single-writer entry, then create the bounded W and obtain independent Stage Critic before Coder. Do not request P acceptance again.
 
 Before that implementation, settle the overlapping hook-documentation baseline: preserve its corrected hook section through authorized integration or an explicitly reviewed branch dependency. Do not edit the older hook handoff, frozen historical plans or shared memory to manufacture authority. If actual source/configuration or ownership differs on resume, repeat the affected preflight and resolve the mismatch before writes.
