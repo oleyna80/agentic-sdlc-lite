@@ -2,11 +2,38 @@
 
 ## Current phase and target
 
-- Phase: independent CLI Verifier returned **REWORK / incomplete assurance** on exact S `a94fdb730ac2db5d1e798967aa996620840df73e`, source blob `35f93bdfe6d6f643ccb891733e6f8640cedd1bbc`. Empty/nonempty manifest success and selected refusal cases were observed; most of P §5 remains NOT_RUN. Next is bounded Coder REWORK for strict nonempty-manifest format checking, then completion of the single matrix by the independent Verifier on the new exact S. Reviewer and hosted CI remain outstanding. This is not delivery readiness.
-- Classification: significant normative workspace creation/entry change. One stage, one normative implementation file. Architecture preparation here ends with reviewed W; implementation goes to the project CLI, followed by distinct independent source missions.
+- Phase: **same-S local assurance complete; delivery pending**. Current S is `f008fc3eabe3b6acbb3c57a0680a266457d68171`, source blob `20a5ba7f4be7a921c1ad1ef4acdb8e6b82d49621`. Independent CLI Verifier **PASS** and separate Reviewer **READY** bind this S; see [the final result](#same-s-independent-assurance-result) and their original reports. Earlier REWORK / NOT_RUN observations below are historical. They are not the next assignment. Hosted CI on delivery H remains outstanding; local assurance alone is not delivery readiness.
+- Classification: the source initiative remains significant, with one stage and one normative implementation file. This Owner-requested handoff refresh and task-message diagnosis are routine factual/operational maintenance: no source, acceptance, lifecycle, hook, configuration or assurance-gate change; new Spec/P/W/Critic and a fixture-matrix rerun are NOT_APPLICABLE for this evidence-only update.
 - Repository: `oleyna80/agentic-sdlc-lite`; origin `https://github.com/oleyna80/agentic-sdlc-lite.git`; project/task: `workspace-creation`.
 - Existing root: `/home/azur/Projects/WSL/agentic-sdlc-lite-worktrees/git-hook-connection`; current branch: `docs/workspace-creation`. No new real worktree was created. The directory's old task name supplies no authority.
-- Baseline B: `07eb819a3dc4c778fc9f60685d0ed4fb40fb3ec4`; tree `e248befd709e0479c4f3c092fab39ab41d5c6a38`. Observed predecessor HEAD for this update is evidence checkpoint `9b0fc9f652572739dc86e7caf531795fef53f824`, parent/current S `a94fdb730ac2db5d1e798967aa996620840df73e`. Only the authorized task branch advances through this source/evidence sequence.
+- Baseline B: `07eb819a3dc4c778fc9f60685d0ed4fb40fb3ec4`; tree `e248befd709e0479c4f3c092fab39ab41d5c6a38`. Observed predecessor HEAD for this update is evidence checkpoint `61963298c6d7d74a1aa04fd066d611a7f9165f8c`; entry index/worktree were clean. Only the authorized task branch advances through this source/evidence sequence.
+- Next action: inspect the complete B..H delivery diff, prove S..H is evidence-only and preserve exact source/Spec/P/W and original report bytes. Then complete the separately authorized task-branch delivery and actual Lite Checks at its final H under P §6–7 and applicable Owner bounds. The prior assurance mission was local-only; its result itself grants no publication authority. No merge, deployment, main mutation or integrated-memory update is included. No additional source rework or independent matrix repeat is needed solely for this handoff correction; source changes or new findings require affected assurance.
+
+## Native task-message limit
+
+The 2026-10-29 Orchestrator log (`01a1889c-c223-7f01-9665-f23af6a5520e`) records three `send_message_to_thread` failures reading `prompt exceeded the maximum context budget`. Installed CLI is `0.165.0`. Its [versioned native implementation](https://github.com/openai/codex/blob/rust-v0.165.0/codex-rs/tui/src/dynamic_tools.rs) sets `MAX_INPUT_BYTES = 1_000` for both `create_thread` and `send_message_to_thread`; `validate_prompt` compares the Rust string's UTF-8 byte length. It separately checks the escaped delegation envelope against 1,256 bytes. This error occurs before target-thread read/resume, not during model inference. The later `active writer` error on the old Orchestrator is a separate ownership condition, not another budget failure.
+
+| Failed call / prompt UTF-8 bytes | Shorter retry / UTF-8 bytes | Observed outcome |
+| --- | --- | --- |
+| Log line 367 / 1,314 | 374 / 983 | Byte validation passed; target resume then reported an active writer. |
+| 577 / 1,067 | 582 / 829 | Retry returned the Verifier thread ID. |
+| 632 / 1,020 | 637 / 793 | Retry returned the Verifier thread ID. |
+
+Keep the full assignment and expectations in the existing task handoff/assigned report, and send a short file/section pointer. Measure UTF-8 bytes, not JavaScript character count; Russian text commonly uses more than one byte per character. For this task prefer a comfortably short prompt (about 900 bytes or fewer), avoid copying the whole matrix into it, and inspect the tool result before treating a mission as delivered. If the budget error recurs, shorten to a pointer and retry; preserve role independence and single-writer ownership. An active-writer refusal requires resolving ownership separately. This is a version-specific operational technique, not a new Lite gate or fixed provider budget policy.
+
+Prepared delivery-check pointer (404 UTF-8 bytes; its envelope with the observed UUID is 536 bytes):
+
+```javascript
+const prompt = "Продолжи workspace-creation/S1 в этом worktree. Прочитай Current phase и Native task-message limit в docs/changes/workspace-creation/handoff.md. Сверь Git и точные P/W/S. Выполни только описанную там delivery-проверку; исходник и оригиналы отчётов сохрани. Без merge/deploy и изменения main.";
+if (new TextEncoder().encode(prompt).length > 1000) {
+  throw new Error("Shorten the task pointer before native dispatch");
+}
+// Pass prompt to the available native task tool; this snippet does not dispatch.
+```
+
+Diagnosis retained at `/tmp/workspace-context-budget.4qo5ec1z/diagnostic.json`, alongside the inspected versioned source (SHA-256 `93445d64b973460bf791ce0601b424b4531112217abe84d9e6fc786244011f0f`). Six recorded prompt sizes match the byte predicate; four offline boundary checks cover 1,000/1,001 ASCII bytes and 500/501 two-byte Cyrillic characters. These are offline predicate checks, not native tool execution. Native dispatch in this architecture session is **NOT_RUN** because `codex_tui` is not exposed here. The successful native retries above are historical observations from the project CLI log. The committed findings and pointer remain usable without the temporary files.
+
+No supported configuration adjustment for this hard-coded message limit was identified in that implementation. Local `model_auto_compact_token_limit = 100000` controls a different mechanism; `model_context_window` is unset. Neither setting was changed. Increasing model context or the compaction threshold would not change this byte check. The vendor binary was not patched.
 
 ## Exact frozen subjects and Owner decisions
 
@@ -33,7 +60,7 @@ All P §3 predicates were checked before W preparation:
 - Relevant configuration was inspected: `core.hooksPath` and `extensions.worktreeConfig` unset (exit 1/empty); no effective checkout/commit hook files. No activation, replacement, bypass or configuration write.
 - Branch `docs/workspace-creation` was absent (`show-ref --exists` exit 2). Normal creation/switch at exact B succeeded. Actual root/branch/HEAD/status and registration were checked afterward; existing refs and other worktrees were preserved. `main` remains `55ebee6cf26db99d708f089f297344ef0341f698`.
 
-The independent CLI Verifier has finished its present attempt. Orchestrator records its unchanged original and this handoff; no other writer is delegated concurrently. The next Coder owns only `docs/workflow/workspaces.md` and an identified append to `implementation.md`; it commits the source-only new S and leaves its report for Orchestrator recording. Preserve all existing report bytes. Do not give this correction to current independent Verifier session `01a1889c-c223-7f01-9665-f23af6a5520e`: it may resume assurance after the new subject is bound. Reviewer remains a later distinct mission. Branch switching and absolute Git paths do not create OS isolation.
+Current ownership: Coder, independent Verifier and separate Reviewer have completed their recorded missions. This update owns only `handoff.md`; no other writer is delegated concurrently. Their original reports remain unchanged. Before any delivery mission, recheck actual Git state and writer ownership. Branch switching and absolute Git paths do not create OS isolation. The execution sections below retain the earlier assignments and observations as history; the current action is stated at the top and the final same-S result at the end.
 
 ## Initial Coder result and Orchestrator inspection
 
@@ -59,7 +86,7 @@ The original [reports](cli-validation.md) are preserved without changing their f
 - Both runs extracted the exact S source (SHA-256 `610299818ce7c03e38c5eb1b56fde61cec0fff092c13732bd75397c749b1e752`) and exact first Bash fence (`99c6a7ced08a6c858a9ec4a9a4ba99b2847d40c7c9601760cf03e586352ddac1`), changing assignment placeholders only. Expected normal hook-free available-base success was recorded before experiments. An empty regular manifest instead caused `sha256sum` to report no properly formatted checksum lines and script exit **1**, before the prompt/add according to the source. No independent call trace was recorded. New branch/destination were absent; saved status and worktree registration were unchanged. The second run also retained equal before/after index hashes.
 - Orchestrator read saved results, checked the exact source/fence bytes, script substitutions and reported hashes in both retained fixture roots. No third runtime experiment was run. No evidence supports PASS for the other matrix cases. Interactive prompts remain an unresolved usability/implementation concern; neither run reached them. They are not an independently reproduced second runtime failure.
 
-## Coder REWORK result and current source
+## Historical Coder REWORK result — superseded source
 
 - New S `a94fdb730ac2db5d1e798967aa996620840df73e` changes only `docs/workflow/workspaces.md`; blob `35f93bdfe6d6f643ccb891733e6f8640cedd1bbc`, source SHA-256 `0d351b737ada071a21c29db222e9ae5be096d83ec60fe194899fa3277360b5ff`. The working source equals S. First Bash fence SHA-256 is `aa5919561dfde82200f87668042ac603e8f766c9cb7dcbf92f0c6ae6a61ffebb`.
 - The correction permits a zero-byte manifest only for an independently established empty set. It skips checksum-entry verification only for the empty-bytes digest after re-reading/comparing the manifest itself. Nonempty checksum verification and subsequent hook/configuration checks remain in place. This is source inspection, not proof of runtime success. Interactive confirmations and the unattended-run restriction are unchanged and still require practical assessment.
@@ -76,7 +103,7 @@ The original [reports](cli-validation.md) are preserved without changing their f
 - PTY confirmation is usable through the actual tools, with an additional inspection call while the process waits. That is observed process cost, without a measured time/token comparison or a demonstrated need to remove the confirmation policy. Keep that policy unchanged in this correction. Exact-source and scratch/report boundaries helped diagnose the issue and preserve independent evidence; the repeated partial manifest checks have still not completed the mandatory matrix.
 - Evidence limits: the report says expectations were established before execution; broad expectations existed in P and the prior handoff, but the inspected log/artifacts do not separately establish a newly recorded per-case expectation set before these runs. Do not convert that retrospective paragraph into stronger timing evidence. On resumption, record each remaining scenario's input/expected result/observation/forbidden side effects before executing it, retaining numeric statuses, relevant state and call order. Preserve the original report rather than editing its claim.
 
-## Required checks and current limits
+## Historical required checks and limits — before final REWORK
 
 The runtime matrix remains exact P §5 with Spec AC-01–AC-14; W refines entry, roles, protected intervals and finite actions without duplicating the matrix. Old-S empty-set failures remain historical. Current-S available-base empty/nonempty creation, selected manifest refusals and real fixture ref-change/restoration have partial evidence as above. Stage descendant/no-fetch call order, fresh-ref success/error/drift/post-fetch change, each manager-data category, path/ref/status/base error injections and actual permitted/unknown/failing/dirty checkout-hook behavior and partial state remain NOT_RUN. A missing referenced file is not proof of unreadable-manifest handling. Full source acceptance, same-S Reviewer and hosted CI are outstanding. After correction bind the new exact S and complete the entire single P §5 matrix; prior-S successes remain historical evidence and cannot silently become new-S results. Historical hook-routing tests remain separately attributed in the hook records; they are not workspace-creation runtime evidence.
 
@@ -84,7 +111,9 @@ Preparation checks verify B ancestry/full path inventory, exact frozen blobs and
 
 Independent [Stage Critic](stage-critic.md) returned READY on the exact W above, with no blockers. Its original report was committed unchanged; SHA-256 `2753f82505019c81a9319c603aeee62110d74e9a78d92fc1b9235bb619dd36df`. It verified subjects/ancestry/B/scope and feasibility of future assurance; it did not execute the implementation or runtime matrix. Its nonblocking recommendation is a short CLI handoff referencing W and the single P §5 matrix. Future tests/CI are not inferred from this design gate.
 
-## Next mission — bounded Coder REWORK
+## Historical assignment — bounded Coder REWORK (completed)
+
+The following assignment and its continuation describe the earlier REWORK, now completed by S `f008fc3eabe3b6acbb3c57a0680a266457d68171` and the independent missions recorded below. Do not dispatch it again as a current instruction.
 
 Use either existing Coder session above, rooted at the existing task worktree; keep the current independent Verifier free of source authorship. No new session, Owner approval or Stage Critic round is required for this correction inside unchanged P/W. Use this bounded assignment:
 
@@ -105,6 +134,6 @@ The independent CLI Verifier `01a188ae-9fbf-7733-8eaa-bf5825e51e2e` returned PAS
 
 - Source S `f008fc3eabe3b6acbb3c57a0680a266457d68171`, `docs/workflow/workspaces.md` blob `20a5ba7f4be7a921c1ad1ef4acdb8e6b82d49621`: independent CLI Verifier session `01a188ae-9fbf-7733-8eaa-bf5825e51e2e` returned **PASS** for the bounded P §5 matrix. Its original report, including the flawed initial attempt and correction, is committed at `438983e`; full report SHA-256 `5cd74767f0651ceab683d000e9122d7a6b21b1235c3bf3805d4e7ba7b7ef5eb5`. A fresh isolated sequential repeat comprised 36 cases and 36 audits with zero audit errors. See the original for the exact coverage, distinct earlier observations and limitations.
 - Separate independent Reviewer session `01a188b7-0544-7330-a4f9-20d174a1a479` returned **READY** on the same S and blob. Its unmodified original is committed at `59ed6c7b18f72202f175b461b3b36ae06c4b6e65`; SHA-256 `3271b150fc4f93bc7890635ed23b5b5684ba461d5c2531e2127979a2b29be517`. Reviewer inspected source and evidence but did not rerun the fixture matrix or examine every individual result.
-- The target/ref-change scenario was performed with fixture state in a native CLI session; it is not evidence of operating-system isolation or rebinding a security authority root. Actual compaction was not run and is optional in P. The fixtures do not establish hosted CI, production hook behavior, or elimination of concurrent filesystem races.
+- The target/ref-change scenario was performed with fixture state in a native CLI session; it is not evidence of operating-system isolation or rebinding a security authority root. A dedicated compaction/recovery acceptance experiment was NOT_RUN and is optional in P. The Verifier session log does contain an ordinary native `compacted` event; that event alone does not establish the acceptance experiment. The fixtures do not establish hosted CI, production hook behavior, or elimination of concurrent filesystem races.
 - Exact subjects and retained original reports enabled separation of the source change from independent findings and preserved the earlier failure history. Costs observed include repeated context reads, interactive state inspection, and an invalid initial fixture run requiring a clean sequential repeat; no comparative time or token measurement was made.
 - Same-S assurance is complete; delivery and hosted CI remain separate. No push, merge, deploy or shared-memory integration is authorized by this result. Any later delivery HEAD requires the applicable S-to-H evidence-only and CI checks.
