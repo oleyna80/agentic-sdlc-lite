@@ -33,3 +33,21 @@ Retained evidence paths, all relative to the fixture root, with SHA-256:
 - The example has an unconditional manifest and human-input `verified` prompt, making unattended use stop by design; the empty-set error occurs even before that prompt. Prompt honesty, CLI interaction and other false stops remain untested. Prior Coder context-loading friction is recorded in the handoff; this mission offers no time/token comparison. No automatic reset, removal, retry, source edit, real worktree creation, real-repository Git config/ref/index change, real fetch, real-repository commit, push, merge or deployment was performed. Fixture setup did configure, stage and commit within the temporary repository.
 
 The Orchestrator should preserve this report as a blocked observation, arrange a distinct fresh-session Verifier and the W-governed rework/renewed same-S assurance as appropriate. Do not adopt a PASS from this report.
+
+---
+
+## Second mission original — appended by Orchestrator
+
+The first report above is preserved at commit `a0b62f72311d676751d16ea14c6dbf789c3cb2e8`, blob `efa07ffb49f0e195619d5c52bc29de54e7b151c4`. The following original is copied verbatim from `/tmp/workspace-cli-independent.wnZ19Fw4/independent-observation.md`, SHA-256 `c8d11e46874cc362fbfec7fdf5c97984527c8f490fb1aa5e83d1333c0f4824b7`, authored in distinct session `01a18879-a348-7c32-834d-9e7ebf4d5cbb`. Its runtime/provenance limitations are retained as written; Orchestrator assessment is separately recorded in [handoff](handoff.md#runtime-findings-and-session-provenance).
+
+# Workspace creation S — independent observation, REWORK
+
+S f24d32367dad594d25b1cd896067910302dca914, source blob 82c3b02ad26b11700c6f45ba19586c60d3b0534d. HEAD 16cdce525df50364b4d9e81657470d777f304aee is evidence-only relative to S for handoff and implementation report; current workspace source matches S. Git 2.53.0, Linux 7.0.0-42-generic. This API agent session is separate from the Coder's reported session; a fresh native Codex CLI session and its AC-11 scenario were not established or observed.
+
+Expected before setup: AC-02 clean hook-free available exact base with an empty relevant-file set should create at exact approved base without fetch. Actual: extracted first Bash fence from exact S, substituted only assignment placeholders; fixture manager uses default hooks with no executable post-checkout; empty manifest. bash exited 1, sha256sum reported no properly formatted checksum lines, then STOP: relevant file bytes changed or inspection failed. Failure occurs in verify_relevant before prompt and before worktree add according to script; no independent call trace. No confirmations piped. Status empty before/after, registration identical, index SHA-256 8a99f56bd3599f16165eb30aa3c8c626923a7d63855907a5b97b98b5c6cdea2b before/after. Branch existence test exit 1, destination existence test exit 1. No automatic recovery.
+
+AC-02 FAIL in this case; AC-01, AC-03 through AC-14 NOT_RUN as acceptance criteria; further normal creation, prompts, hook failures, fresh-ref and mutation error cases NOT_RUN. A later Reviewer, hosted CI and delivery NOT_RUN. Stop matrix at reproducible blocker per handoff; return S for REWORK. Do not claim native CLI independent Verifier PASS.
+
+Fixture root /tmp/workspace-cli-independent.wnZ19Fw4 created via mktemp -d, verified empty, uid 1000 mode 700 before setup, retained. Expected outcomes recorded before setup in expectations.txt. Exact extracted source SHA-256 610299818ce7c03e38c5eb1b56fde61cec0fff092c13732bd75397c749b1e752; original fence 99c6a7ced08a6c858a9ec4a9a4ba99b2847d40c7c9601760cf03e586352ddac1; substituted case 34b89fb2c50e704d6f5358bc610c6f87a5e3d8f2aa741878de296ffb665c1e40; result 6e52bafbd08e2667a3a845923b6ad6b533f6e23171f654b3fc01bc04ff2394b9; partial 839dfe767d3d0b7535b27baa3f05d93344e0232ddfe17732cec65094e8825fad. Other retained pre/post state files and empty manifest are in this directory.
+
+The requested real report path was already occupied by an untracked prior report explicitly requesting preservation for Orchestrator; it was not rewritten or appended. This scratch observation is not the assigned durable report. Orchestrator should preserve the preexisting original then arrange a separate fresh native CLI mission for corrected S; report-path ownership must be resolved before writing there.
