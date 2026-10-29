@@ -2,14 +2,16 @@
 
 ## Observed state and current phase
 
-- Phase: accepted Spec committed; complete Project P prepared for independent Project Critic and subsequent separate Owner review.
+- Phase: accepted Spec committed; complete Project P independently reviewed READY; separate Owner exact-P decision pending.
 - Classification: significant normative workspace-procedure change. Preparing requirements/design is authorized; implementation gates have not been reached.
 - Repository: `oleyna80/agentic-sdlc-lite`, origin `https://github.com/oleyna80/agentic-sdlc-lite.git`.
 - Stable project/task ID: `workspace-creation`. No path history under this ID was found in the locally available refs; this is not an authenticated global registry check.
 - Preparation location: `/home/azur/Projects/WSL/agentic-sdlc-lite-worktrees/git-hook-connection`.
 - Branch: `docs/git-hook-connection`; original baseline: `55ebee6cf26db99d708f089f297344ef0341f698`; observed accepted-Spec HEAD: `d1e75d7e8d31b37cfb7be68416919e28ebfedf04`.
 - No new branch/worktree is created for these bounded proposal files. This location is a preparation location, not an approved implementation branch or authority inherited from the hook task.
-- Owner accepted the exact [Spec](../../projects/workspace-creation/spec.md) and instructed local fixation/planning: [OD-WC-001](owner-decisions.md). Spec blob is `12d01f34ae18d97c767ceabd90d733fd2f1e180e`; its accepted SHA-256 is recorded in that decision. No P approval, W, Critic verdict, Reviewer, Verifier or CI success is claimed at this checkpoint.
+- Owner accepted the exact [Spec](../../projects/workspace-creation/spec.md) and instructed local fixation/planning: [OD-WC-001](owner-decisions.md). Spec blob is `12d01f34ae18d97c767ceabd90d733fd2f1e180e`; its accepted SHA-256 is recorded in that decision.
+- Frozen reviewed P: commit `3161c40a74a55fd2f44e0f1ab1591b353b9aca5e`, `docs/projects/workspace-creation/plan.md`, Git blob `938bc3a27542dd9dae241bcded6068a3ba0cfa75`. Independent [Project Critic](project-critic.md): **READY for Owner review**, no blocking findings. Original report blob `1be11b2182a2bfd2637f2f36775aa8890b2b15db`, SHA-256 `6901e8a1306a7e89c24df9c07eea2348a0a4c7e0fd202533fcf3719f60549b1a`; preserved without normalization or edits by the Git recorder.
+- No Owner P approval, W, Stage Critic, Reviewer, Verifier or CI success is claimed at this checkpoint. Project Critic READY is not implementation permission.
 
 ## Write-set and preservation
 
@@ -45,11 +47,13 @@ The complete [Project P](../../projects/workspace-creation/plan.md) proposes one
 - Checked new Markdown for whitespace, local link targets and unresolved template markers; inspected both complete files.
 - Original draft preparation verified the four pre-existing dirty files, index/configuration, refs and worktree registration against its captured pre-write state. During fixation/planning, only the explicitly authorized task commits may advance this task branch/index; the older hook files, other refs and worktree registration remain preserved.
 - Planning checks cover complete new/updated Markdown, local links, whitespace and absence of unresolved template markers; the committed Spec retains its accepted SHA-256. Installed CLI tools and active GitHub authentication were observed; hosted CI and target push permission have not been verified.
-- Runtime fixtures, independent gates, actual compaction and hosted CI: NOT_RUN in this preparation.
+- An independent native Project Critic read exact committed P/Spec, checked dependency hashes, source-level test/CI feasibility and delivered its original report. Shared filesystem/OS is not isolation. The report's command/results and limitations are preserved in the original; no future runtime result is inferred from design review.
+- During fixation/planning, SHA-256 comparison confirmed all four pre-existing hook-task files unchanged; non-task refs and `main` remained unchanged; the index was empty after the P commit. Only this preparation branch advanced through the authorized task commits.
+- Runtime fixtures, Stage Critic, same-S Reviewer/Verifier, actual compaction and hosted CI: NOT_RUN in this preparation.
 - The original proposal was NOT_COMMITTED. This planning checkpoint is staged/committed only under the subsequent Owner instruction; source execution still requires exact-P approval, satisfied dependency, W and independent Stage Critic.
 
 ## Next action and dependency
 
-Commit the complete candidate P with the separate Spec decision/checkpoint, then commission an independent Project Critic on that exact commit/path/blob. Preserve its original report separately and present the exact reviewed P to Owner. Do not implement before separate exact-P approval and the subsequent W/Stage Critic gate. No executable W is actionable yet.
+Present exact Project-Critic-READY P `3161c40a74a55fd2f44e0f1ab1591b353b9aca5e` and its original report to Owner for a separate decision. Record any attributable exact-P acceptance separately; do not edit frozen P or the original Critic report. Do not implement before that approval, the satisfied dependency and the subsequent W/Stage Critic gate. No executable W is actionable yet.
 
 Before that implementation, settle the overlapping hook-documentation baseline: preserve its corrected hook section through authorized integration or an explicitly reviewed branch dependency. Do not edit the older hook handoff, frozen historical plans or shared memory to manufacture authority. If actual source/configuration or ownership differs on resume, repeat the affected preflight and resolve the mismatch before writes.
