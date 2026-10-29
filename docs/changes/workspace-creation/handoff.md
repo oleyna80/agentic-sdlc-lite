@@ -2,7 +2,7 @@
 
 ## Observed state and current phase
 
-- Phase: exact Project-Critic-READY P accepted by Owner; implementation entry is waiting for the separate hook-task checkpoint required by P §3.
+- Phase: exact Project-Critic-READY P accepted by Owner; the separately authorized hook-task checkpoint is committed. Verify the remaining B predicates, then prepare W and independent Stage Critic before Coder.
 - Classification: significant normative workspace-procedure change. Preparing requirements/design is authorized; implementation gates have not been reached.
 - Repository: `oleyna80/agentic-sdlc-lite`, origin `https://github.com/oleyna80/agentic-sdlc-lite.git`.
 - Stable project/task ID: `workspace-creation`. No path history under this ID was found in the locally available refs; this is not an authenticated global registry check.
@@ -23,7 +23,7 @@ Current planning owns exactly:
 - `docs/changes/workspace-creation/owner-decisions.md`.
 - `docs/changes/workspace-creation/project-critic.md` (independent writer).
 
-The following pre-existing local changes belong to the hook-connection task and are preserved:
+The following hook-task files were separately committed without changing their draft bytes at `00f4375a8e1e1335ae3bf7fb439beacd849e7478` under [OD-WC-003](owner-decisions.md):
 
 - `README.md`.
 - `docs/workflow/workspaces.md`.
@@ -53,8 +53,10 @@ The accepted [Project P](../../projects/workspace-creation/plan.md) defines one 
 - The original proposal was NOT_COMMITTED. This planning checkpoint is staged/committed only under the subsequent Owner instruction; source execution still requires exact-P approval, satisfied dependency, W and independent Stage Critic.
 - On Owner acceptance, entry inspection observed predecessor HEAD `3cbe8f473d9d8b3205d33704b70c3952d78e9a89`, branch `docs/git-hook-connection`, empty index and the same four pending hook-task files. Their SHA-256 values still match the prior preservation checkpoint. The workspace document matches P's required future B bytes, but those bytes are still uncommitted. Seven Bash fences pass syntax checks; removing only the hook section reproduces the old committed workspace document exactly. These static checks do not replace the recorded CLI routing experiments or establish new runtime results.
 
-## Next action and dependency
+## Separate dependency checkpoint and next action
 
-Exact-P acceptance is recorded in OD-WC-002. A separate permission request is pending for one local hook-task commit containing only its four already prepared files. Until that permission arrives and the committed baseline/ownership predicates are satisfied, preserve the drafts and do not create actionable W, switch task branch or implement. If authorized, commit the hook checkpoint separately, verify B and single-writer entry, then create the bounded W and obtain independent Stage Critic before Coder. Do not request P acceptance again.
+Owner authorized the separate four-file local hook commit with “Да, отдельный локальный коммит и продолжить”; [OD-WC-003](owner-decisions.md) records the scope and actual checkpoint. Observed predecessor HEAD for this evidence update is `00f4375a8e1e1335ae3bf7fb439beacd849e7478`. The worktree/index were clean after that commit. The hook-task writer has finished; no other active mission in this architecture team owns the overlapping source path.
 
-Before that implementation, settle the overlapping hook-documentation baseline: preserve its corrected hook section through authorized integration or an explicitly reviewed branch dependency. Do not edit the older hook handoff, frozen historical plans or shared memory to manufacture authority. If actual source/configuration or ownership differs on resume, repeat the affected preflight and resolve the mismatch before writes.
+The preceding preparation entries describe historical checkpoints. In particular, the original hook reports retain their earlier NOT_COMMITTED state as historical evidence; OD-WC-003 records the subsequent real local commit. No source implementation, fixture experiment, Stage Critic, same-S assurance, push or CI success has occurred in this continuation.
+
+Next: verify a clean committed baseline B against all P §3 predicates, including full diff/ancestry, protected hashes and relevant checkout settings. Create/select only the accepted local branch `docs/workspace-creation` in this existing worktree, commit conforming W, obtain its independent Stage Critic and hand implementation to the project CLI. No additional Owner-per-W approval is required. Stop on unexpected source/configuration/writer drift; do not alter frozen Spec/P, historical reports or shared memory to manufacture entry readiness.
