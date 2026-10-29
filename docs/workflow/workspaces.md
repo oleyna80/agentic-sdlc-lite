@@ -73,7 +73,7 @@ verify_relevant() {
   checked_equals 'manifest changed' "$manifest_before" sha256sum -- "$relevant_manifest"
   # GNU sha256sum --check rejects a zero-byte manifest; its digest identifies that case.
   if [[ ${manifest_before%% *} != e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 ]]; then
-    (cd "$managing_worktree" && sha256sum --quiet --check "$relevant_manifest") || fail 'relevant file bytes changed or inspection failed'
+    (cd "$managing_worktree" && sha256sum --quiet --strict --check "$relevant_manifest") || fail 'relevant file bytes changed or inspection failed'
   fi
   checked_equals 'hook path changed' "$hook_path_before" git -C "$managing_worktree" rev-parse --git-path hooks
   local observed rc
