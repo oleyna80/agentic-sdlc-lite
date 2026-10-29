@@ -9,7 +9,7 @@
 3. Classify work by impact/risk. **Routine** low-risk tasks (including safe tiny code fixes) use bounded checks, optional independent gates and an adequate task PR/issue; no mandatory P/W/handoff for one uninterrupted routine.
 4. **Significant initiatives:** after verified Owner/Issue intent, Owner accepts exact project-local Requirements + Design `docs/projects/<project-id>/spec.md`. Orchestrator prepares `docs/projects/<project-id>/plan.md` as P. **Independent Project Critic reviews exact P before Owner approval**. Revisions remain byte-frozen; the historical root `plan.md` is legacy evidence only, never the default or ROADMAP.
 5. **Autonomous stages:** Orchestrator prepares committed actionable W inside approved P, obtains its **own independent Stage Critic READY**, then delegates bounded Coder. Independent Reviewer READY and Verifier PASS cover the same source S. Authorized commits/push/actual CI and durable stage closeout allow the next stage inside P **without Owner approval per WB**. Merge/deployment are separate Owner decisions.
-6. Optional conventional Git hooks can be enabled locally only with appropriate permissions: `git config --local core.hooksPath .githooks`. Hooks are cooperative and are not filesystem/sandbox enforcement; new hook rollout is a separate scoped decision.
+6. Optional conventional Git hooks can be connected with appropriate permissions; follow [Connecting Git hooks](docs/workflow/workspaces.md#connecting-git-hooks) to check existing hooks and configuration scope first. Hooks are cooperative and are not filesystem/sandbox enforcement; new hook rollout is a separate scoped decision.
 
 ## Navigation
 

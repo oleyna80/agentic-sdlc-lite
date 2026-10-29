@@ -1,0 +1,43 @@
+# Coder implementation — workspace-creation / S1
+
+- Mission: bounded Coder in the existing task worktree on `docs/workspace-creation`; exact W `c837e1293f616a0b02a95912402e3a2401fa423b`, blob `f52d395e7ff5c68519391c0cb4b03044c06e4258`; original Stage Critic READY `4f27e3a7bac1c8e965002e3d9e684bb1bf3c4a91`. Entry HEAD `bf7674e2b420538f35d4a7aa2b1bde3bf8d53c59`, clean index/worktree. W, accepted P/Spec and original evidence were checked against the handoff and Git; no other writer was reported in the handoff.
+- **Source candidate S:** `f24d32367dad594d25b1cd896067910302dca914`, parent `bf7674e2b420538f35d4a7aa2b1bde3bf8d53c59`; source `docs/workflow/workspaces.md`, Git blob `82c3b02ad26b11700c6f45ba19586c60d3b0534d`. The source commit contains exactly that one path. This report is authored after S and is left uncommitted for the Orchestrator.
+
+## Implementation
+
+Added operation-oriented entry/recovery, continuation, creation and cleanup navigation; separated an available approved exact commit from a freshness-bound named ref; permitted known unrelated manager state with preservation checks; and documented parent, branch, registration, base, hook, state and post-creation checks and partial failure handling. The example requires an independently prepared relevant-file manifest and explicit interactive verification of hook/metadata observations; these declarations and prompts do not authenticate authority or eliminate races. Hook connection and cleanup sections remain unchanged.
+
+## Static observations
+
+- Inspected the complete source diff and checked `git diff --check` before staging; `git diff --cached --check` passed after staging. The staged path inventory contained only `docs/workflow/workspaces.md`; the staged blob matched the working file, with no remaining source diff. No untracked files existed before staging. The complete `B..S` name inventory includes the previously committed W, Stage Critic and handoff evidence plus the source path.
+- Extracted all six Bash fences in the document and passed each to `bash -n` (exit 0 for each). This establishes syntax only.
+- Checked relative Markdown link target existence in the changed document and the three operation-guide anchors; confirmed the existing README `workspaces.md#connecting-git-hooks` reference and its heading. This was not a general validation of every fragment or external URL.
+- Compared protected bytes directly with B `07eb819a3dc4c778fc9f60685d0ed4fb40fb3ec4`: hook section through before cleanup identical, SHA-256 `2f24416d380628749d7070d75a8b6e7715ea12e4f9cef8bd240f1a7e696b3b0e`; cleanup heading through EOF identical, SHA-256 `7c591074b247e75531f429f32456093302f053ab8fdf1e2c9ff30a6562d591d4`.
+- `git diff --check bf7674e2b420538f35d4a7aa2b1bde3bf8d53c59..S` passed. No source change followed S.
+
+## Limits and handoff
+
+Runtime fixture matrix P §5 / AC-01–AC-14, actual native entry/recovery experiments, independent same-S Reviewer and CLI Verifier, hosted CI and delivery: **NOT_RUN** in this mission. In particular, the interactive confirmations, manifest assumptions, hook effects, post-fetch rechecks and partial-failure behavior require independent runtime scrutiny. No claim of READY, PASS, delivery, Owner acceptance, merge or deployment is made. No real worktree was created; no push, merge or deploy was performed. The Orchestrator should inspect and record this original report, then arrange the separate exact-S missions prescribed by W.
+
+---
+
+## Coder REWORK — empty relevant-file set
+
+- Entry: `5a29ca8f580097b9c3b60b7e8b4323eb3dead361`, branch `docs/workspace-creation`, clean index/worktree; exact W, P, Spec and Stage Critic subjects remain those in the handoff. Both previous observations in `cli-validation.md` were read. This mission continues the session that authored the second observation, so it is Coder work, not independent verification.
+- **New source candidate S:** `a94fdb730ac2db5d1e798967aa996620840df73e`, parent `5a29ca8f580097b9c3b60b7e8b4323eb3dead361`; `docs/workflow/workspaces.md`, blob `35f93bdfe6d6f643ccb891733e6f8640cedd1bbc`. The commit contains only that source path. This appended report is uncommitted for Orchestrator; the previous original remains reachable at `16cdce525df50364b4d9e81657470d777f304aee`.
+- The procedure now explicitly permits a zero-byte manifest only for an independently established empty set. Each `verify_relevant` still re-reads and compares its manifest digest; only the SHA-256 digest of empty bytes skips GNU `sha256sum --check`, which rejects zero checksum lines. Nonempty manifests continue through the existing checksum check; manifest read/change failures and hook/state checks are retained. This relies on SHA-256 as the content identifier and does not establish whether an empty set was honestly identified.
+- Inspected full B-to-candidate source diff and the complete staged correction; the staged inventory contained only the source and the working source matched it. `git diff --check` passed for working, staged, parent-to-S and B-to-S changes. All six Bash fences passed `bash -n`; relative Markdown file targets and the three operation-guide anchors were checked, as was the README hook anchor. Hook section and cleanup-through-EOF match B byte-for-byte, SHA-256 respectively `2f24416d380628749d7070d75a8b6e7715ea12e4f9cef8bd240f1a7e696b3b0e` and `7c591074b247e75531f429f32456093302f053ab8fdf1e2c9ff30a6562d591d4`.
+- **Practicality:** the `verified` prompts and prohibition on unattended execution remain unchanged. They demand real interactive observation and may impede an ordinary automated CLI workflow even when no relevant files or hooks exist. The empty-manifest correction does not resolve or validate that cost; it must be assessed through actual CLI interaction without unconditional confirmations.
+- Runtime tests, including empty/nonempty/corrupt manifests, preservation, error and hook scenarios, and full P §5 / AC-01–AC-14: **NOT_RUN** for this new S in this Coder mission. Separate same-S CLI Verifier and Reviewer, hosted CI and delivery also **NOT_RUN**. No push, PR, merge, deployment, hook/config change or real worktree creation was performed. Orchestrator should preserve this report and assign the complete matrix and separate review to missions independent of this Coder on the exact new S.
+
+---
+
+## Coder REWORK — strict manifest validation, 2026-10-29
+
+**Scope and subject.** Bounded S1 correction under unchanged Spec `d1e75d7e8d31b37cfb7be68416919e28ebfedf04`, P `3161c40a74a55fd2f44e0f1ab1591b353b9aca5e`, W `c837e1293f616a0b02a95912402e3a2401fa423b` and Stage Critic `4f27e3a7bac1c8e965002e3d9e684bb1bf3c4a91`; assignment and independent CLI finding are in the current handoff and `cli-validation.md`. Entry HEAD `2407fd4404fe32b5fa889924ffc122543f60df5a`, branch `docs/workspace-creation`, clean index and worktree. Prior source S `a94fdb730ac2db5d1e798967aa996620840df73e`, blob `35f93bdfe6d6f643ccb891733e6f8640cedd1bbc`.
+
+**New source S:** `f008fc3eabe3b6acbb3c57a0680a266457d68171`; parent `2407fd4404fe32b5fa889924ffc122543f60df5a`; `docs/workflow/workspaces.md` blob `20a5ba7f4be7a921c1ad1ef4acdb8e6b82d49621`. The source-only commit adds `--strict` to the existing nonempty GNU checksum check so malformed lines make that command fail; the empty-manifest digest exception and all other checks and prompts remain unchanged. This is a source-level assessment, not an independent runtime result.
+
+**Coder checks.** Inspected complete source diff from B `07eb819a3dc4c778fc9f60685d0ed4fb40fb3ec4` and exact staged diff: one changed line in the sole staged source file; `git diff --check` and staged `git diff --check` passed. All six Bash fences passed `bash -n`. Local Markdown links and anchors in the source resolved. Hook and cleanup sections compared byte-for-byte equal to B (hook interval SHA-256 `2f24416d380628749d7070d75a8b6e7715ea12e4f9cef8bd240f1a7e696b3b0e`; cleanup interval from its heading through the next heading boundary SHA-256 `a172066f501fad3cc6ed90e751c58b260b0f3458d71787aef95e8ea2b7025b79`). This report was appended after source commit; previous report SHA-256 before append `d43cad2027e2147cef614f1e116616821297198f933886963ef6e0121522e74d`.
+
+**NOT_RUN / handoff.** No runtime fixture or P §5 matrix was run by this Coder for this correction. Independent Verifier must repeat affected manifest cases and complete the entire matrix on the new exact S; separate same-S Reviewer, delivery checks and hosted CI remain NOT_RUN. No PASS or delivery readiness is claimed. This report is left uncommitted for Orchestrator; no push, merge or deployment was performed.
