@@ -100,3 +100,30 @@ implementation is task-bound and must follow the existing canonical procedure.
 - Next: one Coder implements only W's eight source paths, commits S and leaves
   its original implementation report for the Orchestrator Git recorder.
   Parent pauses Git mutation during Coder work. No source assurance is claimed yet.
+
+## Source assurance / pre-publication checkpoint — 2026-11-01
+
+- Observed HEAD / frozen S: `d0f113fb01284f18b3b68f54060cf90157ab412a`,
+  tree `3afe9e10e65213fb1aac42dbc294b3a6e47add87`; actual task root and branch
+  remain those above. Approved Spec/P/W and original Critic reports are unchanged.
+- Coder DONE: [implementation](implementation.md), original blob
+  `bd8cf2f5ff21ed1b3a7ee8e1339ead85d93dac27`. Seven implementation files,
+  46 inserted lines; prepared `PROJECT_MAP.md` navigation retained.
+- Independent [Reviewer READY](review.md), blob
+  `d2d25150feaf610167dbc0b236829391b0fedef8`, and [Verifier PASS](validation.md),
+  blob `ff306f8dcb5e427e3c2003ad35a9ef0127607df5`, bind that same exact S.
+  Six documentation cases passed; all five verbatim local workflow bodies exited
+  0. Hosted H checks remain a separate delivery obligation.
+- The three original reports were the only untracked paths at recorder entry.
+  This handoff and [delivery record](delivery.md) are Orchestrator-owned evidence;
+  originals are retained without edits. Source remains frozen.
+- Current HTTPS Git/gh CLI inspection failed authentication/access; connector
+  metadata succeeded, and existing SSH transport read returned remote main = B
+  and no task branch. Use that same-repository transport without changing origin,
+  Git configuration, keys or permissions. Prior successful CLI observations are
+  historical, not evidence of current HTTPS access.
+- Phase at this observation: LOCAL_ASSURANCE_COMPLETE, publication/hosted CI not
+  yet performed. Next: validate actual staged evidence, commit and derive H,
+  prove evidence-only S..H/full B..H, non-force push this task branch and open one
+  PR. Record actual H/run URLs/conclusion in PR metadata after hosted CI, without
+  another link-only commit. Separate Owner acceptance/merge remains pending.
