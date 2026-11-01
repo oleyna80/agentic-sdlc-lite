@@ -1,6 +1,6 @@
 # HardwareLab pilot feedback — preparation handoff
 
-## Observed state — 2026-11-01
+## Historical preparation observation — 2026-11-01, before Owner confirmation
 
 - Repository: `oleyna80/agentic-sdlc-lite`.
 - Task root: `/home/azur/Projects/WSL/agentic-sdlc-lite-worktrees/hardwarelab-pilot-feedback`.
@@ -39,3 +39,25 @@ Inspect all four draft paths and preparation checks. Freeze a scoped committed
 Spec candidate for Owner's exact-revision consideration; after acceptance prepare
 P and obtain independent Project Critic before Owner exact-P approval. Any future
 implementation is task-bound and must follow the existing canonical procedure.
+
+## Current planning checkpoint — 2026-11-01
+
+- Owner confirmed the reviewed register and specification and assigned the
+  Architect/Orchestrator role; see [OD-PF-001](owner-decisions.md) for the
+  unchanged reviewed-draft binding and its authority limits.
+- Preparation is committed as `21aa763cd7d7247decf9f6978808de5d5d68db4b`;
+  accepted Spec blob is `5e1ffcae32aac6927b105ad25d00e5fa0dd1bf9f`.
+- [Project plan](../../projects/hardwarelab-pilot-feedback/plan.md) proposes
+  one documentation stage, eight source paths, six documentation scenarios and
+  existing independent assurance/current-H CI. Commit P before Project Critic;
+  separate Owner approval of exact Critic-READY P is still pending.
+- Preparation checks actually passed: whitespace/conflict-marker and local-link
+  inspection of all four prepared files, original register-prefix preservation,
+  staged diff check and explicit bundled pre-commit invocation. No hook was
+  activated; canonical workflow/role/security documents remain unchanged.
+- Remote repository identity/access and active PR-triggered Lite Checks workflow
+  were inspected read-only. No task branch publication, PR, hosted CI, application
+  testing, implementation or merge has occurred.
+- Preserve the manager checkout, older dirty register/map and HardwareLab trees.
+  Next: freeze P, obtain original independent Project Critic, present exact READY
+  P to Owner. Do not begin W/Coder before that approval.
