@@ -87,3 +87,16 @@ implementation is task-bound and must follow the existing canonical procedure.
   one source Coder and separate report writers, and carries the accepted checks.
 - Next: commit W and obtain independent Stage Critic on its exact subject;
   Coder source changes remain pending that gate. No publication has occurred.
+
+## Stage entry checkpoint — 2026-11-01
+
+- W: commit `c4a536bd904bf48d67cdfc3b78a9dab4725f3b01`, blob
+  `271c8bbf53ba1fae98c0be41f2f54377169af53c`; conforming to exact approved P.
+- Original [Stage Critic](stage-critic.md), mission `/root/pilot_stage_critic`,
+  returns READY on that W; blob `a3de6f81249d0734bd06a23afbcc6c08d3ec3866`.
+- Critic's CLI remote failures (HTTP 404/exit 1, Git authentication/exit 128)
+  are preserved in its report. Parent CLI and connector metadata checks succeeded;
+  publication/CI will use the parent's actual access, rechecked at delivery.
+- Next: one Coder implements only W's eight source paths, commits S and leaves
+  its original implementation report for the Orchestrator Git recorder.
+  Parent pauses Git mutation during Coder work. No source assurance is claimed yet.
