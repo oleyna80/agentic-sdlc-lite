@@ -61,3 +61,19 @@ implementation is task-bound and must follow the existing canonical procedure.
 - Preserve the manager checkout, older dirty register/map and HardwareLab trees.
   Next: freeze P, obtain original independent Project Critic, present exact READY
   P to Owner. Do not begin W/Coder before that approval.
+
+## Project Critic checkpoint — 2026-11-01
+
+- Candidate P is committed at `e7282ad5f1e2d36d834ba9c4fd0e1e0964152f01`,
+  plan blob `ab0d699a4746c705b40dd1f30e1d8bd6cae8fcab`.
+- Original independent [Project Critic](project-critic.md) from native mission
+  `/root/pilot_project_critic` returns READY for Owner review on that exact P;
+  original report blob `101e6dcd769ddbb7e207a0a9a044692d75ea141a`.
+  No blocking correction was required. Report bytes are preserved unchanged.
+- Full preparation diff B..P passed whitespace inspection. Manager checkout
+  remains clean on its recorded main SHA; old dirty map/register remain intact.
+- Current phase: planning, awaiting separate Owner approval of exact READY P.
+  No W, Stage Critic, implementation, publication or hosted CI is claimed.
+- Next: Owner reviews P/report and accepts or rejects its proposed scope and
+  delegated task-branch publication/PR/CI. After acceptance, prepare conforming W
+  and independent Stage Critic, then execute within approved P autonomously.
