@@ -19,6 +19,7 @@ This index provides paths, not process authority, current task registry, permiss
 | Architecture diagram | `docs/architecture/overview.md` |
 | Security details | `docs/security/boundaries.md` |
 | Accepted durable design rationale | `docs/decisions/` |
+| Process observations and improvement proposals (advisory) | `docs/process-feedback.md` |
 | Task-local progress/independent reports | `docs/changes/<task>/handoff.md`, linked reports |
 | Last reconciled integrated project context | `memory_bank/context.md`, `progress.md`, `decisions.md`, `orchestrator-log.md` |
 | Optional non-authoritative forms | `docs/templates/` |
