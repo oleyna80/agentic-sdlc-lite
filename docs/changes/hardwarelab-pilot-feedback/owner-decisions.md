@@ -22,3 +22,21 @@
   Project Critic must examine exact committed P before separate Owner approval
   of that P. No implementation, publication, final acceptance or merge is inferred
   merely from this specification decision.
+
+## OD-PF-002 — exact READY P approved for execution, 2026-11-01
+
+- **Source:** Owner's direct reply after the exact P and independent READY report
+  were presented: «План проверил, подтверждаю к исполнению».
+- **Approved P:** `docs/projects/hardwarelab-pilot-feedback/plan.md` at commit
+  `e7282ad5f1e2d36d834ba9c4fd0e1e0964152f01`, blob
+  `ab0d699a4746c705b40dd1f30e1d8bd6cae8fcab`.
+- **Original Project Critic:** [report](project-critic.md) at commit
+  `1340908634b4dab862382d7ee808664a47dd8004`, blob
+  `101e6dcd769ddbb7e207a0a9a044692d75ea141a`, READY on that exact P.
+- **Delegation:** Execute the single stage through DELIVERY_READY as specified in
+  P, including conforming W/Stage Critic, Coder, bounded REWORK, independent
+  same-S Reviewer/Verifier, local commits, non-force task-branch publication,
+  one task PR and existing applicable CI. No repeated Owner approval for these
+  conforming actions. Owner final acceptance/merge remains separate; deployment,
+  settings, credentials, hooks/configuration, cleanup, shared-memory/ROADMAP
+  reconciliation and application changes remain outside this delegation.

@@ -77,3 +77,13 @@ implementation is task-bound and must follow the existing canonical procedure.
 - Next: Owner reviews P/report and accepts or rejects its proposed scope and
   delegated task-branch publication/PR/CI. After acceptance, prepare conforming W
   and independent Stage Critic, then execute within approved P autonomously.
+
+## Execution authorized / W preparation — 2026-11-01
+
+- Owner approved exact P `e7282ad5f1e2d36d834ba9c4fd0e1e0964152f01`;
+  see [OD-PF-002](owner-decisions.md). Scope/delegation are unchanged.
+- Observed predecessor HEAD: `1340908634b4dab862382d7ee808664a47dd8004`.
+- [W / S1](work-block.md) binds P/Spec/original Critic/Owner evidence, assigns
+  one source Coder and separate report writers, and carries the accepted checks.
+- Next: commit W and obtain independent Stage Critic on its exact subject;
+  Coder source changes remain pending that gate. No publication has occurred.
