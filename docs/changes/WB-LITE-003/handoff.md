@@ -1,0 +1,13 @@
+# WB-LITE-003 — S3 handoff: Stage Critic READY; full-tree source S fixed; local native preflight pending
+
+**2026-10-27.** Repository `oleyna80/agentic-sdlc-lite`, project `wb-lite-003-universal-skills`, task WB-LITE-003, branch `docs/wb-lite-003-universal-skills-spec-20261023`, Draft PR #16. GitHub-connected Recorder has verified W-S3 after independent Stage Critic READY. Any later tool must re-check actual repo/branch/HEAD, rights and competing writers.
+
+**Authoritative final source S:** `72f4c17fd5441914d48a1e146bc8e3c5d8aef389`, tree `b132862c5fc2a22e355368e55f32e566d14bb6e4`, Work Block W-S3 blob `0de3af49cd919e4cfc6a51f58d2835c968f8ec9d`. [Original Independent Stage Critic R1 READY](https://github.com/oleyna80/agentic-sdlc-lite/pull/16#issuecomment-6440354538); [Recorder S designation with 11 blobs](https://github.com/oleyna80/agentic-sdlc-lite/pull/16#issuecomment-6440374987). No future approval for W drafting is confused with implementation.
+
+**Immutable parents:** accepted Spec blob `0655245d5f00aafc6980d4a5e1232eacb0b7da53`; approved P `f374a4a8c7e51955547885fb96241b45a3f9ad9d`; S1 corpus `521f65a7e0223b144b90d2969184665305f056f3`, oracle `7e79599150fe692cfb12541671ae5443824c0869`; preliminary S2 T2 `33ec738439c7150d590b0f5bf06c864d32dbd0d4`, identical 11 source Skill blobs. CI on S #40491075734 SUCCESS.
+
+**Next permitted local step:** hand off bounded native **controller preflight** on the exact fixed S, inspect real Codex version/App Server API, HOME/symlink/ownership/UID/sandbox, candidate/baseline common instructions/global Skill collisions and Recorder read denial. Stage W-S3 authorizes separately verified local disposable test boundaries; it does **not** assert they already exist or are safe. Confirm actual controls before any recorder directory creation or non-scored smoke. If hard precondition cannot be met, record BLOCKED and Owner disposition, not a substitute 'PASS'.
+
+**Observability and custody priorities:** implicit-positive and implicit-negative coverage through the same actual event channel; explicit typed Skills is not proof of implicit routing; evaluated agent must not read original oracles or Recorder raw traces. Same Unix UID `0700` directories do not establish isolation. Raw redacted traces, IDs, exit status, hash and before/after manifests must remain independently accessible to future Verifier.
+
+**Status:** `W-S3: INDEPENDENT_READY`; `source S: PINNED`; `LOCAL_RUNTIME_PREFLIGHT: NOT_RUN`; `NATIVE_SMOKE: NOT_RUN`; `94 SCORED RUNS: NOT_RUN`; `OS_NEGATIVES: NOT_RUN`; `INDEPENDENT REVIEWER/VERIFIER: PENDING`. Later evidence-only records must not change S, Skills, W or fixed S1 inputs. No merge/Owner GO, no delivery H yet.
