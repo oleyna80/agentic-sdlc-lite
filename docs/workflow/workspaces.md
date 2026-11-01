@@ -9,6 +9,12 @@ Keep a persistent, clean checkout of `main` as general advice, not a prerequisit
 - **Create:** use the guarded procedure below after establishing authority, base, path, relevant manager state and checkout effects.
 - **Delete:** use [safe cleanup](#safe-cleanup-after-owner-approved-disposition), with separate Owner disposition; its rules are unchanged.
 
+## Resources and resumable work
+
+Place substantial project copies, dependencies, caches, logs and resumable artifacts on a verified persistent disk location appropriate to the project and its authorized write boundary. Check available disk/memory capacity and retention before heavy work; neither an absolute path nor `/tmp` alone establishes persistence or RAM backing. Small disposable temporary scratch remains appropriate when its loss is harmless. Preserve unrelated data and keep secrets out of logs.
+
+Choose heavy-job concurrency from actual host capacity and competing work; use sequential heavy checks when capacity is unknown or constrained. Keep short supporting step checkpoints around expensive operations as described in [memory/recovery](memory.md#3-canonical-conditional-checkpoint-matrix), including candidate, outcome/log pointer and next action. They do not replace required committed checkpoints. Before repeating an expensive failed/interrupted step, inspect its exit status, logs and current state to distinguish resource pressure, path/environment errors, access limits and candidate mismatch; preserve completed evidence and correct the identified cause within scope. Escalate missing permission or a material scope change instead of repeatedly rerunning or moving work outside the authorized boundary.
+
 ## Create a workspace
 
 Two base contracts are available. An **available exact commit** is an independently approved full SHA already present locally, including an approved stage descendant; no fetch or equality with `origin/main` is inherently required. If an approved named stage ref is part of the contract, check its exact value too. A **fresh named ref** requires an authorized fetch and exact comparison to the expected approved SHA; fetch is a mutation and a mismatch or failure stops creation. Never select the available route to avoid a required freshness check. Existence, ancestry and ref names do not establish approval.

@@ -216,3 +216,20 @@ puts subsequently observed final CI links in PR metadata without a link-only
 commit. Its [handoff](https://github.com/oleyna80/hardwarelab/blob/fbe6e963538ca2c9d31fd9c74c9830700d950227/docs/changes/application-maintenance/handoff.md)
 delegates the whole approved mission and bounded rework. These are demonstrated
 documentation applications, not proof of a fully autonomous or parallel execution.
+
+## 2026-11-01 — Canonical documentation candidate
+
+The separately accepted Spec and approved [P](projects/hardwarelab-pilot-feedback/plan.md),
+with decisions recorded in [Owner evidence](changes/hardwarelab-pilot-feedback/owner-decisions.md),
+now have a documentation implementation awaiting independent assurance and integration:
+
+- PF-001: [hook selection and limits](security/boundaries.md#selecting-an-optional-hook).
+- PF-002: [final CI metadata and current-head checks](workflow/development.md#4-delivery-integrity-completion-and-progression).
+- PF-003: [whole-mission autonomy and optional parallel Coders](workflow/development.md#3-autonomous-stages-w--stage-critic--implementation).
+- PF-004: [resource placement and diagnostic retries](workflow/workspaces.md#resources-and-resumable-work), with [supporting checkpoints](workflow/memory.md#3-canonical-conditional-checkpoint-matrix).
+- PF-005: [exact candidate and execution root](workflow/development.md#candidate-and-execution-root).
+- PF-006: [bounded dispatch](workflow/development.md#3-autonomous-stages-w--stage-critic--implementation) and [selective recovery reads](workflow/memory.md#1-session-start-and-recovery).
+
+All six entries remain **LINKED**, not CLOSED. The earlier draft/no-change statements
+retain their observation-time meaning. These pointers record source changes, not
+a runtime pilot, measured savings, independent PASS/READY or integration outcome.

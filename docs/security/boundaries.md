@@ -19,4 +19,10 @@ Lite's shared operating rules are in `AGENTS.md`. This file owns the **details o
 
 Git hooks can be bypassed. Prompts, templates, role briefs and Git hooks are **not** OS sandboxing, network isolation or remote access control. Test the actual sandbox and credential boundaries before enabling autonomous external operations.
 
+## Selecting an optional hook
+
+Keep ordinary workflow instruction-driven. Consider a hook for a concrete harmful action or critical instruction violation only when it can detect that event at its actual interception point. Select Git or native-agent interception by the operation and available runtime support: a Git hook can inspect its Git event, while a native hook may observe a supported tool/lifecycle event. Neither name implies coverage of other tools, arbitrary confidential-data disclosure or malicious bypass. Establish actual coverage and limits before choosing either; some risks require platform isolation or credential/network controls instead.
+
+Follow the separately scoped prototype, runtime testing and **separate Owner activation** route in [development §6](../workflow/development.md#6-security-hooks-and-workflow-scope), including false positives, overhead, permissions, bypass and rollback. This principle installs or activates nothing and does not expand the bundled hooks' existing guarantees.
+
 If potential exposure occurs, stop further operations, preserve *redacted* evidence, and route credential revocation and incident handling through the Owner/provider.
