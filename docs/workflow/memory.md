@@ -35,6 +35,8 @@ The four root `memory_bank/*.md` files are Git-tracked. Do not ignore `memory_ba
 4. For the default branch, identify unfinished work from active PRs and task records; the shared context is **not** a complete authoritative registry of unmerged branches.
 5. Consult linked accepted decisions and relevant reports only as needed.
 
+Keep recovery reads bounded to the role and current phase: start with the current task checkpoint and exact bindings, then load the referenced sections/evidence needed for the next action. Do not repeatedly copy all historical reports or raw transcripts into context. Selective reads never waive the binding and permission checks above; missing facts must be restored before affected work.
+
 ## 2. Parallel tasks — shared memory ownership
 
 - Each concurrent task owns its unique `docs/changes/<task>/handoff.md` (or an issue/PR description for a trivial task with no long-lived handoff). Do not store competing "current active task" claims in the shared `memory_bank/context.md`.
@@ -53,6 +55,8 @@ The four root `memory_bank/*.md` files are Git-tracked. Do not ignore `memory_ba
 | **Significant** or **parallel** task | Own **committed** branch-local `docs/changes/<task>/handoff.md` linking exact P/W and independent results; shared memory is not task state |
 
 The checkpoint states objective, classification, scope/permissions, exact branch/base, **observed predecessor HEAD** (not a self-referential future commit), dirty/untracked files, verified tests/role verdicts, blockers and concrete next action. Record a subsequently observed SHA in later evidence. Chat, agent-local `MEMORY.md`, `/tmp` scratch, compacted messages and uncommitted drafts are **lookup hints**, not project authority or a completed durable checkpoint.
+
+Around costly steps, keep a short supporting note in existing task evidence with the exact candidate/root, completed or interrupted command/outcome, safe log pointer and next action. Save it before an expected interruption and record the actual result afterward when possible; do not invent results after a crash. No additional form is required, and a disk log or uncommitted note does not satisfy the committed-checkpoint matrix. Use the [workspace resource guidance](workspaces.md#resources-and-resumable-work) for persistent placement, concurrency and diagnosis before retries.
 
 **Resume/compaction:** before the next write, independently restore objective, applicable instructions, verified absolute target, branch/HEAD/status, authorized scope, all dirty/untracked paths, task checkpoint and next action; apply `docs/workflow/workspaces.md`. Never assume prior cwd/tool state/temp path survived. If reconstruction is uncertain, say STOP/NOT_VERIFIED; a synthetic replay does not prove native compaction.
 
