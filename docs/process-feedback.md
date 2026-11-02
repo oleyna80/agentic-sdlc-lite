@@ -233,3 +233,38 @@ now have a documentation implementation awaiting independent assurance and integ
 All six entries remain **LINKED**, not CLOSED. The earlier draft/no-change statements
 retain their observation-time meaning. These pointers record source changes, not
 a runtime pilot, measured savings, independent PASS/READY or integration outcome.
+
+## 2026-11-02 — Owner-confirmed hook role and next pilot (PF-001)
+
+- **Owner decision / provenance:** In the 2026-11-02 architecture discussion,
+  Owner confirmed: **Instructions define behavior. Harness executes. Hooks
+  enforce critical boundaries. Independent agents assess quality. Owner retains
+  decision authority.** This refines PF-001; it does not add a new component.
+- **Responsibility split:** Instructions and optional Skills guide agent behavior;
+  the native harness orchestrates execution. Independent Critic, Reviewer and
+  Verifier assess architecture, source and verification evidence. A native-harness
+  or Git hook may detect and prevent a **concrete, observable** unsafe action or
+  critical instruction violation at its supported interception point. Hooks do
+  not judge engineering quality, replace independent assurance or orchestrate
+  agent assignments.
+- **Illustrative boundary:** If an agent attempts an observable delivery
+  progression while a Critic, Reviewer or Verifier result **required for that
+  task and phase** is missing, an appropriately supported hook may block that
+  action when the missing evidence is reliably detectable. Do not demand
+  downstream results prematurely (for example, Reviewer/Verifier on S before S
+  exists), infer that every routine task requires every gate, or claim that a
+  Git hook can intercept arbitrary harness actions. Existing lifecycle and
+  Owner/merge/deployment authority remain unchanged.
+- **Next pilot — Owner direction:** Test **one or two** selected existing Git or
+  harness-native hooks on real supported events. Select candidates and the
+  target harness when scoping that pilot; include permitted and prohibited
+  scenarios, relevant missing/valid gate evidence, false-positive/overhead and
+  bypass/coverage observations. Record executed behavior rather than treating
+  written instructions as proof of enforcement. No specific hook or native
+  capability has yet been selected or validated.
+- **Status / authorization:** PF-001 is **LINKED** to the documentation transfer
+  merged in [Lite PR #19](https://github.com/oleyna80/agentic-sdlc-lite/pull/19);
+  runtime hook efficacy remains untested. This register entry is advisory and
+  authorizes **no hook installation, activation, configuration change, additional
+  gate, Controller or new lifecycle**. Prototype/activation and any material
+  scope or authority change follow existing separate authorization rules.
