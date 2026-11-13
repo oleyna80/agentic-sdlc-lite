@@ -29,6 +29,14 @@ These are **integration events**, not proof of completion of new downstream nati
 
 For the live issue status use [PR #14](https://github.com/oleyna80/agentic-sdlc-lite/pull/14) and its [task handoff](docs/changes/ISSUE-010/handoff.md), not this overview.
 
+## 2026-11-13 — active downstream CI/CD pilot (not a Lite policy change)
+
+[HardwareLab](https://github.com/oleyna80/hardwarelab) is piloting SDLC Lite in a live application CI/CD modernization. The Owner has accepted a **HardwareLab-specific target direction**, recorded in its [GitOps/CD ADR](https://github.com/oleyna80/hardwarelab/blob/docs/gitops-pilot-decisions-20261113/docs/decisions/0002-pull-gitops-cd-pilot.md): bounded ordinary application auto-merge after acceptance and checks; automated PR-based release promotion to the private [azursystech-gitops](https://github.com/oleyna80/azursystech-gitops) repository; VPS-initiated Pull CD with Docker Compose; and locally protected file-backed application secrets. Material architecture, CI/CD policy, access, secret-handling and data-migration changes retain separate Owner authority.
+
+**Evidence and state:** [HardwareLab draft PR #17](https://github.com/oleyna80/hardwarelab/pull/17) contains reviewed earlier CI/runtime work and unfinished SSH S3; [PR #19](https://github.com/oleyna80/hardwarelab/pull/19) proposes the pull-CD audit/approach. Neither represents a completed GitOps deployment, production cutover, activated auto-merge policy or validated secrets migration. Existing exact HardwareLab Spec/P/W evidence is not superseded by this source-Lite roadmap note.
+
+**Learning loop:** after the HardwareLab pilot reaches verified results, collect portability evidence, failed and successful test cases, review/QA/verification friction, release authority boundaries and any reusable Skills. Evaluate proposed improvements through a **separate SDLC Lite initiative and Owner decision**; do not automatically import HardwareLab's deployment mechanics, credentials, PR policy or approvals into the universal kit. This dated entry is informational only and grants no implementation, merge or deployment permission.
+
 ## Where we are going — proposals, not implementation grants
 
 1. Complete ISSUE-010 source assurance with genuine test evidence, fresh native recovery, independent Reviewer/Verifier and final Owner merge decision.
